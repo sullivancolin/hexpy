@@ -3,7 +3,7 @@
 import requests
 import os
 import json
-from response import handle_response
+from .response import handle_response
 
 ONE_MINUTE = 60
 ROOT = "https://api.crimsonhexagon.com/api/"
