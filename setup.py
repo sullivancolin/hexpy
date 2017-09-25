@@ -6,6 +6,8 @@ from setuptools import setup, find_packages
 
 requirements = [
     'Click>=6.0',
+    'requests>=2.18.4',
+    'ratelimiter>=1.2.0'
     # TODO: put package requirements here
 ]
 
@@ -29,11 +31,7 @@ setup(
     author_email='csullivan@crimsonhexagon.com',
     url='https://github.com/sullivancolin/hexpy',
     packages=find_packages(include=['hexpy']),
-    entry_points={
-        'console_scripts': [
-            'hexpy=hexpy.cli:main'
-        ]
-    },
+    entry_points={'console_scripts': ['hexpy=hexpy.cli:main']},
     include_package_data=True,
     install_requires=requirements,
     zip_safe=False,
