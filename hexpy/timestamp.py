@@ -1,18 +1,14 @@
+# -*- coding: utf-8 -*-
+"""Module for working with dates and times."""
+
 from datetime import datetime
 
 
 class Timestamp(object):
     """docstring for Timestamp"""
 
-    def __init__(self,
-                 day,
-                 month,
-                 year,
-                 hour=0,
-                 minute=0,
-                 second=0,
-                 zone=None,
-                 military=True):
+    def __init__(self, day, month, year, hour=0, minute=0, second=0,
+                 zone=None):
         super(Timestamp, self).__init__()
         self.day = day
         self.month = month
@@ -21,7 +17,6 @@ class Timestamp(object):
         self.minute = minute
         self.second = second
         self.zone = zone
-        self.military = True
         self.datetime = datetime(self.year, self.month, self.day, self.hour,
                                  self.minute, self.second)
 

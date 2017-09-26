@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Main module."""
+"""Module for handling API authorization"""
+
 import requests
 import os
 import json
 from .response import handle_response
 
 ONE_MINUTE = 60
-ROOT = "https://api.crimsonhexagon.com/api/"
 
 
 class CrimsonAuthorization(object):
     """Client class for interacting with Crimson Hexagon API"""
-
+    ROOT = "https://api.crimsonhexagon.com/api/"
     CREDS_FILE = os.path.join(
         os.path.expanduser('~'), '.hexpy', 'credentials.json')
 
@@ -31,7 +31,7 @@ class CrimsonAuthorization(object):
     def get_token(self, username, password, no_expiration=True):
         response = handle_response(
             requests.get(
-                ROOT +
+                self.ROOT +
                 "authenticate?username={username}&password={password}&noExpiration={expiration}".format(
                     username=username,
                     password=password,
@@ -53,12 +53,3 @@ class CrimsonAuthorization(object):
             raise e(
                 "{} not found. Please specify token or username and password.".format(
                     self.CREDS_FILE))
-
-
-if __name__ == '__main__':
-
-    client = CrimsonAuthorization()
-
-    client.save_token()
-
-    client = CrimsonAuthorization()

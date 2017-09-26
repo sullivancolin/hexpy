@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+"""Module for Monitor results API"""
+
 import requests
 from .response import handle_response
 from ratelimiter import RateLimiter
@@ -8,14 +11,21 @@ ONE_MINUTE = 60
 class MonitorAPI(object):
     """docstring for MonitorAPI"""
 
+    TEMPLATE = "https://api.crimsonhexagon.com/api/monitor/"
+
     def __init__(self, authorization):
         super(MonitorAPI, self).__init__()
         self.authorization = authorization
 
-    TEMPLATE = "https://api.crimsonhexagon.com/api/monitor/"
-
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def details(self, monitor_id):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE + "audit?auth={token}&id={monitor_id}".format(
+                    token=self.authorization.token, monitor_id=monitor_id)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def audit(self, monitor_id):
         return handle_response(
             requests.get(
                 self.TEMPLATE + "detail?auth={token}&id={monitor_id}".format(
@@ -52,7 +62,8 @@ class MonitorAPI(object):
                     "monitorID": monitor_id,
                     "categoryID": category_id,
                     "document": data
-                }),
+                },
+                params={"auth": self.authorization.token}),
             check_text=True)
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
@@ -123,14 +134,15 @@ class MonitorAPI(object):
                                  start,
                                  end,
                                  hide_excluded=False):
-        requests.get(
-            self.TEMPLATE +
-            "results?auth={token}&id={monitor_id}&start={start}&end={end}&hideExcluded={hide_excluded}".format(
-                token=self.authorization.token,
-                monitor_id=monitor_id,
-                start=start,
-                end=end,
-                hide_excluded=str(hide_excluded).lower()))
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "results?auth={token}&id={monitor_id}&start={start}&end={end}&hideExcluded={hide_excluded}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end,
+                    hide_excluded=str(hide_excluded).lower())))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def posts(self,
@@ -154,3 +166,223 @@ class MonitorAPI(object):
                     extend_limit=str(extend_limit).lower(),
                     full_contents=str(full_contents).lower(),
                     geotagged=str(geotagged).lower())))
+
+    #################################################################################
+    # Demographics                                                                  #
+    #################################################################################
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def age(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "demographics/age?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def ethnicity(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "demographics/ethnicity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def gender(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "demographics/gender?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    #################################################################################
+    # Geography                                                                  #
+    #################################################################################
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def cities(self, monitor_id, start, end, country):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "geography/cities?auth={token}&id={monitor_id}&start={start}&end={end}&countr={country}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end,
+                    country=country)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def states(self, monitor_id, start, end, country):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "geography/states?auth={token}&id={monitor_id}&start={start}&end={end}&countr={country}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end,
+                    country=country)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def countries(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "geography/countries?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    #################################################################################
+    # Twitter                                                                       #
+    #################################################################################
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def twitter_authors(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "authors?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def twitter_metrics(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "twittermetrics?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def twitter_followers(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "twittersocial/followers?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def twitter_sent_posts(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "twittersocial/sentposts?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def twitter_engagement(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "twittersocial/totalengagement?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    #################################################################################
+    # Facebook                                                                      #
+    #################################################################################
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def facebook_admin_posts(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "facebook/adminposts?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def facebook_likes(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "facebook/pagelikes?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def facebook_activity(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "facebook/totalactivity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    #################################################################################
+    # Instagram                                                                     #
+    #################################################################################
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def instagram_top_hashtags(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "instagram/hashtags?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def instagram_followers(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "instagram/followers?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def instagram_sent_media(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "instagram/sentmedia?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
+
+    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    def instagram_activity(self, monitor_id, start, end):
+        return handle_response(
+            requests.get(
+                self.TEMPLATE +
+                "instagram/totalactivity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
+                    token=self.authorization.token,
+                    monitor_id=monitor_id,
+                    start=start,
+                    end=end)))
