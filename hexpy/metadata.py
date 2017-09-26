@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Module for handling API Metadata"""
+"""Module for API Metadata"""
 
 import requests
 from .response import handle_response

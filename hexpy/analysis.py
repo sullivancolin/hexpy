@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+"""Top-level package for hexpy."""
+
 import requests
 from .response import handle_response
 from ratelimiter import RateLimiter
