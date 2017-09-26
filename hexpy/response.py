@@ -8,5 +8,5 @@ def handle_response(response, check_text=False):
         raise ValueError("Bad request." + response.text)
     if check_text:
         if "error" in response.text:
-            ValueError("Bad request." + response.text)
+            raise ValueError("Bad request." + response.text)
     return response.json()
