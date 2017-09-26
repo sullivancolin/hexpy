@@ -4,23 +4,11 @@
 
 from setuptools import setup, find_packages
 
-requirements = [
-    'Click>=6.0',
-    'requests>=2.18.4',
-    'ratelimiter>=1.2.0'
-    # TODO: put package requirements here
-]
+requirements = ['clint>=0.5.1', 'requests>=2.18.4', 'ratelimiter>=1.2.0']
 
-setup_requirements = [
-    'pytest-runner',
-    'setuptools-markdown'
-    # TODO(sullivancolin): put setup requirements (distutils extensions, etc.) here
-]
+setup_requirements = ['pytest-runner', 'setuptools-markdown']
 
-test_requirements = [
-    'pytest',
-    # TODO: put package test requirements here
-]
+test_requirements = ['pytest']
 
 setup(
     name='hexpy',
