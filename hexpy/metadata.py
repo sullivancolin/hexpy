@@ -40,16 +40,18 @@ class MetadataAPI(object):
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def states(self, country):
         return handle_response(
-            requests.get(self.TEMPLATE +
-                         "geography/info/states?auth={token}".format(
-                             token=self.authorization.token, country=country)))
+            requests.get(
+                self.TEMPLATE +
+                "geography/info/states?auth={token}&country={country}".format(
+                    token=self.authorization.token, country=country)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def cities(self, country):
         return handle_response(
-            requests.get(self.TEMPLATE +
-                         "geography/info/cities?auth={token}".format(
-                             token=self.authorization.token, country=country)))
+            requests.get(
+                self.TEMPLATE +
+                "geography/info/cities?auth={token}&country={country}".format(
+                    token=self.authorization.token, country=country)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def countries(self):

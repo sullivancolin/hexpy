@@ -21,14 +21,14 @@ class MonitorAPI(object):
     def details(self, monitor_id):
         return handle_response(
             requests.get(
-                self.TEMPLATE + "audit?auth={token}&id={monitor_id}".format(
+                self.TEMPLATE + "detail?auth={token}&id={monitor_id}".format(
                     token=self.authorization.token, monitor_id=monitor_id)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def audit(self, monitor_id):
         return handle_response(
             requests.get(
-                self.TEMPLATE + "detail?auth={token}&id={monitor_id}".format(
+                self.TEMPLATE + "audit?auth={token}&id={monitor_id}".format(
                     token=self.authorization.token, monitor_id=monitor_id)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
@@ -67,12 +67,12 @@ class MonitorAPI(object):
             check_text=True)
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
-    def interest_and_affinities(self,
-                                monitor_id,
-                                start,
-                                end,
-                                daily=False,
-                                document_source=None):
+    def interest_affinities(self,
+                            monitor_id,
+                            start,
+                            end,
+                            daily=False,
+                            document_source=None):
         return handle_response(
             requests.get(
                 self.TEMPLATE +
@@ -81,9 +81,9 @@ class MonitorAPI(object):
                     token=self.authorization.token,
                     monitor_id=monitor_id,
                     start=start,
-                    end=end),
-                daily=str(daily).lower(),
-                document_source=document_source))
+                    end=end,
+                    daily=str(daily).lower(),
+                    document_source=document_source)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
     def top_sources(self, monitor_id, start, end):
@@ -97,7 +97,12 @@ class MonitorAPI(object):
                     end=end)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
-    def image_analysis(self, monitor_id, start, end, type=None, top=None):
+    def image_analysis(self,
+                       monitor_id,
+                       start,
+                       end,
+                       object_type="object",
+                       top=100):
         return handle_response(
             requests.get(
                 self.TEMPLATE +
@@ -106,7 +111,7 @@ class MonitorAPI(object):
                     monitor_id=monitor_id,
                     start=start,
                     end=end,
-                    type=type,
+                    type=object_type,
                     top=top)))
 
     @RateLimiter(max_calls=120, period=ONE_MINUTE)
@@ -213,7 +218,7 @@ class MonitorAPI(object):
         return handle_response(
             requests.get(
                 self.TEMPLATE +
-                "geography/cities?auth={token}&id={monitor_id}&start={start}&end={end}&countr={country}".format(
+                "geography/cities?auth={token}&id={monitor_id}&start={start}&end={end}&country={country}".format(
                     token=self.authorization.token,
                     monitor_id=monitor_id,
                     start=start,
@@ -225,7 +230,7 @@ class MonitorAPI(object):
         return handle_response(
             requests.get(
                 self.TEMPLATE +
-                "geography/states?auth={token}&id={monitor_id}&start={start}&end={end}&countr={country}".format(
+                "geography/states?auth={token}&id={monitor_id}&start={start}&end={end}&country={country}".format(
                     token=self.authorization.token,
                     monitor_id=monitor_id,
                     start=start,
