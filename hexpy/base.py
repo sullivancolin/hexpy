@@ -4,7 +4,7 @@ logging.basicConfig(
 
 ROOT = "https://api.crimsonhexagon.com/api/"
 
-ONE_MINUTE = 70
+ONE_MINUTE = 60
 MAX_CALLS = 120
 
 
