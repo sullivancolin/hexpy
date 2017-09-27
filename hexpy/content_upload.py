@@ -2,22 +2,23 @@
 """Module for uploading custom content"""
 
 import requests
-from .response import handle_response
 from ratelimiter import RateLimiter
 from clint.textui import progress
-ONE_MINUTE = 60
+from .response import handle_response
+from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class ContentUploadAPI(object):
-    """docstring for MetadataAPI"""
+    """docstring for MetadataAPI."""
 
-    TEMPLATE = "https://api.crimsonhexagon.com/api/content/upload"
+    TEMPLATE = ROOT + "content/upload"
 
     def __init__(self, authorization):
         super(ContentUploadAPI, self).__init__()
         self.authorization = authorization
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def upload(self, data):
         return handle_response(
             requests.post(

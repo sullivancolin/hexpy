@@ -1,31 +1,34 @@
 # -*- coding: utf-8 -*-
-"""Top-level package for hexpy."""
+"""Moduel for interacting with analysis API"""
 
 import requests
 from .response import handle_response
 from ratelimiter import RateLimiter
-
-ONE_MINUTE = 60
+from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class AnalysisAPI(object):
-    """docstring for AnalysisAPI"""
+    """docstring for AnalysisAPI."""
 
-    TEMPLATE = "https://api.crimsonhexagon.com/api/results/"
+    TEMPLATE = ROOT + "results/"
 
     def __init__(self, authorization):
         super(AnalysisAPI, self).__init__()
         self.authorization = authorization
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def analysis_request(self, data):
+        """Submit a query task against 24 hours of social data."""
         return handle_response(
             requests.post(self.TEMPLATE),
             json=data,
             params={"auth": self.authorization.token})
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def results(self, request_id):
+        """Retrieve the status of the analysis request and the results."""
         return handle_response(
             requests.get(self.TEMPLATE + "{request_id}?auth={token}".format(
                 token=self.authorization.token, request_id=request_id)))

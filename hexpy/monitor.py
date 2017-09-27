@@ -1,37 +1,39 @@
 # -*- coding: utf-8 -*-
-"""Module for Monitor results API"""
+"""Module for monitor results API"""
 
 import requests
 from .response import handle_response
 from ratelimiter import RateLimiter
-
-ONE_MINUTE = 60
+from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class MonitorAPI(object):
-    """docstring for MonitorAPI"""
+    """docstring for MonitorAPI."""
 
-    TEMPLATE = "https://api.crimsonhexagon.com/api/monitor/"
+    TEMPLATE = ROOT + "monitor/"
 
     def __init__(self, authorization):
         super(MonitorAPI, self).__init__()
         self.authorization = authorization
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def details(self, monitor_id):
         return handle_response(
             requests.get(
                 self.TEMPLATE + "detail?auth={token}&id={monitor_id}".format(
                     token=self.authorization.token, monitor_id=monitor_id)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def audit(self, monitor_id):
         return handle_response(
             requests.get(
                 self.TEMPLATE + "audit?auth={token}&id={monitor_id}".format(
                     token=self.authorization.token, monitor_id=monitor_id)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def word_cloud(self, monitor_id, start, end, filter=None):
         return handle_response(
             requests.get(
@@ -43,7 +45,8 @@ class MonitorAPI(object):
                     end=end,
                     filter=filter)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def trained_posts(self, monitor_id, category=None):
         return handle_response(
             requests.get(
@@ -53,7 +56,8 @@ class MonitorAPI(object):
                     monitor_id=monitor_id,
                     category=category)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def train_monitor(self, monitor_id, category_id, data):
         return handle_response(
             requests.post(
@@ -66,7 +70,8 @@ class MonitorAPI(object):
                 params={"auth": self.authorization.token}),
             check_text=True)
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def interest_affinities(self,
                             monitor_id,
                             start,
@@ -85,7 +90,8 @@ class MonitorAPI(object):
                     daily=str(daily).lower(),
                     document_source=document_source)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def top_sources(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -96,7 +102,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def image_analysis(self,
                        monitor_id,
                        start,
@@ -114,7 +121,8 @@ class MonitorAPI(object):
                     type=object_type,
                     top=top)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def volume(self,
                monitor_id,
                start,
@@ -133,7 +141,8 @@ class MonitorAPI(object):
                     aggregate_by_day=str(aggregate_by_day).lower(),
                     use_local_time=str(use_local_time).lower())))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def sentiment_and_categories(self,
                                  monitor_id,
                                  start,
@@ -149,7 +158,8 @@ class MonitorAPI(object):
                     end=end,
                     hide_excluded=str(hide_excluded).lower())))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def posts(self,
               monitor_id,
               start,
@@ -176,7 +186,8 @@ class MonitorAPI(object):
     # Demographics                                                                  #
     #################################################################################
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def age(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -187,7 +198,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def ethnicity(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -198,7 +210,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def gender(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -213,7 +226,8 @@ class MonitorAPI(object):
     # Geography                                                                  #
     #################################################################################
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def cities(self, monitor_id, start, end, country):
         return handle_response(
             requests.get(
@@ -225,7 +239,8 @@ class MonitorAPI(object):
                     end=end,
                     country=country)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def states(self, monitor_id, start, end, country):
         return handle_response(
             requests.get(
@@ -237,7 +252,8 @@ class MonitorAPI(object):
                     end=end,
                     country=country)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def countries(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -252,7 +268,8 @@ class MonitorAPI(object):
     # Twitter                                                                       #
     #################################################################################
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def twitter_authors(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -263,7 +280,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def twitter_metrics(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -274,7 +292,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def twitter_followers(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -285,7 +304,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def twitter_sent_posts(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -296,7 +316,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def twitter_engagement(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -311,7 +332,8 @@ class MonitorAPI(object):
     # Facebook                                                                      #
     #################################################################################
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def facebook_admin_posts(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -322,7 +344,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def facebook_likes(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -333,7 +356,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def facebook_activity(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -348,7 +372,8 @@ class MonitorAPI(object):
     # Instagram                                                                     #
     #################################################################################
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def instagram_top_hashtags(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -359,7 +384,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def instagram_followers(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -370,7 +396,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def instagram_sent_media(self, monitor_id, start, end):
         return handle_response(
             requests.get(
@@ -381,7 +408,8 @@ class MonitorAPI(object):
                     start=start,
                     end=end)))
 
-    @RateLimiter(max_calls=120, period=ONE_MINUTE)
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def instagram_activity(self, monitor_id, start, end):
         return handle_response(
             requests.get(

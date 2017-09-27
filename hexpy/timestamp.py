@@ -7,7 +7,7 @@ from datetime import datetime
 class Timestamp(object):
     """docstring for Timestamp"""
 
-    def __init__(self, day, month, year, hour=0, minute=0, second=0,
+    def __init__(self, year, month, day, hour=0, minute=0, second=0,
                  zone=None):
         super(Timestamp, self).__init__()
         self.day = day
@@ -26,4 +26,4 @@ class Timestamp(object):
     @classmethod
     def from_string(cls, timestamp):
         t = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
-        return cls(t.day, t.month, t.year, t.hour, t.minute, t.second)
+        return cls(t.year, t.month, t.day, t.hour, t.minute, t.second)

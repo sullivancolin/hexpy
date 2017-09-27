@@ -4,39 +4,47 @@
 import requests
 import os
 import json
+from getpass import getpass
+from ratelimiter import RateLimiter
 from .response import handle_response
-
-ONE_MINUTE = 60
+from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class CrimsonAuthorization(object):
     """Client class for interacting with Crimson Hexagon API"""
-    ROOT = "https://api.crimsonhexagon.com/api/"
     CREDS_FILE = os.path.join(
         os.path.expanduser('~'), '.hexpy', 'credentials.json')
 
     def __init__(self, username=None, password=None, token=None):
         super(CrimsonAuthorization, self).__init__()
         if not any([username, password, token]):
-            self.load_auth_from_cache()
+            raise ValueError(
+                "No credentials given. Please provide valid token or username and password")
         else:
             if not token:
-                if not (username and password):
-                    raise ValueError("Missing user name or password.")
-                else:
-                    self.get_token(username, password)
+
+                if username and not password:
+                    password = getpass(prompt='Enter password: ')
+                elif password and not username:
+                    raise ValueError("Missing username.")
+
+                self.auth = self.get_token(username, password)
+                self.token = self.auth["auth"]
             else:
+                # TODO Test of validity of provided token
                 self.token = token
 
+    @RateLimiter(
+        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def get_token(self, username, password, no_expiration=True):
         response = handle_response(
             requests.get(
-                self.ROOT +
+                ROOT +
                 "authenticate?username={username}&password={password}&noExpiration={expiration}".format(
                     username=username,
                     password=password,
                     expiration=str(no_expiration).lower())))
-        self.token = response["auth"]
+        return response
 
     def save_token(self):
         if not os.path.exists(os.path.split(self.CREDS_FILE)[0]):
@@ -44,12 +52,18 @@ class CrimsonAuthorization(object):
         with open(self.CREDS_FILE, "w") as outfile:
             json.dump({"auth": self.token}, outfile, indent=4)
 
-    def load_auth_from_cache(self):
+    @classmethod
+    def load_auth_from_cache(cls, path=None):
+
         try:
-            with open(self.CREDS_FILE) as infile:
-                auth = json.load(infile)
-                self.token = auth["auth"]
-        except FileNotFoundError as e:
-            raise e(
-                "{} not found. Please specify token or username and password.".format(
-                    self.CREDS_FILE))
+            if not path:
+                with open(cls.CREDS_FILE) as infile:
+                    auth = json.load(infile)
+                    return cls(token=auth["auth"])
+            else:
+                with open(path) as infile:
+                    auth = json.load(infile)
+                    return cls(token=auth["auth"])
+        except FileNotFoundError:
+            raise FileNotFoundError(
+                "Credentials File not found. Please specify token or username and password.")
