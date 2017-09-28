@@ -11,9 +11,9 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class CrimsonAuthorization(object):
-    """Class for generating a token for use with all API requests.
+    """Generating a token for use with all API requests.
 
-    Create instance with token, or username. Optionally include password, or enter it at the prompt.
+    Instantiate with token, or username. Optionally include password, or enter it at the prompt.
 
     ```python
     >>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
@@ -29,7 +29,7 @@ class CrimsonAuthorization(object):
     ```python
     >>> auth = CrimsonAuthorization(token="previously_saved_token")
     ```
-    or load token from file.  Default is `~/.hexpy/credentials.json`
+    Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
     ```python
     >>> auth = CrimsonAuthorization.load_auth_from_file()
     ```
@@ -95,13 +95,10 @@ class CrimsonAuthorization(object):
         """
         try:
             if not path:
-                with open(cls.CREDS_FILE) as infile:
-                    auth = json.load(infile)
-                    return cls(token=auth["auth"])
-            else:
-                with open(path) as infile:
-                    auth = json.load(infile)
-                    return cls(token=auth["auth"])
+                path = cls.CREDS_FILE
+            with open(path) as infile:
+                auth = json.load(infile)
+                return cls(token=auth["auth"])
         except FileNotFoundError:
             raise FileNotFoundError(
                 "Credentials File not found. Please specify token or username and password.")

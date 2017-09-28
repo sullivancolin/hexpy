@@ -45,13 +45,16 @@ coverage:
 	$(BROWSER) htmlcov/index.html
 
 ## generate Mkdocs HTML documentation
-docs:
-	rm -rf site/
-	mkdocs build
+docs: docs-clean
+	cd docs/; mkdocs build
+
+## remove previously build docs
+docs-clean:
+	cd docs/; rm -rf site/;
 
 ## generate Mkdocs HTML documentation, commit to gh-pages branch and push to github
 releasedocs:
-	mkdocs gh-deploy
+	cd docs/; mkdocs gh-deploy
 
 ## package and upload a release
 release: clean

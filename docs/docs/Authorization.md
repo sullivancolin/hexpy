@@ -2,9 +2,7 @@
 
 ## Generating a token for use with all API requests.
 
-`class CrimsonAuthorizatio(username=None, password=None, token=None)`.
-
-Create instance with token, or username. Optionally include password, or enter it at the prompt.
+Instantiate using account token, or username. Optionally include password, or enter it at the prompt.
 
 ```python
 >>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
@@ -20,7 +18,7 @@ or
 ```python
 >>> auth = CrimsonAuthorization(token="previously_saved_token")
 ```
-or load token from file.  Default is `~/.hexpy/credentials.json`
+Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
 ```python
 >>> auth = CrimsonAuthorization.load_auth_from_file()
 ```

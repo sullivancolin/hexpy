@@ -53,7 +53,7 @@ coverage.xml
 *.log
 
 # Mkdocs documentation
-site/
+docs/site/
 
 # PyBuilder
 target/
