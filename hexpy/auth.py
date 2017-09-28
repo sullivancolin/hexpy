@@ -11,7 +11,30 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class CrimsonAuthorization(object):
-    """Client class for interacting with Crimson Hexagon API"""
+    """Class for generating a token for use with all API requests.
+
+    Create instance with token, or username. Optionally include password, or enter it at the prompt.
+
+    ```python
+    >>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
+    >>> auth.save_token()
+    ```
+    or
+    ```python
+    >>> auth = CrimsonAuthorization(username="username@email.com")
+    Enter password: *********
+    >>> auth.save_token()
+    ```
+    or
+    ```python
+    >>> auth = CrimsonAuthorization(token="previously_saved_token")
+    ```
+    or load token from file.  Default is `~/.hexpy/credentials.json`
+    ```python
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    ```
+    """
+
     CREDS_FILE = os.path.join(
         os.path.expanduser('~'), '.hexpy', 'credentials.json')
 
@@ -37,6 +60,12 @@ class CrimsonAuthorization(object):
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def get_token(self, username, password, no_expiration=True):
+        """Request authorization token.
+        # Arguments
+            username: account username.
+            password: account password.
+            no_expiration: True/False token with 24 expiration.
+        """
         response = handle_response(
             requests.get(
                 ROOT +
@@ -46,15 +75,24 @@ class CrimsonAuthorization(object):
                     expiration=str(no_expiration).lower())))
         return response
 
-    def save_token(self):
-        if not os.path.exists(os.path.split(self.CREDS_FILE)[0]):
-            os.makedirs(os.path.split(self.CREDS_FILE)[0])
-        with open(self.CREDS_FILE, "w") as outfile:
+    def save_token(self, path=None):
+        """Request authorization token.
+        # Arguments
+            path: path to store credentials. default is
+        """
+        if not path:
+            path = self.CREDS_FILE
+        if not os.path.exists(os.path.split(path)[0]):
+            os.makedirs(os.path.split(path)[0])
+        with open(path, "w") as outfile:
             json.dump({"auth": self.token}, outfile, indent=4)
 
     @classmethod
-    def load_auth_from_cache(cls, path=None):
-
+    def load_auth_from_file(cls, path=None):
+        """Instanciate class from previously saved credentials file.
+        # Arguments
+            path: path to store credentials. default is
+        """
         try:
             if not path:
                 with open(cls.CREDS_FILE) as infile:

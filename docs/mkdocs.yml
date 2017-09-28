@@ -1,0 +1,13 @@
+site_name: hexpy
+site_description: A Python client for the Crimson Hexagon API.
+repo_url: https://github.com/sullivancolin/hexpy
+pages:
+    - Home: index.md
+    - Authorization: Authorization.md
+    - Metadata: Metadata.md
+    - Monitor: Monitor.md
+    - Analysis: Analysis.md
+    - Upload: Upload.md
+    - Streams: Streams.md
+    - Timestamps: Timestamps.md
+theme: readthedocs

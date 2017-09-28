@@ -27,7 +27,6 @@ class ContentUploadAPI(object):
                 params={"auth": self.authorization.token}))
 
     def batch_upload(self, data):
-        assert (len(data) > 1000)
         for batch in progress.bar(
             [data[i:i + 1000] for i in range(0, len(data), 1000)]):
             self.upload(batch)

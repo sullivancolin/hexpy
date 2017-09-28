@@ -1,7 +1,7 @@
 .PHONY: clean clean-test clean-pyc clean-build docs
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
-
+ ## remove all build, test, coverage and Python artifacts
+clean: clean-build clean-pyc clean-test
 
 ## remove build artifacts
 clean-build:
@@ -44,18 +44,14 @@ coverage:
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-## generate Sphinx HTML documentation, including API docs
+## generate Mkdocs HTML documentation
 docs:
-	rm -f docs/hexpy.rst
-	rm -f docs/modules.rst
-	# sphinx-apidoc -o docs/ hexpy
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
+	rm -rf site/
+	mkdocs build
 
-## compile the docs watching for changes
-servedocs: docs
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+## generate Mkdocs HTML documentation, commit to gh-pages branch and push to github
+releasedocs:
+	mkdocs gh-deploy
 
 ## package and upload a release
 release: clean

@@ -19,6 +19,7 @@ Markdown==2.6.9
 MarkupSafe==1.0
 mccabe==0.6.1
 mkdocs==0.16.3
+mkdocs-cinder==0.9.4
 parso==0.1.0
 pexpect==4.2.1
 pickleshare==0.7.4

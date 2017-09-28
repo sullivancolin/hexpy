@@ -1,6 +1,0 @@
-site_name: hexpy
-repo_url: https://github.com/sullivancolin/hexpy
-pages:
-    - Home: index.md
-    # - About: about.md
-theme: cinder
