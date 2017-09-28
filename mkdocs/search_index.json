@@ -1,0 +1,19 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "A Python Client for working with Crimson Hexagon's REST API\n\n\nhexpy is a simple python package for working with the Crimson Hexagon API\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version run \npip install git+git://github.com/sullivancolin/hexpy.git@master\n or\n\ngit clone https://github.com/sullivancolin/hexpy.git\n followed by \npip install -e hexpy/",
+            "title": "Home"
+        },
+        {
+            "location": "/#a-python-client-for-working-with-crimson-hexagons-rest-api",
+            "text": "hexpy is a simple python package for working with the Crimson Hexagon API",
+            "title": "A Python Client for working with Crimson Hexagon's REST API"
+        },
+        {
+            "location": "/#installation",
+            "text": "To install the latest version run  pip install git+git://github.com/sullivancolin/hexpy.git@master  or git clone https://github.com/sullivancolin/hexpy.git  followed by  pip install -e hexpy/",
+            "title": "Installation"
+        }
+    ]
+}
