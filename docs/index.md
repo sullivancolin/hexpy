@@ -1,17 +1,14 @@
-# Welcome to MkDocs
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+A Python Client for working with Crimson Hexagon's REST API
+-----------------------------------------------------------
 
-## Commands
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
 
-## Project layout
+hexpy is a simple python package for working with the Crimson Hexagon API
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+<a name="installation"></a>
+## Installation
+<!-- To install the most recent stable release run `pip install hexpy`. -->
+
+To install the latest version run `pip install git+git://github.com/sullivancolin/hexpy.git@master` or
+`git clone https://github.com/sullivancolin/hexpy.git` followed by `pip install -e hexpy/`

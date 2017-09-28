@@ -1,23 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Tests for `hexpy` package."""
-from unittest.mock import Mock, patch
+
 import pytest
 from hexpy import handle_response
 from hexpy import Timestamp, CrimsonAuthorization
 from hexpy import CrimsonAuthorization, MonitorAPI
-
-
-@patch('hexpy.monitor.requests.get')
-def test_rate_limit(mock_get):
-    auth = CrimsonAuthorization.load_auth_from_cache()
-
-    client = MonitorAPI(auth)
-    mock_get.return_value.status_code = 200
-    for i in range(300):
-        if i % 10 == 0:
-            print(i)
-        client.details(6054759047)
 
 
 def test_auth():

@@ -19,7 +19,6 @@ setup(
     author_email='csullivan@crimsonhexagon.com',
     url='https://github.com/sullivancolin/hexpy',
     packages=find_packages(include=['hexpy']),
-    entry_points={'console_scripts': ['hexpy=hexpy.cli:main']},
     include_package_data=True,
     install_requires=requirements,
     zip_safe=False,
@@ -32,4 +31,4 @@ setup(
     ],
     test_suite='tests',
     tests_require=test_requirements,
-    setup_requires=setup_requirements, )
+    setup_requires=setup_requirements)

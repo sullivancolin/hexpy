@@ -9,5 +9,6 @@ MAX_CALLS = 120
 
 
 def sleep_message(until):
-    print('Rate limit reached, sleeping for {minute} seconds'.format(
-        minute=ONE_MINUTE))
+    pass
+    # print('Rate limit reached, sleeping for {minute} seconds.'.format(
+    #     minute=ONE_MINUTE))
