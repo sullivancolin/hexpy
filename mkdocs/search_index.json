@@ -2,18 +2,108 @@
     "docs": [
         {
             "location": "/",
-            "text": "A Python Client for working with Crimson Hexagon's REST API\n\n\nhexpy is a simple python package for working with the Crimson Hexagon API\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version run \npip install git+git://github.com/sullivancolin/hexpy.git@master\n or\n\ngit clone https://github.com/sullivancolin/hexpy.git\n followed by \npip install -e hexpy/",
+            "text": "A Python Client for the Crimson Hexagon's API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon' rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check requests sucess.\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ pip install git+git://github.com/sullivancolin/hexpy.git@master\n\n\n\n\nor\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install -e hexpy/\n\n\n\n\nExample Usage\n\n\n\n>>> from hexpy import CrimsonAuthorization, MonitorAPI, MetaDataAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
             "title": "Home"
         },
         {
-            "location": "/#a-python-client-for-working-with-crimson-hexagons-rest-api",
-            "text": "hexpy is a simple python package for working with the Crimson Hexagon API",
-            "title": "A Python Client for working with Crimson Hexagon's REST API"
+            "location": "/#a-python-client-for-the-crimson-hexagons-api",
+            "text": "hexpy  is a simple python package for working with the Crimson Hexagon API",
+            "title": "A Python Client for the Crimson Hexagon's API"
+        },
+        {
+            "location": "/#why-use-this-client",
+            "text": "Easily and securely manage account authentication.  Automatically abides by Crimson Hexagon' rate limits.  Automatically converts python data to/from JSON strings.  Automatically check requests sucess.",
+            "title": "Why use this client?"
         },
         {
             "location": "/#installation",
-            "text": "To install the latest version run  pip install git+git://github.com/sullivancolin/hexpy.git@master  or git clone https://github.com/sullivancolin/hexpy.git  followed by  pip install -e hexpy/",
+            "text": "To install the latest version:  $ pip install git+git://github.com/sullivancolin/hexpy.git@master  or  $ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install -e hexpy/",
             "title": "Installation"
+        },
+        {
+            "location": "/#example-usage",
+            "text": ">>> from hexpy import CrimsonAuthorization, MonitorAPI, MetaDataAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
+            "title": "Example Usage"
+        },
+        {
+            "location": "/Authorization/",
+            "text": "Authorization\n\n\nGenerating a token for use with all API requests.\n\n\nclass CrimsonAuthorizatio(username=None, password=None, token=None)\n.\n\n\nCreate instance with token, or username. Optionally include password, or enter it at the prompt.\n\n\n>>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(token=\"previously_saved_token\")\n\n\n\n\nor load token from file.  Default is \n~/.hexpy/credentials.json\n\n\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n\n\n\n\nMethods\n\n\nget_token\n\n\nget_token(self, username, password, no_expiration=True)\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\nusername: account username.\n\n\npassword: account password.\n\n\nno_expiration: True/False token with 24 expiration.\n\n\n\n\nsave_token\n\n\nsave_token(self, path=None)\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\npath: path to store credentials. default is\n\n\n\n\nload_auth_from_file()\n\n\nload_auth_from_file(self, path=None)\n\n\nInstantiate class from previously saved credentials file.\n\n\nArguments\n\n\n\n\npath: path to store credentials. default is",
+            "title": "Authorization"
+        },
+        {
+            "location": "/Authorization/#authorization",
+            "text": "",
+            "title": "Authorization"
+        },
+        {
+            "location": "/Authorization/#generating-a-token-for-use-with-all-api-requests",
+            "text": "class CrimsonAuthorizatio(username=None, password=None, token=None) .  Create instance with token, or username. Optionally include password, or enter it at the prompt.  >>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(token=\"previously_saved_token\")  or load token from file.  Default is  ~/.hexpy/credentials.json  >>> auth = CrimsonAuthorization.load_auth_from_file()",
+            "title": "Generating a token for use with all API requests."
+        },
+        {
+            "location": "/Authorization/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Authorization/#get_token",
+            "text": "get_token(self, username, password, no_expiration=True)  Request authorization token.",
+            "title": "get_token"
+        },
+        {
+            "location": "/Authorization/#arguments",
+            "text": "username: account username.  password: account password.  no_expiration: True/False token with 24 expiration.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Authorization/#save_token",
+            "text": "save_token(self, path=None)  Request authorization token.",
+            "title": "save_token"
+        },
+        {
+            "location": "/Authorization/#arguments_1",
+            "text": "path: path to store credentials. default is",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Authorization/#load_auth_from_file",
+            "text": "load_auth_from_file(self, path=None)  Instantiate class from previously saved credentials file.",
+            "title": "load_auth_from_file()"
+        },
+        {
+            "location": "/Authorization/#arguments_2",
+            "text": "path: path to store credentials. default is",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Metadata/",
+            "text": "",
+            "title": "Metadata"
+        },
+        {
+            "location": "/Monitor/",
+            "text": "",
+            "title": "Monitor"
+        },
+        {
+            "location": "/Analysis/",
+            "text": "",
+            "title": "Analysis"
+        },
+        {
+            "location": "/Upload/",
+            "text": "",
+            "title": "Upload"
+        },
+        {
+            "location": "/Streams/",
+            "text": "",
+            "title": "Streams"
+        },
+        {
+            "location": "/Timestamps/",
+            "text": "",
+            "title": "Timestamps"
         }
     ]
 }
