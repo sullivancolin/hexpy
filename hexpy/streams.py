@@ -8,7 +8,30 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class StreamsAPI(object):
-    """Class for working with Realtime Streams API."""
+    """Class for working with Realtime Streams API.
+
+    # Example usage.
+
+    ```python
+    >>> from hexpy import CrimsonAuthorization, StreamsAPI
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> streams_client = StreamsAPI(auth)
+    >>> stream_list = streams_client.details(team_id)
+    >>> stream_list
+    {
+    "streams": [
+        {
+            "id": 123456,
+            "name": "Test Stream",
+            "teamName": "Test Team",
+            "monitors": [
+                {
+                    "id": 7899999,
+                    "name": "Apple",
+                    "description": "",
+    ...
+    ```
+    """
 
     TEMPLATE = ROOT + "stream/"
 

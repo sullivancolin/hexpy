@@ -8,7 +8,34 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class MetadataAPI(object):
-    """Class for working with Crimson Hexagon account and analysis metadata."""
+    """Class for working with Crimson Hexagon account and analysis metadata.
+
+    # Example usage.
+
+    ```python
+    >>> from hexpy import CrimsonAuthorization, MetadataAPI
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> metadata_client = MetadataAPI(auth)
+    >>> metadata_client.team_list()
+    {
+      "teams": [
+        {
+          "id": 507581078,
+          "name": "Acme"
+        },
+        {
+          "id": 500793406,
+          "name": "Bob's Used Cars"
+        },
+        {
+          "id": 1283959240,
+          "name": "Phones and Things"
+        }
+      ],
+      "status": "success"
+    }
+    ```
+    """
 
     TEMPLATE = ROOT
 

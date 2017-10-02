@@ -8,7 +8,10 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class AnalysisAPI(object):
-    """docstring for AnalysisAPI."""
+    """Class for working with Crimson Hexagon Analysis API.
+
+
+    """
 
     TEMPLATE = ROOT + "results/"
 
@@ -35,7 +38,7 @@ class AnalysisAPI(object):
         """Retrieve the status of the analysis request and the results.
 
         # Arguments
-            request_id: Integer, the identifier given for the analysis task, generated via the Analysis Request endpoint
+            request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints
         """
         return handle_response(
             requests.get(self.TEMPLATE + "{request_id}?auth={token}".format(

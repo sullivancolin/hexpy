@@ -39,13 +39,13 @@ Request authorization token.
 ### save_token
 `save_token(self, path=None)`
 
-Request authorization token.
+Save authorization token.
 #### Arguments
-* path: path to store credentials. default is
+* path: String, path to store credentials. default is `~/.hexpy/credentials.json`
 
 ### load_auth_from_file()
 `load_auth_from_file(self, path=None)`
 
 Instantiate class from previously saved credentials file.
 #### Arguments
-* path: path to store credentials. default is
+* path: String, path to store credentials. default is `~/.hexpy/credentials.json`

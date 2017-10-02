@@ -17,6 +17,31 @@ class ContentUploadAPI(object):
     To use this endpoint, please contact support and they will create a new custom content type for you.
 
     [Reference](https://apidocs.crimsonhexagon.com/reference#content-upload-1)
+
+    # Example Usage
+
+    ```python
+    >>> from hexpy import CrimsonAuthorization, ContentUploadAPI
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> upload_client = ContentUploadAPI(auth)
+    >>> items ={
+      "items": [
+        {
+          "title": "Example Title",
+          "date": "2010-01-26T16:14:00",
+          "author": "me",
+          "url": "http://www.crimsonhexagon.com/post1",
+          "contents": "Example content",
+          "language": "en",
+          "type": "Your_Assigned_Content_Type_Name",
+          "geolocation": {
+            "id": "USA.NY"
+          }
+        },
+      ]
+    }
+    >>> upload_client.upload(items)
+    ```
     """
 
     TEMPLATE = ROOT + "content/upload"

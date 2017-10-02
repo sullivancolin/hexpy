@@ -11,7 +11,9 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class CrimsonAuthorization(object):
-    """Generating a token for use with all API requests.
+    """Class for generating a token for use with all API requests.
+
+    # Example Usage
 
     Instantiate with token, or username. Optionally include password, or enter it at the prompt.
 
@@ -67,20 +69,19 @@ class CrimsonAuthorization(object):
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        response = handle_response(
+        return handle_response(
             requests.get(
                 ROOT +
                 "authenticate?username={username}&password={password}&noExpiration={expiration}".format(
                     username=username,
                     password=password,
                     expiration=str(no_expiration).lower())))
-        return response
 
     def save_token(self, path=None):
-        """Request authorization token.
+        """Save authorization token.
 
         # Arguments
-            path: String, path to store credentials. default is
+            path: String, path to store credentials. default is `~/.hexpy/credentials.json`
         """
         if not path:
             path = self.CREDS_FILE
@@ -91,10 +92,10 @@ class CrimsonAuthorization(object):
 
     @classmethod
     def load_auth_from_file(cls, path=None):
-        """Instanciate class from previously saved credentials file.
+        """Instantiate class from previously saved credentials file.
 
         # Arguments
-            path: path to store credentials. default is
+            path: path to store credentials. default is default is `~/.hexpy/credentials.json`
         """
         try:
             if not path:

@@ -8,7 +8,26 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 
 
 class MonitorAPI(object):
-    """Class for working with Crimson Hexagon Monitor API."""
+    """Class for working with Crimson Hexagon Monitor API.
+
+    # Example usage.
+
+    ```python
+    >>> from hexpy import CrimsonAuthorization, MonitorAPI
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> monitor_client = MonitorAPI(auth)
+    >>> details = monitor_client.details(monitor_id)
+    >>> start = details["resultsStart"]
+    >>> end = details["resultsEnd"]
+    >>> monitor_client.posts(monitor_id, start, end)
+    {
+      "posts": [
+        {
+          "url": "http://twitter.com/username/status/status_id",
+          "date": "2016-05-28T00:00:00",
+    ...
+    ```
+    """
 
     TEMPLATE = ROOT + "monitor/"
 
