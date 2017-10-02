@@ -61,10 +61,11 @@ class CrimsonAuthorization(object):
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
     def get_token(self, username, password, no_expiration=True):
         """Request authorization token.
+
         # Arguments
-            username: account username.
-            password: account password.
-            no_expiration: True/False token with 24 expiration.
+            username: String, account username.
+            password: String, account password.
+            no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
         response = handle_response(
             requests.get(
@@ -77,8 +78,9 @@ class CrimsonAuthorization(object):
 
     def save_token(self, path=None):
         """Request authorization token.
+
         # Arguments
-            path: path to store credentials. default is
+            path: String, path to store credentials. default is
         """
         if not path:
             path = self.CREDS_FILE
@@ -90,6 +92,7 @@ class CrimsonAuthorization(object):
     @classmethod
     def load_auth_from_file(cls, path=None):
         """Instanciate class from previously saved credentials file.
+
         # Arguments
             path: path to store credentials. default is
         """

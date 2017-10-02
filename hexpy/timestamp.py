@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 class Timestamp(object):
-    """docstring for Timestamp"""
+    """Class for working with dates and times."""
 
     def __init__(self, year, month, day, hour=0, minute=0, second=0,
                  zone=None):
@@ -21,9 +21,11 @@ class Timestamp(object):
                                  self.minute, self.second)
 
     def to_string(self):
+        """Convert timestamp object to ISO format string."""
         return self.datetime.isoformat()
 
     @classmethod
     def from_string(cls, timestamp):
+        """Instantiate Timestamp object from ISO format String."""
         t = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
         return cls(t.year, t.month, t.day, t.hour, t.minute, t.second)
