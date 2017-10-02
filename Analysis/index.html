@@ -72,6 +72,19 @@
     <a class="current" href="./">Analysis</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#analysis-api">Analysis API</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-crimson-hexagon-analysis-api">Class for working with Crimson Hexagon Analysis API.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -87,7 +100,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Timestamps/">Timestamps</a>
+    <a class="" href="../Timestamp/">Timestamp</a>
 	    </li>
           
         </ul>
@@ -115,9 +128,6 @@
     <li>Analysis</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Analysis.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
     </li>
   </ul>
   <hr/>
@@ -125,7 +135,34 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="analysis-api">Analysis API</h1>
+<h2 id="class-for-working-with-crimson-hexagon-analysis-api">Class for working with Crimson Hexagon Analysis API.</h2>
+<h2 id="example-usage">Example Usage</h2>
+<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, AnalysisAPI
+&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+&gt;&gt;&gt; analysis_client = AnalysisAPI(auth)
+&gt;&gt;&gt; analysis_client.results(request_id)
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+<h3 id="anaysis_requests">anaysis_requests</h3>
+<pre><code class="python">analysis_request(data)
+</code></pre>
+
+<p>Submit a query task against 24 hours of social data.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li>data: Dictionary, query and filter parameters</li>
+</ul>
+<h3 id="results">results</h3>
+<pre><code class="python">results(request_id)
+</code></pre>
+
+<p>Retrieve the status of the analysis request and the results.</p>
+<h4 id="arguments_1">Arguments</h4>
+<ul>
+<li>request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints</li>
+</ul>
               
             </div>
           </div>
@@ -160,8 +197,6 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Monitor/" style="color: #fcfcfc;">&laquo; Previous</a></span>

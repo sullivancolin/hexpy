@@ -67,6 +67,29 @@
     <a class="current" href="./">Monitor</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#monitor-api">Monitor API</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-crimson-hexagon-monitor-api">Class for working with Crimson Hexagon Monitor API.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example usage.</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+            <li><a class="toctree-l3" href="#demographics">Demographics</a></li>
+        
+            <li><a class="toctree-l3" href="#geography">Geography</a></li>
+        
+            <li><a class="toctree-l3" href="#twitter">Twitter</a></li>
+        
+            <li><a class="toctree-l3" href="#facebook">Facebook</a></li>
+        
+            <li><a class="toctree-l3" href="#instagram">Instagram</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -87,7 +110,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Timestamps/">Timestamps</a>
+    <a class="" href="../Timestamp/">Timestamp</a>
 	    </li>
           
         </ul>
@@ -115,9 +138,6 @@
     <li>Monitor</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Monitor.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
     </li>
   </ul>
   <hr/>
@@ -125,7 +145,356 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="monitor-api">Monitor API</h1>
+<h2 id="class-for-working-with-crimson-hexagon-monitor-api">Class for working with Crimson Hexagon Monitor API.</h2>
+<h2 id="example-usage">Example usage.</h2>
+<p>Class for working with Crimson Hexagon Monitor API.</p>
+<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, MonitorAPI
+&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+&gt;&gt;&gt; monitor_client = MonitorAPI(auth)
+&gt;&gt;&gt; details = monitor_client.details(monitor_id)
+&gt;&gt;&gt; start = details[&quot;resultsStart&quot;]
+&gt;&gt;&gt; end = details[&quot;resultsEnd&quot;]
+&gt;&gt;&gt; monitor_client.posts(monitor_id, start, end)
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+<h3 id="details">details</h3>
+<pre><code class="python">details(monitor_id)
+</code></pre>
+
+<p>Return detailed metadata about the selected monitor, including category metadata.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+</ul>
+<h3 id="audit">audit</h3>
+<pre><code class="python">audit(monitor_id)
+</code></pre>
+
+<p>Return audit information about the selected monitor, sorted from most to least recent.</p>
+<h4 id="arguments_1">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+</ul>
+<h3 id="word_cloud">word_cloud</h3>
+<pre><code class="python">word_cloud(monitor_id, start, end, filter=None)
+</code></pre>
+
+<p>Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.</p>
+<h4 id="arguments_2">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>filter: String, pipe-separated list of field:value pairs used to filter posts</li>
+</ul>
+<h3 id="trained_posts">trained_posts</h3>
+<pre><code class="python">trained_posts(monitor_id, category=None)
+</code></pre>
+
+<p>Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.</p>
+<h4 id="arguments_3">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>category: Integer, category id to target training posts from a specific category</li>
+</ul>
+<h3 id="train_monitor">train_monitor</h3>
+<pre><code class="python">train_monitor(monitor_id, category_id, data)
+</code></pre>
+
+<p>Upload individual training document monitors programmatically.</p>
+<p>You may only upload one document per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. <a href="https://apidocs.crimsonhexagon.com/reference#training-document-upload">Reference</a></p>
+<h4 id="arguments_4">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>category_id: Integer, the category this content should belong to</li>
+<li>data: Dictionary, document item with required fields</li>
+</ul>
+<h3 id="interest_affinities">interest_affinities</h3>
+<pre><code class="python">interest_affinities(monitor_id, start, end, daily=False, document_source=None)
+</code></pre>
+
+<p>Return information about the authors in a monitor and their affinity with a range of pre-defined topics.</p>
+<h4 id="arguments_5">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range</li>
+<li>document_source: String, document source for affinities. valid params include <code>TWITTER</code> or <code>TUMBLR</code></li>
+</ul>
+<h3 id="top_sources">top_sources</h3>
+<pre><code class="python">top_sources(monitor_id, start, end)
+</code></pre>
+
+<p>Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.</p>
+<h4 id="arguments_6">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="image_analysis">image_analysis</h3>
+<pre><code class="python">image_analysis(monitor_id, start, end, object_type=&quot;&quot;, top=100)
+</code></pre>
+
+<p>Return a breakdown of the top image classes within a provided monitor.</p>
+<h4 id="arguments_7">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>object_type: String, specifies type of image classes, valid values [object, scene, action, logo]</li>
+<li>top : Integer, if defined, only the selected number of classes will be returned</li>
+</ul>
+<h3 id="volume">volume</h3>
+<pre><code class="python">volume(monitor_id, start, end, aggregate_by_day=False, use_local_time=False)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by date.</p>
+<h4 id="arguments_8">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day</li>
+<li>use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor</li>
+</ul>
+<h3 id="sentiment_and_categories">sentiment_and_categories</h3>
+<pre><code class="python">sentiment_and_categories(monitor_id, start, end, hide_excluded=False)
+</code></pre>
+
+<p>Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.</p>
+<h4 id="arguments_9">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.</li>
+</ul>
+<h3 id="posts">posts</h3>
+<pre><code class="python">posts(monitor_id, start, end, filter=None, extend_limit=False, full_contents=False, geotagged=False)
+</code></pre>
+
+<p>Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.</p>
+<h4 id="arguments_10">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>filter: String, pipe-separated list of field:value pairs used to filter posts</li>
+<li>extend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call</li>
+<li>full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms</li>
+<li>geotagged: Boolean, if True, returns only geotagged documents matching the given filter</li>
+</ul>
+<h2 id="demographics">Demographics</h2>
+<p>This collection of endpoints provide demographic volume metrics for users within a given monitor.</p>
+<h3 id="age">age</h3>
+<pre><code class="python">age(monitor_id, start, end)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by age bracket.</p>
+<h4 id="arguments_11">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="ethnicity">ethnicity</h3>
+<pre><code class="python">ethnicity(monitor_id, start, end)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by ethnicity.</p>
+<h4 id="arguments_12">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="gender">gender</h3>
+<pre><code class="python">gender(monitor_id, start, end)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by gender.</p>
+<h4 id="arguments_13">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h2 id="geography">Geography</h2>
+<h3 id="cities">cities</h3>
+<pre><code class="python">cities(monitor_id, start, end, country)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by city.</p>
+<h4 id="arguments_14">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>country: String, country code to filter cities</li>
+</ul>
+<h3 id="states">states</h3>
+<pre><code class="python">states(monitor_id, start, end, country)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by state.</p>
+<h4 id="arguments_15">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>country: String, country code to filter states</li>
+</ul>
+<h3 id="countries">countries</h3>
+<pre><code class="python">countries(monitor_id, start, end)
+</code></pre>
+
+<p>Return volume metrics for a given monitor split by country.</p>
+<h4 id="arguments_16">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h2 id="twitter">Twitter</h2>
+<p>This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. </p>
+<h3 id="twitter_authors">twitter_authors</h3>
+<pre><code class="python">twitter_authors(monitor_id, start, end)
+</code></pre>
+
+<p>Return information related to the Twitter authors who have posted in a given monitor.</p>
+<h4 id="arguments_17">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="twitter_metrics">twitter_metrics</h3>
+<pre><code class="python">twitter_metrics(monitor_id, start, end)
+</code></pre>
+
+<p>Return information about the top hashtags, mentions, and retweets in a monitor.</p>
+<h4 id="arguments_18">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="twitter_followers">twitter_followers</h3>
+<pre><code class="python">twitter_followers(monitor_id, start, end)
+</code></pre>
+
+<p>Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.</p>
+<h4 id="arguments_19">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="twitter_sent_posts">twitter_sent_posts</h3>
+<pre><code class="python">twitter_sent_posts(monitor_id, start, end)
+</code></pre>
+
+<p>Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.</p>
+<h4 id="arguments_20">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="twitter_engagement">twitter_engagement</h3>
+<pre><code class="python">twitter_engagement(monitor_id, start, end):
+</code></pre>
+
+<p>Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.</p>
+<h4 id="arguments_21">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h2 id="facebook">Facebook</h2>
+<h3 id="facebook_admin_posts">facebook_admin_posts</h3>
+<pre><code class="python">facebook_admin_posts(monitor_id, start, end)
+</code></pre>
+
+<p>Return those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.</p>
+<h4 id="arguments_22">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="facebook_likes">facebook_likes</h3>
+<pre><code class="python">facebook_likes(monitor_id, start, end)
+</code></pre>
+
+<p>Return the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.</p>
+<h4 id="arguments_23">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="facebook_activity">facebook_activity</h3>
+<pre><code class="python">facebook_activity(monitor_id, start, end)
+</code></pre>
+
+<p>Return information about actions (likes, comments, shares) made by users and admins for a given page.</p>
+<h4 id="arguments_24">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h2 id="instagram">Instagram</h2>
+<h3 id="instagram_top_hashtags">instagram_top_hashtags</h3>
+<pre><code class="python">instagram_top_hashtags(monitor_id, start, end)
+</code></pre>
+
+<p>Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).</p>
+<h4 id="arguments_25">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="instagram_followers">instagram_followers</h3>
+<pre><code class="python">instagram_followers(monitor_id, start, end)
+</code></pre>
+
+<p>Return the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.</p>
+<h4 id="arguments_26">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="instagram_sent_media">instagram_sent_media</h3>
+<pre><code class="python">instagram_sent_media(monitor_id, start, end)
+</code></pre>
+
+<p>Return media sent by admins in a targeted Instagram account.</p>
+<h4 id="arguments_27">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
+<h3 id="instagram_activity">instagram_activity</h3>
+<pre><code class="python">instagram_activity(monitor_id, start, end)
+</code></pre>
+
+<p>Return information about actions (likes, comments) made by users and admins for a given account.</p>
+<h4 id="arguments_28">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+</ul>
               
             </div>
           </div>
@@ -160,8 +529,6 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Metadata/" style="color: #fcfcfc;">&laquo; Previous</a></span>

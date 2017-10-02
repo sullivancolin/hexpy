@@ -98,7 +98,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Timestamps/">Timestamps</a>
+    <a class="" href="../Timestamp/">Timestamp</a>
 	    </li>
           
         </ul>
@@ -126,9 +126,6 @@
     <li>Authorization</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Authorization.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
     </li>
   </ul>
   <hr/>
@@ -139,7 +136,8 @@
                 <h1 id="authorization">Authorization</h1>
 <h2 id="generating-a-token-for-use-with-all-api-requests">Generating a token for use with all API requests.</h2>
 <p>Instantiate using account token, or username. Optionally include password, or enter it at the prompt.</p>
-<pre><code class="python">&gt;&gt;&gt; auth = CrimsonAuthorization(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
+<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization
+&gt;&gt;&gt; auth = CrimsonAuthorization(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
 &gt;&gt;&gt; auth.save_token()
 </code></pre>
 
@@ -159,7 +157,9 @@ Enter password: *********
 
 <h2 id="methods">Methods</h2>
 <h3 id="get_token">get_token</h3>
-<p><code>get_token(self, username, password, no_expiration=True)</code></p>
+<pre><code class="python">get_token(username, password, no_expiration=True)
+</code></pre>
+
 <p>Request authorization token.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
@@ -168,18 +168,22 @@ Enter password: *********
 <li>no_expiration: True/False token with 24 expiration.</li>
 </ul>
 <h3 id="save_token">save_token</h3>
-<p><code>save_token(self, path=None)</code></p>
-<p>Request authorization token.</p>
+<pre><code class="python">save_token(path=None)
+</code></pre>
+
+<p>Save authorization token.</p>
 <h4 id="arguments_1">Arguments</h4>
 <ul>
-<li>path: path to store credentials. default is</li>
+<li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
-<h3 id="load_auth_from_file">load_auth_from_file()</h3>
-<p><code>load_auth_from_file(self, path=None)</code></p>
+<h3 id="load_auth_from_file">load_auth_from_file</h3>
+<pre><code class="python">load_auth_from_file(path=None)
+</code></pre>
+
 <p>Instantiate class from previously saved credentials file.</p>
 <h4 id="arguments_2">Arguments</h4>
 <ul>
-<li>path: path to store credentials. default is</li>
+<li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
               
             </div>
@@ -215,8 +219,6 @@ Enter password: *********
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>

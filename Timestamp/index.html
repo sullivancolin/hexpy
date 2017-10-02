@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Timestamps - hexpy</title>
+  <title>Timestamp - hexpy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Timestamps";
-    var mkdocs_page_input_path = "Timestamps.md";
-    var mkdocs_page_url = "/Timestamps/";
+    var mkdocs_page_name = "Timestamp";
+    var mkdocs_page_input_path = "Timestamp.md";
+    var mkdocs_page_url = "/Timestamp/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -84,9 +84,22 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Timestamps</a>
+    <a class="current" href="./">Timestamp</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#timestamp">Timestamp</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-dates-and-times">Class for working with dates and times.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -112,11 +125,8 @@
     
       
     
-    <li>Timestamps</li>
+    <li>Timestamp</li>
     <li class="wy-breadcrumbs-aside">
-      
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Timestamps.md"
-          class="icon icon-github"> Edit on GitHub</a>
       
     </li>
   </ul>
@@ -125,7 +135,30 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="timestamp">Timestamp</h1>
+<h2 id="class-for-working-with-dates-and-times">Class for working with dates and times.</h2>
+<h2 id="example-usage">Example Usage</h2>
+<pre><code class="python">&gt;&gt;&gt; from hexpy import Timestamp
+&gt;&gt;&gt; stamp = Timestamp(2017, 9, 26)
+&gt;&gt;&gt; stamp.to_string()
+'2017-09-29T00:00:00'
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+<h3 id="to_string">to_string</h3>
+<pre><code class="python">to_string()
+</code></pre>
+
+<p>Convert timestamp object to ISO format string.</p>
+<h3 id="from_string">from_string</h3>
+<pre><code class="python">from_string(timestamp)
+</code></pre>
+
+<p>Instantiate Timestamp object from ISO format String.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li>timestamp: String, isoformatted timestamp</li>
+</ul>
               
             </div>
           </div>
@@ -158,8 +191,6 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Streams/" style="color: #fcfcfc;">&laquo; Previous</a></span>

@@ -77,6 +77,19 @@
     <a class="current" href="./">Upload</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#timestamp">Timestamp</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-content-upload-api">Class for working with Content Upload API.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -87,7 +100,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Timestamps/">Timestamps</a>
+    <a class="" href="../Timestamp/">Timestamp</a>
 	    </li>
           
         </ul>
@@ -115,9 +128,6 @@
     <li>Upload</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Upload.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
     </li>
   </ul>
   <hr/>
@@ -125,7 +135,55 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="timestamp">Timestamp</h1>
+<h3 id="class-for-working-with-content-upload-api">Class for working with Content Upload API.</h3>
+<p>You may use the Content Upload endpoint to upload documents for analysis.
+In the past, users have uploaded survey responses, proprietary content,
+and other types of data not available in the Crimson Hexagon data library.
+To use this endpoint, please contact support and they will create a new custom content type for you. <a href="https://apidocs.crimsonhexagon.com/reference#content-upload-1">Reference</a></p>
+<h2 id="example-usage">Example Usage</h2>
+<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, ContentUploadAPI
+&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+&gt;&gt;&gt; upload_client = ContentUploadAPI(auth)
+&gt;&gt;&gt; items ={
+  &quot;items&quot;: [
+    {
+      &quot;title&quot;: &quot;Example Title&quot;,
+      &quot;date&quot;: &quot;2010-01-26T16:14:00&quot;,
+      &quot;author&quot;: &quot;me&quot;,
+      &quot;url&quot;: &quot;http://www.crimsonhexagon.com/post1&quot;,
+      &quot;contents&quot;: &quot;Example content&quot;,
+      &quot;language&quot;: &quot;en&quot;,
+      &quot;type&quot;: &quot;Your_Assigned_Content_Type_Name&quot;,
+      &quot;geolocation&quot;: {
+        &quot;id&quot;: &quot;USA.NY&quot;
+      }
+    },
+  ]
+}
+&gt;&gt;&gt; upload_client.upload(items)
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+<h3 id="upload">upload</h3>
+<pre><code class="python">upload(data)
+</code></pre>
+
+<p>Upload list of document dictionaries to Crimson Hexagon platform.</p>
+<p>If greater than 1000 items passed, reverts to batch upload.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li>data: list of document dictionaries  to upload.</li>
+</ul>
+<h3 id="batch_upload">batch_upload</h3>
+<pre><code class="python">batch_upload(data)
+</code></pre>
+
+<p>Batch upload list of document dictionaries to Crimson Hexagon platform.</p>
+<h4 id="arguments_1">Arguments</h4>
+<ul>
+<li>data: list of document dictionaries to upload in batches of 1000.</li>
+</ul>
               
             </div>
           </div>
@@ -160,8 +218,6 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Analysis/" style="color: #fcfcfc;">&laquo; Previous</a></span>

@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "A Python Client for the Crimson Hexagon's API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon' rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check requests sucess.\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ pip install git+git://github.com/sullivancolin/hexpy.git@master\n\n\n\n\nor\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install -e hexpy/\n\n\n\n\nExample Usage\n\n\n\n>>> from hexpy import CrimsonAuthorization, MonitorAPI, MetaDataAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
+            "text": "A Python Client for the Crimson Hexagon's API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon' rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check requests success.\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ pip install git+git://github.com/sullivancolin/hexpy.git@master\n\n\n\n\nor\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install -e hexpy/\n\n\n\n\nProject Homepage\n\n\nVisit \nGithub\n project page for full source code.\n\n\nExample Usage\n\n\n>>> from hexpy import CrimsonAuthorization, MonitorAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
             "title": "Home"
         },
         {
@@ -12,7 +12,7 @@
         },
         {
             "location": "/#why-use-this-client",
-            "text": "Easily and securely manage account authentication.  Automatically abides by Crimson Hexagon' rate limits.  Automatically converts python data to/from JSON strings.  Automatically check requests sucess.",
+            "text": "Easily and securely manage account authentication.  Automatically abides by Crimson Hexagon' rate limits.  Automatically converts python data to/from JSON strings.  Automatically check requests success.",
             "title": "Why use this client?"
         },
         {
@@ -21,13 +21,18 @@
             "title": "Installation"
         },
         {
+            "location": "/#project-homepage",
+            "text": "Visit  Github  project page for full source code.",
+            "title": "Project Homepage"
+        },
+        {
             "location": "/#example-usage",
-            "text": ">>> from hexpy import CrimsonAuthorization, MonitorAPI, MetaDataAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
+            "text": ">>> from hexpy import CrimsonAuthorization, MonitorAPI\n>>> auth = CrimsonAuthorization(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(auth)\n>>> monitor.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...",
             "title": "Example Usage"
         },
         {
             "location": "/Authorization/",
-            "text": "Authorization\n\n\nGenerating a token for use with all API requests.\n\n\nInstantiate using account token, or username. Optionally include password, or enter it at the prompt.\n\n\n>>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(token=\"previously_saved_token\")\n\n\n\n\nCreate instance by loading token from file.  Default is \n~/.hexpy/credentials.json\n\n\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n\n\n\n\nMethods\n\n\nget_token\n\n\nget_token(self, username, password, no_expiration=True)\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\nusername: account username.\n\n\npassword: account password.\n\n\nno_expiration: True/False token with 24 expiration.\n\n\n\n\nsave_token\n\n\nsave_token(self, path=None)\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\npath: path to store credentials. default is\n\n\n\n\nload_auth_from_file()\n\n\nload_auth_from_file(self, path=None)\n\n\nInstantiate class from previously saved credentials file.\n\n\nArguments\n\n\n\n\npath: path to store credentials. default is",
+            "text": "Authorization\n\n\nGenerating a token for use with all API requests.\n\n\nInstantiate using account token, or username. Optionally include password, or enter it at the prompt.\n\n\n>>> from hexpy import CrimsonAuthorization\n>>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()\n\n\n\n\nor\n\n\n>>> auth = CrimsonAuthorization(token=\"previously_saved_token\")\n\n\n\n\nCreate instance by loading token from file.  Default is \n~/.hexpy/credentials.json\n\n\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n\n\n\n\nMethods\n\n\nget_token\n\n\nget_token(username, password, no_expiration=True)\n\n\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\nusername: account username.\n\n\npassword: account password.\n\n\nno_expiration: True/False token with 24 expiration.\n\n\n\n\nsave_token\n\n\nsave_token(path=None)\n\n\n\n\nSave authorization token.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json\n\n\n\n\nload_auth_from_file\n\n\nload_auth_from_file(path=None)\n\n\n\n\nInstantiate class from previously saved credentials file.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json",
             "title": "Authorization"
         },
         {
@@ -37,7 +42,7 @@
         },
         {
             "location": "/Authorization/#generating-a-token-for-use-with-all-api-requests",
-            "text": "Instantiate using account token, or username. Optionally include password, or enter it at the prompt.  >>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(token=\"previously_saved_token\")  Create instance by loading token from file.  Default is  ~/.hexpy/credentials.json  >>> auth = CrimsonAuthorization.load_auth_from_file()",
+            "text": "Instantiate using account token, or username. Optionally include password, or enter it at the prompt.  >>> from hexpy import CrimsonAuthorization\n>>> auth = CrimsonAuthorization(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(username=\"username@email.com\")\nEnter password: *********\n>>> auth.save_token()  or  >>> auth = CrimsonAuthorization(token=\"previously_saved_token\")  Create instance by loading token from file.  Default is  ~/.hexpy/credentials.json  >>> auth = CrimsonAuthorization.load_auth_from_file()",
             "title": "Generating a token for use with all API requests."
         },
         {
@@ -47,7 +52,7 @@
         },
         {
             "location": "/Authorization/#get_token",
-            "text": "get_token(self, username, password, no_expiration=True)  Request authorization token.",
+            "text": "get_token(username, password, no_expiration=True)  Request authorization token.",
             "title": "get_token"
         },
         {
@@ -57,53 +62,608 @@
         },
         {
             "location": "/Authorization/#save_token",
-            "text": "save_token(self, path=None)  Request authorization token.",
+            "text": "save_token(path=None)  Save authorization token.",
             "title": "save_token"
         },
         {
             "location": "/Authorization/#arguments_1",
-            "text": "path: path to store credentials. default is",
+            "text": "path: String, path to store credentials. default is  ~/.hexpy/credentials.json",
             "title": "Arguments"
         },
         {
             "location": "/Authorization/#load_auth_from_file",
-            "text": "load_auth_from_file(self, path=None)  Instantiate class from previously saved credentials file.",
-            "title": "load_auth_from_file()"
+            "text": "load_auth_from_file(path=None)  Instantiate class from previously saved credentials file.",
+            "title": "load_auth_from_file"
         },
         {
             "location": "/Authorization/#arguments_2",
-            "text": "path: path to store credentials. default is",
+            "text": "path: String, path to store credentials. default is  ~/.hexpy/credentials.json",
             "title": "Arguments"
         },
         {
             "location": "/Metadata/",
-            "text": "",
+            "text": "Metadata API\n\n\nClass for working with Crimson Hexagon account and analysis metadata.\n\n\nExample usage.\n\n\n>>> from hexpy import CrimsonAuthorization, MetadataAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> metadata_client = MetadataAPI(auth)\n>>> metadata_client.team_list()\n\n\n\n\nMethods\n\n\nteam_list\n\n\nanalysis_request(data)\n\n\n\n\nReturn a list of teams accessible to the requesting user.\n\n\nmonitor_list\n\n\nmonitor_list(team_id)\n\n\n\n\nReturns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.\n\n\nArguments\n\n\n\n\nteam_id: integer id number for a team\n\n\n\n\ngeography\n\n\ngeography()\n\n\n\n\nReturn all the geographical locations that you may use to filter monitor results and to upload documents with location information.\n\n\nstates\n\n\nstates(country)\n\n\n\n\nReturn all the states for a given country that you may use to filter monitor results and to upload documents with location information.\n\n\nArguments\n\n\n\n\ncountry: country code to filter states\n\n\n\n\ncities\n\n\ncities(country)\n\n\n\n\nReturns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. \n\n\nArguments\n\n\n\n\ncountry: country: country code  to filter states\n\n\n\n\ncountries\n\n\ncountries()\n\n\n\n\nReturns all the countries that you may use to filter monitor results and to upload documents with location information.",
             "title": "Metadata"
         },
         {
-            "location": "/Monitor/",
+            "location": "/Metadata/#metadata-api",
             "text": "",
+            "title": "Metadata API"
+        },
+        {
+            "location": "/Metadata/#class-for-working-with-crimson-hexagon-account-and-analysis-metadata",
+            "text": "",
+            "title": "Class for working with Crimson Hexagon account and analysis metadata."
+        },
+        {
+            "location": "/Metadata/#example-usage",
+            "text": ">>> from hexpy import CrimsonAuthorization, MetadataAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> metadata_client = MetadataAPI(auth)\n>>> metadata_client.team_list()",
+            "title": "Example usage."
+        },
+        {
+            "location": "/Metadata/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Metadata/#team_list",
+            "text": "analysis_request(data)  Return a list of teams accessible to the requesting user.",
+            "title": "team_list"
+        },
+        {
+            "location": "/Metadata/#monitor_list",
+            "text": "monitor_list(team_id)  Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.",
+            "title": "monitor_list"
+        },
+        {
+            "location": "/Metadata/#arguments",
+            "text": "team_id: integer id number for a team",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Metadata/#geography",
+            "text": "geography()  Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.",
+            "title": "geography"
+        },
+        {
+            "location": "/Metadata/#states",
+            "text": "states(country)  Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.",
+            "title": "states"
+        },
+        {
+            "location": "/Metadata/#arguments_1",
+            "text": "country: country code to filter states",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Metadata/#cities",
+            "text": "cities(country)  Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information.",
+            "title": "cities"
+        },
+        {
+            "location": "/Metadata/#arguments_2",
+            "text": "country: country: country code  to filter states",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Metadata/#countries",
+            "text": "countries()  Returns all the countries that you may use to filter monitor results and to upload documents with location information.",
+            "title": "countries"
+        },
+        {
+            "location": "/Monitor/",
+            "text": "Monitor API\n\n\nClass for working with Crimson Hexagon Monitor API.\n\n\nExample usage.\n\n\nClass for working with Crimson Hexagon Monitor API.\n\n\n>>> from hexpy import CrimsonAuthorization, MonitorAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> monitor_client = MonitorAPI(auth)\n>>> details = monitor_client.details(monitor_id)\n>>> start = details[\"resultsStart\"]\n>>> end = details[\"resultsEnd\"]\n>>> monitor_client.posts(monitor_id, start, end)\n\n\n\n\nMethods\n\n\ndetails\n\n\ndetails(monitor_id)\n\n\n\n\nReturn detailed metadata about the selected monitor, including category metadata.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\naudit\n\n\naudit(monitor_id)\n\n\n\n\nReturn audit information about the selected monitor, sorted from most to least recent.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\nword_cloud\n\n\nword_cloud(monitor_id, start, end, filter=None)\n\n\n\n\nReturn an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter: String, pipe-separated list of field:value pairs used to filter posts\n\n\n\n\ntrained_posts\n\n\ntrained_posts(monitor_id, category=None)\n\n\n\n\nReturn a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory: Integer, category id to target training posts from a specific category\n\n\n\n\ntrain_monitor\n\n\ntrain_monitor(monitor_id, category_id, data)\n\n\n\n\nUpload individual training document monitors programmatically.\n\n\nYou may only upload one document per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. \nReference\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory_id: Integer, the category this content should belong to\n\n\ndata: Dictionary, document item with required fields\n\n\n\n\ninterest_affinities\n\n\ninterest_affinities(monitor_id, start, end, daily=False, document_source=None)\n\n\n\n\nReturn information about the authors in a monitor and their affinity with a range of pre-defined topics.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ndaily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range\n\n\ndocument_source: String, document source for affinities. valid params include \nTWITTER\n or \nTUMBLR\n\n\n\n\ntop_sources\n\n\ntop_sources(monitor_id, start, end)\n\n\n\n\nReturn volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nimage_analysis\n\n\nimage_analysis(monitor_id, start, end, object_type=\"\", top=100)\n\n\n\n\nReturn a breakdown of the top image classes within a provided monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nobject_type: String, specifies type of image classes, valid values [object, scene, action, logo]\n\n\ntop : Integer, if defined, only the selected number of classes will be returned\n\n\n\n\nvolume\n\n\nvolume(monitor_id, start, end, aggregate_by_day=False, use_local_time=False)\n\n\n\n\nReturn volume metrics for a given monitor split by date.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\naggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day\n\n\nuse_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor\n\n\n\n\nsentiment_and_categories\n\n\nsentiment_and_categories(monitor_id, start, end, hide_excluded=False)\n\n\n\n\nReturn aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nhide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.\n\n\n\n\nposts\n\n\nposts(monitor_id, start, end, filter=None, extend_limit=False, full_contents=False, geotagged=False)\n\n\n\n\nReturn post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter: String, pipe-separated list of field:value pairs used to filter posts\n\n\nextend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call\n\n\nfull_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms\n\n\ngeotagged: Boolean, if True, returns only geotagged documents matching the given filter\n\n\n\n\nDemographics\n\n\nThis collection of endpoints provide demographic volume metrics for users within a given monitor.\n\n\nage\n\n\nage(monitor_id, start, end)\n\n\n\n\nReturn volume metrics for a given monitor split by age bracket.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nethnicity\n\n\nethnicity(monitor_id, start, end)\n\n\n\n\nReturn volume metrics for a given monitor split by ethnicity.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ngender\n\n\ngender(monitor_id, start, end)\n\n\n\n\nReturn volume metrics for a given monitor split by gender.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nGeography\n\n\ncities\n\n\ncities(monitor_id, start, end, country)\n\n\n\n\nReturn volume metrics for a given monitor split by city.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter cities\n\n\n\n\nstates\n\n\nstates(monitor_id, start, end, country)\n\n\n\n\nReturn volume metrics for a given monitor split by state.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter states\n\n\n\n\ncountries\n\n\ncountries(monitor_id, start, end)\n\n\n\n\nReturn volume metrics for a given monitor split by country.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nTwitter\n\n\nThis collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. \n\n\ntwitter_authors\n\n\ntwitter_authors(monitor_id, start, end)\n\n\n\n\nReturn information related to the Twitter authors who have posted in a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_metrics\n\n\ntwitter_metrics(monitor_id, start, end)\n\n\n\n\nReturn information about the top hashtags, mentions, and retweets in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_followers\n\n\ntwitter_followers(monitor_id, start, end)\n\n\n\n\nReturn the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_sent_posts\n\n\ntwitter_sent_posts(monitor_id, start, end)\n\n\n\n\nReturn information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_engagement\n\n\ntwitter_engagement(monitor_id, start, end):\n\n\n\n\nReturn information about retweets, replies, and @mentions for a Twitter Social Account monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nFacebook\n\n\nfacebook_admin_posts\n\n\nfacebook_admin_posts(monitor_id, start, end)\n\n\n\n\nReturn those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_likes\n\n\nfacebook_likes(monitor_id, start, end)\n\n\n\n\nReturn the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_activity\n\n\nfacebook_activity(monitor_id, start, end)\n\n\n\n\nReturn information about actions (likes, comments, shares) made by users and admins for a given page.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nInstagram\n\n\ninstagram_top_hashtags\n\n\ninstagram_top_hashtags(monitor_id, start, end)\n\n\n\n\nReturn the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_followers\n\n\ninstagram_followers(monitor_id, start, end)\n\n\n\n\nReturn the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_sent_media\n\n\ninstagram_sent_media(monitor_id, start, end)\n\n\n\n\nReturn media sent by admins in a targeted Instagram account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_activity\n\n\ninstagram_activity(monitor_id, start, end)\n\n\n\n\nReturn information about actions (likes, comments) made by users and admins for a given account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD",
             "title": "Monitor"
         },
         {
-            "location": "/Analysis/",
+            "location": "/Monitor/#monitor-api",
             "text": "",
+            "title": "Monitor API"
+        },
+        {
+            "location": "/Monitor/#class-for-working-with-crimson-hexagon-monitor-api",
+            "text": "",
+            "title": "Class for working with Crimson Hexagon Monitor API."
+        },
+        {
+            "location": "/Monitor/#example-usage",
+            "text": "Class for working with Crimson Hexagon Monitor API.  >>> from hexpy import CrimsonAuthorization, MonitorAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> monitor_client = MonitorAPI(auth)\n>>> details = monitor_client.details(monitor_id)\n>>> start = details[\"resultsStart\"]\n>>> end = details[\"resultsEnd\"]\n>>> monitor_client.posts(monitor_id, start, end)",
+            "title": "Example usage."
+        },
+        {
+            "location": "/Monitor/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Monitor/#details",
+            "text": "details(monitor_id)  Return detailed metadata about the selected monitor, including category metadata.",
+            "title": "details"
+        },
+        {
+            "location": "/Monitor/#arguments",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#audit",
+            "text": "audit(monitor_id)  Return audit information about the selected monitor, sorted from most to least recent.",
+            "title": "audit"
+        },
+        {
+            "location": "/Monitor/#arguments_1",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#word_cloud",
+            "text": "word_cloud(monitor_id, start, end, filter=None)  Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.",
+            "title": "word_cloud"
+        },
+        {
+            "location": "/Monitor/#arguments_2",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  filter: String, pipe-separated list of field:value pairs used to filter posts",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#trained_posts",
+            "text": "trained_posts(monitor_id, category=None)  Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.",
+            "title": "trained_posts"
+        },
+        {
+            "location": "/Monitor/#arguments_3",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  category: Integer, category id to target training posts from a specific category",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#train_monitor",
+            "text": "train_monitor(monitor_id, category_id, data)  Upload individual training document monitors programmatically.  You may only upload one document per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.  Reference",
+            "title": "train_monitor"
+        },
+        {
+            "location": "/Monitor/#arguments_4",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  category_id: Integer, the category this content should belong to  data: Dictionary, document item with required fields",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#interest_affinities",
+            "text": "interest_affinities(monitor_id, start, end, daily=False, document_source=None)  Return information about the authors in a monitor and their affinity with a range of pre-defined topics.",
+            "title": "interest_affinities"
+        },
+        {
+            "location": "/Monitor/#arguments_5",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range  document_source: String, document source for affinities. valid params include  TWITTER  or  TUMBLR",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#top_sources",
+            "text": "top_sources(monitor_id, start, end)  Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.",
+            "title": "top_sources"
+        },
+        {
+            "location": "/Monitor/#arguments_6",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#image_analysis",
+            "text": "image_analysis(monitor_id, start, end, object_type=\"\", top=100)  Return a breakdown of the top image classes within a provided monitor.",
+            "title": "image_analysis"
+        },
+        {
+            "location": "/Monitor/#arguments_7",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  object_type: String, specifies type of image classes, valid values [object, scene, action, logo]  top : Integer, if defined, only the selected number of classes will be returned",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#volume",
+            "text": "volume(monitor_id, start, end, aggregate_by_day=False, use_local_time=False)  Return volume metrics for a given monitor split by date.",
+            "title": "volume"
+        },
+        {
+            "location": "/Monitor/#arguments_8",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day  use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#sentiment_and_categories",
+            "text": "sentiment_and_categories(monitor_id, start, end, hide_excluded=False)  Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.",
+            "title": "sentiment_and_categories"
+        },
+        {
+            "location": "/Monitor/#arguments_9",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#posts",
+            "text": "posts(monitor_id, start, end, filter=None, extend_limit=False, full_contents=False, geotagged=False)  Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.",
+            "title": "posts"
+        },
+        {
+            "location": "/Monitor/#arguments_10",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  filter: String, pipe-separated list of field:value pairs used to filter posts  extend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call  full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms  geotagged: Boolean, if True, returns only geotagged documents matching the given filter",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#demographics",
+            "text": "This collection of endpoints provide demographic volume metrics for users within a given monitor.",
+            "title": "Demographics"
+        },
+        {
+            "location": "/Monitor/#age",
+            "text": "age(monitor_id, start, end)  Return volume metrics for a given monitor split by age bracket.",
+            "title": "age"
+        },
+        {
+            "location": "/Monitor/#arguments_11",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#ethnicity",
+            "text": "ethnicity(monitor_id, start, end)  Return volume metrics for a given monitor split by ethnicity.",
+            "title": "ethnicity"
+        },
+        {
+            "location": "/Monitor/#arguments_12",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#gender",
+            "text": "gender(monitor_id, start, end)  Return volume metrics for a given monitor split by gender.",
+            "title": "gender"
+        },
+        {
+            "location": "/Monitor/#arguments_13",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#geography",
+            "text": "",
+            "title": "Geography"
+        },
+        {
+            "location": "/Monitor/#cities",
+            "text": "cities(monitor_id, start, end, country)  Return volume metrics for a given monitor split by city.",
+            "title": "cities"
+        },
+        {
+            "location": "/Monitor/#arguments_14",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  country: String, country code to filter cities",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#states",
+            "text": "states(monitor_id, start, end, country)  Return volume metrics for a given monitor split by state.",
+            "title": "states"
+        },
+        {
+            "location": "/Monitor/#arguments_15",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  country: String, country code to filter states",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#countries",
+            "text": "countries(monitor_id, start, end)  Return volume metrics for a given monitor split by country.",
+            "title": "countries"
+        },
+        {
+            "location": "/Monitor/#arguments_16",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#twitter",
+            "text": "This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors.",
+            "title": "Twitter"
+        },
+        {
+            "location": "/Monitor/#twitter_authors",
+            "text": "twitter_authors(monitor_id, start, end)  Return information related to the Twitter authors who have posted in a given monitor.",
+            "title": "twitter_authors"
+        },
+        {
+            "location": "/Monitor/#arguments_17",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#twitter_metrics",
+            "text": "twitter_metrics(monitor_id, start, end)  Return information about the top hashtags, mentions, and retweets in a monitor.",
+            "title": "twitter_metrics"
+        },
+        {
+            "location": "/Monitor/#arguments_18",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#twitter_followers",
+            "text": "twitter_followers(monitor_id, start, end)  Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.",
+            "title": "twitter_followers"
+        },
+        {
+            "location": "/Monitor/#arguments_19",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#twitter_sent_posts",
+            "text": "twitter_sent_posts(monitor_id, start, end)  Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.",
+            "title": "twitter_sent_posts"
+        },
+        {
+            "location": "/Monitor/#arguments_20",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#twitter_engagement",
+            "text": "twitter_engagement(monitor_id, start, end):  Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.",
+            "title": "twitter_engagement"
+        },
+        {
+            "location": "/Monitor/#arguments_21",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#facebook",
+            "text": "",
+            "title": "Facebook"
+        },
+        {
+            "location": "/Monitor/#facebook_admin_posts",
+            "text": "facebook_admin_posts(monitor_id, start, end)  Return those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.",
+            "title": "facebook_admin_posts"
+        },
+        {
+            "location": "/Monitor/#arguments_22",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#facebook_likes",
+            "text": "facebook_likes(monitor_id, start, end)  Return the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.",
+            "title": "facebook_likes"
+        },
+        {
+            "location": "/Monitor/#arguments_23",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#facebook_activity",
+            "text": "facebook_activity(monitor_id, start, end)  Return information about actions (likes, comments, shares) made by users and admins for a given page.",
+            "title": "facebook_activity"
+        },
+        {
+            "location": "/Monitor/#arguments_24",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#instagram",
+            "text": "",
+            "title": "Instagram"
+        },
+        {
+            "location": "/Monitor/#instagram_top_hashtags",
+            "text": "instagram_top_hashtags(monitor_id, start, end)  Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).",
+            "title": "instagram_top_hashtags"
+        },
+        {
+            "location": "/Monitor/#arguments_25",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#instagram_followers",
+            "text": "instagram_followers(monitor_id, start, end)  Return the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.",
+            "title": "instagram_followers"
+        },
+        {
+            "location": "/Monitor/#arguments_26",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#instagram_sent_media",
+            "text": "instagram_sent_media(monitor_id, start, end)  Return media sent by admins in a targeted Instagram account.",
+            "title": "instagram_sent_media"
+        },
+        {
+            "location": "/Monitor/#arguments_27",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#instagram_activity",
+            "text": "instagram_activity(monitor_id, start, end)  Return information about actions (likes, comments) made by users and admins for a given account.",
+            "title": "instagram_activity"
+        },
+        {
+            "location": "/Monitor/#arguments_28",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Analysis/",
+            "text": "Analysis API\n\n\nClass for working with Crimson Hexagon Analysis API.\n\n\nExample Usage\n\n\n>>> from hexpy import CrimsonAuthorization, AnalysisAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(auth)\n>>> analysis_client.results(request_id)\n\n\n\n\nMethods\n\n\nanaysis_requests\n\n\nanalysis_request(data)\n\n\n\n\nSubmit a query task against 24 hours of social data.\n\n\nArguments\n\n\n\n\ndata: Dictionary, query and filter parameters\n\n\n\n\nresults\n\n\nresults(request_id)\n\n\n\n\nRetrieve the status of the analysis request and the results.\n\n\nArguments\n\n\n\n\nrequest_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
             "title": "Analysis"
         },
         {
-            "location": "/Upload/",
+            "location": "/Analysis/#analysis-api",
             "text": "",
+            "title": "Analysis API"
+        },
+        {
+            "location": "/Analysis/#class-for-working-with-crimson-hexagon-analysis-api",
+            "text": "",
+            "title": "Class for working with Crimson Hexagon Analysis API."
+        },
+        {
+            "location": "/Analysis/#example-usage",
+            "text": ">>> from hexpy import CrimsonAuthorization, AnalysisAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(auth)\n>>> analysis_client.results(request_id)",
+            "title": "Example Usage"
+        },
+        {
+            "location": "/Analysis/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Analysis/#anaysis_requests",
+            "text": "analysis_request(data)  Submit a query task against 24 hours of social data.",
+            "title": "anaysis_requests"
+        },
+        {
+            "location": "/Analysis/#arguments",
+            "text": "data: Dictionary, query and filter parameters",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Analysis/#results",
+            "text": "results(request_id)  Retrieve the status of the analysis request and the results.",
+            "title": "results"
+        },
+        {
+            "location": "/Analysis/#arguments_1",
+            "text": "request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Upload/",
+            "text": "Timestamp\n\n\nClass for working with Content Upload API.\n\n\nYou may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you. \nReference\n\n\nExample Usage\n\n\n>>> from hexpy import CrimsonAuthorization, ContentUploadAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(auth)\n>>> items ={\n  \"items\": [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n}\n>>> upload_client.upload(items)\n\n\n\n\nMethods\n\n\nupload\n\n\nupload(data)\n\n\n\n\nUpload list of document dictionaries to Crimson Hexagon platform.\n\n\nIf greater than 1000 items passed, reverts to batch upload.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries  to upload.\n\n\n\n\nbatch_upload\n\n\nbatch_upload(data)\n\n\n\n\nBatch upload list of document dictionaries to Crimson Hexagon platform.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries to upload in batches of 1000.",
             "title": "Upload"
         },
         {
-            "location": "/Streams/",
+            "location": "/Upload/#timestamp",
             "text": "",
+            "title": "Timestamp"
+        },
+        {
+            "location": "/Upload/#class-for-working-with-content-upload-api",
+            "text": "You may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you.  Reference",
+            "title": "Class for working with Content Upload API."
+        },
+        {
+            "location": "/Upload/#example-usage",
+            "text": ">>> from hexpy import CrimsonAuthorization, ContentUploadAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(auth)\n>>> items ={\n  \"items\": [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n}\n>>> upload_client.upload(items)",
+            "title": "Example Usage"
+        },
+        {
+            "location": "/Upload/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Upload/#upload",
+            "text": "upload(data)  Upload list of document dictionaries to Crimson Hexagon platform.  If greater than 1000 items passed, reverts to batch upload.",
+            "title": "upload"
+        },
+        {
+            "location": "/Upload/#arguments",
+            "text": "data: list of document dictionaries  to upload.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Upload/#batch_upload",
+            "text": "batch_upload(data)  Batch upload list of document dictionaries to Crimson Hexagon platform.",
+            "title": "batch_upload"
+        },
+        {
+            "location": "/Upload/#arguments_1",
+            "text": "data: list of document dictionaries to upload in batches of 1000.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/",
+            "text": "Streams API\n\n\nClass for working with Realtime Streams API.\n\n\nExample usage.\n\n\n>>> from hexpy import CrimsonAuthorization, StreamsAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> streams_client = StreamsAPI(auth)\n>>> streams_client.stream_list(team_id)\n\n\n\n\nMethods\n\n\nposts\n\n\nposts(stream_id, count=100)\n\n\n\n\nReturn posts from a stream.\n\n\nArguments:\n\n\n\n\nstream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint\n\n\ncount: Integer, the count of posts to retrieve from the stream, max = 100\n\n\n\n\nstream_list\n\n\nstream_list(team_id)\n\n\n\n\nList all available Realtime Streams for a team.\n\n\nArguments\n\n\n\n\nteam_id: Integer the id of the team, available via the team list endpoint",
             "title": "Streams"
         },
         {
-            "location": "/Timestamps/",
+            "location": "/Streams/#streams-api",
             "text": "",
-            "title": "Timestamps"
+            "title": "Streams API"
+        },
+        {
+            "location": "/Streams/#class-for-working-with-realtime-streams-api",
+            "text": "",
+            "title": "Class for working with Realtime Streams API."
+        },
+        {
+            "location": "/Streams/#example-usage",
+            "text": ">>> from hexpy import CrimsonAuthorization, StreamsAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> streams_client = StreamsAPI(auth)\n>>> streams_client.stream_list(team_id)",
+            "title": "Example usage."
+        },
+        {
+            "location": "/Streams/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Streams/#posts",
+            "text": "posts(stream_id, count=100)  Return posts from a stream.",
+            "title": "posts"
+        },
+        {
+            "location": "/Streams/#arguments",
+            "text": "stream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint  count: Integer, the count of posts to retrieve from the stream, max = 100",
+            "title": "Arguments:"
+        },
+        {
+            "location": "/Streams/#stream_list",
+            "text": "stream_list(team_id)  List all available Realtime Streams for a team.",
+            "title": "stream_list"
+        },
+        {
+            "location": "/Streams/#arguments_1",
+            "text": "team_id: Integer the id of the team, available via the team list endpoint",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Timestamp/",
+            "text": "Timestamp\n\n\nClass for working with dates and times.\n\n\nExample Usage\n\n\n>>> from hexpy import Timestamp\n>>> stamp = Timestamp(2017, 9, 26)\n>>> stamp.to_string()\n'2017-09-29T00:00:00'\n\n\n\n\nMethods\n\n\nto_string\n\n\nto_string()\n\n\n\n\nConvert timestamp object to ISO format string.\n\n\nfrom_string\n\n\nfrom_string(timestamp)\n\n\n\n\nInstantiate Timestamp object from ISO format String.\n\n\nArguments\n\n\n\n\ntimestamp: String, isoformatted timestamp",
+            "title": "Timestamp"
+        },
+        {
+            "location": "/Timestamp/#timestamp",
+            "text": "",
+            "title": "Timestamp"
+        },
+        {
+            "location": "/Timestamp/#class-for-working-with-dates-and-times",
+            "text": "",
+            "title": "Class for working with dates and times."
+        },
+        {
+            "location": "/Timestamp/#example-usage",
+            "text": ">>> from hexpy import Timestamp\n>>> stamp = Timestamp(2017, 9, 26)\n>>> stamp.to_string()\n'2017-09-29T00:00:00'",
+            "title": "Example Usage"
+        },
+        {
+            "location": "/Timestamp/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Timestamp/#to_string",
+            "text": "to_string()  Convert timestamp object to ISO format string.",
+            "title": "to_string"
+        },
+        {
+            "location": "/Timestamp/#from_string",
+            "text": "from_string(timestamp)  Instantiate Timestamp object from ISO format String.",
+            "title": "from_string"
+        },
+        {
+            "location": "/Timestamp/#arguments",
+            "text": "timestamp: String, isoformatted timestamp",
+            "title": "Arguments"
         }
     ]
 }

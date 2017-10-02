@@ -62,6 +62,19 @@
     <a class="current" href="./">Metadata</a>
     <ul class="subnav">
             
+    <li class="toctree-l2"><a href="#metadata-api">Metadata API</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-crimson-hexagon-account-and-analysis-metadata">Class for working with Crimson Hexagon account and analysis metadata.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example usage.</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+        </ul>
+    
+
     </ul>
 	    </li>
           
@@ -87,7 +100,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Timestamps/">Timestamps</a>
+    <a class="" href="../Timestamp/">Timestamp</a>
 	    </li>
           
         </ul>
@@ -115,9 +128,6 @@
     <li>Metadata</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/Metadata.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
     </li>
   </ul>
   <hr/>
@@ -125,7 +135,58 @@
           <div role="main">
             <div class="section">
               
-                
+                <h1 id="metadata-api">Metadata API</h1>
+<h2 id="class-for-working-with-crimson-hexagon-account-and-analysis-metadata">Class for working with Crimson Hexagon account and analysis metadata.</h2>
+<h2 id="example-usage">Example usage.</h2>
+<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, MetadataAPI
+&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+&gt;&gt;&gt; metadata_client = MetadataAPI(auth)
+&gt;&gt;&gt; metadata_client.team_list()
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+<h3 id="team_list">team_list</h3>
+<pre><code class="python">analysis_request(data)
+</code></pre>
+
+<p>Return a list of teams accessible to the requesting user.</p>
+<h3 id="monitor_list">monitor_list</h3>
+<pre><code class="python">monitor_list(team_id)
+</code></pre>
+
+<p>Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.</p>
+<h4 id="arguments">Arguments</h4>
+<ul>
+<li>team_id: integer id number for a team</li>
+</ul>
+<h3 id="geography">geography</h3>
+<pre><code class="python">geography()
+</code></pre>
+
+<p>Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.</p>
+<h3 id="states">states</h3>
+<pre><code class="python">states(country)
+</code></pre>
+
+<p>Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.</p>
+<h4 id="arguments_1">Arguments</h4>
+<ul>
+<li>country: country code to filter states</li>
+</ul>
+<h3 id="cities">cities</h3>
+<pre><code class="python">cities(country)
+</code></pre>
+
+<p>Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. </p>
+<h4 id="arguments_2">Arguments</h4>
+<ul>
+<li>country: country: country code  to filter states</li>
+</ul>
+<h3 id="countries">countries</h3>
+<pre><code class="python">countries()
+</code></pre>
+
+<p>Returns all the countries that you may use to filter monitor results and to upload documents with location information.</p>
               
             </div>
           </div>
@@ -160,8 +221,6 @@
 
   <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
-      
-          <a href="https://github.com/sullivancolin/hexpy" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href="../Authorization/" style="color: #fcfcfc;">&laquo; Previous</a></span>
