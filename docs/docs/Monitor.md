@@ -4,8 +4,6 @@
 
 ## Example usage.
 
-Class for working with Crimson Hexagon Monitor API.
-
 ```python
 >>> from hexpy import CrimsonAuthorization, MonitorAPI
 >>> auth = CrimsonAuthorization.load_auth_from_file()
