@@ -58,7 +58,6 @@ class ContentUploadAPI(object):
         If greater than 1000 items passed, reverts to batch upload.
         # Arguments
             data: list of document dictionaries  to upload.
-
         """
         if len(data) <= 1000:
 
@@ -76,7 +75,6 @@ class ContentUploadAPI(object):
 
         # Arguments
             data: list of document dictionaries to upload in batches of 1000.
-
         """
         for batch in progress.bar(
             [data[i:i + 1000] for i in range(0, len(data), 1000)]):

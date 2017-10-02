@@ -18,6 +18,7 @@ class CrimsonAuthorization(object):
     Instantiate with token, or username. Optionally include password, or enter it at the prompt.
 
     ```python
+    >>> from hexpy import CrimsonAuthorization
     >>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
     >>> auth.save_token()
     ```

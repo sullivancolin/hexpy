@@ -10,7 +10,14 @@ from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
 class AnalysisAPI(object):
     """Class for working with Crimson Hexagon Analysis API.
 
+    # Example Usage
 
+    ```python
+    >>> from hexpy import CrimsonAuthorization, AnalysisAPI
+    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> analysis_client = AnalysisAPI(auth)
+    >>> analysis_client.results(request_id)
+    ```
     """
 
     TEMPLATE = ROOT + "results/"

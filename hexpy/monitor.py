@@ -20,12 +20,6 @@ class MonitorAPI(object):
     >>> start = details["resultsStart"]
     >>> end = details["resultsEnd"]
     >>> monitor_client.posts(monitor_id, start, end)
-    {
-      "posts": [
-        {
-          "url": "http://twitter.com/username/status/status_id",
-          "date": "2016-05-28T00:00:00",
-    ...
     ```
     """
 

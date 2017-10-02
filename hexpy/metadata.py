@@ -17,23 +17,6 @@ class MetadataAPI(object):
     >>> auth = CrimsonAuthorization.load_auth_from_file()
     >>> metadata_client = MetadataAPI(auth)
     >>> metadata_client.team_list()
-    {
-      "teams": [
-        {
-          "id": 507581078,
-          "name": "Acme"
-        },
-        {
-          "id": 500793406,
-          "name": "Bob's Used Cars"
-        },
-        {
-          "id": 1283959240,
-          "name": "Phones and Things"
-        }
-      ],
-      "status": "success"
-    }
     ```
     """
 
@@ -83,7 +66,7 @@ class MetadataAPI(object):
         filter monitor results and to upload documents with location information.
 
         # Arguments
-            country: country code  to filter states
+            country: country code to filter states
         """
         return handle_response(
             requests.get(

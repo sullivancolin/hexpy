@@ -16,20 +16,7 @@ class StreamsAPI(object):
     >>> from hexpy import CrimsonAuthorization, StreamsAPI
     >>> auth = CrimsonAuthorization.load_auth_from_file()
     >>> streams_client = StreamsAPI(auth)
-    >>> stream_list = streams_client.details(team_id)
-    >>> stream_list
-    {
-    "streams": [
-        {
-            "id": 123456,
-            "name": "Test Stream",
-            "teamName": "Test Team",
-            "monitors": [
-                {
-                    "id": 7899999,
-                    "name": "Apple",
-                    "description": "",
-    ...
+    >>> streams_client.stream_list(team_id)
     ```
     """
 
