@@ -36,9 +36,10 @@ class StreamsAPI(object):
             count: Integer, the count of posts to retrieve from the stream, max = 100
         """
         return handle_response(
-            requests.get(self.TEMPLATE +
-                         "{stream_id}/posts?count={count}".format(
-                             stream_id=stream_id, count=count)))
+            requests.get(self.TEMPLATE + "{stream_id}/posts".format(stream_id),
+                         params={
+                             "count": count,
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -49,6 +50,8 @@ class StreamsAPI(object):
             team_id: Integer the id of the team, available via the team list endpoint
         """
         return handle_response(
-            requests.get(self.TEMPLATE +
-                         "list/?auth={token}&teamid={team_id}".format(
-                             token=self.authorization.token, team_id=team_id)))
+            requests.get(self.TEMPLATE + "list/",
+                         params={
+                             "auth": self.authorization.token,
+                             "teamid": team_id
+                         }))

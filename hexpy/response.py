@@ -13,8 +13,8 @@ def handle_response(response, check_text=False):
         check_text: Boolean (default= False).
     """
     if response.status_code != 200:
-        raise ValueError("Bad request." + response.text)
+        raise ValueError("Something Went Wrong." + response.text)
     if check_text:
         if "error" in response.text:
-            raise ValueError("Bad request." + response.text)
+            raise ValueError("Something Went Wrong." + response.text)
     return response.json()

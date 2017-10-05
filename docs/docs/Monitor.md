@@ -39,7 +39,7 @@ Return audit information about the selected monitor, sorted from most to least r
 
 ### word_cloud
 ```python
-word_cloud(monitor_id, start, end, filter=None)
+word_cloud(monitor_id, start, end, filter_string=None)
 ```
 
 Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.
@@ -48,7 +48,7 @@ Return an alphabetized list of the top 300 words in a monitor. This data is gene
 * monitor_id: Integer, id of the monitor or monitor filter being requested
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
-* filter: String, pipe-separated list of field:value pairs used to filter posts
+* filter_string: String, pipe-separated list of field:value pairs used to filter posts
 
 
 ### trained_posts
@@ -145,7 +145,7 @@ Return aggregate volume, sentiment, emotion and opinion category analysis for a 
 
 ### posts
 ```python
-posts(monitor_id, start, end, filter=None, extend_limit=False, full_contents=False, geotagged=False)
+posts(monitor_id, start, end, filter_string=None, extend_limit=False, full_contents=False, geotagged=False)
 ```
 
 Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
@@ -154,7 +154,7 @@ Return post-level information (where available) and associated analysis (sentime
 * monitor_id: Integer, id of the monitor or monitor filter being requested
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
-* filter: String, pipe-separated list of field:value pairs used to filter posts
+* filter_string: String, pipe-separated list of field:value pairs used to filter posts
 * extend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call
 * full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
 * geotagged: Boolean, if True, returns only geotagged documents matching the given filter

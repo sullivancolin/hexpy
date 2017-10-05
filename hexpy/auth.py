@@ -71,12 +71,12 @@ class CrimsonAuthorization(object):
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
         return handle_response(
-            requests.get(
-                ROOT +
-                "authenticate?username={username}&password={password}&noExpiration={expiration}".format(
-                    username=username,
-                    password=password,
-                    expiration=str(no_expiration).lower())))
+            requests.get(ROOT + "authenticate",
+                         params={
+                             "username": username,
+                             "password": password,
+                             "noExpiration": no_expiration,
+                         }))
 
     def save_token(self, path=None):
         """Save authorization token.

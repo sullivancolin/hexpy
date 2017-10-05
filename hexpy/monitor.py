@@ -38,9 +38,11 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE + "detail?auth={token}&id={monitor_id}".format(
-                    token=self.authorization.token, monitor_id=monitor_id)))
+            requests.get(self.TEMPLATE + "detail",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -51,13 +53,15 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE + "audit?auth={token}&id={monitor_id}".format(
-                    token=self.authorization.token, monitor_id=monitor_id)))
+            requests.get(self.TEMPLATE + "audit",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
-    def word_cloud(self, monitor_id, start, end, filter=None):
+    def word_cloud(self, monitor_id, start, end, filter_string=None):
         """Return an alphabetized list of the top 300 words in a monitor.
 
         This data is generated using documents randomly selected from the pool defined by the submitted parameters.
@@ -66,17 +70,17 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
-            filter: String, pipe-separated list of field:value pairs used to filter posts
+            filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "wordcloud?auth={token}&id={monitor_id}&start={start}&end={end}&filter={filter}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    filter=filter)))
+            requests.get(self.TEMPLATE + "wordcloud",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "filter": filter_string
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -92,12 +96,12 @@ class MonitorAPI(object):
             category: Integer, category id to target training posts from a specific category
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "trainingposts?auth={token}&id={monitor_id}&category={category}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    category=category)))
+            requests.get(self.TEMPLATE + "trainingposts",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "category": category
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -141,19 +145,17 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range
             document_source: String, document source for affinities. valid params include `TWITTER` or `TUMBLR`
-
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "interestaffinities?auth={token}&id={monitor_id}&start={start}&end={end}&daily={daily}\
-                &documentSource={document_source}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    daily=str(daily).lower(),
-                    document_source=document_source)))
+            requests.get(self.TEMPLATE + "interestaffinities",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "daily": daily,
+                             "documentSource": document_source
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -166,13 +168,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "sources?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "sources",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -187,15 +189,15 @@ class MonitorAPI(object):
             top : Integer, if defined, only the selected number of classes will be returned
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "imageresults?auth={token}&id={monitor_id}&start={start}&end={end}&type={type}&top={top}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    type=object_type,
-                    top=top)))
+            requests.get(self.TEMPLATE + "imageresults",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "type": object_type,
+                             "top": top
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -215,16 +217,15 @@ class MonitorAPI(object):
             use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "dayandtime?auth={token}&id={monitor_id}&start={start}&end={end}&aggregatebyday={aggregate_by_day}\
-                &uselocaltime={use_local_time}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    aggregate_by_day=str(aggregate_by_day).lower(),
-                    use_local_time=str(use_local_time).lower())))
+            requests.get(self.TEMPLATE + "dayandtime",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "aggregatebyday": aggregate_by_day,
+                             "uselocaltime": use_local_time
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -243,14 +244,14 @@ class MonitorAPI(object):
             hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "results?auth={token}&id={monitor_id}&start={start}&end={end}&hideExcluded={hide_excluded}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    hide_excluded=str(hide_excluded).lower())))
+            requests.get(self.TEMPLATE + "results",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "hideExcluded": hide_excluded
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -258,7 +259,7 @@ class MonitorAPI(object):
               monitor_id,
               start,
               end,
-              filter=None,
+              filter_string=None,
               extend_limit=False,
               full_contents=False,
               geotagged=False):
@@ -269,24 +270,23 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
-            filter: String, pipe-separated list of field:value pairs used to filter posts
+            filter_string: String, pipe-separated list of field:value pairs used to filter posts
             extend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call
             full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
             geotagged: Boolean, if True, returns only geotagged documents matching the given filter
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "posts?auth={token}&id={monitor_id}&start={start}&end={end}&filter={filter}&extendLimit={extend_limit}\
-                &fullContents={full_contents}&geotagged={geotagged}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    filter=filter,
-                    extend_limit=str(extend_limit).lower(),
-                    full_contents=str(full_contents).lower(),
-                    geotagged=str(geotagged).lower())))
+            requests.get(self.TEMPLATE + "posts",
+                         params={
+                             "auth": self.authorizataion.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "filter": filter_string,
+                             "extendLimit": extend_limit,
+                             "fullContents": full_contents,
+                             "geotagged": geotagged
+                         }))
 
     #################################################################################
     # Demographics                                                                  #
@@ -305,13 +305,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "demographics/age?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "demographics/age",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -324,13 +324,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "demographics/ethnicity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "demographics/ethnicity",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -343,13 +343,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "demographics/gender?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "demographics/gender",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     #################################################################################
     # Geography                                                                     #
@@ -369,14 +369,14 @@ class MonitorAPI(object):
 
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "geography/cities?auth={token}&id={monitor_id}&start={start}&end={end}&country={country}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    country=country)))
+            requests.get(self.TEMPLATE + "geography/cities",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "country": country
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -390,14 +390,14 @@ class MonitorAPI(object):
             country: String, country code to filter states
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "geography/states?auth={token}&id={monitor_id}&start={start}&end={end}&country={country}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end,
-                    country=country)))
+            requests.get(self.TEMPLATE + "geography/states",
+                         params={
+                             "auth": self.authorizataion.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end,
+                             "country": country
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -410,13 +410,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "geography/countries?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "geography/countries",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     #################################################################################
     # Twitter                                                                       #
@@ -435,13 +435,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "authors?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "authors",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -454,13 +454,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "twittermetrics?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "twittermetrics",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -474,13 +474,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "twittersocial/followers?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "twittersocial/followers",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -493,13 +493,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "twittersocial/sentposts?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "twittersocial/sentposts",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -512,13 +512,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "twittersocial/totalengagement?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "twittersocial/totalengagement",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     #################################################################################
     # Facebook                                                                      #
@@ -538,13 +538,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "facebook/adminposts?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "facebook/adminposts",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -558,13 +558,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "facebook/pagelikes?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "facebook/pagelikes",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -577,13 +577,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "facebook/totalactivity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "facebook/totalactivity",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     #################################################################################
     # Instagram                                                                     #
@@ -604,13 +604,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "instagram/hashtags?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "instagram/hashtags",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -624,13 +624,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "instagram/followers?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "instagram/followers",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -643,13 +643,13 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "instagram/sentmedia?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "instagram/sentmedia",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
 
     @RateLimiter(
         max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
@@ -662,10 +662,10 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
         """
         return handle_response(
-            requests.get(
-                self.TEMPLATE +
-                "instagram/totalactivity?auth={token}&id={monitor_id}&start={start}&end={end}".format(
-                    token=self.authorization.token,
-                    monitor_id=monitor_id,
-                    start=start,
-                    end=end)))
+            requests.get(self.TEMPLATE + "instagram/totalactivity",
+                         params={
+                             "auth": self.authorization.token,
+                             "id": monitor_id,
+                             "start": start,
+                             "end": end
+                         }))
