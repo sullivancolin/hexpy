@@ -32,7 +32,6 @@ lint:
 test:
 	pytest
 
-
 ## run tests on every Python version with tox
 test-all:
 	tox

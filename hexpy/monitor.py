@@ -2,9 +2,8 @@
 """Module for monitor results API"""
 
 import requests
-from .response import handle_response
-from ratelimiter import RateLimiter
-from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
+from halo import Halo
+from .base import ROOT, response_handler
 
 
 class MonitorAPI(object):
@@ -28,39 +27,89 @@ class MonitorAPI(object):
     def __init__(self, authorization):
         super(MonitorAPI, self).__init__()
         self.authorization = authorization
+        self.METRICS = {"volume": self.volume,
+                        "word_cloud": self.word_cloud,
+                        "sentiment_and_categories":
+                        self.sentiment_and_categories,
+                        "top_sources": self.top_sources,
+                        "interest_affinities": self.interest_affinities}
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    def _aggregate_metrics(self, monitor_id, date, metrics):
+        if isinstance(metrics, list):
+            return {metric: self.METRICS[metric](monitor_id, date[0], date[1])
+                    for metric in metrics}
+        elif metrics in self.METRICS:
+            return {metrics: self.METRICS[metrics](monitor_id, date[0],
+                                                   date[1])}
+        else:
+            raise ValueError('valid metrics are {}'.format(self.METRICS.keys(
+            )))
+
+    def _aggregate_dates(self, monitor_id, dates, metrics):
+        if not (isinstance(dates, list) or isinstance(dates, tuple)):
+            raise ValueError(
+                "dates must be a start and end pair, or a list of start and end pairs")
+        elif isinstance(dates[0], list) or isinstance(dates[0], tuple):
+            return {date[0]: self._aggregate_metrics(monitor_id, date, metrics)
+                    for date in dates}
+        else:
+            return {dates[0]: self._aggregate_metrics(monitor_id, dates,
+                                                      metrics)}
+
+    # @Halo(text='Getting Aggregate Metrics...')
+    def aggregate(self, monitor_ids, dates, metrics):
+        """Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
+
+        Valid metrics
+        * 'volume'
+        * 'word_cloud'
+        * 'top_sources'
+        * 'interest_affinities'
+        * 'sentiment_and_categories'
+
+        # Arguments
+            monitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested
+            dates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings
+            metrics: String or list of Strings, metric(s) to aggregate upon
+        """
+        if isinstance(monitor_ids, list):
+            return {monitor_id:
+                    self._aggregate_dates(monitor_id, dates, metrics)
+                    for monitor_id in monitor_ids}
+        elif isinstance(monitor_ids, int):
+            return {monitor_ids: self._aggregate_dates(monitor_ids, dates,
+                                                       metrics)}
+        else:
+            raise ValueError(
+                "monitor_ids must be integer or list of integers to aggregate")
+
+    @response_handler
     def details(self, monitor_id):
         """Return detailed metadata about the selected monitor, including category metadata.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "detail",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id
-                         }))
+        return requests.get(self.TEMPLATE + "detail",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def audit(self, monitor_id):
         """Return audit information about the selected monitor, sorted from most to least recent.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "audit",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id
-                         }))
+        return requests.get(self.TEMPLATE + "audit",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def word_cloud(self, monitor_id, start, end, filter_string=None):
         """Return an alphabetized list of the top 300 words in a monitor.
 
@@ -72,18 +121,16 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "wordcloud",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "filter": filter_string
-                         }))
+        return requests.get(self.TEMPLATE + "wordcloud",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "filter": filter_string
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def trained_posts(self, monitor_id, category=None):
         """Return a list of the training posts for a given opinion monitor.
 
@@ -95,16 +142,14 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category: Integer, category id to target training posts from a specific category
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "trainingposts",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "category": category
-                         }))
+        return requests.get(self.TEMPLATE + "trainingposts",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "category": category
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def train_monitor(self, monitor_id, category_id, data):
         """Upload individual training document monitors programmatically.
 
@@ -118,19 +163,14 @@ class MonitorAPI(object):
             category_id: Integer, the category this content should belong to
             data: Dictionary, document item with required fields
         """
-        return handle_response(
-            requests.post(
-                self.TEMPLATE + "train",
-                json={
-                    "monitorID": monitor_id,
-                    "categoryID": category_id,
-                    "document": data
-                },
-                params={"auth": self.authorization.token}),
-            check_text=True)
+        return requests.post(
+            self.TEMPLATE + "train",
+            json={"monitorID": monitor_id,
+                  "categoryID": category_id,
+                  "document": data},
+            params={"auth": self.authorization.token})
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def interest_affinities(self,
                             monitor_id,
                             start,
@@ -146,19 +186,17 @@ class MonitorAPI(object):
             daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range
             document_source: String, document source for affinities. valid params include `TWITTER` or `TUMBLR`
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "interestaffinities",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "daily": daily,
-                             "documentSource": document_source
-                         }))
+        return requests.get(self.TEMPLATE + "interestaffinities",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "daily": daily,
+                                "documentSource": document_source
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def top_sources(self, monitor_id, start, end):
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
@@ -167,17 +205,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "sources",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "sources",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def image_analysis(self, monitor_id, start, end, object_type="", top=100):
         """Return a breakdown of the top image classes within a provided monitor.
 
@@ -188,19 +224,17 @@ class MonitorAPI(object):
             object_type: String, specifies type of image classes, valid values [object, scene, action, logo]
             top : Integer, if defined, only the selected number of classes will be returned
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "imageresults",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "type": object_type,
-                             "top": top
-                         }))
+        return requests.get(self.TEMPLATE + "imageresults",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "type": object_type,
+                                "top": top
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def volume(self,
                monitor_id,
                start,
@@ -216,19 +250,17 @@ class MonitorAPI(object):
             aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day
             use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "dayandtime",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "aggregatebyday": aggregate_by_day,
-                             "uselocaltime": use_local_time
-                         }))
+        return requests.get(self.TEMPLATE + "dayandtime",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "aggregatebyday": aggregate_by_day,
+                                "uselocaltime": use_local_time
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def sentiment_and_categories(self,
                                  monitor_id,
                                  start,
@@ -243,18 +275,16 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "results",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "hideExcluded": hide_excluded
-                         }))
+        return requests.get(self.TEMPLATE + "results",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "hideExcluded": hide_excluded
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def posts(self,
               monitor_id,
               start,
@@ -275,18 +305,17 @@ class MonitorAPI(object):
             full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
             geotagged: Boolean, if True, returns only geotagged documents matching the given filter
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "posts",
-                         params={
-                             "auth": self.authorizataion.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "filter": filter_string,
-                             "extendLimit": extend_limit,
-                             "fullContents": full_contents,
-                             "geotagged": geotagged
-                         }))
+        return requests.get(self.TEMPLATE + "posts",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "filter": filter_string,
+                                "extendLimit": extend_limit,
+                                "fullContents": full_contents,
+                                "geotagged": geotagged
+                            })
 
     #################################################################################
     # Demographics                                                                  #
@@ -294,8 +323,7 @@ class MonitorAPI(object):
     # within a given monitor.                                                       #
     #################################################################################
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def age(self, monitor_id, start, end):
         """Return volume metrics for a given monitor split by age bracket.
 
@@ -304,17 +332,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "demographics/age",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "demographics/age",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def ethnicity(self, monitor_id, start, end):
         """Return volume metrics for a given monitor split by ethnicity.
 
@@ -323,17 +349,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "demographics/ethnicity",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "demographics/ethnicity",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def gender(self, monitor_id, start, end):
         """Return volume metrics for a given monitor split by gender.
 
@@ -342,22 +366,20 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "demographics/gender",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "demographics/gender",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
     #################################################################################
     # Geography                                                                     #
     #                                                                               #
     #################################################################################
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def cities(self, monitor_id, start, end, country):
         """Return volume metrics for a given monitor split by city.
 
@@ -368,18 +390,16 @@ class MonitorAPI(object):
             country: String, country code to filter cities
 
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "geography/cities",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "country": country
-                         }))
+        return requests.get(self.TEMPLATE + "geography/cities",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "country": country
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def states(self, monitor_id, start, end, country):
         """Return volume metrics for a given monitor split by state.
 
@@ -389,18 +409,16 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             country: String, country code to filter states
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "geography/states",
-                         params={
-                             "auth": self.authorizataion.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end,
-                             "country": country
-                         }))
+        return requests.get(self.TEMPLATE + "geography/states",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end,
+                                "country": country
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def countries(self, monitor_id, start, end):
         """Return volume metrics for a given monitor split by country.
 
@@ -409,14 +427,13 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "geography/countries",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "geography/countries",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
     #################################################################################
     # Twitter                                                                       #
@@ -424,8 +441,7 @@ class MonitorAPI(object):
     # either Social Account or Buzz monitors.                                       #
     #################################################################################
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def twitter_authors(self, monitor_id, start, end):
         """Return information related to the Twitter authors who have posted in a given monitor.
 
@@ -434,17 +450,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "authors",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "authors",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def twitter_metrics(self, monitor_id, start, end):
         """Return information about the top hashtags, mentions, and retweets in a monitor.
 
@@ -453,17 +467,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "twittermetrics",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "twittermetrics",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def twitter_followers(self, monitor_id, start, end):
         """Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor
         as of the selected dates.
@@ -473,17 +485,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "twittersocial/followers",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "twittersocial/followers",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def twitter_sent_posts(self, monitor_id, start, end):
         """Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.
 
@@ -492,17 +502,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "twittersocial/sentposts",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "twittersocial/sentposts",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def twitter_engagement(self, monitor_id, start, end):
         """Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.
 
@@ -511,14 +519,13 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "twittersocial/totalengagement",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "twittersocial/totalengagement",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
     #################################################################################
     # Facebook                                                                      #
@@ -526,8 +533,7 @@ class MonitorAPI(object):
     # either Social Account or Buzz monitors.                                       #
     #################################################################################
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def facebook_admin_posts(self, monitor_id, start, end):
         """Return those posts made by the administrators/owners of a targeted Facebook page in a
         Facebook Social Account Monitor.
@@ -537,17 +543,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "facebook/adminposts",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "facebook/adminposts",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def facebook_likes(self, monitor_id, start, end):
         """Return the cumulative daily like count for a targeted Facebook page in a
         Facebook Social Account Monitor as of the selected dates.
@@ -557,17 +561,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "facebook/pagelikes",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "facebook/pagelikes",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def facebook_activity(self, monitor_id, start, end):
         """Return information about actions (likes, comments, shares) made by users and admins for a given page.
 
@@ -576,14 +578,13 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "facebook/totalactivity",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "facebook/totalactivity",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
     #################################################################################
     # Instagram                                                                     #
@@ -591,8 +592,7 @@ class MonitorAPI(object):
     # from either Social Account or Buzz monitors.                                  #
     #################################################################################
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def instagram_top_hashtags(self, monitor_id, start, end):
         """Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor,
         plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected
@@ -603,17 +603,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "instagram/hashtags",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "instagram/hashtags",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def instagram_followers(self, monitor_id, start, end):
         """Return the cumulative daily follower count for a targeted Instagram account in an
         Instagram Social Account Monitor as of the selected dates.
@@ -623,17 +621,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "instagram/followers",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "instagram/followers",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def instagram_sent_media(self, monitor_id, start, end):
         """Return media sent by admins in a targeted Instagram account.
 
@@ -642,17 +638,15 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "instagram/sentmedia",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "instagram/sentmedia",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def instagram_activity(self, monitor_id, start, end):
         """Return information about actions (likes, comments) made by users and admins for a given account.
 
@@ -661,11 +655,10 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return handle_response(
-            requests.get(self.TEMPLATE + "instagram/totalactivity",
-                         params={
-                             "auth": self.authorization.token,
-                             "id": monitor_id,
-                             "start": start,
-                             "end": end
-                         }))
+        return requests.get(self.TEMPLATE + "instagram/totalactivity",
+                            params={
+                                "auth": self.authorization.token,
+                                "id": monitor_id,
+                                "start": start,
+                                "end": end
+                            })

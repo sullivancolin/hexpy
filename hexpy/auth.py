@@ -5,9 +5,7 @@ import requests
 import os
 import json
 from getpass import getpass
-from ratelimiter import RateLimiter
-from .response import handle_response
-from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
+from .base import ROOT, response_handler
 
 
 class CrimsonAuthorization(object):
@@ -41,7 +39,11 @@ class CrimsonAuthorization(object):
     CREDS_FILE = os.path.join(
         os.path.expanduser('~'), '.hexpy', 'credentials.json')
 
-    def __init__(self, username=None, password=None, token=None):
+    def __init__(self,
+                 username=None,
+                 password=None,
+                 token=None,
+                 no_expiration=True):
         super(CrimsonAuthorization, self).__init__()
         if not any([username, password, token]):
             raise ValueError(
@@ -54,14 +56,13 @@ class CrimsonAuthorization(object):
                 elif password and not username:
                     raise ValueError("Missing username.")
 
-                self.auth = self.get_token(username, password)
+                self.auth = self.get_token(username, password, no_expiration)
                 self.token = self.auth["auth"]
             else:
                 # TODO Test of validity of provided token
                 self.token = token
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def get_token(self, username, password, no_expiration=True):
         """Request authorization token.
 
@@ -70,13 +71,12 @@ class CrimsonAuthorization(object):
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        return handle_response(
-            requests.get(ROOT + "authenticate",
-                         params={
-                             "username": username,
-                             "password": password,
-                             "noExpiration": no_expiration,
-                         }))
+        return requests.get(ROOT + "authenticate",
+                            params={
+                                "username": username,
+                                "password": password,
+                                "noExpiration": no_expiration,
+                            })
 
     def save_token(self, path=None):
         """Save authorization token.

@@ -4,7 +4,8 @@
 
 from setuptools import setup, find_packages
 
-requirements = ['clint>=0.5.1', 'requests>=2.18.4', 'ratelimiter>=1.2.0']
+requirements = ['clint>=0.5.1', 'requests>=2.18.4', 'ratelimiter>=1.2.0',
+                'halo>=0.0.6']
 
 setup_requirements = ['pytest-runner', 'setuptools-markdown']
 

@@ -143,6 +143,26 @@ Return aggregate volume, sentiment, emotion and opinion category analysis for a 
 * end: String, exclusive end date in YYYY-MM-DD
 * hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.
 
+
+### aggregate
+```python
+aggregate(monitor_ids, dates, metrics)
+```
+Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
+
+#### Valid metrics
+* 'volume'
+* 'word_cloud'
+* 'top_sources'
+* 'interest_affinities'
+* 'sentiment_and_categories'
+
+#### Arguments
+* monitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested
+* dates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings
+* metrics: String or list of Strings, metric(s) to aggregate upon
+
+
 ### posts
 ```python
 posts(monitor_id, start, end, filter_string=None, extend_limit=False, full_contents=False, geotagged=False)
@@ -159,8 +179,10 @@ Return post-level information (where available) and associated analysis (sentime
 * full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
 * geotagged: Boolean, if True, returns only geotagged documents matching the given filter
 
-## Demographics
+Demographics
+-------------
 This collection of endpoints provide demographic volume metrics for users within a given monitor.
+
 ### age
 ```python
 age(monitor_id, start, end)
@@ -195,7 +217,8 @@ Return volume metrics for a given monitor split by gender.
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
 
-## Geography
+Geography
+---------
 
 ### cities
 ```python
@@ -233,7 +256,9 @@ Return volume metrics for a given monitor split by country.
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
 
-## Twitter
+Twitter
+------------
+
 This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. 
 
 ### twitter_authors
@@ -290,7 +315,8 @@ Return information about retweets, replies, and @mentions for a Twitter Social A
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
 
-## Facebook
+Facebook
+------------
 
 ### facebook_admin_posts
 ```python
@@ -325,7 +351,8 @@ Return information about actions (likes, comments, shares) made by users and adm
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
 
-## Instagram
+Instagram
+-------------
 
 ### instagram_top_hashtags
 ```python

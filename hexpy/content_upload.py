@@ -2,10 +2,8 @@
 """Module for uploading custom content"""
 
 import requests
-from ratelimiter import RateLimiter
 from clint.textui import progress
-from .response import handle_response
-from .base import ROOT, ONE_MINUTE, MAX_CALLS, sleep_message
+from .base import ROOT, response_handler
 
 
 class ContentUploadAPI(object):
@@ -50,8 +48,7 @@ class ContentUploadAPI(object):
         super(ContentUploadAPI, self).__init__()
         self.authorization = authorization
 
-    @RateLimiter(
-        max_calls=MAX_CALLS, period=ONE_MINUTE, callback=sleep_message)
+    @response_handler
     def upload(self, data):
         """Upload list of document dictionaries to Crimson Hexagon platform.
 
@@ -61,11 +58,10 @@ class ContentUploadAPI(object):
         """
         if len(data) <= 1000:
 
-            return handle_response(
-                requests.post(
-                    self.TEMPLATE,
-                    json={"items": data},
-                    params={"auth": self.authorization.token}))
+            return requests.post(
+                self.TEMPLATE,
+                json={"items": data},
+                params={"auth": self.authorization.token})
         else:
             print("More than 1000 items found.  Uploading in batches of 1000.")
             self.batch_upload(data)

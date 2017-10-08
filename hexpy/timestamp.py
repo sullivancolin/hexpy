@@ -39,7 +39,7 @@ class Timestamp(object):
         """Instantiate Timestamp object from ISO format String.
 
         # Arguments
-            timestamp: isoformmated timestamp
+            timestamp: isoformatted timestamp
         """
         t = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S")
         return cls(t.year, t.month, t.day, t.hour, t.minute, t.second)
