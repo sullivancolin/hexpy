@@ -135,7 +135,7 @@
               
                 <h1 id="authorization">Authorization</h1>
 <h2 id="generating-a-token-for-use-with-all-api-requests">Generating a token for use with all API requests.</h2>
-<p>Instantiate using account token, or username. Optionally include password, or enter it at the prompt.</p>
+<p>Instantiate using token, or username. Optionally include password, or enter it at the prompt.</p>
 <pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization
 &gt;&gt;&gt; auth = CrimsonAuthorization(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
 &gt;&gt;&gt; auth.save_token()
@@ -157,7 +157,7 @@ Enter password: *********
 
 <h2 id="methods">Methods</h2>
 <h3 id="get_token">get_token</h3>
-<pre><code class="python">get_token(username, password, no_expiration=True)
+<pre><code class="python">get_token(username, password, no_expiration=False)
 </code></pre>
 
 <p>Request authorization token.</p>
