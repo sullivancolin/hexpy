@@ -43,11 +43,12 @@ class CrimsonAuthorization(object):
                  username=None,
                  password=None,
                  token=None,
-                 no_expiration=True):
+                 no_expiration=False):
         super(CrimsonAuthorization, self).__init__()
         if not any([username, password, token]):
             raise ValueError(
-                "No credentials given. Please provide valid token or username and password")
+                "No credentials given. Please provide valid token or username and password"
+            )
         else:
             if not token:
 
@@ -63,7 +64,7 @@ class CrimsonAuthorization(object):
                 self.token = token
 
     @response_handler
-    def get_token(self, username, password, no_expiration=True):
+    def get_token(self, username, password, no_expiration=False):
         """Request authorization token.
 
         # Arguments
@@ -71,12 +72,13 @@ class CrimsonAuthorization(object):
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        return requests.get(ROOT + "authenticate",
-                            params={
-                                "username": username,
-                                "password": password,
-                                "noExpiration": no_expiration,
-                            })
+        return requests.get(
+            ROOT + "authenticate",
+            params={
+                "username": username,
+                "password": password,
+                "noExpiration": no_expiration,
+            })
 
     def save_token(self, path=None):
         """Save authorization token.
@@ -104,6 +106,7 @@ class CrimsonAuthorization(object):
             with open(path) as infile:
                 auth = json.load(infile)
                 return cls(token=auth["auth"])
-        except FileNotFoundError:
-            raise FileNotFoundError(
-                "Credentials File not found. Please specify token or username and password.")
+        except IOError:
+            raise IOError(
+                "Credentials File not found. Please specify token or username and password."
+            )

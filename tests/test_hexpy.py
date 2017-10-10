@@ -3,9 +3,8 @@
 """Tests for `hexpy` package."""
 
 import pytest
-from hexpy import handle_response
-from hexpy import Timestamp, CrimsonAuthorization
-from hexpy import CrimsonAuthorization, MonitorAPI
+from hexpy.base import response_handler
+from hexpy import Timestamp, CrimsonAuthorization, MonitorAPI
 
 
 def test_auth():
@@ -17,19 +16,20 @@ def test_handle_response():
     import json
     r1 = Response()
     r1.status_code = 403
-    r1._content = bytes(json.dumps({"error": "something went wrong"}), 'utf-8')
+    r1._content = bytes(json.dumps({"status": "error"}), 'utf-8')
+
+    @response_handler
+    def test_response(r):
+        return r
 
     with pytest.raises(ValueError) as e:
-        handle_response(r1)
-
+        test_response(r1)
     r1.status_code = 200
-
     with pytest.raises(ValueError) as e:
-        handle_response(r1, check_text=True)
+        test_response(r1)
 
-    data = {"error": "something went wrong"}
-
-    assert (handle_response(r1) == data)
+    data = {"some": "suff"}
+    r1._content = bytes(json.dumps({"some": "stuff"}), 'utf-8')
 
 
 def test_timestamp_from_string():

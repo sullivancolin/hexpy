@@ -45,8 +45,7 @@ class StreamsAPI(object):
         # Arguments
             team_id: Integer the id of the team, available via the team list endpoint
         """
-        return requests.get(self.TEMPLATE + "list/",
-                            params={
-                                "auth": self.authorization.token,
-                                "teamid": team_id
-                            })
+        return requests.get(
+            self.TEMPLATE + "list/",
+            params={"auth": self.authorization.token,
+                    "teamid": team_id})

@@ -23,6 +23,7 @@ clean-test:
 	rm -fr .tox/
 	rm -f .coverage
 	rm -fr htmlcov/
+	rm -fr .cache/
 
 ## check style with flake8
 lint:

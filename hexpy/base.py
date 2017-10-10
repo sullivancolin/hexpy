@@ -5,7 +5,6 @@ from halo import Halo
 from ratelimiter import RateLimiter
 import time
 import threading
-from .limiter import SpinnerLimiter
 
 ROOT = "https://api.crimsonhexagon.com/api/"
 
@@ -29,24 +28,22 @@ class SpinnerLimiter(RateLimiter):
                     t.daemon = True
                     t.start()
                 sleeptime = until - time.time()
-                with Halo(
-                        text="Rate Limit Reached. (Sleeping for {} seconds)".format(
-                            round(sleeptime))):
+                with Halo(text="Rate Limit Reached. (Sleeping for {} seconds)".
+                          format(round(sleeptime))):
                     if sleeptime > 0:
                         time.sleep(sleeptime)
             return self
 
 
 def response_handler(f):
-    """Ensure responses do not contain errors, and Rate Limit is obeyed"""
+    """Ensure responses do not contain errors, and Rate Limit is obeyed."""
 
     @SpinnerLimiter(max_calls=MAX_CALLS, period=ONE_MINUTE)
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         response = f(*args, **kwargs)
-        if response.status_code != 200:
-            raise ValueError("Something Went Wrong." + response.text)
-        if "error" in response.text:
+        if (response.status_code !=
+                200) or ("\"status\": \"error\"" in response.text):
             raise ValueError("Something Went Wrong." + response.text)
         return response.json()
 

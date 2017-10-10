@@ -2,7 +2,7 @@
 
 ## Generating a token for use with all API requests.
 
-Instantiate using account token, or username. Optionally include password, or enter it at the prompt.
+Instantiate using token, or username. Optionally include password, or enter it at the prompt.
 ```python
 >>> from hexpy import CrimsonAuthorization
 >>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
@@ -28,7 +28,7 @@ Create instance by loading token from file.  Default is `~/.hexpy/credentials.js
 ### get_token
 
 ```python
-get_token(username, password, no_expiration=True)
+get_token(username, password, no_expiration=False)
 ```
 
 Request authorization token.
