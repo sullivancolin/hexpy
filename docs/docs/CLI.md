@@ -56,7 +56,7 @@ $ hexpy query MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 
 Get volume information for the monitor and get count for each day
 ```bash
-$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]
+$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
 ["2017-01-04T00:00:00",74]
 ["2017-01-05T00:00:00",101]
 ["2017-01-06T00:00:00",67]
