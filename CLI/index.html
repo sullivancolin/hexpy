@@ -188,7 +188,7 @@ $ pip install hexpy/[cli]
 </code></pre>
 
 <p>Get volume information for the monitor and get count for each day</p>
-<pre><code class="bash">$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]
+<pre><code class="bash">$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
 [&quot;2017-01-04T00:00:00&quot;,74]
 [&quot;2017-01-05T00:00:00&quot;,101]
 [&quot;2017-01-06T00:00:00&quot;,67]
