@@ -1,6 +1,5 @@
-
 A Python Client for the Crimson Hexagon's API
-===================
+=============================================
 
 **hexpy** is a simple python package for working with the Crimson Hexagon API
 

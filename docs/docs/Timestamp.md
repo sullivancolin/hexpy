@@ -1,4 +1,5 @@
-# Timestamp 
+Timestamp
+========= 
 
 ## Class for working with dates and times.
 

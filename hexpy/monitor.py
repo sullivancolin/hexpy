@@ -55,16 +55,25 @@ class MonitorAPI(object):
                 "dates must be a start and end pair, or a list of start and end pairs"
             )
         elif isinstance(dates[0], list) or isinstance(dates[0], tuple):
-            return {
-                date[0]: self._aggregate_metrics(monitor_id, date, metrics)
-                for date in dates
-            }
+            return [{
+                "resultsStart":
+                date[0],
+                "resultsEnd":
+                date[1],
+                "results":
+                self._aggregate_metrics(monitor_id, date, metrics)
+            } for date in dates]
         else:
-            return {
-                dates[0]: self._aggregate_metrics(monitor_id, dates, metrics)
-            }
+            return [{
+                "resultsStart":
+                dates[0],
+                "resultsEnd":
+                dates[1],
+                "results":
+                self._aggregate_metrics(monitor_id, dates, metrics)
+            }]
 
-    @Halo(text='Getting Aggregate Metrics...')
+    # @Halo(text='Getting Aggregate Metrics...')
     def aggregate(self, monitor_ids, dates, metrics):
         """Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
 
@@ -81,14 +90,21 @@ class MonitorAPI(object):
             metrics: String or list of Strings, metric(s) to aggregate upon
         """
         if isinstance(monitor_ids, list):
-            return {
-                monitor_id: self._aggregate_dates(monitor_id, dates, metrics)
-                for monitor_id in monitor_ids
-            }
+            return [{
+                "monitor_id":
+                monitor_id,
+                "results":
+                self._aggregate_dates(monitor_id, dates, metrics)
+            } for monitor_id in monitor_ids]
+
         elif isinstance(monitor_ids, int):
-            return {
-                monitor_ids: self._aggregate_dates(monitor_ids, dates, metrics)
-            }
+            return [{
+                "monitor_id":
+                monitor_ids,
+                "results":
+                self._aggregate_dates(monitor_ids, dates, metrics)
+            }]
+
         else:
             raise ValueError(
                 "monitor_ids must be integer or list of integers to aggregate")

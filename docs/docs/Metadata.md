@@ -1,4 +1,5 @@
-# Metadata API
+Metadata API
+============
 
 ## Class for working with Crimson Hexagon account and analysis metadata.
 

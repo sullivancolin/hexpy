@@ -42,8 +42,10 @@ def response_handler(f):
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         response = f(*args, **kwargs)
-        if (response.status_code !=
-                200) or ("\"status\": \"error\"" in response.text):
+        if response.status_code != 200:
+            raise ValueError("Something Went Wrong." + response.text)
+        elif ("status" in response.json()
+              ) and response.json()["status"] == "error":
             raise ValueError("Something Went Wrong." + response.text)
         return response.json()
 

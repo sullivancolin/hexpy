@@ -74,4 +74,5 @@ class ContentUploadAPI(object):
         """
         for batch in progress.bar(
             [data[i:i + 1000] for i in range(0, len(data), 1000)]):
-            self.upload(batch)
+            response = self.upload(batch)
+        return response

@@ -1,4 +1,5 @@
-# Authorization
+Authorization
+=============
 
 ## Generating a token for use with all API requests.
 

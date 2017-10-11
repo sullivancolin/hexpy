@@ -1,4 +1,5 @@
-# Monitor API
+Monitor API
+===========
 
 ## Class for working with Crimson Hexagon Monitor API.
 

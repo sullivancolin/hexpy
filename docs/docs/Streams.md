@@ -1,4 +1,5 @@
-# Streams API
+Streams API
+===========
 
 ## Class for working with Realtime Streams API.
 
