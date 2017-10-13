@@ -154,10 +154,6 @@
 <!-- To install the most recent stable release run <code>pip install hexpy</code>. -->
 
 <p>To install the optional console command:</p>
-<pre><code class="bash">$ pip install git+git://github.com/sullivancolin/hexpy.git@master[cli]
-</code></pre>
-
-<p>or</p>
 <pre><code class="bash">$ git clone https://github.com/sullivancolin/hexpy.git
 $ pip install hexpy/[cli]
 </code></pre>
@@ -170,13 +166,18 @@ $ pip install hexpy/[cli]
 <h3 id="commands">Commands</h3>
 <ul>
 <li><strong>export</strong>  Save Monitor posts as spreadsheet.</li>
-<li><strong>query</strong>   Get Monitor results for 1 or more metrics.</li>
+<li><strong>login</strong>   Get valid authorization from user.</li>
+<li><strong>query</strong>   Request 24 analysis for provided query.</li>
+<li><strong>results</strong> Get Monitor results for 1 or more metrics.</li>
 <li><strong>upload</strong>  Upload spreadsheet file as custom content.</li>
 </ul>
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples</h2>
-<p>Export Monitor posts to excel file called <code>my_export.xlsx</code></p>
-<pre><code class="bash">$ hexpy export MONITOR_ID --file_type excel --output my_export
+<p>Login to Crimson API with you credentials</p>
+<pre><code class="bash">$ hexpy login --force
+Enter username: username@email.com
+Enter password: ***********
+✔ Success!
 </code></pre>
 
 <p>Upload CSV file as <code>my_custom_types</code> with English language code and column delimiter is tab</p>
@@ -184,11 +185,11 @@ $ pip install hexpy/[cli]
 </code></pre>
 
 <p>Get word cloud and volume information from the monitor in the specified date range</p>
-<pre><code class="bash">$ hexpy query MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
+<pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 </code></pre>
 
-<p>Get volume information for the monitor and get count for each day</p>
-<pre><code class="bash">$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
+<p>Get volume information for the monitor and get count for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
 [&quot;2017-01-04T00:00:00&quot;,74]
 [&quot;2017-01-05T00:00:00&quot;,101]
 [&quot;2017-01-06T00:00:00&quot;,67]
@@ -201,7 +202,15 @@ $ pip install hexpy/[cli]
 [&quot;2017-01-13T00:00:00&quot;,67]
 [&quot;2017-01-14T00:00:00&quot;,68]
 [&quot;2017-01-15T00:00:00&quot;,72]
-...'
+...
+</code></pre>
+
+<p>Export Monitor posts to excel file called <code>my_export.xlsx</code></p>
+<pre><code class="bash">$ hexpy export MONITOR_ID --file_type excel --output my_export
+</code></pre>
+
+<p>Export posts for multiple monitors in parallel from a file containing a list of monitor ids</p>
+<pre><code class="bash">cat ids.txt | xargs -n 1 -P 4 hexpy export
 </code></pre>
               
             </div>
