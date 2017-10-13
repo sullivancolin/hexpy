@@ -22,8 +22,7 @@ class ContentUploadAPI(object):
     >>> from hexpy import CrimsonAuthorization, ContentUploadAPI
     >>> auth = CrimsonAuthorization.load_auth_from_file()
     >>> upload_client = ContentUploadAPI(auth)
-    >>> items ={
-      "items": [
+    >>> items = [
         {
           "title": "Example Title",
           "date": "2010-01-26T16:14:00",
@@ -37,7 +36,6 @@ class ContentUploadAPI(object):
           }
         },
       ]
-    }
     >>> upload_client.upload(items)
     ```
     """

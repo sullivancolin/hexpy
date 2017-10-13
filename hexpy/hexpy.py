@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """CLI interface for hexpy."""
 from datetime import datetime
+import time
 import json
 import pandas as pd
 import numpy as np
@@ -11,24 +12,43 @@ from clint.textui import progress
 from .auth import CrimsonAuthorization
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
-
-
-def get_auth():
-    """Get valid authorization either form cached credentials or from user."""
-    try:
-        auth = CrimsonAuthorization.load_auth_from_file()
-        return auth
-    except IOError:
-        username = input('Enter username: ')
-        password = getpass(prompt='Enter password: ')
-        auth = CrimsonAuthorization(username, password, no_expiration=False)
-        return auth
+from .analysis import AnalysisAPI
 
 
 @click.group()
 def cli():
-    """Command Line interface for working with hexpy."""
+    """Command Line interface for working with Crimson Hexagon API."""
     pass
+
+
+@cli.command()
+@click.option(
+    "--force/--no-force",
+    '-f',
+    default=False,
+    help="force signing in again and storing token")
+@click.option(
+    '--expiration/--no-expiration',
+    '-e',
+    default=True,
+    help='Get token valid for 24 hours, or with no expiration')
+def login(force, expiration):
+    """Get valid authorization from user."""
+    try:
+        if not force:
+            auth = CrimsonAuthorization.load_auth_from_file()
+            return auth
+        else:
+            raise IOError
+    except IOError:
+        username = input('Enter username: ')
+        password = getpass(prompt='Enter password: ')
+        auth = CrimsonAuthorization(
+            username, password, no_expiration=expiration)
+        auth.save_token()
+        spinner = Halo(text='Success!', spinner='dots')
+        spinner.succeed()
+        return auth
 
 
 @cli.command()
@@ -40,7 +60,8 @@ def cli():
     help='start and end date of export in YYYY-MM-DD format.')
 @click.argument('monitor_id', type=int)
 @click.argument('metrics', nargs=-1)
-def query(monitor_id, metrics, date_range):
+@click.pass_context
+def results(ctx, monitor_id, metrics, date_range):
     """Get Monitor results for 1 or more metrics.
 
     \b
@@ -51,10 +72,9 @@ def query(monitor_id, metrics, date_range):
         * interest_affinities
         * sentiment_and_categories
     """
-    auth = get_auth()
+    auth = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(auth)
     details = client.details(monitor_id)
-    info = details["name"]
     if date_range:
         results = client.aggregate(monitor_id, date_range, list(metrics))
     else:
@@ -62,7 +82,8 @@ def query(monitor_id, metrics, date_range):
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
     click.echo(
-        json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
+        json.dumps(
+            results[0]["results"][0], indent=4, ensure_ascii=False))
 
 
 @cli.command()
@@ -75,9 +96,10 @@ def query(monitor_id, metrics, date_range):
 @click.option('--delimiter', '-d', default=",", help='CSV column delimiter.')
 @click.option(
     '--language', '-l', default="en", help='language code of documents')
-def upload(filename, content_type, delimiter, language):
+@click.pass_context
+def upload(ctx, filename, content_type, delimiter, language):
     """Upload spreadsheet file as custom content."""
-    auth = get_auth()
+    auth = ctx.invoke(login, expiration=True, force=False)
     client = ContentUploadAPI(auth)
     if filename.endswith(".csv"):
         items = pd.read_csv(filename, sep=delimiter)
@@ -150,11 +172,12 @@ def upload(filename, content_type, delimiter, language):
     default=None,
     help='output filename. Default is monitor name.')
 @click.option('--delimiter', '-d', default=",", help='CSV column delimiter.')
-def export(monitor_id, limit, dates, file_type, output, delimiter):
+@click.pass_context
+def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
     """Save Monitor posts as spreadsheet."""
     if delimiter == "\\t":
         delimiter = '\t'
-    auth = get_auth()
+    auth = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(auth)
     details = client.details(monitor_id)
     info = details["name"]
@@ -200,6 +223,26 @@ def export(monitor_id, limit, dates, file_type, output, delimiter):
         df.to_excel(info + ".xlsx", index=True)
     spinner = Halo(text='Done!', spinner='dots')
     spinner.succeed()
+
+
+@cli.command()
+@click.argument('query_file')
+@click.pass_context
+def query(ctx, query_file):
+    """Submit a query task against 24 hours of social data."""
+    auth = ctx.invoke(login, expiration=True, force=False)
+    client = AnalysisAPI(auth)
+    query_json = json.load(open(query_file))
+    response = client.analysis_request(query_json)
+    if response["status"] == "WAITING":
+        request_id = response["resultId"]
+        with Halo(text="Wating for Analysis to finish."):
+            results = client.results(request_id)
+            time.sleep(20)
+            results = client.results(request_id)
+    else:
+        results = response
+    click.echo(json.dumps(results, indent=4, ensure_ascii=False))
 
 
 if __name__ == '__main__':

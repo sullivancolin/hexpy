@@ -15,10 +15,6 @@ Hexpy Command Line Interface
 
 To install the optional console command:
 ```bash
-$ pip install git+git://github.com/sullivancolin/hexpy.git@master[cli]
-```
- or
-```bash
 $ git clone https://github.com/sullivancolin/hexpy.git
 $ pip install hexpy/[cli]
 ```
@@ -32,16 +28,21 @@ $ hexpy [OPTIONS] COMMAND [ARGS]...
 
 ### Commands
 * **export**  Save Monitor posts as spreadsheet.
-* **query**   Get Monitor results for 1 or more metrics.
+* **login**   Get valid authorization from user.
+* **query**   Request 24 analysis for provided query.
+* **results** Get Monitor results for 1 or more metrics.
 * **upload**  Upload spreadsheet file as custom content.
 
 See how each `hexpy` command works by running `hexpy COMMAND --help`
 
 ## Examples
 
-Export Monitor posts to excel file called `my_export.xlsx`
+Login to Crimson API with you credentials
 ```bash
-$ hexpy export MONITOR_ID --file_type excel --output my_export
+$ hexpy login --force
+Enter username: username@email.com
+Enter password: ***********
+✔ Success!
 ```
 
 Upload CSV file as `my_custom_types` with English language code and column delimiter is tab
@@ -51,12 +52,12 @@ $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --deli
 
 Get word cloud and volume information from the monitor in the specified date range
 ```bash
-$ hexpy query MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
+$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 ```
 
-Get volume information for the monitor and get count for each day
+Get volume information for the monitor and get count for each day using [jq](https://stedolan.github.io/jq/)
 ```bash
-$ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
+$ hexpy results MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
 ["2017-01-04T00:00:00",74]
 ["2017-01-05T00:00:00",101]
 ["2017-01-06T00:00:00",67]
@@ -69,5 +70,15 @@ $ hexpy query MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startD
 ["2017-01-13T00:00:00",67]
 ["2017-01-14T00:00:00",68]
 ["2017-01-15T00:00:00",72]
-...'
+...
+```
+
+Export Monitor posts to excel file called `my_export.xlsx`
+```bash
+$ hexpy export MONITOR_ID --file_type excel --output my_export
+```
+
+Export posts for multiple monitors in parallel from a file containing a list of monitor ids
+```bash
+cat ids.txt | xargs -n 1 -P 4 hexpy export
 ```

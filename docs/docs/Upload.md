@@ -14,8 +14,7 @@ To use this endpoint, please contact support and they will create a new custom c
 >>> from hexpy import CrimsonAuthorization, ContentUploadAPI
 >>> auth = CrimsonAuthorization.load_auth_from_file()
 >>> upload_client = ContentUploadAPI(auth)
->>> items ={
-  "items": [
+>>> items = [
     {
       "title": "Example Title",
       "date": "2010-01-26T16:14:00",
@@ -29,7 +28,6 @@ To use this endpoint, please contact support and they will create a new custom c
       }
     },
   ]
-}
 >>> upload_client.upload(items)
 ```
 ## Methods

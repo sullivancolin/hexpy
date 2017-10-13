@@ -28,8 +28,9 @@ class SpinnerLimiter(RateLimiter):
                     t.daemon = True
                     t.start()
                 sleeptime = until - time.time()
-                with Halo(text="Rate Limit Reached. (Sleeping for {} seconds)".
-                          format(round(sleeptime))):
+                with Halo(
+                        text="Rate Limit Reached. (Sleeping for {} seconds)".format(
+                            round(sleeptime))):
                     if sleeptime > 0:
                         time.sleep(sleeptime)
             return self
@@ -42,7 +43,7 @@ def response_handler(f):
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         response = f(*args, **kwargs)
-        if response.status_code != 200:
+        if response.status_code not in [200, 201, 202]:
             raise ValueError("Something Went Wrong." + response.text)
         elif ("status" in response.json()
               ) and response.json()["status"] == "error":

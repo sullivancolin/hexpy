@@ -25,7 +25,7 @@ $ pip install -e hexpy/
 
 ## Project Homepage
 
- Visit [Github](https://github.com/sullivancolin/hexpy) project page for full source code.
+Visit [Github](https://github.com/sullivancolin/hexpy) project page for full source code.
 
 ## Example Usage
 
@@ -33,7 +33,7 @@ $ pip install -e hexpy/
 >>> from hexpy import CrimsonAuthorization, MonitorAPI
 >>> auth = CrimsonAuthorization(username="user@email.com", password="crimson_login")
 >>> monitor_results_client=MonitorAPI(auth)
->>> monitor.details(monitor_id)
+>>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
    'name': 'Basic Positive',
