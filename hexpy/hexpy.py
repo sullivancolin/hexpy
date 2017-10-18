@@ -82,8 +82,7 @@ def results(ctx, monitor_id, metrics, date_range):
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
     click.echo(
-        json.dumps(
-            results[0]["results"][0], indent=4, ensure_ascii=False))
+        json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
 
 
 @cli.command()
@@ -103,8 +102,10 @@ def upload(ctx, filename, content_type, delimiter, language):
     client = ContentUploadAPI(auth)
     if filename.endswith(".csv"):
         items = pd.read_csv(filename, sep=delimiter)
-    else:
+    elif filename.endswith(".xlsx"):
         items = pd.read_excel(filename)
+    else:
+        raise ValueError("File type must be either .csv or .xlsx")
 
     # Handle Content Types
     if content_type is not None:
@@ -121,10 +122,22 @@ def upload(ctx, filename, content_type, delimiter, language):
         items["language"] = language
 
     # Correctly format dates
-    dates = [
-        datetime.strptime(x, "%Y-%m-%dT%H:%M:%S").isoformat()
-        for x in items["date"]
-    ]
+    try:
+        dates = [
+            datetime.strptime(x, "%Y-%m-%dT%H:%M:%S").isoformat()
+            for x in items["date"]
+        ]
+    except:
+        try:
+            dates = [
+                datetime.strptime(x, "%Y-%m-%d").isoformat()
+                for x in items["date"]
+            ]
+        except:
+            raise ValueError(
+                """Could not parse date format.  Must be Year-Month-Day as in 2017-10-01.
+                Optionally include time as 2017-10-01T21:30:05
+                """)
 
     items.loc[:, "date"] = dates
 

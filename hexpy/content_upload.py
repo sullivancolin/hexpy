@@ -62,7 +62,7 @@ class ContentUploadAPI(object):
                 params={"auth": self.authorization.token})
         else:
             print("More than 1000 items found.  Uploading in batches of 1000.")
-            self.batch_upload(data)
+            return self.batch_upload(data)
 
     def batch_upload(self, data):
         """Batch upload list of document dictionaries to Crimson Hexagon platform.

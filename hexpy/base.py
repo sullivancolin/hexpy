@@ -28,9 +28,8 @@ class SpinnerLimiter(RateLimiter):
                     t.daemon = True
                     t.start()
                 sleeptime = until - time.time()
-                with Halo(
-                        text="Rate Limit Reached. (Sleeping for {} seconds)".format(
-                            round(sleeptime))):
+                with Halo(text="Rate Limit Reached. (Sleeping for {} seconds)".
+                          format(round(sleeptime))):
                     if sleeptime > 0:
                         time.sleep(sleeptime)
             return self
