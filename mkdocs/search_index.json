@@ -552,13 +552,13 @@
         },
         {
             "location": "/Upload/",
-            "text": "Upload\n\n\nClass for working with Content Upload API.\n\n\nYou may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you. \nReference\n\n\nExample Usage\n\n\n>>> from hexpy import CrimsonAuthorization, ContentUploadAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(auth)\n>>> items = [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n>>> upload_client.upload(items)\n\n\n\n\nMethods\n\n\nupload\n\n\nupload(data)\n\n\n\n\nUpload list of document dictionaries to Crimson Hexagon platform.\n\n\nIf greater than 1000 items passed, reverts to batch upload.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries  to upload.\n\n\n\n\nbatch_upload\n\n\nbatch_upload(data)\n\n\n\n\nBatch upload list of document dictionaries to Crimson Hexagon platform.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries to upload in batches of 1000.",
+            "text": "Upload API\n\n\nClass for working with Content Upload API.\n\n\nYou may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you. \nReference\n\n\nExample Usage\n\n\n>>> from hexpy import CrimsonAuthorization, ContentUploadAPI\n>>> auth = CrimsonAuthorization.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(auth)\n>>> items = [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n>>> upload_client.upload(items)\n\n\n\n\nMethods\n\n\nupload\n\n\nupload(data)\n\n\n\n\nUpload list of document dictionaries to Crimson Hexagon platform.\n\n\nIf greater than 1000 items passed, reverts to batch upload.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries  to upload.\n\n\n\n\nbatch_upload\n\n\nbatch_upload(data)\n\n\n\n\nBatch upload list of document dictionaries to Crimson Hexagon platform.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries to upload in batches of 1000.",
             "title": "Upload"
         },
         {
-            "location": "/Upload/#upload",
+            "location": "/Upload/#upload-api",
             "text": "",
-            "title": "Upload"
+            "title": "Upload API"
         },
         {
             "location": "/Upload/#class-for-working-with-content-upload-api",
@@ -576,7 +576,7 @@
             "title": "Methods"
         },
         {
-            "location": "/Upload/#upload_1",
+            "location": "/Upload/#upload",
             "text": "upload(data)  Upload list of document dictionaries to Crimson Hexagon platform.  If greater than 1000 items passed, reverts to batch upload.",
             "title": "upload"
         },
