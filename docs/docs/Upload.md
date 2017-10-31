@@ -1,4 +1,4 @@
-Upload
+Upload API
 =========
 
 ### Class for working with Content Upload API.
