@@ -1,4 +1,4 @@
-Timestamp
+Upload
 =========
 
 ### Class for working with Content Upload API.
