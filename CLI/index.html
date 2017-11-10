@@ -188,8 +188,8 @@ Enter password: ***********
 <pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 </code></pre>
 
-<p>Get volume information for the monitor and get count for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
-<pre><code class="bash">$ hexpy results 5437021987 volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
+<p>Get CSV data with volume information for the monitor for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 &quot;2017-01-04T00:00:00&quot;,74
 &quot;2017-01-05T00:00:00&quot;,101
 &quot;2017-01-06T00:00:00&quot;,67
@@ -207,8 +207,8 @@ Enter password: ***********
 <pre><code class="bash">$ hexpy export MONITOR_ID --file_type excel --output my_export
 </code></pre>
 
-<p>Export posts for multiple monitors in parallel from a file containing a list of monitor ids</p>
-<pre><code class="bash">cat ids.txt | xargs -n 1 -P 4 hexpy export
+<p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids</p>
+<pre><code class="bash">cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
 </code></pre>
               
             </div>
