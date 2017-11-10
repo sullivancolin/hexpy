@@ -11,8 +11,8 @@ class StreamsAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import CrimsonAuthorization, StreamsAPI
-    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> from hexpy import HexpyAuthorization, StreamsAPI
+    >>> auth = HexpyAuthorization.load_auth_from_file()
     >>> streams_client = StreamsAPI(auth)
     >>> streams_client.stream_list(team_id)
     ```

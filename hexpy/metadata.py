@@ -11,8 +11,8 @@ class MetadataAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import CrimsonAuthorization, MetadataAPI
-    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> from hexpy import HexpyAuthorization, MetadataAPI
+    >>> auth = HexpyAuthorization.load_auth_from_file()
     >>> metadata_client = MetadataAPI(auth)
     >>> metadata_client.team_list()
     ```

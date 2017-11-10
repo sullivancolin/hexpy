@@ -5,23 +5,23 @@ Authorization
 
 Instantiate using token, or username. Optionally include password, or enter it at the prompt.
 ```python
->>> from hexpy import CrimsonAuthorization
->>> auth = CrimsonAuthorization(username="username@gmail.com", password="secretpassword")
+>>> from hexpy import HexpyAuthorization
+>>> auth = HexpyAuthorization(username="username@gmail.com", password="secretpassword")
 >>> auth.save_token()
 ```
 or
 ```python
->>> auth = CrimsonAuthorization(username="username@email.com")
+>>> auth = HexpyAuthorization(username="username@email.com")
 Enter password: *********
 >>> auth.save_token()
 ```
 or
 ```python
->>> auth = CrimsonAuthorization(token="previously_saved_token")
+>>> auth = HexpyAuthorization(token="previously_saved_token")
 ```
 Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
 ```python
->>> auth = CrimsonAuthorization.load_auth_from_file()
+>>> auth = HexpyAuthorization.load_auth_from_file()
 ```
 
 ## Methods

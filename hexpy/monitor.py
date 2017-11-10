@@ -12,8 +12,8 @@ class MonitorAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import CrimsonAuthorization, MonitorAPI
-    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> from hexpy import HexpyAuthorization, MonitorAPI
+    >>> auth = HexpyAuthorization.load_auth_from_file()
     >>> monitor_client = MonitorAPI(auth)
     >>> details = monitor_client.details(monitor_id)
     >>> start = details["resultsStart"]
@@ -73,7 +73,6 @@ class MonitorAPI(object):
                 self._aggregate_metrics(monitor_id, dates, metrics)
             }]
 
-    # @Halo(text='Getting Aggregate Metrics...')
     def aggregate(self, monitor_ids, dates, metrics):
         """Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
 

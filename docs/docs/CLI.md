@@ -57,19 +57,17 @@ $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 
 Get volume information for the monitor and get count for each day using [jq](https://stedolan.github.io/jq/)
 ```bash
-$ hexpy results MONITOR_ID volume | jq -c -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments]'
-["2017-01-04T00:00:00",74]
-["2017-01-05T00:00:00",101]
-["2017-01-06T00:00:00",67]
-["2017-01-07T00:00:00",58]
-["2017-01-08T00:00:00",64]
-["2017-01-09T00:00:00",72]
-["2017-01-10T00:00:00",92]
-["2017-01-11T00:00:00",72]
-["2017-01-12T00:00:00",133]
-["2017-01-13T00:00:00",67]
-["2017-01-14T00:00:00",68]
-["2017-01-15T00:00:00",72]
+$ hexpy results 5437021987 volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
+"2017-01-04T00:00:00",74
+"2017-01-05T00:00:00",101
+"2017-01-06T00:00:00",67
+"2017-01-07T00:00:00",58
+"2017-01-08T00:00:00",64
+"2017-01-09T00:00:00",72
+"2017-01-10T00:00:00",92
+"2017-01-11T00:00:00",72
+"2017-01-12T00:00:00",133
+"2017-01-13T00:00:00",67
 ...
 ```
 

@@ -9,7 +9,7 @@ import click
 from halo import Halo
 from getpass import getpass
 from clint.textui import progress
-from .auth import CrimsonAuthorization
+from .auth import HexpyAuthorization
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
@@ -36,15 +36,14 @@ def login(force, expiration):
     """Get valid authorization from user."""
     try:
         if not force:
-            auth = CrimsonAuthorization.load_auth_from_file()
+            auth = HexpyAuthorization.load_auth_from_file()
             return auth
         else:
             raise IOError
     except IOError:
         username = input('Enter username: ')
         password = getpass(prompt='Enter password: ')
-        auth = CrimsonAuthorization(
-            username, password, no_expiration=expiration)
+        auth = HexpyAuthorization(username, password, no_expiration=expiration)
         auth.save_token()
         spinner = Halo(text='Success!', spinner='dots')
         spinner.succeed()
@@ -249,9 +248,9 @@ def query(ctx, query_file):
     response = client.analysis_request(query_json)
     if response["status"] == "WAITING":
         request_id = response["resultId"]
-        with Halo(text="Wating for Analysis to finish."):
-            results = client.results(request_id)
-            time.sleep(20)
+        results = client.results(request_id)
+        while results["status"] == "WAITING":
+            time.sleep(10)
             results = client.results(request_id)
     else:
         results = response

@@ -19,8 +19,8 @@ class ContentUploadAPI(object):
     # Example Usage
 
     ```python
-    >>> from hexpy import CrimsonAuthorization, ContentUploadAPI
-    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> from hexpy import HexpyAuthorization, ContentUploadAPI
+    >>> auth = HexpyAuthorization.load_auth_from_file()
     >>> upload_client = ContentUploadAPI(auth)
     >>> items = [
         {

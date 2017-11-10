@@ -6,8 +6,8 @@ Monitor API
 ## Example usage.
 
 ```python
->>> from hexpy import CrimsonAuthorization, MonitorAPI
->>> auth = CrimsonAuthorization.load_auth_from_file()
+>>> from hexpy import HexpyAuthorization, MonitorAPI
+>>> auth = HexpyAuthorization.load_auth_from_file()
 >>> monitor_client = MonitorAPI(auth)
 >>> details = monitor_client.details(monitor_id)
 >>> start = details["resultsStart"]

@@ -3,7 +3,7 @@
 
 __version__ = '0.1.0'
 
-from .auth import CrimsonAuthorization
+from .auth import HexpyAuthorization
 from .monitor import MonitorAPI
 from .timestamp import Timestamp
 from .metadata import MetadataAPI

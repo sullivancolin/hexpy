@@ -30,8 +30,8 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
 ## Example Usage
 
 ```python
->>> from hexpy import CrimsonAuthorization, MonitorAPI
->>> auth = CrimsonAuthorization(username="user@email.com", password="crimson_login")
+>>> from hexpy import HexpyAuthorization, MonitorAPI
+>>> auth = HexpyAuthorization(username="user@email.com", password="crimson_login")
 >>> monitor_results_client=MonitorAPI(auth)
 >>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,

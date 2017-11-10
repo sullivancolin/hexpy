@@ -11,8 +11,8 @@ class AnalysisAPI(object):
     # Example Usage
 
     ```python
-    >>> from hexpy import CrimsonAuthorization, AnalysisAPI
-    >>> auth = CrimsonAuthorization.load_auth_from_file()
+    >>> from hexpy import HexpyAuthorization, AnalysisAPI
+    >>> auth = HexpyAuthorization.load_auth_from_file()
     >>> analysis_client = AnalysisAPI(auth)
     >>> analysis_client.results(request_id)
     ```
