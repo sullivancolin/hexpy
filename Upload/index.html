@@ -147,8 +147,8 @@ In the past, users have uploaded survey responses, proprietary content,
 and other types of data not available in the Crimson Hexagon data library.
 To use this endpoint, please contact support and they will create a new custom content type for you. <a href="https://apidocs.crimsonhexagon.com/reference#content-upload-1">Reference</a></p>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, ContentUploadAPI
-&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization, ContentUploadAPI
+&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
 &gt;&gt;&gt; upload_client = ContentUploadAPI(auth)
 &gt;&gt;&gt; items = [
     {

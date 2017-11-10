@@ -153,8 +153,8 @@
                 <h1 id="monitor-api">Monitor API</h1>
 <h2 id="class-for-working-with-crimson-hexagon-monitor-api">Class for working with Crimson Hexagon Monitor API.</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import CrimsonAuthorization, MonitorAPI
-&gt;&gt;&gt; auth = CrimsonAuthorization.load_auth_from_file()
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization, MonitorAPI
+&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
 &gt;&gt;&gt; monitor_client = MonitorAPI(auth)
 &gt;&gt;&gt; details = monitor_client.details(monitor_id)
 &gt;&gt;&gt; start = details[&quot;resultsStart&quot;]
