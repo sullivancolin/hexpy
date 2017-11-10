@@ -55,9 +55,9 @@ Get word cloud and volume information from the monitor in the specified date ran
 $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 ```
 
-Get volume information for the monitor and get count for each day using [jq](https://stedolan.github.io/jq/)
+Get CSV data with volume information for the monitor for each day using [jq](https://stedolan.github.io/jq/)
 ```bash
-$ hexpy results 5437021987 volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
+$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 "2017-01-04T00:00:00",74
 "2017-01-05T00:00:00",101
 "2017-01-06T00:00:00",67
@@ -76,7 +76,7 @@ Export Monitor posts to excel file called `my_export.xlsx`
 $ hexpy export MONITOR_ID --file_type excel --output my_export
 ```
 
-Export posts for multiple monitors in parallel from a file containing a list of monitor ids
+Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids
 ```bash
-cat ids.txt | xargs -n 1 -P 4 hexpy export
+cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
 ```

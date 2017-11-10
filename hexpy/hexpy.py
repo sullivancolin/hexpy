@@ -241,7 +241,7 @@ def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
 @click.argument('query_file')
 @click.pass_context
 def query(ctx, query_file):
-    """Submit a query task against 24 hours of social data."""
+    """Submit a query task on 24 hours of data."""
     auth = ctx.invoke(login, expiration=True, force=False)
     client = AnalysisAPI(auth)
     query_json = json.load(open(query_file))
