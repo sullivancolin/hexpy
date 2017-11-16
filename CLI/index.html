@@ -148,7 +148,8 @@
 <ul>
 <li>Export sample of monitor posts to a spreadsheet.</li>
 <li>Easily upload a spreadsheet as custom content for analysis in ForSight.</li>
-<li>Quickly get multiple metrics from monitor results as JSON. (Works well with <a href="https://stedolan.github.io/jq/">jq</a>)</li>
+<li>Quickly get multiple metrics from monitor results as JSON. </li>
+<li>Compose powerful shell scripts with pipe-able commands such as <a href="https://stedolan.github.io/jq/">jq</a>, and <code>xargs</code>.</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <!-- To install the most recent stable release run <code>pip install hexpy</code>. -->
@@ -160,7 +161,7 @@ $ pip install hexpy/[cli]
 
 <h2 id="usage">Usage</h2>
 <h3 id="basic">Basic</h3>
-<pre><code>$ hexpy [OPTIONS] COMMAND [ARGS]...
+<pre><code class="bash">$ hexpy [OPTIONS] COMMAND [ARGS]...
 </code></pre>
 
 <h3 id="commands">Commands</h3>
@@ -180,11 +181,11 @@ Enter password: ***********
 ✔ Success!
 </code></pre>
 
-<p>Upload CSV file as <code>my_custom_types</code> with English language code and column delimiter is tab</p>
+<p>Upload CSV file as <code>my_custom_types</code> with English language code and tab delimted columns.</p>
 <pre><code class="bash">$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
 </code></pre>
 
-<p>Get word cloud and volume information from the monitor in the specified date range</p>
+<p>Get word cloud and volume information from the monitor in the specified date range.</p>
 <pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 </code></pre>
 
