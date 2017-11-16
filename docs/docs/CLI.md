@@ -7,7 +7,8 @@ Hexpy Command Line Interface
 
 * Export sample of monitor posts to a spreadsheet.
 * Easily upload a spreadsheet as custom content for analysis in ForSight.
-* Quickly get multiple metrics from monitor results as JSON. (Works well with [jq](https://stedolan.github.io/jq/))
+* Quickly get multiple metrics from monitor results as JSON. 
+* Compose powerful shell scripts with pipe-able commands such as [jq](https://stedolan.github.io/jq/), and `xargs`.
 
 
 ## Installation
@@ -22,7 +23,7 @@ $ pip install hexpy/[cli]
 ## Usage
 
 ### Basic
-```
+```bash
 $ hexpy [OPTIONS] COMMAND [ARGS]...
 ```
 
@@ -45,12 +46,12 @@ Enter password: ***********
 ✔ Success!
 ```
 
-Upload CSV file as `my_custom_types` with English language code and column delimiter is tab
+Upload CSV file as `my_custom_types` with English language code and tab delimted columns.
 ```bash
 $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
 ```
 
-Get word cloud and volume information from the monitor in the specified date range
+Get word cloud and volume information from the monitor in the specified date range.
 ```bash
 $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 ```

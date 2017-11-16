@@ -1,5 +1,5 @@
 A Python Client for the Crimson Hexagon API
-===================
+===========================================
 
 **hexpy** is a simple python package for working with the Crimson Hexagon API
 
@@ -8,20 +8,16 @@ A Python Client for the Crimson Hexagon API
 * Easily and securely manage account authentication.
 * Automatically abides by Crimson Hexagon's rate limits.
 * Automatically converts python data to/from JSON strings.
-* Automatically check for request errors.
-* Easily create shell scripts to work with API data
+* Automatically check request success.
+* Easily create powerful shell scripts to work with API data.
 
 ## Installation
 <!-- To install the most recent stable release run `pip install hexpy`. -->
 
 To install the latest version:
 ```bash
-$ pip install git+git://github.com/sullivancolin/hexpy.git@master
-```
- or
-```bash
 $ git clone https://github.com/sullivancolin/hexpy.git
-$ pip install -e hexpy/
+$ pip install hexpy/
 ```
 
 ## Project Homepage
@@ -31,10 +27,10 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
 ## Example Usage
 
 ```python
->>> from hexpy import CrimsonAuthorization, MonitorAPI
->>> auth = CrimsonAuthorization(username="user@email.com", password="crimson_login")
+>>> from hexpy import HexpyAuthorization, MonitorAPI
+>>> auth = HexpyAuthorization(username="user@email.com", password="crimson_login")
 >>> monitor_results_client=MonitorAPI(auth)
->>> monitor.details(monitor_id)
+>>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
    'name': 'Basic Positive',

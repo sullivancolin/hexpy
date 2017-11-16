@@ -141,8 +141,8 @@ def upload(ctx, filename, content_type, delimiter, language):
     items.loc[:, "date"] = dates
 
     # Check for required fields
-    assert ({"contents", "date", "author", "language", "type",
-             "title"}.issubset(set(items.columns)))
+    assert ({"contents", "date", "author", "language", "type", "title",
+             "url"}.issubset(set(items.columns)))
 
     # Covert data to list of dictionaries
     data = items[[
