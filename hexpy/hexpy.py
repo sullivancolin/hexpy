@@ -81,7 +81,8 @@ def results(ctx, monitor_id, metrics, date_range):
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
     click.echo(
-        json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
+        json.dumps(
+            results[0]["results"][0], indent=4, ensure_ascii=False))
 
 
 @cli.command()
@@ -212,7 +213,7 @@ def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
                     record[key] = val.replace("\n", " ").replace("\r", " ")
                 else:
                     record[key] = val
-            elif key.endswith("Scores"):
+            elif key.endswith("Scores") and len(val) > 0:
                 category_name = key.split("Scores")[0]
                 category_max_index = np.argmax([x["score"] for x in val])
                 category = val[category_max_index][category_name + "Name"]
