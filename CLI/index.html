@@ -176,6 +176,7 @@ $ pip install hexpy/[cli]
 <li><strong>query</strong>   Request 24 analysis for provided query.</li>
 <li><strong>results</strong> Get Monitor results for 1 or more metrics.</li>
 <li><strong>upload</strong>  Upload spreadsheet file as custom content.</li>
+<li><strong>metadata</strong> Get Metadata for account team, monitors, and geography.</li>
 </ul>
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples</h2>
@@ -184,6 +185,10 @@ $ pip install hexpy/[cli]
 Enter username: username@email.com
 Enter password: ***********
 ✔ Success!
+</code></pre>
+
+<p>Get list of monitors for the users team</p>
+<pre><code class="bash">hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'
 </code></pre>
 
 <p>Upload CSV file as <code>my_custom_types</code> with English language code and tab delimted columns.</p>
