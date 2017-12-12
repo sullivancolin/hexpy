@@ -17,7 +17,7 @@ scripts_requirements = ["pandas>=0.20.3", "openpyxl>=2.4.8"]
 
 setup(
     name='hexpy',
-    version='0.1.0',
+    version='0.2.0',
     description="Python Client for Crimson Hexagon API",
     long_description_markdown_filename='README.md',
     author="Colin Sullivan",
