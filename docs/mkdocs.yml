@@ -10,5 +10,6 @@ pages:
     - Upload: Upload.md
     - Streams: Streams.md
     - Timestamp: Timestamp.md
+    - Custom: Custom.md
     - Command Line Interface: CLI.md
 theme: readthedocs

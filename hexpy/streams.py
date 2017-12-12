@@ -36,7 +36,7 @@ class StreamsAPI(object):
             count = 100
 
         return self.session.get(
-            self.TEMPLATE + "{stream_id}/posts".format(stream_id),
+            self.TEMPLATE + "{stream_id}/posts".format(stream_id=stream_id),
             params={
                 "count": count,
             })
