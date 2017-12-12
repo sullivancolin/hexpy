@@ -158,6 +158,15 @@ Enter password: *********
 
 <p>Create instance by loading token from file.  Default is <code>~/.hexpy/credentials.json</code></p>
 <pre><code class="python">&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
+
+
+Create instance with context manager to close TCP session automatically when finished
+```python
+&gt;&gt;&gt; with HexpyAuthorization.load_auth_from_file() as auth:
+...:     client = MonitorAPI(auth)
+...:     # use client to call API multiple times with same session
+
+&gt;&gt;&gt; # auth TCP session is closed until next call to API
 </code></pre>
 
 <h2 id="methods">Methods</h2>
