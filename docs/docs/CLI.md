@@ -33,6 +33,7 @@ $ hexpy [OPTIONS] COMMAND [ARGS]...
 * **query**   Request 24 analysis for provided query.
 * **results** Get Monitor results for 1 or more metrics.
 * **upload**  Upload spreadsheet file as custom content.
+* **metadata** Get Metadata for account team, monitors, and geography.
 
 See how each `hexpy` command works by running `hexpy COMMAND --help`
 
@@ -44,6 +45,11 @@ $ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
 ✔ Success!
+```
+
+Get list of monitors for the users team
+```bash
+hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'
 ```
 
 Upload CSV file as `my_custom_types` with English language code and tab delimted columns.

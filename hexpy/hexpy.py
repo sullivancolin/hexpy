@@ -13,6 +13,7 @@ from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
+from .metadata import MetadataAPI
 
 
 @click.group()
@@ -82,6 +83,44 @@ def results(ctx, monitor_id, metrics, date_range):
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
     click.echo(
         json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
+
+
+@cli.command()
+@click.option('--team_id', '-t', default=None, help='team id for monitor list')
+@click.option(
+    '--country', '-c', default=None, help='country code for city or state geo')
+@click.argument('info', type=str)
+@click.pass_context
+def metadata(ctx, info, team_id, country):
+    """Get Metadata for account team, monitors, and geography.
+
+    \b
+    Valid info
+        * team_list
+        * monitor_list
+        * geography
+        * states
+        * cities
+        * countries
+    """
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = MetadataAPI(session)
+    metadata = {
+        "team_list": client.team_list,
+        "monitor_list": client.monitor_list,
+        "geography": client.geography,
+        "states": client.states,
+        "cities": client.cities,
+        "countries": client.countries
+    }
+    if team_id:
+        return click.echo(
+            json.dumps(metadata[info](team_id=team_id), indent=4))
+    elif country:
+        return click.echo(
+            json.dumps(metadata[info](country=country), indent=4))
+    else:
+        return click.echo(json.dumps(metadata[info](), indent=4))
 
 
 @cli.command()
