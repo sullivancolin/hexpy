@@ -18,9 +18,9 @@ class ContentUploadAPI(object):
     # Example Usage
 
     ```python
-    >>> from hexpy import HexpyAuthorization, ContentUploadAPI
-    >>> auth = HexpyAuthorization.load_auth_from_file()
-    >>> upload_client = ContentUploadAPI(auth)
+    >>> from hexpy import HexpySession, ContentUploadAPI
+    >>> session = HexpySession.load_auth_from_file()
+    >>> upload_client = ContentUploadAPI(session)
     >>> items = [
         {
           "title": "Example Title",
@@ -36,14 +36,15 @@ class ContentUploadAPI(object):
         },
       ]
     >>> upload_client.upload(items)
+    >>> session.close()
     ```
     """
 
     TEMPLATE = ROOT + "content/upload"
 
-    def __init__(self, authorization):
+    def __init__(self, session):
         super(ContentUploadAPI, self).__init__()
-        self.session = authorization.session
+        self.session = session.session
 
     @response_handler
     def upload(self, data):

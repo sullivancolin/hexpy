@@ -10,18 +10,19 @@ class StreamsAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import HexpyAuthorization, StreamsAPI
-    >>> auth = HexpyAuthorization.load_auth_from_file()
-    >>> streams_client = StreamsAPI(auth)
+    >>> from hexpy import HexpySession, StreamsAPI
+    >>> session = HexpySession.load_auth_from_file()
+    >>> streams_client = StreamsAPI(session)
     >>> streams_client.stream_list(team_id)
+    >>> session.close()
     ```
     """
 
     TEMPLATE = ROOT + "stream/"
 
-    def __init__(self, authorization):
+    def __init__(self, session):
         super(StreamsAPI, self).__init__()
-        self.session = authorization.session
+        self.session = session.session
 
     @response_handler
     def posts(self, stream_id, count=100):

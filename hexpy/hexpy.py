@@ -9,7 +9,7 @@ import click
 from halo import Halo
 from getpass import getpass
 from clint.textui import progress
-from .auth import HexpyAuthorization
+from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
@@ -33,21 +33,21 @@ def cli():
     default=True,
     help='Get token valid for 24 hours, or with no expiration')
 def login(force, expiration):
-    """Get valid authorization from user."""
+    """Session login credentials."""
     try:
         if not force:
-            auth = HexpyAuthorization.load_auth_from_file()
-            return auth
+            session = HexpySession.load_auth_from_file()
+            return session
         else:
             raise IOError
     except IOError:
         username = input('Enter username: ')
         password = getpass(prompt='Enter password: ')
-        auth = HexpyAuthorization(username, password, no_expiration=expiration)
-        auth.save_token()
+        session = HexpySession(username, password, no_expiration=expiration)
+        session.save_token()
         spinner = Halo(text='Success!', spinner='dots')
         spinner.succeed()
-        return auth
+        return session
 
 
 @cli.command()
@@ -71,8 +71,8 @@ def results(ctx, monitor_id, metrics, date_range):
         * interest_affinities
         * sentiment_and_categories
     """
-    auth = ctx.invoke(login, expiration=True, force=False)
-    client = MonitorAPI(auth)
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = MonitorAPI(session)
     details = client.details(monitor_id)
     if date_range:
         results = client.aggregate(monitor_id, date_range, list(metrics))
@@ -81,8 +81,7 @@ def results(ctx, monitor_id, metrics, date_range):
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
     click.echo(
-        json.dumps(
-            results[0]["results"][0], indent=4, ensure_ascii=False))
+        json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
 
 
 @cli.command()
@@ -98,8 +97,8 @@ def results(ctx, monitor_id, metrics, date_range):
 @click.pass_context
 def upload(ctx, filename, content_type, delimiter, language):
     """Upload spreadsheet file as custom content."""
-    auth = ctx.invoke(login, expiration=True, force=False)
-    client = ContentUploadAPI(auth)
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = ContentUploadAPI(session)
     if filename.endswith(".csv"):
         items = pd.read_csv(filename, sep=delimiter)
     elif filename.endswith(".xlsx"):
@@ -190,8 +189,8 @@ def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
     """Save Monitor posts as spreadsheet."""
     if delimiter == "\\t":
         delimiter = '\t'
-    auth = ctx.invoke(login, expiration=True, force=False)
-    client = MonitorAPI(auth)
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = MonitorAPI(session)
     details = client.details(monitor_id)
     info = details["name"]
     if dates:
@@ -243,8 +242,8 @@ def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
 @click.pass_context
 def query(ctx, query_file):
     """Submit a query task on 24 hours of data."""
-    auth = ctx.invoke(login, expiration=True, force=False)
-    client = AnalysisAPI(auth)
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = AnalysisAPI(session)
     query_json = json.load(open(query_file))
     response = client.analysis_request(query_json)
     if response["status"] == "WAITING":

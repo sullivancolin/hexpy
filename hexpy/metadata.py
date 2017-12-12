@@ -10,18 +10,19 @@ class MetadataAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import HexpyAuthorization, MetadataAPI
-    >>> auth = HexpyAuthorization.load_auth_from_file()
-    >>> metadata_client = MetadataAPI(auth)
+    >>> from hexpy import HexpySession, MetadataAPI
+    >>> session = HexpySession.load_auth_from_file()
+    >>> metadata_client = MetadataAPI(session)
     >>> metadata_client.team_list()
+    >>> session.close()
     ```
     """
 
     TEMPLATE = ROOT
 
-    def __init__(self, authorization):
+    def __init__(self, session):
         super(MetadataAPI, self).__init__()
-        self.session = authorization.session
+        self.session = session.session
 
     @response_handler
     def team_list(self):

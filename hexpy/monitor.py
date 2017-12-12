@@ -11,21 +11,22 @@ class MonitorAPI(object):
     # Example usage.
 
     ```python
-    >>> from hexpy import HexpyAuthorization, MonitorAPI
-    >>> auth = HexpyAuthorization.load_auth_from_file()
-    >>> monitor_client = MonitorAPI(auth)
+    >>> from hexpy import HexpySession, MonitorAPI
+    >>> session = HexpySession.load_auth_from_file()
+    >>> monitor_client = MonitorAPI(session)
     >>> details = monitor_client.details(monitor_id)
     >>> start = details["resultsStart"]
     >>> end = details["resultsEnd"]
     >>> monitor_client.posts(monitor_id, start, end)
+    >>> session.close()
     ```
     """
 
     TEMPLATE = ROOT + "monitor/"
 
-    def __init__(self, authorization):
+    def __init__(self, session):
         super(MonitorAPI, self).__init__()
-        self.session = authorization.session
+        self.session = session.session
         self.METRICS = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,

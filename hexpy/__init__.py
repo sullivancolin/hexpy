@@ -3,7 +3,7 @@
 
 __version__ = '0.1.0'
 
-from .auth import HexpyAuthorization
+from .session import HexpySession
 from .monitor import MonitorAPI
 from .timestamp import Timestamp
 from .metadata import MetadataAPI

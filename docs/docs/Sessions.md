@@ -1,36 +1,36 @@
-Authorization
+Sessions
 =============
 
-## Generating a token for use with all API requests.
+## Creating a session and generating a token for API requests.
 
 Instantiate using token, or username. Optionally include password, or enter it at the prompt.
 ```python
->>> from hexpy import HexpyAuthorization
->>> auth = HexpyAuthorization(username="username@gmail.com", password="secretpassword")
->>> auth.save_token()
+>>> from hexpy import HexpySession
+>>> session = HexpySession(username="username@gmail.com", password="secretpassword")
+>>> session.save_token()
 ```
 or
 ```python
->>> auth = HexpyAuthorization(username="username@email.com")
+>>> session = HexpySession(username="username@email.com")
 Enter password: *********
->>> auth.save_token()
+>>> session.save_token()
 ```
 or
 ```python
->>> auth = HexpyAuthorization(token="previously_saved_token")
+>>> session = HexpySession(token="previously_saved_token")
 ```
 Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
 ```python
->>> auth = HexpyAuthorization.load_auth_from_file()
+>>> session = HexpySession.load_auth_from_file()
 
 
 Create instance with context manager to close TCP session automatically when finished
 ```python
->>> with HexpyAuthorization.load_auth_from_file() as auth:
-...:     client = MonitorAPI(auth)
+>>> with HexpySession.load_auth_from_file() as session:
+...:     client = MonitorAPI(session)
 ...:     # use client to call API multiple times with same session
 
->>> # auth TCP session is closed until next call to API
+>>> # session TCP connection is closed until next call to API
 ```
 
 ## Methods
@@ -63,3 +63,11 @@ load_auth_from_file(path=None)
 Instantiate class from previously saved credentials file.
 #### Arguments
 * path: String, path to store credentials. default is `~/.hexpy/credentials.json`
+
+### close
+
+```python
+close()
+```
+Close persisted connection to API server.
+

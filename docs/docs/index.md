@@ -27,9 +27,9 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
 ## Example Usage
 
 ```python
->>> from hexpy import HexpyAuthorization, MonitorAPI
->>> auth = HexpyAuthorization(username="user@email.com", password="crimson_login")
->>> monitor_results_client=MonitorAPI(auth)
+>>> from hexpy import HexpySession, MonitorAPI
+>>> session = HexpySession(username="user@email.com", password="crimson_login")
+>>> monitor_results_client=MonitorAPI(session)
 >>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
@@ -48,4 +48,6 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
    'name': 'Basic Negative',
    'sortOrder': 102,
    ...
+
+>>> session.close()
 ```

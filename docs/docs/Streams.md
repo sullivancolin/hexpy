@@ -6,10 +6,11 @@ Streams API
 ## Example usage.
 
 ```python
->>> from hexpy import HexpyAuthorization, StreamsAPI
->>> auth = HexpyAuthorization.load_auth_from_file()
->>> streams_client = StreamsAPI(auth)
+>>> from hexpy import HexpySession , StreamsAPI
+>>> session = HexpySession.load_auth_from_file()
+>>> streams_client = StreamsAPI(session)
 >>> streams_client.stream_list(team_id)
+>>> session.close()
 ```
 
 ## Methods

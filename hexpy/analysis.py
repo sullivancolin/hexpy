@@ -10,18 +10,19 @@ class AnalysisAPI(object):
     # Example Usage
 
     ```python
-    >>> from hexpy import HexpyAuthorization, AnalysisAPI
-    >>> auth = HexpyAuthorization.load_auth_from_file()
-    >>> analysis_client = AnalysisAPI(auth)
+    >>> from hexpy import HexpySession, AnalysisAPI
+    >>> session = HexpySession.load_auth_from_file()
+    >>> analysis_client = AnalysisAPI(session)
     >>> analysis_client.results(request_id)
+    >>> session.close()
     ```
     """
 
     TEMPLATE = ROOT + "results/"
 
-    def __init__(self, authorization):
+    def __init__(self, session):
         super(AnalysisAPI, self).__init__()
-        self.session = authorization.session
+        self.session = session.session
 
     @response_handler
     def analysis_request(self, data):

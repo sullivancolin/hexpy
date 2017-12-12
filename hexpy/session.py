@@ -8,7 +8,7 @@ from getpass import getpass
 from .base import ROOT, response_handler
 
 
-class HexpyAuthorization(object):
+class HexpySession(object):
     """Class for generating a token for use with all API requests.
 
     # Example Usage
@@ -16,34 +16,33 @@ class HexpyAuthorization(object):
     Instantiate with token, or username. Optionally include password, or enter it at the prompt.
 
     ```python
-    >>> from hexpy import HexpyAuthorization
-    >>> auth = HexpyAuthorization(username="username@gmail.com", password="secretpassword")
-    >>> auth.save_token()
+    >>> from hexpy import HexpySession
+    >>> session = HexpySession(username="username@gmail.com", password="secretpassword")
+    >>> session.save_token()
     ```
     or
     ```python
-    >>> auth = HexpyAuthorization(username="username@email.com")
+    >>> session = HexpySession(username="username@email.com")
     Enter password: *********
-    >>> auth.save_token()
+    >>> session.save_token()
     ```
     or
     ```python
-    >>> auth = HexpyAuthorization(token="previously_saved_token")
+    >>> session = HexpySession(token="previously_saved_token")
     ```
     Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
     ```python
-    >>> auth = HexpyAuthorization.load_auth_from_file()
+    >>> session = HexpySession.load_auth_from_file()
     ```
 
     Create instance with context manager to close TCP session automatically when finished
     ```python
-    >>> with HexpyAuthorization.load_auth_from_file() as auth:
-    ...:     client = MonitorAPI(auth)
+    >>> with HexpySession.load_auth_from_file() as session:
+    ...:     client = MonitorAPI(session)
     ...:     # use client to call API multiple times with same session
 
-    >>> # auth TCP session is closed until next call to API
+    >>> # session TCP connection is closed until next call to API
     ```
-
     """
 
     CREDS_FILE = os.path.join(
@@ -54,7 +53,7 @@ class HexpyAuthorization(object):
                  password=None,
                  token=None,
                  no_expiration=False):
-        super(HexpyAuthorization, self).__init__()
+        super(HexpySession, self).__init__()
         if not any([username, password, token]):
             raise ValueError(
                 "No credentials given. Please provide valid token or username and password"
@@ -129,7 +128,7 @@ class HexpyAuthorization(object):
         return self
 
     def __enter__(self):
-        """Use HexpyAuthorization with Context Manager."""
+        """Use HexpySession with Context Manager."""
         return self
 
     def __exit__(self, *args):

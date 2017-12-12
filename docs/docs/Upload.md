@@ -11,9 +11,9 @@ To use this endpoint, please contact support and they will create a new custom c
 ## Example Usage
 
 ```python
->>> from hexpy import HexpyAuthorization, ContentUploadAPI
->>> auth = HexpyAuthorization.load_auth_from_file()
->>> upload_client = ContentUploadAPI(auth)
+>>> from hexpy import HexpySession, ContentUploadAPI
+>>> session = HexpySession.load_auth_from_file()
+>>> upload_client = ContentUploadAPI(session)
 >>> items = [
     {
       "title": "Example Title",
@@ -29,6 +29,7 @@ To use this endpoint, please contact support and they will create a new custom c
     },
   ]
 >>> upload_client.upload(items)
+>>> session.close()
 ```
 ## Methods
 
