@@ -67,6 +67,14 @@
 
     
     <url>
+     <loc>/Custom/</loc>
+     <lastmod>2017-12-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/CLI/</loc>
      <lastmod>2017-12-12</lastmod>
      <changefreq>daily</changefreq>
