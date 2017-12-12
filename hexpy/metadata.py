@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for API Metadata"""
 
-import requests
 from .base import ROOT, response_handler
 
 
@@ -22,14 +21,12 @@ class MetadataAPI(object):
 
     def __init__(self, authorization):
         super(MetadataAPI, self).__init__()
-        self.authorization = authorization
+        self.session = authorization.session
 
     @response_handler
     def team_list(self):
         """Return a list of teams accessible to the requesting user."""
-        return requests.get(
-            self.TEMPLATE + "team/list",
-            params={"auth": self.authorization.token})
+        return self.session.get(self.TEMPLATE + "team/list")
 
     @response_handler
     def monitor_list(self, team_id):
@@ -39,19 +36,15 @@ class MetadataAPI(object):
         # Arguments
             team_id: integer id number for a team
         """
-        return requests.get(
-            self.TEMPLATE + "monitor/list",
-            params={"auth": self.authorization.token,
-                    "team": team_id})
+        return self.session.get(
+            self.TEMPLATE + "monitor/list", params={"team": team_id})
 
     @response_handler
     def geography(self):
         """Return all the geographical locations that you may use to
         filter monitor results and to upload documents with location information.
         """
-        return requests.get(
-            self.TEMPLATE + "geography/info/all",
-            params={"auth": self.authorization.token})
+        return self.session.get(self.TEMPLATE + "geography/info/all")
 
     @response_handler
     def states(self, country):
@@ -61,10 +54,9 @@ class MetadataAPI(object):
         # Arguments
             country: country code to filter states
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "geography/info/states",
-            params={"auth": self.authorization.token,
-                    "country": country})
+            params={"country": country})
 
     @response_handler
     def cities(self, country):
@@ -74,16 +66,13 @@ class MetadataAPI(object):
         # Arguments
             country: country: country code  to filter states
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "geography/info/cities",
-            params={"auth": self.authorization.token,
-                    "country": country})
+            params={"country": country})
 
     @response_handler
     def countries(self):
         """Returns all the countries that you may use to filter monitor results
         and to upload documents with location information.
         """
-        return requests.get(
-            self.TEMPLATE + "geography/info/countries",
-            params={"auth": self.authorization.token})
+        return self.session.get(self.TEMPLATE + "geography/info/countries")

@@ -34,6 +34,16 @@ class HexpyAuthorization(object):
     ```python
     >>> auth = HexpyAuthorization.load_auth_from_file()
     ```
+
+    Create instance with context manager to close TCP session automatically when finished
+    ```python
+    >>> with HexpyAuthorization.load_auth_from_file() as auth:
+    ...:     client = MonitorAPI(auth)
+    ...:     # use client to call API multiple times with same session
+
+    >>> # auth TCP session is closed until next call to API
+    ```
+
     """
 
     CREDS_FILE = os.path.join(
@@ -51,17 +61,19 @@ class HexpyAuthorization(object):
             )
         else:
             if not token:
-
                 if username and not password:
                     password = getpass(prompt='Enter password: ')
                 elif password and not username:
                     raise ValueError("Missing username.")
-
                 self.auth = self.get_token(username, password, no_expiration)
                 self.token = self.auth["auth"]
+                self.session = requests.Session()
+                self.session.params = {"auth": self.token}
             else:
                 # TODO Test of validity of provided token
                 self.token = token
+                self.session = requests.Session()
+                self.session.params = {"auth": self.token}
 
     @response_handler
     def get_token(self, username, password, no_expiration=False):
@@ -110,3 +122,16 @@ class HexpyAuthorization(object):
             raise IOError(
                 "Credentials File not found. Please specify token or username and password."
             )
+
+    def close(self):
+        """Close persisted connection to API server."""
+        self.session.close()
+        return self
+
+    def __enter__(self):
+        """Use HexpyAuthorization with Context Manager."""
+        return self
+
+    def __exit__(self, *args):
+        """Exit Context Manager and close session."""
+        self.close()

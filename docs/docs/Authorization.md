@@ -22,6 +22,15 @@ or
 Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
 ```python
 >>> auth = HexpyAuthorization.load_auth_from_file()
+
+
+Create instance with context manager to close TCP session automatically when finished
+```python
+>>> with HexpyAuthorization.load_auth_from_file() as auth:
+...:     client = MonitorAPI(auth)
+...:     # use client to call API multiple times with same session
+
+>>> # auth TCP session is closed until next call to API
 ```
 
 ## Methods

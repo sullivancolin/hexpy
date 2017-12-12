@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for monitor results API"""
 
-import requests
 from halo import Halo
 from .base import ROOT, response_handler
 
@@ -26,7 +25,7 @@ class MonitorAPI(object):
 
     def __init__(self, authorization):
         super(MonitorAPI, self).__init__()
-        self.authorization = authorization
+        self.session = authorization.session
         self.METRICS = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,
@@ -115,10 +114,8 @@ class MonitorAPI(object):
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return requests.get(
-            self.TEMPLATE + "detail",
-            params={"auth": self.authorization.token,
-                    "id": monitor_id})
+        return self.session.get(
+            self.TEMPLATE + "detail", params={"id": monitor_id})
 
     @response_handler
     def audit(self, monitor_id):
@@ -127,10 +124,8 @@ class MonitorAPI(object):
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return requests.get(
-            self.TEMPLATE + "audit",
-            params={"auth": self.authorization.token,
-                    "id": monitor_id})
+        return self.session.get(
+            self.TEMPLATE + "audit", params={"id": monitor_id})
 
     @response_handler
     def word_cloud(self, monitor_id, start, end, filter_string=None):
@@ -144,10 +139,9 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "wordcloud",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -166,13 +160,10 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category: Integer, category id to target training posts from a specific category
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "trainingposts",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "category": category
-            })
+            params={"id": monitor_id,
+                    "category": category})
 
     @response_handler
     def train_monitor(self, monitor_id, category_id, data):
@@ -188,14 +179,13 @@ class MonitorAPI(object):
             category_id: Integer, the category this content should belong to
             data: Dictionary, document item with required fields
         """
-        return requests.post(
+        return self.session.post(
             self.TEMPLATE + "train",
             json={
                 "monitorID": monitor_id,
                 "categoryID": category_id,
                 "document": data
-            },
-            params={"auth": self.authorization.token})
+            })
 
     @response_handler
     def interest_affinities(self,
@@ -213,10 +203,9 @@ class MonitorAPI(object):
             daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range
             document_source: String, document source for affinities. valid params include `TWITTER` or `TUMBLR`
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "interestaffinities",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -233,14 +222,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "sources",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def image_analysis(self, monitor_id, start, end, object_type="", top=100):
@@ -253,10 +239,9 @@ class MonitorAPI(object):
             object_type: String, specifies type of image classes, valid values [object, scene, action, logo]
             top : Integer, if defined, only the selected number of classes will be returned
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "imageresults",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -280,10 +265,9 @@ class MonitorAPI(object):
             aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day
             use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "dayandtime",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -306,10 +290,9 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "results",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -325,8 +308,7 @@ class MonitorAPI(object):
               extend_limit=False,
               full_contents=False,
               geotagged=False):
-        """Return post-level information (where available)
-        and associated analysis (sentiment, emotion) for a given monitor.
+        """Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
@@ -337,10 +319,9 @@ class MonitorAPI(object):
             full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
             geotagged: Boolean, if True, returns only geotagged documents matching the given filter
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "posts",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -365,14 +346,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "demographics/age",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def ethnicity(self, monitor_id, start, end):
@@ -383,14 +361,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "demographics/ethnicity",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def gender(self, monitor_id, start, end):
@@ -401,14 +376,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "demographics/gender",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     #################################################################################
     # Geography                                                                     #
@@ -426,10 +398,9 @@ class MonitorAPI(object):
             country: String, country code to filter cities
 
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "geography/cities",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -446,10 +417,9 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             country: String, country code to filter states
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "geography/states",
             params={
-                "auth": self.authorization.token,
                 "id": monitor_id,
                 "start": start,
                 "end": end,
@@ -465,14 +435,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "geography/countries",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     #################################################################################
     # Twitter                                                                       #
@@ -489,14 +456,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "authors",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def twitter_metrics(self, monitor_id, start, end):
@@ -507,14 +471,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "twittermetrics",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def twitter_followers(self, monitor_id, start, end):
@@ -526,14 +487,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "twittersocial/followers",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def twitter_sent_posts(self, monitor_id, start, end):
@@ -544,14 +502,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "twittersocial/sentposts",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def twitter_engagement(self, monitor_id, start, end):
@@ -562,14 +517,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "twittersocial/totalengagement",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     #################################################################################
     # Facebook                                                                      #
@@ -587,14 +539,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "facebook/adminposts",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def facebook_likes(self, monitor_id, start, end):
@@ -606,14 +555,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "facebook/pagelikes",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def facebook_activity(self, monitor_id, start, end):
@@ -624,14 +570,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "facebook/totalactivity",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     #################################################################################
     # Instagram                                                                     #
@@ -650,14 +593,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "instagram/hashtags",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def instagram_followers(self, monitor_id, start, end):
@@ -669,14 +609,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "instagram/followers",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def instagram_sent_media(self, monitor_id, start, end):
@@ -687,14 +624,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "instagram/sentmedia",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
 
     @response_handler
     def instagram_activity(self, monitor_id, start, end):
@@ -705,11 +639,8 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return requests.get(
+        return self.session.get(
             self.TEMPLATE + "instagram/totalactivity",
-            params={
-                "auth": self.authorization.token,
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})

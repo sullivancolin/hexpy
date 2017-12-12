@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for Realtime streams API."""
 
-import requests
 from .base import ROOT, response_handler
 
 
@@ -22,7 +21,7 @@ class StreamsAPI(object):
 
     def __init__(self, authorization):
         super(StreamsAPI, self).__init__()
-        self.authorization = authorization
+        self.session = authorization.session
 
     @response_handler
     def posts(self, stream_id, count=100):
@@ -32,7 +31,10 @@ class StreamsAPI(object):
             stream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint
             count: Integer, the count of posts to retrieve from the stream, max = 100
         """
-        return requests.get(
+        if count > 100:
+            count = 100
+
+        return self.session.get(
             self.TEMPLATE + "{stream_id}/posts".format(stream_id),
             params={
                 "count": count,
@@ -45,7 +47,5 @@ class StreamsAPI(object):
         # Arguments
             team_id: Integer the id of the team, available via the team list endpoint
         """
-        return requests.get(
-            self.TEMPLATE + "list/",
-            params={"auth": self.authorization.token,
-                    "teamid": team_id})
+        return self.session.get(
+            self.TEMPLATE + "list/", params={"teamid": team_id})

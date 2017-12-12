@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for uploading custom content"""
 
-import requests
 from clint.textui import progress
 from .base import ROOT, response_handler
 
@@ -44,7 +43,7 @@ class ContentUploadAPI(object):
 
     def __init__(self, authorization):
         super(ContentUploadAPI, self).__init__()
-        self.authorization = authorization
+        self.session = authorization.session
 
     @response_handler
     def upload(self, data):
@@ -55,11 +54,7 @@ class ContentUploadAPI(object):
             data: list of document dictionaries  to upload.
         """
         if len(data) <= 1000:
-
-            return requests.post(
-                self.TEMPLATE,
-                json={"items": data},
-                params={"auth": self.authorization.token})
+            return self.session.post(self.TEMPLATE, json={"items": data})
         else:
             print("More than 1000 items found.  Uploading in batches of 1000.")
             return self.batch_upload(data)

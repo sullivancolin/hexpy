@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Moduel for interacting with analysis API"""
 
-import requests
 from .base import ROOT, response_handler
 
 
@@ -22,7 +21,7 @@ class AnalysisAPI(object):
 
     def __init__(self, authorization):
         super(AnalysisAPI, self).__init__()
-        self.authorization = authorization
+        self.session = authorization.session
 
     @response_handler
     def analysis_request(self, data):
@@ -31,10 +30,7 @@ class AnalysisAPI(object):
         # Arguments
             data: Dictionary, query and filter parameters
         """
-        return requests.post(
-            self.TEMPLATE,
-            json=data,
-            params={"auth": self.authorization.token})
+        return self.session.post(self.TEMPLATE, json=data)
 
     @response_handler
     def results(self, request_id):
@@ -43,6 +39,5 @@ class AnalysisAPI(object):
         # Arguments
             request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints
         """
-        return requests.get(
-            self.TEMPLATE + "{request_id}".format(request_id=request_id),
-            params={"auth": self.authorization.token})
+        return self.session.get(self.TEMPLATE + "{request_id}".format(
+            request_id=request_id))
