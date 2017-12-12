@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Authorization - hexpy</title>
+  <title>Sessions - hexpy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Authorization";
-    var mkdocs_page_input_path = "Authorization.md";
-    var mkdocs_page_url = "/Authorization/";
+    var mkdocs_page_name = "Sessions";
+    var mkdocs_page_input_path = "Sessions.md";
+    var mkdocs_page_url = "/Sessions/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -54,14 +54,14 @@
           
             <li class="toctree-l1 current">
 		
-    <a class="current" href="./">Authorization</a>
+    <a class="current" href="./">Sessions</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#authorization">Authorization</a></li>
+    <li class="toctree-l2"><a href="#sessions">Sessions</a></li>
     
         <ul>
         
-            <li><a class="toctree-l3" href="#generating-a-token-for-use-with-all-api-requests">Generating a token for use with all API requests.</a></li>
+            <li><a class="toctree-l3" href="#creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</a></li>
         
             <li><a class="toctree-l3" href="#methods">Methods</a></li>
         
@@ -128,7 +128,7 @@
     
       
     
-    <li>Authorization</li>
+    <li>Sessions</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -138,35 +138,35 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="authorization">Authorization</h1>
-<h2 id="generating-a-token-for-use-with-all-api-requests">Generating a token for use with all API requests.</h2>
+                <h1 id="sessions">Sessions</h1>
+<h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</h2>
 <p>Instantiate using token, or username. Optionally include password, or enter it at the prompt.</p>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization
-&gt;&gt;&gt; auth = HexpyAuthorization(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
-&gt;&gt;&gt; auth.save_token()
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession
+&gt;&gt;&gt; session = HexpySession(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
+&gt;&gt;&gt; session.save_token()
 </code></pre>
 
 <p>or</p>
-<pre><code class="python">&gt;&gt;&gt; auth = HexpyAuthorization(username=&quot;username@email.com&quot;)
+<pre><code class="python">&gt;&gt;&gt; session = HexpySession(username=&quot;username@email.com&quot;)
 Enter password: *********
-&gt;&gt;&gt; auth.save_token()
+&gt;&gt;&gt; session.save_token()
 </code></pre>
 
 <p>or</p>
-<pre><code class="python">&gt;&gt;&gt; auth = HexpyAuthorization(token=&quot;previously_saved_token&quot;)
+<pre><code class="python">&gt;&gt;&gt; session = HexpySession(token=&quot;previously_saved_token&quot;)
 </code></pre>
 
 <p>Create instance by loading token from file.  Default is <code>~/.hexpy/credentials.json</code></p>
-<pre><code class="python">&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
+<pre><code class="python">&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
 
 
 Create instance with context manager to close TCP session automatically when finished
 ```python
-&gt;&gt;&gt; with HexpyAuthorization.load_auth_from_file() as auth:
-...:     client = MonitorAPI(auth)
+&gt;&gt;&gt; with HexpySession.load_auth_from_file() as session:
+...:     client = MonitorAPI(session)
 ...:     # use client to call API multiple times with same session
 
-&gt;&gt;&gt; # auth TCP session is closed until next call to API
+&gt;&gt;&gt; # session TCP connection is closed until next call to API
 </code></pre>
 
 <h2 id="methods">Methods</h2>
@@ -199,6 +199,11 @@ Create instance with context manager to close TCP session automatically when fin
 <ul>
 <li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
+<h3 id="close">close</h3>
+<pre><code class="python">close()
+</code></pre>
+
+<p>Close persisted connection to API server.</p>
               
             </div>
           </div>

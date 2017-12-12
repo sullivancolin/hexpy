@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Authorization/">Authorization</a>
+    <a class="" href="../Sessions/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -143,10 +143,11 @@
                 <h1 id="streams-api">Streams API</h1>
 <h2 id="class-for-working-with-realtime-streams-api">Class for working with Realtime Streams API.</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization, StreamsAPI
-&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
-&gt;&gt;&gt; streams_client = StreamsAPI(auth)
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession , StreamsAPI
+&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
+&gt;&gt;&gt; streams_client = StreamsAPI(session)
 &gt;&gt;&gt; streams_client.stream_list(team_id)
+&gt;&gt;&gt; session.close()
 </code></pre>
 
 <h2 id="methods">Methods</h2>

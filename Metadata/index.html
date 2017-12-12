@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Authorization/">Authorization</a>
+    <a class="" href="../Sessions/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -143,10 +143,11 @@
                 <h1 id="metadata-api">Metadata API</h1>
 <h2 id="class-for-working-with-crimson-hexagon-account-and-analysis-metadata">Class for working with Crimson Hexagon account and analysis metadata.</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization, MetadataAPI
-&gt;&gt;&gt; auth = HexpyAuthorization.load_auth_from_file()
-&gt;&gt;&gt; metadata_client = MetadataAPI(auth)
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, MetadataAPI
+&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
+&gt;&gt;&gt; metadata_client = MetadataAPI(session)
 &gt;&gt;&gt; metadata_client.team_list()
+&gt;&gt;&gt; session.close()
 </code></pre>
 
 <h2 id="methods">Methods</h2>
@@ -202,7 +203,7 @@
         <a href="../Monitor/" class="btn btn-neutral float-right" title="Monitor">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Authorization/" class="btn btn-neutral" title="Authorization"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Sessions/" class="btn btn-neutral" title="Sessions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -228,7 +229,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Authorization/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Sessions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../Monitor/" style="color: #fcfcfc">Next &raquo;</a></span>

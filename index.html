@@ -72,7 +72,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="Authorization/">Authorization</a>
+    <a class="" href="Sessions/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -163,9 +163,9 @@ $ pip install hexpy/
 <h2 id="project-homepage">Project Homepage</h2>
 <p>Visit <a href="https://github.com/sullivancolin/hexpy">Github</a> project page for full source code.</p>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpyAuthorization, MonitorAPI
-&gt;&gt;&gt; auth = HexpyAuthorization(username=&quot;user@email.com&quot;, password=&quot;crimson_login&quot;)
-&gt;&gt;&gt; monitor_results_client=MonitorAPI(auth)
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, MonitorAPI
+&gt;&gt;&gt; session = HexpySession(username=&quot;user@email.com&quot;, password=&quot;crimson_login&quot;)
+&gt;&gt;&gt; monitor_results_client=MonitorAPI(session)
 &gt;&gt;&gt; monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
@@ -184,6 +184,8 @@ $ pip install hexpy/
    'name': 'Basic Negative',
    'sortOrder': 102,
    ...
+
+&gt;&gt;&gt; session.close()
 </code></pre>
               
             </div>
@@ -192,7 +194,7 @@ $ pip install hexpy/
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Authorization/" class="btn btn-neutral float-right" title="Authorization">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="Sessions/" class="btn btn-neutral float-right" title="Sessions">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
     </div>
@@ -220,7 +222,7 @@ $ pip install hexpy/
       
       
       
-        <span style="margin-left: 15px"><a href="Authorization/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="Sessions/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
@@ -231,5 +233,5 @@ $ pip install hexpy/
 
 <!--
 MkDocs version : 0.16.3
-Build Date UTC : 2017-12-12 19:46:19
+Build Date UTC : 2017-12-12 20:46:20
 -->
