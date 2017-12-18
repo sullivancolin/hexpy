@@ -74,10 +74,10 @@ def results(ctx, monitor_id, metrics, date_range):
     """
     session = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(session)
-    details = client.details(monitor_id)
     if date_range:
         results = client.aggregate(monitor_id, date_range, list(metrics))
     else:
+        details = client.details(monitor_id)
         start = details["resultsStart"]
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
@@ -89,10 +89,11 @@ def results(ctx, monitor_id, metrics, date_range):
 @click.option('--team_id', '-t', default=None, help='team id for monitor list')
 @click.option(
     '--country', '-c', default=None, help='country code for city or state geo')
+@click.option('--monitor', '-m', default=None, help='monitor id for details')
 @click.argument('info', type=str)
 @click.pass_context
-def metadata(ctx, info, team_id, country):
-    """Get Metadata for account team, monitors, and geography.
+def metadata(ctx, info, team_id, country, monitor):
+    r"""Get Metadata for account team, monitors, and geography.
 
     \b
     Valid info
@@ -102,16 +103,19 @@ def metadata(ctx, info, team_id, country):
         * states
         * cities
         * countries
+        * details
     """
     session = ctx.invoke(login, expiration=True, force=False)
     client = MetadataAPI(session)
+    monitor_client = MonitorAPI(session)
     metadata = {
         "team_list": client.team_list,
         "monitor_list": client.monitor_list,
         "geography": client.geography,
         "states": client.states,
         "cities": client.cities,
-        "countries": client.countries
+        "countries": client.countries,
+        "details": monitor_client.details
     }
     if team_id:
         return click.echo(
@@ -119,6 +123,9 @@ def metadata(ctx, info, team_id, country):
     elif country:
         return click.echo(
             json.dumps(metadata[info](country=country), indent=4))
+    elif monitor:
+        return click.echo(
+            json.dumps(metadata[info](monitor_id=monitor), indent=4))
     else:
         return click.echo(json.dumps(metadata[info](), indent=4))
 
