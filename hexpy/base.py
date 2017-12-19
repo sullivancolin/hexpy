@@ -5,6 +5,7 @@ from halo import Halo
 from ratelimiter import RateLimiter
 import time
 import threading
+import collections
 
 ROOT = "https://api.crimsonhexagon.com/api/"
 
@@ -32,6 +33,7 @@ class SpinnerLimiter(RateLimiter):
                           format(round(sleeptime))):
                     if sleeptime > 0:
                         time.sleep(sleeptime)
+                        self.calls = collections.deque()
             return self
 
 
