@@ -14,6 +14,7 @@ from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
 from .metadata import MetadataAPI
+import pendulum
 
 
 @click.group()
@@ -44,7 +45,8 @@ def login(force, expiration):
     except IOError:
         username = input('Enter username: ')
         password = getpass(prompt='Enter password: ')
-        session = HexpySession(username, password, no_expiration=expiration)
+        session = HexpySession(
+            username, password, no_expiration=not expiration)
         session.save_token()
         spinner = Halo(text='Success!', spinner='dots')
         spinner.succeed()
@@ -150,13 +152,13 @@ def upload(ctx, filename, content_type, delimiter, language):
     elif filename.endswith(".xlsx"):
         items = pd.read_excel(filename)
     else:
-        raise ValueError("File type must be either .csv or .xlsx")
+        raise click.ClickException("File type must be either .csv or .xlsx")
 
     # Handle Content Types
     if content_type is not None:
         items["type"] = content_type
     elif "type" not in items.columns:
-        raise ValueError("missing custom content type")
+        raise click.ClickException("Missing custom content type")
 
     # Handle titles
     if "title" not in items.columns:
@@ -168,27 +170,30 @@ def upload(ctx, filename, content_type, delimiter, language):
 
     # Correctly format dates
     try:
-        dates = [
-            datetime.strptime(x, "%Y-%m-%dT%H:%M:%S").isoformat()
-            for x in items["date"]
-        ]
+        dates = [pendulum.parse(x).to_iso8601_string() for x in items["date"]]
     except:
-        try:
-            dates = [
-                datetime.strptime(x, "%Y-%m-%d").isoformat()
-                for x in items["date"]
-            ]
-        except:
-            raise ValueError(
-                """Could not parse date format.  Must be Year-Month-Day as in 2017-10-01.
-                Optionally include time as 2017-10-01T21:30:05
-                """)
+        raise click.ClickException(
+            """Could not parse date format.  Must be Year-Month-Day as in 2017-10-01.
+            Optionally include time as 2017-10-01T21:30:05
+            """)
 
     items.loc[:, "date"] = dates
 
     # Check for required fields
-    assert ({"contents", "date", "author", "language", "type", "title",
-             "url"}.issubset(set(items.columns)))
+    try:
+        assert ({
+            "contents", "date", "author", "language", "type", "title", "url"
+        }.issubset(set(items.columns)))
+    except AssertionError:
+        raise click.ClickException(
+            "1 or more missing fields.  Required fields: contents, date, author, language, type, title, url"
+        )
+
+    # Assert Unique Urls
+    try:
+        assert (len(items[items.url.duplicated()]) == 0)
+    except AssertionError:
+        raise click.ClickException("Duplicate URLs detected.")
 
     # Covert data to list of dictionaries
     data = items[[
@@ -200,7 +205,7 @@ def upload(ctx, filename, content_type, delimiter, language):
         pass
 
     response = client.upload(data=data)
-    print(response)
+    click.echo(json.dumps(response, indent=4))
     spinner = Halo(text='Success!', spinner='dots')
     spinner.succeed()
 

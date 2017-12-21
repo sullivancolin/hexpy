@@ -65,14 +65,13 @@ class HexpySession(object):
                 elif password and not username:
                     raise ValueError("Missing username.")
                 self.auth = self.get_token(username, password, no_expiration)
-                self.token = self.auth["auth"]
                 self.session = requests.Session()
-                self.session.params = {"auth": self.token}
+                self.session.params = {"auth": self.auth["auth"]}
             else:
                 # TODO Test of validity of provided token
-                self.token = token
+                self.auth = {"auth": token}
                 self.session = requests.Session()
-                self.session.params = {"auth": self.token}
+                self.session.params = self.auth
 
     @response_handler
     def get_token(self, username, password, no_expiration=False):
@@ -102,7 +101,7 @@ class HexpySession(object):
         if not os.path.exists(os.path.split(path)[0]):
             os.makedirs(os.path.split(path)[0])
         with open(path, "w") as outfile:
-            json.dump({"auth": self.token}, outfile, indent=4)
+            json.dump(self.auth, outfile, indent=4)
 
     @classmethod
     def load_auth_from_file(cls, path=None):

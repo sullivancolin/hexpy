@@ -13,7 +13,7 @@ setup_requirements = ['pytest-runner', 'setuptools-markdown']
 
 test_requirements = ['pytest']
 
-scripts_requirements = ["pandas>=0.20.3", "openpyxl>=2.4.8"]
+scripts_requirements = ["pandas>=0.20.3", "openpyxl>=2.4.8", "pendulum>=1.3.2"]
 
 setup(
     name='hexpy',

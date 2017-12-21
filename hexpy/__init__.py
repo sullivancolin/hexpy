@@ -5,7 +5,6 @@ __version__ = '0.2.0'
 
 from .session import HexpySession
 from .monitor import MonitorAPI
-from .timestamp import Timestamp
 from .metadata import MetadataAPI
 from .streams import StreamsAPI
 from .analysis import AnalysisAPI

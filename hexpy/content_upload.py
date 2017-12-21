@@ -66,7 +66,10 @@ class ContentUploadAPI(object):
         # Arguments
             data: list of document dictionaries to upload in batches of 1000.
         """
-        for batch in progress.bar(
-            [data[i:i + 1000] for i in range(0, len(data), 1000)]):
+        batch_responses = {}
+        for batch_num, batch in enumerate(
+                progress.bar(
+                    [data[i:i + 1000] for i in range(0, len(data), 1000)])):
             response = self.upload(batch)
-        return response
+            batch_responses["Batch number {}".format(batch_num)] = response
+        return batch_responses
