@@ -17,6 +17,7 @@ clean-pyc:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
+	rm -rf .mypy_cache/
 
 ## remove test and coverage artifacts
 clean-test:
@@ -27,7 +28,8 @@ clean-test:
 
 ## check style with flake8
 lint:
-	flake8 hexpy tests
+	flake8 hexpy tests +
+	mypy hexpy
 
 ## run tests quickly with the default Python
 test:
@@ -47,6 +49,10 @@ coverage:
 ## generate Mkdocs HTML documentation
 docs: docs-clean
 	cd docs/; mkdocs build
+
+## serve docss
+serve-docs: docs
+	cd docs/; mkdocs serve
 
 ## remove previously build docs
 docs-clean:
@@ -68,7 +74,7 @@ dist: clean
 
 ## install the package to the active Python's site-packages
 install: clean
-	python setup.py install
+	pip install .[cli]
 
 #################################################################################
 # Self Documenting Commands                                                     #

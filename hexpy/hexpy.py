@@ -15,6 +15,7 @@ from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
 from .metadata import MetadataAPI
 import pendulum
+from typing import Sequence
 
 
 @click.group()
@@ -34,7 +35,7 @@ def cli():
     '-e',
     default=True,
     help='Get token valid for 24 hours, or with no expiration')
-def login(force, expiration):
+def login(force: bool = False, expiration: bool = True) -> HexpySession:
     """Session login credentials."""
     try:
         if not force:
@@ -63,7 +64,10 @@ def login(force, expiration):
 @click.argument('monitor_id', type=int)
 @click.argument('metrics', nargs=-1)
 @click.pass_context
-def results(ctx, monitor_id, metrics, date_range):
+def results(ctx,
+            monitor_id: int,
+            metrics: Sequence[str],
+            date_range: Sequence[str] = None) -> None:
     """Get Monitor results for 1 or more metrics.
 
     \b
@@ -94,7 +98,11 @@ def results(ctx, monitor_id, metrics, date_range):
 @click.option('--monitor', '-m', default=None, help='monitor id for details')
 @click.argument('info', type=str)
 @click.pass_context
-def metadata(ctx, info, team_id, country, monitor):
+def metadata(ctx,
+             info: str,
+             team_id: int = None,
+             country: str = None,
+             monitor: int = None) -> None:
     r"""Get Metadata for account team, monitors, and geography.
 
     \b
@@ -143,7 +151,11 @@ def metadata(ctx, info, team_id, country, monitor):
 @click.option(
     '--language', '-l', default="en", help='language code of documents')
 @click.pass_context
-def upload(ctx, filename, content_type, delimiter, language):
+def upload(ctx,
+           filename: str,
+           content_type: str = None,
+           delimiter: str = ",",
+           language: str = "en") -> None:
     """Upload spreadsheet file as custom content."""
     session = ctx.invoke(login, expiration=True, force=False)
     client = ContentUploadAPI(session)
@@ -236,7 +248,13 @@ def upload(ctx, filename, content_type, delimiter, language):
     help='output filename. Default is monitor name.')
 @click.option('--delimiter', '-d', default=",", help='CSV column delimiter.')
 @click.pass_context
-def export(ctx, monitor_id, limit, dates, file_type, output, delimiter):
+def export(ctx,
+           monitor_id: int,
+           limit: bool = True,
+           dates: Sequence[str] = None,
+           file_type: str = "csv",
+           output: str = None,
+           delimiter: str = ",") -> None:
     """Save Monitor posts as spreadsheet."""
     if delimiter == "\\t":
         delimiter = '\t'
