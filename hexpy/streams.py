@@ -2,6 +2,8 @@
 """Module for Realtime streams API."""
 
 from .base import ROOT, response_handler
+from .session import HexpySession
+from requests.models import Response
 
 
 class StreamsAPI(object):
@@ -20,12 +22,12 @@ class StreamsAPI(object):
 
     TEMPLATE = ROOT + "stream/"
 
-    def __init__(self, session):
+    def __init__(self, session: HexpySession) -> None:
         super(StreamsAPI, self).__init__()
         self.session = session.session
 
     @response_handler
-    def posts(self, stream_id, count=100):
+    def posts(self, stream_id: int, count: int = 100) -> Response:
         """Return posts from a stream.
 
         # Arguments:
@@ -42,7 +44,7 @@ class StreamsAPI(object):
             })
 
     @response_handler
-    def stream_list(self, team_id):
+    def stream_list(self, team_id: int) -> Response:
         """List all available Realtime Streams for a team.
 
         # Arguments

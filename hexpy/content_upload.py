@@ -3,6 +3,9 @@
 
 from clint.textui import progress
 from .base import ROOT, response_handler
+from .session import HexpySession
+from requests.models import Response
+from typing import Dict, Any, Sequence, Union
 
 
 class ContentUploadAPI(object):
@@ -42,12 +45,13 @@ class ContentUploadAPI(object):
 
     TEMPLATE = ROOT + "content/upload"
 
-    def __init__(self, session):
+    def __init__(self, session: HexpySession) -> None:
         super(ContentUploadAPI, self).__init__()
         self.session = session.session
 
     @response_handler
-    def upload(self, data):
+    def upload(self, data: Sequence[Dict[str, Any]]
+               ) -> Union[Response, Dict[str, Any]]:
         """Upload list of document dictionaries to Crimson Hexagon platform.
 
         If greater than 1000 items passed, reverts to batch upload.
@@ -60,7 +64,7 @@ class ContentUploadAPI(object):
             print("More than 1000 items found.  Uploading in batches of 1000.")
             return self.batch_upload(data)
 
-    def batch_upload(self, data):
+    def batch_upload(self, data: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         """Batch upload list of document dictionaries to Crimson Hexagon platform.
 
         # Arguments

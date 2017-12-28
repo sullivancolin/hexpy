@@ -2,6 +2,7 @@
 """Module for handling API authorization"""
 
 import requests
+from requests.models import Response
 import os
 import json
 from getpass import getpass
@@ -49,10 +50,10 @@ class HexpySession(object):
         os.path.expanduser('~'), '.hexpy', 'credentials.json')
 
     def __init__(self,
-                 username=None,
-                 password=None,
-                 token=None,
-                 no_expiration=False):
+                 username: str = None,
+                 password: str = None,
+                 token: str = None,
+                 no_expiration: bool = False) -> None:
         super(HexpySession, self).__init__()
         if not any([username, password, token]):
             raise ValueError(
@@ -74,7 +75,10 @@ class HexpySession(object):
                 self.session.params = self.auth
 
     @response_handler
-    def get_token(self, username, password, no_expiration=False):
+    def get_token(self,
+                  username: str,
+                  password: str,
+                  no_expiration: bool = False) -> Response:
         """Request authorization token.
 
         # Arguments
@@ -82,7 +86,7 @@ class HexpySession(object):
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        return requests.get(
+        return requests.Session().get(
             ROOT + "authenticate",
             params={
                 "username": username,
@@ -90,7 +94,7 @@ class HexpySession(object):
                 "noExpiration": no_expiration,
             })
 
-    def save_token(self, path=None):
+    def save_token(self, path: str = None) -> None:
         """Save authorization token.
 
         # Arguments
@@ -104,7 +108,7 @@ class HexpySession(object):
             json.dump(self.auth, outfile, indent=4)
 
     @classmethod
-    def load_auth_from_file(cls, path=None):
+    def load_auth_from_file(cls, path: str = None):
         """Instantiate class from previously saved credentials file.
 
         # Arguments
@@ -124,7 +128,6 @@ class HexpySession(object):
     def close(self):
         """Close persisted connection to API server."""
         self.session.close()
-        return self
 
     def __enter__(self):
         """Use HexpySession with Context Manager."""

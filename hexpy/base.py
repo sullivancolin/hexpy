@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """global variables for the API URL and rate limiting."""
 import functools
+from typing import Callable
 from halo import Halo
 from ratelimiter import RateLimiter
 import time
@@ -37,7 +38,7 @@ class SpinnerLimiter(RateLimiter):
             return self
 
 
-def response_handler(f):
+def response_handler(f: Callable) -> Callable:
     """Ensure responses do not contain errors, and Rate Limit is obeyed."""
 
     @SpinnerLimiter(max_calls=MAX_CALLS, period=ONE_MINUTE)

@@ -2,6 +2,8 @@
 """Module for API Metadata"""
 
 from .base import ROOT, response_handler
+from .session import HexpySession
+from requests.models import Response
 
 
 class MetadataAPI(object):
@@ -20,17 +22,17 @@ class MetadataAPI(object):
 
     TEMPLATE = ROOT
 
-    def __init__(self, session):
+    def __init__(self, session: HexpySession) -> None:
         super(MetadataAPI, self).__init__()
         self.session = session.session
 
     @response_handler
-    def team_list(self):
+    def team_list(self) -> Response:
         """Return a list of teams accessible to the requesting user."""
         return self.session.get(self.TEMPLATE + "team/list")
 
     @response_handler
-    def monitor_list(self, team_id):
+    def monitor_list(self, team_id: int) -> Response:
         """Returns a list of monitors accessible to the requesting
         or selected user along with metadata related to those monitors.
 
@@ -41,14 +43,14 @@ class MetadataAPI(object):
             self.TEMPLATE + "monitor/list", params={"team": team_id})
 
     @response_handler
-    def geography(self):
+    def geography(self) -> Response:
         """Return all the geographical locations that you may use to
         filter monitor results and to upload documents with location information.
         """
         return self.session.get(self.TEMPLATE + "geography/info/all")
 
     @response_handler
-    def states(self, country):
+    def states(self, country: str) -> Response:
         """Return all the states for a given country that you may use to
         filter monitor results and to upload documents with location information.
 
@@ -60,7 +62,7 @@ class MetadataAPI(object):
             params={"country": country})
 
     @response_handler
-    def cities(self, country):
+    def cities(self, country: str) -> Response:
         """Returns all the cities or urban areas defined in the given country that you may use to
         filter monitor results and to upload documents with location information.
 
@@ -72,7 +74,7 @@ class MetadataAPI(object):
             params={"country": country})
 
     @response_handler
-    def countries(self):
+    def countries(self) -> Response:
         """Returns all the countries that you may use to filter monitor results
         and to upload documents with location information.
         """
