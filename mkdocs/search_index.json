@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "A Python Client for the Crimson Hexagon API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon's rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check request success.\n\n\nEasily create powerful shell scripts to work with API data.\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nProject Homepage\n\n\nVisit \nGithub\n project page for full source code.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(session)\n>>> monitor_results_client.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...\n\n>>> session.close()",
+            "text": "A Python Client for the Crimson Hexagon API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon's rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check request success.\n\n\nEasily create powerful shell scripts to work with API data.\n\n\n\n\nRequiremnts\n\n\nhexpy\n is compatible with Python 3.5 and higher\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nProject Homepage\n\n\nVisit \nGithub\n project page for full source code.\n\n\nQuick Start\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(session)\n>>> monitor_results_client.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...\n\n>>> session.close()",
             "title": "Home"
         },
         {
@@ -16,6 +16,11 @@
             "title": "Why use this client?"
         },
         {
+            "location": "/#requiremnts",
+            "text": "hexpy  is compatible with Python 3.5 and higher",
+            "title": "Requiremnts"
+        },
+        {
             "location": "/#installation",
             "text": "To install the latest version:  $ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/",
             "title": "Installation"
@@ -26,9 +31,9 @@
             "title": "Project Homepage"
         },
         {
-            "location": "/#example-usage",
+            "location": "/#quick-start",
             "text": ">>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(session)\n>>> monitor_results_client.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...\n\n>>> session.close()",
-            "title": "Example Usage"
+            "title": "Quick Start"
         },
         {
             "location": "/Sessions/",
@@ -643,46 +648,6 @@
         {
             "location": "/Streams/#arguments_1",
             "text": "team_id: Integer the id of the team, available via the team list endpoint",
-            "title": "Arguments"
-        },
-        {
-            "location": "/Timestamp/",
-            "text": "Timestamp\n\n\nClass for working with dates and times.\n\n\nExample Usage\n\n\n>>> from hexpy import Timestamp\n>>> stamp = Timestamp(2017, 9, 26)\n>>> stamp.to_string()\n'2017-09-29T00:00:00'\n\n\n\n\nMethods\n\n\nto_string\n\n\nto_string()\n\n\n\n\nConvert timestamp object to ISO format string.\n\n\nfrom_string\n\n\nfrom_string(timestamp)\n\n\n\n\nInstantiate Timestamp object from ISO format String.\n\n\nArguments\n\n\n\n\ntimestamp: String, isoformatted timestamp",
-            "title": "Timestamp"
-        },
-        {
-            "location": "/Timestamp/#timestamp",
-            "text": "",
-            "title": "Timestamp"
-        },
-        {
-            "location": "/Timestamp/#class-for-working-with-dates-and-times",
-            "text": "",
-            "title": "Class for working with dates and times."
-        },
-        {
-            "location": "/Timestamp/#example-usage",
-            "text": ">>> from hexpy import Timestamp\n>>> stamp = Timestamp(2017, 9, 26)\n>>> stamp.to_string()\n'2017-09-29T00:00:00'",
-            "title": "Example Usage"
-        },
-        {
-            "location": "/Timestamp/#methods",
-            "text": "",
-            "title": "Methods"
-        },
-        {
-            "location": "/Timestamp/#to_string",
-            "text": "to_string()  Convert timestamp object to ISO format string.",
-            "title": "to_string"
-        },
-        {
-            "location": "/Timestamp/#from_string",
-            "text": "from_string(timestamp)  Instantiate Timestamp object from ISO format String.",
-            "title": "from_string"
-        },
-        {
-            "location": "/Timestamp/#arguments",
-            "text": "timestamp: String, isoformatted timestamp",
             "title": "Arguments"
         },
         {

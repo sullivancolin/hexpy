@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/Sessions/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>/Metadata/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +28,7 @@
     
     <url>
      <loc>/Monitor/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +36,7 @@
     
     <url>
      <loc>/Analysis/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +44,7 @@
     
     <url>
      <loc>/Upload/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -52,15 +52,7 @@
     
     <url>
      <loc>/Streams/</loc>
-     <lastmod>2017-12-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/Timestamp/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -68,7 +60,7 @@
     
     <url>
      <loc>/Custom/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -76,7 +68,7 @@
     
     <url>
      <loc>/CLI/</loc>
-     <lastmod>2017-12-12</lastmod>
+     <lastmod>2018-01-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
