@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "A Python Client for the Crimson Hexagon API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon's rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check request success.\n\n\nEasily create powerful shell scripts to work with API data.\n\n\n\n\nRequiremnts\n\n\nhexpy\n is compatible with Python 3.5 and higher\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nProject Homepage\n\n\nVisit \nGithub\n project page for full source code.\n\n\nQuick Start\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(session)\n>>> monitor_results_client.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...\n\n>>> session.close()",
+            "text": "A Python Client for the Crimson Hexagon API\n\n\nhexpy\n is a simple python package for working with the Crimson Hexagon API\n\n\nWhy use this client?\n\n\n\n\nEasily and securely manage account authentication.\n\n\nAutomatically abides by Crimson Hexagon's rate limits.\n\n\nAutomatically converts python data to/from JSON strings.\n\n\nAutomatically check request success.\n\n\nEasily create powerful shell scripts to work with API data.\n\n\n\n\nRequirements\n\n\nhexpy\n is compatible with Python 3.5 and higher\n\n\nInstallation\n\n\n\n\n\nTo install the latest version:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nProject Homepage\n\n\nVisit \nGithub\n project page for full source code.\n\n\nQuick Start\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession(username=\"user@email.com\", password=\"crimson_login\")\n>>> monitor_results_client=MonitorAPI(session)\n>>> monitor_results_client.details(monitor_id)\n{'categories': [{'hidden': False,\n   'id': 6054759055,\n   'name': 'Basic Positive',\n   'sortOrder': 100,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759059,\n   'name': 'Basic Neutral',\n   'sortOrder': 101,\n   'status': 'red',\n   'trainingDocs': 0},\n  {'hidden': False,\n   'id': 6054759051,\n   'name': 'Basic Negative',\n   'sortOrder': 102,\n   ...\n\n>>> session.close()",
             "title": "Home"
         },
         {
@@ -16,9 +16,9 @@
             "title": "Why use this client?"
         },
         {
-            "location": "/#requiremnts",
+            "location": "/#requirements",
             "text": "hexpy  is compatible with Python 3.5 and higher",
-            "title": "Requiremnts"
+            "title": "Requirements"
         },
         {
             "location": "/#installation",
