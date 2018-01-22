@@ -11,7 +11,7 @@ A Python Client for the Crimson Hexagon API
 * Automatically check request success.
 * Easily create powerful shell scripts to work with API data.
 
-## Requiremnts
+## Requirements
 **hexpy** is compatible with Python 3.5 and higher
 
 ## Installation
