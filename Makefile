@@ -62,11 +62,6 @@ docs-clean:
 releasedocs:
 	cd docs/; mkdocs gh-deploy
 
-## package and upload a release
-release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
-
 ## builds source and wheel package
 dist: clean
 	python setup.py sdist bdist_wheel

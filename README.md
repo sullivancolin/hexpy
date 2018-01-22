@@ -16,7 +16,7 @@ A Python Client for the Crimson Hexagon API
 **hexpy** is compatible with Python 3.5 and higher
 
 ## Installation
-<!-- To install the most recent stable release run `pip install hexpy`. -->
+To install the most recent stable release run `pip install hexpy`.
 
 To install the latest version:
 ```bash

@@ -12,7 +12,7 @@ Hexpy Command Line Interface
 
 
 ## Installation
-<!-- To install the most recent stable release run `pip install hexpy`. -->
+To install the most recent stable release run `pip install hexpy`.
 
 To install the console command:
 ```bash
