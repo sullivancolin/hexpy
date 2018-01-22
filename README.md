@@ -12,7 +12,7 @@ A Python Client for the Crimson Hexagon API
 * Make it easy to do common tasks like exporting and uploading content.
 * Easily create shell scripts to work with API data.
 
-## Requiremnts
+## Requirements
 **hexpy** is compatible with Python 3.5 and higher
 
 ## Installation
