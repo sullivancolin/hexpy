@@ -1,7 +1,7 @@
 Hexpy Command Line Interface
 =============================
 
-**hexpy** comes with an optional console script for conveniently automating several common tasks
+**hexpy** comes with a console script for conveniently automating several common tasks
 
 ## Helpful Commands
 
@@ -14,10 +14,10 @@ Hexpy Command Line Interface
 ## Installation
 <!-- To install the most recent stable release run `pip install hexpy`. -->
 
-To install the optional console command:
+To install the console command:
 ```bash
 $ git clone https://github.com/sullivancolin/hexpy.git
-$ pip install hexpy/[cli]
+$ pip install hexpy/
 ```
 
 ## Usage

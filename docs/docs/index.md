@@ -6,10 +6,11 @@ A Python Client for the Crimson Hexagon API
 ## Why use this client?
 
 * Easily and securely manage account authentication.
-* Automatically abides by Crimson Hexagon's rate limits.
-* Automatically converts python data to/from JSON strings.
-* Automatically check request success.
-* Easily create powerful shell scripts to work with API data.
+* Automatically abide by Crimson Hexagon's rate limits.
+* Automatically convert python data to/from JSON strings.
+* Automatically check requests success.
+* Make it easy to do common tasks like exporting and uploading content.
+* Easily create shell scripts to work with API data.
 
 ## Requirements
 **hexpy** is compatible with Python 3.5 and higher
