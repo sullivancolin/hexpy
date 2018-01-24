@@ -86,7 +86,7 @@
     
         <ul>
         
-            <li><a class="toctree-l3" href="#class-for-working-with-realtime-streams-api">Class for working with Realtime Streams API.</a></li>
+            <li><a class="toctree-l3" href="#class-for-working-with-streams-api">Class for working with Streams API.</a></li>
         
             <li><a class="toctree-l3" href="#example-usage">Example usage.</a></li>
         
@@ -96,6 +96,11 @@
     
 
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Realtime/">Realtime</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -141,7 +146,7 @@
             <div class="section">
               
                 <h1 id="streams-api">Streams API</h1>
-<h2 id="class-for-working-with-realtime-streams-api">Class for working with Realtime Streams API.</h2>
+<h2 id="class-for-working-with-streams-api">Class for working with Streams API.</h2>
 <h2 id="example-usage">Example usage.</h2>
 <pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession , StreamsAPI
 &gt;&gt;&gt; session = HexpySession.load_auth_from_file()
@@ -158,17 +163,66 @@
 <p>Return posts from a stream.</p>
 <h4 id="arguments">Arguments:</h4>
 <ul>
-<li>stream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint</li>
-<li>count: Integer, the count of posts to retrieve from the stream, max = 100</li>
+<li>stream_id: Integer, the id of the stream containing the posts.</li>
+<li>count: Integer, the count of posts to retrieve from the stream, max = 100.</li>
 </ul>
 <h3 id="stream_list">stream_list</h3>
 <pre><code class="python">stream_list(team_id)
 </code></pre>
 
-<p>List all available Realtime Streams for a team.</p>
+<p>List all available Streams for a team.</p>
 <h4 id="arguments_1">Arguments</h4>
 <ul>
-<li>team_id: Integer the id of the team, available via the team list endpoint</li>
+<li>team_id: Integer the id of the team.</li>
+</ul>
+<h3 id="create_stream">create_stream</h3>
+<pre><code class="python">create_stream(team_id, name)
+</code></pre>
+
+<p>Create new stream for a team. System Admin Only.</p>
+<h4 id="arguments_2">Arguments</h4>
+<ul>
+<li>team_id: Integer, the id of the team to associate created stream with.</li>
+<li>name: String, the name to associate with the newly created stream.</li>
+</ul>
+<h3 id="delete_stream">delete_stream</h3>
+<pre><code class="python">delete_stream(stream_id)
+</code></pre>
+
+<p>Delete a stream. System Admin Only.</p>
+<h4 id="arguments_3">Arguments</h4>
+<ul>
+<li>stream_id: Integer, the id of the stream to be deleted.</li>
+</ul>
+<h3 id="add_monitor_to_stream">add_monitor_to_stream</h3>
+<pre><code class="python">add_monitor_to_stream(stream_id, monitor_id)
+</code></pre>
+
+<p>Associate a monitor with a stream. System Admin Only.</p>
+<h4 id="arguments_4">Arguments</h4>
+<ul>
+<li>stream_id: Integer, the id of stream to be modified.</li>
+<li>monitor_id: Integer, the id to be associated with the stream.</li>
+</ul>
+<h3 id="remove_monitor_from_stream">remove_monitor_from_stream</h3>
+<pre><code class="python">remove_monitor_from_stream(stream_id, monitor_id)
+</code></pre>
+
+<p>Remove association between monitor and stream.  System Admin Only.</p>
+<h4 id="arguments_5">Arguments</h4>
+<ul>
+<li>stream_id: Integer, the id of stream to be updated.</li>
+<li>monitor_id: Integer, the id to be removed from the stream.</li>
+</ul>
+<h3 id="update_stream">update_stream</h3>
+<pre><code class="python">update_stream(stream_id, name)
+</code></pre>
+
+<p>Update name of stream. System Admin Only.</p>
+<h4 id="arguments_6">Arguments</h4>
+<ul>
+<li>stream_id: Integer, the id of stream to be updated.</li>
+<li>name: String, the new name to be associated with the stream.</li>
 </ul>
               
             </div>
@@ -177,7 +231,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Custom/" class="btn btn-neutral float-right" title="Custom">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Realtime/" class="btn btn-neutral float-right" title="Realtime">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../Upload/" class="btn btn-neutral" title="Upload"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -209,7 +263,7 @@
         <span><a href="../Upload/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Custom/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Realtime/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

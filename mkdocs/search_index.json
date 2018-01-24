@@ -607,7 +607,7 @@
         },
         {
             "location": "/Streams/",
-            "text": "Streams API\n\n\nClass for working with Realtime Streams API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , StreamsAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> streams_client = StreamsAPI(session)\n>>> streams_client.stream_list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nposts\n\n\nposts(stream_id, count=100)\n\n\n\n\nReturn posts from a stream.\n\n\nArguments:\n\n\n\n\nstream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint\n\n\ncount: Integer, the count of posts to retrieve from the stream, max = 100\n\n\n\n\nstream_list\n\n\nstream_list(team_id)\n\n\n\n\nList all available Realtime Streams for a team.\n\n\nArguments\n\n\n\n\nteam_id: Integer the id of the team, available via the team list endpoint",
+            "text": "Streams API\n\n\nClass for working with Streams API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , StreamsAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> streams_client = StreamsAPI(session)\n>>> streams_client.stream_list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nposts\n\n\nposts(stream_id, count=100)\n\n\n\n\nReturn posts from a stream.\n\n\nArguments:\n\n\n\n\nstream_id: Integer, the id of the stream containing the posts.\n\n\ncount: Integer, the count of posts to retrieve from the stream, max = 100.\n\n\n\n\nstream_list\n\n\nstream_list(team_id)\n\n\n\n\nList all available Streams for a team.\n\n\nArguments\n\n\n\n\nteam_id: Integer the id of the team.\n\n\n\n\ncreate_stream\n\n\ncreate_stream(team_id, name)\n\n\n\n\nCreate new stream for a team. System Admin Only.\n\n\nArguments\n\n\n\n\nteam_id: Integer, the id of the team to associate created stream with.\n\n\nname: String, the name to associate with the newly created stream.\n\n\n\n\ndelete_stream\n\n\ndelete_stream(stream_id)\n\n\n\n\nDelete a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of the stream to be deleted.\n\n\n\n\nadd_monitor_to_stream\n\n\nadd_monitor_to_stream(stream_id, monitor_id)\n\n\n\n\nAssociate a monitor with a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be modified.\n\n\nmonitor_id: Integer, the id to be associated with the stream.\n\n\n\n\nremove_monitor_from_stream\n\n\nremove_monitor_from_stream(stream_id, monitor_id)\n\n\n\n\nRemove association between monitor and stream.  System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nmonitor_id: Integer, the id to be removed from the stream.\n\n\n\n\nupdate_stream\n\n\nupdate_stream(stream_id, name)\n\n\n\n\nUpdate name of stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nname: String, the new name to be associated with the stream.",
             "title": "Streams"
         },
         {
@@ -616,9 +616,9 @@
             "title": "Streams API"
         },
         {
-            "location": "/Streams/#class-for-working-with-realtime-streams-api",
+            "location": "/Streams/#class-for-working-with-streams-api",
             "text": "",
-            "title": "Class for working with Realtime Streams API."
+            "title": "Class for working with Streams API."
         },
         {
             "location": "/Streams/#example-usage",
@@ -637,22 +637,217 @@
         },
         {
             "location": "/Streams/#arguments",
-            "text": "stream_id: Integer, the id of the stream containing the posts, available via the stream list endpoint  count: Integer, the count of posts to retrieve from the stream, max = 100",
+            "text": "stream_id: Integer, the id of the stream containing the posts.  count: Integer, the count of posts to retrieve from the stream, max = 100.",
             "title": "Arguments:"
         },
         {
             "location": "/Streams/#stream_list",
-            "text": "stream_list(team_id)  List all available Realtime Streams for a team.",
+            "text": "stream_list(team_id)  List all available Streams for a team.",
             "title": "stream_list"
         },
         {
             "location": "/Streams/#arguments_1",
-            "text": "team_id: Integer the id of the team, available via the team list endpoint",
+            "text": "team_id: Integer the id of the team.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/#create_stream",
+            "text": "create_stream(team_id, name)  Create new stream for a team. System Admin Only.",
+            "title": "create_stream"
+        },
+        {
+            "location": "/Streams/#arguments_2",
+            "text": "team_id: Integer, the id of the team to associate created stream with.  name: String, the name to associate with the newly created stream.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/#delete_stream",
+            "text": "delete_stream(stream_id)  Delete a stream. System Admin Only.",
+            "title": "delete_stream"
+        },
+        {
+            "location": "/Streams/#arguments_3",
+            "text": "stream_id: Integer, the id of the stream to be deleted.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/#add_monitor_to_stream",
+            "text": "add_monitor_to_stream(stream_id, monitor_id)  Associate a monitor with a stream. System Admin Only.",
+            "title": "add_monitor_to_stream"
+        },
+        {
+            "location": "/Streams/#arguments_4",
+            "text": "stream_id: Integer, the id of stream to be modified.  monitor_id: Integer, the id to be associated with the stream.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/#remove_monitor_from_stream",
+            "text": "remove_monitor_from_stream(stream_id, monitor_id)  Remove association between monitor and stream.  System Admin Only.",
+            "title": "remove_monitor_from_stream"
+        },
+        {
+            "location": "/Streams/#arguments_5",
+            "text": "stream_id: Integer, the id of stream to be updated.  monitor_id: Integer, the id to be removed from the stream.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Streams/#update_stream",
+            "text": "update_stream(stream_id, name)  Update name of stream. System Admin Only.",
+            "title": "update_stream"
+        },
+        {
+            "location": "/Streams/#arguments_6",
+            "text": "stream_id: Integer, the id of stream to be updated.  name: String, the new name to be associated with the stream.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/",
+            "text": "Realtime API\n\n\nClass for working with Realtime Results API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, RealtimeAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> realtime_client = RealtimeAPI(session)\n>>> realtime_client.list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nlist\n\n\nlist(team_id)\n\n\n\n\nGet the Monitors which are in Proteus\n\n\nArguments\n\n\n\n\nteam_id: Integer, The id of the team to which the listed monitors belong.\n\n\n\n\nconfigure\n\n\nconfigure(monitor_id)\n\n\n\n\nConfigure the Realtime evaluators for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nenable\n\n\nenable(monitor_id)\n\n\n\n\nEnable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndisbale\n\n\ndisbale(monitor_id)\n\n\n\n\nDisable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndetail\n\n\ndetail(monitor_id)\n\n\n\n\nGet the Realtime evaluators details for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ncashtags\n\n\ncashtags(monitor_id, start, top)\n\n\n\n\nGet Cashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N cashtags to retrieve.\n\n\n\n\nhashtags\n\n\nhashtags(monitor_id, start, top)\n\n\n\n\nGet Hashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N hashtags to retrieve.\n\n\n\n\nretweets\n\n\nretweets(monitor_id)\n\n\n\n\nGet the Realtime retweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nsocial_guids\n\n\nsocial_guids(monitor_id, doc_type, start, received_after) \n\n\n\n\nGet the Realtime social guids for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: String, Specifies the document type.\n\n\n\n\ntweets\n\n\ntweets(monitor_id, start) \n\n\n\n\nGet the Realtime tweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\n\n\nvolume\n\n\nvolume(monitor_id, doc_type, start) \n\n\n\n\nGet the Realtime volume for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: List, specifies the document type to filter.\n\n\n\n\nvolume_by_sentiment\n\n\nvolume_by_sentiment(monitor_id, doc_type, start) \n\n\n\n\nGet the Realtime volume by sentiment for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: String, specifies the document type to filter.",
+            "title": "Realtime"
+        },
+        {
+            "location": "/Realtime/#realtime-api",
+            "text": "",
+            "title": "Realtime API"
+        },
+        {
+            "location": "/Realtime/#class-for-working-with-realtime-results-api",
+            "text": "",
+            "title": "Class for working with Realtime Results API."
+        },
+        {
+            "location": "/Realtime/#example-usage",
+            "text": ">>> from hexpy import HexpySession, RealtimeAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> realtime_client = RealtimeAPI(session)\n>>> realtime_client.list(team_id)\n>>> session.close()",
+            "title": "Example usage."
+        },
+        {
+            "location": "/Realtime/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Realtime/#list",
+            "text": "list(team_id)  Get the Monitors which are in Proteus",
+            "title": "list"
+        },
+        {
+            "location": "/Realtime/#arguments",
+            "text": "team_id: Integer, The id of the team to which the listed monitors belong.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#configure",
+            "text": "configure(monitor_id)  Configure the Realtime evaluators for the Monitor.",
+            "title": "configure"
+        },
+        {
+            "location": "/Realtime/#arguments_1",
+            "text": "monitor_id: Integer, the id of the monitor being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#enable",
+            "text": "enable(monitor_id)  Enable Realtime Data.",
+            "title": "enable"
+        },
+        {
+            "location": "/Realtime/#arguments_2",
+            "text": "monitor_id: Integer, the id of the monitor being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#disbale",
+            "text": "disbale(monitor_id)  Disable Realtime Data.",
+            "title": "disbale"
+        },
+        {
+            "location": "/Realtime/#arguments_3",
+            "text": "monitor_id: Integer, the id of the monitor being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#detail",
+            "text": "detail(monitor_id)  Get the Realtime evaluators details for the Monitor.",
+            "title": "detail"
+        },
+        {
+            "location": "/Realtime/#arguments_4",
+            "text": "monitor_id: Integer, the id of the monitor being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#cashtags",
+            "text": "cashtags(monitor_id, start, top)  Get Cashtags associated to a Monitor.",
+            "title": "cashtags"
+        },
+        {
+            "location": "/Realtime/#arguments_5",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  top: Integer, The top N cashtags to retrieve.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#hashtags",
+            "text": "hashtags(monitor_id, start, top)  Get Hashtags associated to a Monitor.",
+            "title": "hashtags"
+        },
+        {
+            "location": "/Realtime/#arguments_6",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  top: Integer, The top N hashtags to retrieve.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#retweets",
+            "text": "retweets(monitor_id)  Get the Realtime retweets for the Monitor.",
+            "title": "retweets"
+        },
+        {
+            "location": "/Realtime/#arguments_7",
+            "text": "monitor_id: Integer, the id of the monitor being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#social_guids",
+            "text": "social_guids(monitor_id, doc_type, start, received_after)   Get the Realtime social guids for the Monitor.",
+            "title": "social_guids"
+        },
+        {
+            "location": "/Realtime/#arguments_8",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: String, Specifies the document type.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#tweets",
+            "text": "tweets(monitor_id, start)   Get the Realtime tweets for the Monitor.",
+            "title": "tweets"
+        },
+        {
+            "location": "/Realtime/#arguments_9",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#volume",
+            "text": "volume(monitor_id, doc_type, start)   Get the Realtime volume for the Monitor.",
+            "title": "volume"
+        },
+        {
+            "location": "/Realtime/#arguments_10",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: List, specifies the document type to filter.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Realtime/#volume_by_sentiment",
+            "text": "volume_by_sentiment(monitor_id, doc_type, start)   Get the Realtime volume by sentiment for the Monitor.",
+            "title": "volume_by_sentiment"
+        },
+        {
+            "location": "/Realtime/#arguments_11",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: String, specifies the document type to filter.",
             "title": "Arguments"
         },
         {
             "location": "/Custom/",
-            "text": "Custom API\n\n\nClass for creating a custom API\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , CustomAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> custom_client = CustomAPI(session, \"/some/endpoint/\")\n>>> custom_client.get(url_params=\"<url_param1>/path\", params={\"query_string_param\":some_value})\n>>> session.close()\n\n\n\n\nMethods\n\n\nget\n\n\nget(url_params, params=None)\n\n\n\n\nend get request using URL parameters and query-string parameters.\n\n\nArguments:\n\n\n\n\nurl_params: String, parameters for URL endpoint\n\n\nparams: Dictionary, query-string parameters\n\n\n\n\npost\n\n\npost(url_params, params=None, data=None)\n\n\n\n\nSend post request using URL parameters and query-string parameters, and json data.\n\n\nArguments\n\n\n\n\nurl_params: String, parameters for URL endpoint\n\n\nparams: Dictionary, query-string parameters\n\n\ndata: Dictionary/List, data to be sent as JSON\n\n\n\n\ndelete\n\n\ndelete(url_params, params=None)\n\n\n\n\nSend delete request using URL parameters and query-string parameters.\n\n\nArguments\n\n\n\n\nurl_params: String, parameters for URL endpoint\n\n\nparams: Dictionary, query-string parameters",
+            "text": "Custom API\n\n\nClass for creating a custom API\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , CustomAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> custom_client = CustomAPI(session, \"/some/endpoint/\")\n>>> custom_client.get(url_params=\"<url_param1>/path\", params={\"query_string_param\":some_value})\n>>> session.close()\n\n\n\n\nMethods\n\n\nget\n\n\nget(url_params, params=None)\n\n\n\n\nend get request using URL parameters and query-string parameters.\n\n\nArguments:\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\n\n\npost\n\n\npost(url_params, params=None, data=None)\n\n\n\n\nSend post request using URL parameters and query-string parameters, and json data.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\ndata: Dict, json data to post.\n\n\n\n\ndelete\n\n\ndelete(url_params, params=None)\n\n\n\n\nSend delete request using URL parameters and query-string parameters.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.",
             "title": "Custom"
         },
         {
@@ -682,7 +877,7 @@
         },
         {
             "location": "/Custom/#arguments",
-            "text": "url_params: String, parameters for URL endpoint  params: Dictionary, query-string parameters",
+            "text": "url_params: String, url params and endpoints concatenated.  params: Dict, querystring params.",
             "title": "Arguments:"
         },
         {
@@ -692,7 +887,7 @@
         },
         {
             "location": "/Custom/#arguments_1",
-            "text": "url_params: String, parameters for URL endpoint  params: Dictionary, query-string parameters  data: Dictionary/List, data to be sent as JSON",
+            "text": "url_params: String, url params and endpoints concatenated.  params: Dict, querystring params.  data: Dict, json data to post.",
             "title": "Arguments"
         },
         {
@@ -702,12 +897,12 @@
         },
         {
             "location": "/Custom/#arguments_2",
-            "text": "url_params: String, parameters for URL endpoint  params: Dictionary, query-string parameters",
+            "text": "url_params: String, url params and endpoints concatenated.  params: Dict, querystring params.",
             "title": "Arguments"
         },
         {
             "location": "/CLI/",
-            "text": "Hexpy Command Line Interface\n\n\nhexpy\n comes with a console script for conveniently automating several common tasks\n\n\nHelpful Commands\n\n\n\n\nExport sample of monitor posts to a spreadsheet.\n\n\nEasily upload a spreadsheet as custom content for analysis in ForSight.\n\n\nQuickly get multiple metrics from monitor results as JSON. \n\n\nCompose powerful shell scripts with pipe-able commands such as \njq\n, and \nxargs\n.\n\n\n\n\nInstallation\n\n\n\n\n\nTo install the console command:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nUsage\n\n\nBasic\n\n\n$ hexpy [OPTIONS] COMMAND [ARGS]...\n\n\n\n\nCommands\n\n\n\n\nexport\n  Save Monitor posts as spreadsheet.\n\n\nlogin\n   Get valid authorization from user.\n\n\nquery\n   Request 24 analysis for provided query.\n\n\nresults\n Get Monitor results for 1 or more metrics.\n\n\nupload\n  Upload spreadsheet file as custom content.\n\n\nmetadata\n Get Metadata for account team, monitors, and geography.\n\n\n\n\nSee how each \nhexpy\n command works by running \nhexpy COMMAND --help\n\n\nExamples\n\n\nLogin to Crimson API with you credentials\n\n\n$ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!\n\n\n\n\nGet list of monitors for the users team\n\n\nhexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'\n\n\n\n\nUpload CSV file as \nmy_custom_types\n with English language code and tab delimted columns.\n\n\n$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'\n\n\n\n\nGet word cloud and volume information from the monitor in the specified date range.\n\n\n$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01\n\n\n\n\nGet CSV data with volume information for the monitor for each day using \njq\n\n\n$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...\n\n\n\n\nExport Monitor posts to excel file called \nmy_export.xlsx\n\n\n$ hexpy export MONITOR_ID --file_type excel --output my_export\n\n\n\n\nExport posts to excel for multiple monitors in parallel from a file containing a list of monitor ids\n\n\ncat ids.txt | xargs -n 1 -P 4 hexpy export -f excel",
+            "text": "Hexpy Command Line Interface\n\n\nhexpy\n comes with a console script for conveniently automating several common tasks\n\n\nHelpful Commands\n\n\n\n\nExport sample of monitor posts to a spreadsheet.\n\n\nEasily upload a spreadsheet as custom content for analysis in ForSight.\n\n\nQuickly get multiple metrics from monitor results as JSON. \n\n\nCompose powerful shell scripts with pipe-able commands such as \njq\n, and \nxargs\n.\n\n\n\n\nInstallation\n\n\nTo install the most recent stable release run \npip install hexpy\n.\n\n\nTo install the console command:\n\n\n$ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/\n\n\n\n\nUsage\n\n\nBasic\n\n\n$ hexpy [OPTIONS] COMMAND [ARGS]...\n\n\n\n\nCommands\n\n\n\n\nexport\n  Save Monitor posts as spreadsheet.\n\n\nlogin\n   Get valid authorization from user.\n\n\nquery\n   Request 24 analysis for provided query.\n\n\nresults\n Get Monitor results for 1 or more metrics.\n\n\nupload\n  Upload spreadsheet file as custom content.\n\n\nmetadata\n Get Metadata for account team, monitors, and geography.\n\n\n\n\nSee how each \nhexpy\n command works by running \nhexpy COMMAND --help\n\n\nExamples\n\n\nLogin to Crimson API with you credentials\n\n\n$ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!\n\n\n\n\nGet list of monitors for the users team\n\n\nhexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'\n\n\n\n\nUpload CSV file as \nmy_custom_types\n with English language code and tab delimted columns.\n\n\n$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'\n\n\n\n\nGet word cloud and volume information from the monitor in the specified date range.\n\n\n$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01\n\n\n\n\nGet CSV data with volume information for the monitor for each day using \njq\n\n\n$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...\n\n\n\n\nExport Monitor posts to excel file called \nmy_export.xlsx\n\n\n$ hexpy export MONITOR_ID --file_type excel --output my_export\n\n\n\n\nExport posts to excel for multiple monitors in parallel from a file containing a list of monitor ids\n\n\ncat ids.txt | xargs -n 1 -P 4 hexpy export -f excel",
             "title": "Command Line Interface"
         },
         {
@@ -722,7 +917,7 @@
         },
         {
             "location": "/CLI/#installation",
-            "text": "To install the console command:  $ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/",
+            "text": "To install the most recent stable release run  pip install hexpy .  To install the console command:  $ git clone https://github.com/sullivancolin/hexpy.git\n$ pip install hexpy/",
             "title": "Installation"
         },
         {
