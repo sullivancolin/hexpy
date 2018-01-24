@@ -10,4 +10,4 @@ from .streams import StreamsAPI
 from .analysis import AnalysisAPI
 from .content_upload import ContentUploadAPI
 from .custom import CustomAPI
-from .realtime import RealtimeAPi
+from .realtime import RealtimeAPI
