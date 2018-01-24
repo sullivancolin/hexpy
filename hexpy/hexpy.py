@@ -125,7 +125,8 @@ def metadata(ctx,
         "states": client.states,
         "cities": client.cities,
         "countries": client.countries,
-        "details": monitor_client.details
+        "details": monitor_client.details,
+        "api_documentation": client.api_documentation
     }
     if team_id:
         return click.echo(

@@ -33,7 +33,7 @@ class MetadataAPI(object):
 
     @response_handler
     def monitor_list(self, team_id: int) -> Response:
-        """Returns a list of monitors accessible to the requesting
+        """Return a list of monitors accessible to the requesting
         or selected user along with metadata related to those monitors.
 
         # Arguments
@@ -63,7 +63,7 @@ class MetadataAPI(object):
 
     @response_handler
     def cities(self, country: str) -> Response:
-        """Returns all the cities or urban areas defined in the given country that you may use to
+        """Return all the cities or urban areas defined in the given country that you may use to
         filter monitor results and to upload documents with location information.
 
         # Arguments
@@ -75,7 +75,12 @@ class MetadataAPI(object):
 
     @response_handler
     def countries(self) -> Response:
-        """Returns all the countries that you may use to filter monitor results
+        """Return all the countries that you may use to filter monitor results
         and to upload documents with location information.
         """
         return self.session.get(self.TEMPLATE + "geography/info/countries")
+
+    @response_handler
+    def api_documentation(self) -> Response:
+        """Return latest version of API endpoint documentation."""
+        return self.session.get(self.TEMPLATE + "documentation")

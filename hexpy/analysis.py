@@ -21,7 +21,7 @@ class AnalysisAPI(object):
     ```
     """
 
-    TEMPLATE = ROOT + "results/"
+    TEMPLATE = ROOT + "results"
 
     def __init__(self, session: HexpySession) -> None:
         super(AnalysisAPI, self).__init__()
@@ -43,5 +43,5 @@ class AnalysisAPI(object):
         # Arguments
             request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints
         """
-        return self.session.get(self.TEMPLATE + "{request_id}".format(
+        return self.session.get(self.TEMPLATE + "/{request_id}".format(
             request_id=request_id))

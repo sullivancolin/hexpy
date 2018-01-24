@@ -26,22 +26,40 @@ class CustomAPI(object):
         self.TEMPLATE = ROOT + endpoint
 
     @response_handler
-    def get(self, url_params: str, params: Dict[str, Any] = None) -> Response:
-        """Send get request using URL parameters and query-string parameters."""
+    def get(self, url_params: str = "",
+            params: Dict[str, Any] = None) -> Response:
+        """Send get request using URL parameters and query-string parameters.
+
+        # Arguments
+            url_params: String, url params and endpoints concatenated.
+            params: Dict, querystring params.
+
+        """
         return self.session.get(self.TEMPLATE + url_params, params=params)
 
     @response_handler
     def post(
             self,
-            url_params: str,
+            url_params: str = "",
             params: Dict[str, Any] = None,
             data: Dict[str, Any] = None, ) -> Response:
-        """Send post request using URL parameters and query-string parameters, and json data"""
+        """Send post request using URL parameters and query-string parameters, and json data.
+
+        # Arguments
+            url_params: String, url params and endpoints concatenated.
+            params: Dict, querystring params.
+            data: Dict, json data to post.
+        """
         return self.session.post(
             self.TEMPLATE + url_params, params=params, json=data)
 
     @response_handler
-    def delete(self, url_params: str,
+    def delete(self, url_params: str = "",
                params: Dict[str, Any] = None) -> Response:
-        """Send delete request using URL parameters and query-string parameters."""
+        """Send delete request using URL parameters and query-string parameters.
+
+        # Arguments
+            url_params: String, url params and endpoints concatenated.
+            params: Dict, querystring params.
+        """
         return self.session.delete(self.TEMPLATE + url_params, params=params)

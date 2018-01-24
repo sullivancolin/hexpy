@@ -22,8 +22,8 @@ get(url_params, params=None)
 end get request using URL parameters and query-string parameters.
 
 #### Arguments:
-* url_params: String, parameters for URL endpoint
-* params: Dictionary, query-string parameters
+* url_params: String, url params and endpoints concatenated.
+* params: Dict, querystring params.
 
 ### post
 ```python
@@ -32,9 +32,9 @@ post(url_params, params=None, data=None)
 Send post request using URL parameters and query-string parameters, and json data.
 
 #### Arguments
-* url_params: String, parameters for URL endpoint
-* params: Dictionary, query-string parameters
-* data: Dictionary/List, data to be sent as JSON
+* url_params: String, url params and endpoints concatenated.
+* params: Dict, querystring params.
+* data: Dict, json data to post.
 
 ### delete
 ```python
@@ -43,5 +43,5 @@ delete(url_params, params=None)
 Send delete request using URL parameters and query-string parameters.
 
 #### Arguments
-* url_params: String, parameters for URL endpoint
-* params: Dictionary, query-string parameters
+* url_params: String, url params and endpoints concatenated.
+* params: Dict, querystring params.

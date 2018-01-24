@@ -232,6 +232,45 @@ class MonitorAPI(object):
             })
 
     @response_handler
+    def topics(self,
+               monitor_id: int,
+               start: str,
+               end: str,
+               filter_string: str = None) -> Response:
+        """Return the XML data that can be used to generate clustering visualizations using third-party software.
+
+        # Arguments
+            monitor_id: Integer, id of the monitor or monitor filter being requested
+            start: String, inclusive start date in YYYY-MM-DD
+            end: String, exclusive end date in YYYY-MM-DD
+            filter_string: String, pipe-separated list of field:value pairs used to filter posts
+        """
+        return self.session.get(
+            self.TEMPLATE + "topics",
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end,
+                "filter": filter_string
+            })
+
+    @response_handler
+    def topic_waves(self, monitor_id: int, start: str, end: str) -> Response:
+        """Return the Topic waves information for a monitor.
+
+        # Arguments
+            monitor_id: Integer, id of the monitor or monitor filter being requested
+            start: String, inclusive start date in YYYY-MM-DD
+            end: String, exclusive end date in YYYY-MM-DD
+            filter_string: String, pipe-separated list of field:value pairs used to filter posts
+        """
+        return self.session.get(
+            self.TEMPLATE + "topicwaves",
+            params={"id": monitor_id,
+                    "start": start,
+                    "end": end})
+
+    @response_handler
     def top_sources(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
