@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Module for Realtime Results Api."""
 
+import inspect
 from .base import ROOT, response_handler
 from .session import HexpySession
 from requests.models import Response
@@ -26,8 +27,10 @@ class RealtimeAPI(object):
     def __init__(self, session):
         super(RealtimeAPI, self).__init__()
         self.session = session.session
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in ["__init__"]:
+                setattr(self, name, response_handler(fn))
 
-    @response_handler
     def cashtags(self, monitor_id: int, start: int = None,
                  top: int = None) -> Response:
         """Get Cashtags associated to a Monitor.
@@ -43,7 +46,6 @@ class RealtimeAPI(object):
                     "start": start,
                     "top": top})
 
-    @response_handler
     def hashtags(self, monitor_id: int, start: int = None,
                  top: int = None) -> Response:
         """Get Hashtags associated to a Monitor.
@@ -59,7 +61,6 @@ class RealtimeAPI(object):
                     "start": start,
                     "top": top})
 
-    @response_handler
     def list(self, team_id: int = None) -> Response:
         """Get the Monitors which are in Proteus
 
@@ -69,7 +70,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "list", params={"team_id": team_id})
 
-    @response_handler
     def configure(self, monitor_id: int) -> Response:
         """Configure the Realtime evaluators for the Monitor.
 
@@ -79,7 +79,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "configure", params={"id": monitor_id})
 
-    @response_handler
     def enable(self, monitor_id: int) -> Response:
         """Enable Realtime Data.
 
@@ -89,7 +88,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "enable", params={"id": monitor_id})
 
-    @response_handler
     def disbale(self, monitor_id: int) -> Response:
         """Disable Realtime Data.
 
@@ -99,7 +97,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "disable", params={"id": monitor_id})
 
-    @response_handler
     def detail(self, monitor_id: int) -> Response:
         """Get the Realtime evaluators details for the Monitor.
 
@@ -109,7 +106,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "details", params={"id": monitor_id})
 
-    @response_handler
     def retweets(self, monitor_id: int) -> Response:
         """Get the Realtime retweets for the Monitor.
 
@@ -119,7 +115,6 @@ class RealtimeAPI(object):
         return self.session.get(
             self.TEMPLATE + "retweets", params={"id": monitor_id})
 
-    @response_handler
     def social_guids(self,
                      monitor_id: int,
                      doc_type: str,
@@ -141,7 +136,6 @@ class RealtimeAPI(object):
                 "type": doc_type
             })
 
-    @response_handler
     def tweets(self, monitor_id: int, start: int = None) -> Response:
         """Get the Realtime tweets for the Monitor.
 
@@ -154,7 +148,6 @@ class RealtimeAPI(object):
             params={"id": monitor_id,
                     "start": start})
 
-    @response_handler
     def volume(self, monitor_id: int, start: int = None,
                doc_type: List = None) -> Response:
         """Get the Realtime volume for the Monitor.
@@ -170,7 +163,6 @@ class RealtimeAPI(object):
                     "start": start,
                     "type": doc_type})
 
-    @response_handler
     def volume_by_sentiment(self, monitor_id: int, start: int,
                             doc_type: str) -> Response:
         """Get the Realtime volume by sentiment for the Monitor.

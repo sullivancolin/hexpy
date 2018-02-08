@@ -5,8 +5,8 @@
 from setuptools import setup, find_packages
 
 requirements = [
-    'clint>=0.5.1', 'requests>=2.18.4', 'ratelimiter>=1.2.0', 'halo>=0.0.7',
-    'click>=6.7', "pandas>=0.20.3", "openpyxl>=2.4.8", "pendulum>=1.3.2"
+    'clint>=0.5.1', 'requests>=2.18.4', 'halo>=0.0.7', 'click>=6.7',
+    "pandas>=0.20.3", "openpyxl>=2.4.8", "pendulum>=1.3.2"
 ]
 
 setup_requirements = ['pytest-runner', 'setuptools-markdown']

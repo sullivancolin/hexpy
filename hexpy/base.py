@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 """global variables for the API URL and rate limiting."""
+
 import functools
 from typing import Callable
-from halo import Halo
-from ratelimiter import RateLimiter
 import time
 import threading
 import collections
@@ -14,34 +13,44 @@ ONE_MINUTE = 60
 MAX_CALLS = 120
 
 
-class SpinnerLimiter(RateLimiter):
-    """Rate limiting with spinner information."""
+def rate_limited(max_calls, period=1.0):
+    def decorator(func):
+        calls = collections.deque()
 
-    def __enter__(self):
-        """When limiter sleeps, show spinner with wait time."""
-        with self._lock:
-            # We want to ensure that no more than max_calls were run in the allowed
-            # period. For this, we store the last timestamps of each call and run
-            # the rate verification upon each __enter__ call.
-            if len(self.calls) >= self.max_calls:
-                until = time.time() + self.period - self._timespan
-                if self.callback:
-                    t = threading.Thread(target=self.callback, args=(until, ))
-                    t.daemon = True
-                    t.start()
-                sleeptime = until - time.time()
-                with Halo(text="Rate Limit Reached. (Sleeping for {} seconds)".
-                          format(round(sleeptime))):
+        # Add thread safety
+        lock = threading.RLock()
+
+        @functools.wraps(func)
+        def wrapper(*args, **kargs):
+            '''Decorator wrapper function'''
+            with lock:
+                if len(calls) >= max_calls:
+                    until = time.time() + period - (calls[-1] - calls[0])
+                    sleeptime = until - time.time()
                     if sleeptime > 0:
+                        print("Rate Limit Reached. (Sleeping for {} seconds)".
+                              format(round(sleeptime)))
                         time.sleep(sleeptime)
-                        self.calls = collections.deque()
-            return self
+                    while len(calls) > 0:
+                        calls.popleft()
+                calls.append(time.time())
+
+                # Pop the timestamp list front (ie: the older calls) until the sum goes
+                # back below the period. This is our 'sliding period' window.
+                while (calls[-1] - calls[0]) >= period:
+                    calls.popleft()
+
+            return func(*args, **kargs)
+
+        return wrapper
+
+    return decorator
 
 
 def response_handler(f: Callable) -> Callable:
     """Ensure responses do not contain errors, and Rate Limit is obeyed."""
 
-    @SpinnerLimiter(max_calls=MAX_CALLS, period=ONE_MINUTE)
+    @rate_limited(max_calls=MAX_CALLS, period=ONE_MINUTE)
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         response = f(*args, **kwargs)

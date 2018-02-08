@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for monitor results API"""
-
-from halo import Halo
+import inspect
 from .base import ROOT, response_handler
 from hexpy.session import HexpySession
 from requests.models import Response
@@ -37,6 +36,12 @@ class MonitorAPI(object):
             "top_sources": self.top_sources,
             "interest_affinities": self.interest_affinities
         }
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in [
+                    "__init__", "_aggregate_metrics", "_aggregate_dates",
+                    "aggregate"
+            ]:
+                setattr(self, name, response_handler(fn))
 
     def _aggregate_metrics(self, monitor_id: int, date: Sequence[str],
                            metrics: Union[Sequence[str], str]
@@ -120,7 +125,6 @@ class MonitorAPI(object):
             raise ValueError(
                 "monitor_ids must be integer or list of integers to aggregate")
 
-    @response_handler
     def details(self, monitor_id: int) -> Response:
         """Return detailed metadata about the selected monitor, including category metadata.
 
@@ -130,7 +134,6 @@ class MonitorAPI(object):
         return self.session.get(
             self.TEMPLATE + "detail", params={"id": monitor_id})
 
-    @response_handler
     def audit(self, monitor_id: int) -> Response:
         """Return audit information about the selected monitor, sorted from most to least recent.
 
@@ -140,7 +143,6 @@ class MonitorAPI(object):
         return self.session.get(
             self.TEMPLATE + "audit", params={"id": monitor_id})
 
-    @response_handler
     def word_cloud(self,
                    monitor_id: int,
                    start: str,
@@ -165,7 +167,6 @@ class MonitorAPI(object):
                 "filter": filter_string
             })
 
-    @response_handler
     def trained_posts(self, monitor_id: int, category: int = None) -> Response:
         """Return a list of the training posts for a given opinion monitor.
 
@@ -182,7 +183,6 @@ class MonitorAPI(object):
             params={"id": monitor_id,
                     "category": category})
 
-    @response_handler
     def train_monitor(self, monitor_id: int, category_id: int,
                       data: Dict[str, Any]) -> Response:
         """Upload individual training document monitors programmatically.
@@ -205,7 +205,6 @@ class MonitorAPI(object):
                 "document": data
             })
 
-    @response_handler
     def interest_affinities(self,
                             monitor_id: int,
                             start: str,
@@ -231,7 +230,6 @@ class MonitorAPI(object):
                 "documentSource": document_source
             })
 
-    @response_handler
     def topics(self,
                monitor_id: int,
                start: str,
@@ -254,7 +252,6 @@ class MonitorAPI(object):
                 "filter": filter_string
             })
 
-    @response_handler
     def topic_waves(self, monitor_id: int, start: str, end: str) -> Response:
         """Return the Topic waves information for a monitor.
 
@@ -270,7 +267,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def top_sources(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
@@ -285,7 +281,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def image_analysis(self,
                        monitor_id: int,
                        start: str,
@@ -311,7 +306,6 @@ class MonitorAPI(object):
                 "top": top
             })
 
-    @response_handler
     def volume(self,
                monitor_id: int,
                start: str,
@@ -337,7 +331,6 @@ class MonitorAPI(object):
                 "uselocaltime": use_local_time
             })
 
-    @response_handler
     def sentiment_and_categories(self,
                                  monitor_id: int,
                                  start: str,
@@ -361,7 +354,6 @@ class MonitorAPI(object):
                 "hideExcluded": hide_excluded
             })
 
-    @response_handler
     def posts(self,
               monitor_id: int,
               start: str,
@@ -399,7 +391,6 @@ class MonitorAPI(object):
     # within a given monitor.                                                       #
     #################################################################################
 
-    @response_handler
     def age(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by age bracket.
 
@@ -414,7 +405,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def ethnicity(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by ethnicity.
 
@@ -429,7 +419,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def gender(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by gender.
 
@@ -449,7 +438,6 @@ class MonitorAPI(object):
     #                                                                               #
     #################################################################################
 
-    @response_handler
     def cities(self, monitor_id: int, start: str, end: str,
                country: str) -> Response:
         """Return volume metrics for a given monitor split by city.
@@ -470,7 +458,6 @@ class MonitorAPI(object):
                 "country": country
             })
 
-    @response_handler
     def states(self, monitor_id: int, start: str, end: str,
                country: str) -> Response:
         """Return volume metrics for a given monitor split by state.
@@ -490,7 +477,6 @@ class MonitorAPI(object):
                 "country": country
             })
 
-    @response_handler
     def countries(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by country.
 
@@ -511,7 +497,6 @@ class MonitorAPI(object):
     # either Social Account or Buzz monitors.                                       #
     #################################################################################
 
-    @response_handler
     def twitter_authors(self, monitor_id: int, start: str,
                         end: str) -> Response:
         """Return information related to the Twitter authors who have posted in a given monitor.
@@ -527,7 +512,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def twitter_metrics(self, monitor_id: int, start: str,
                         end: str) -> Response:
         """Return information about the top hashtags, mentions, and retweets in a monitor.
@@ -543,7 +527,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def twitter_followers(self, monitor_id: int, start: str,
                           end: str) -> Response:
         """Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor
@@ -560,7 +543,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def twitter_sent_posts(self, monitor_id: int, start: str,
                            end: str) -> Response:
         """Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.
@@ -576,7 +558,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def twitter_engagement(self, monitor_id: int, start: str,
                            end: str) -> Response:
         """Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.
@@ -598,7 +579,6 @@ class MonitorAPI(object):
     # either Social Account or Buzz monitors.                                       #
     #################################################################################
 
-    @response_handler
     def facebook_admin_posts(self, monitor_id: int, start: str,
                              end: str) -> Response:
         """Return those posts made by the administrators/owners of a targeted Facebook page in a
@@ -615,7 +595,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def facebook_likes(self, monitor_id: int, start: str,
                        end: str) -> Response:
         """Return the cumulative daily like count for a targeted Facebook page in a
@@ -632,7 +611,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def facebook_activity(self, monitor_id: int, start: str,
                           end: str) -> Response:
         """Return information about actions (likes, comments, shares) made by users and admins for a given page.
@@ -654,7 +632,6 @@ class MonitorAPI(object):
     # from either Social Account or Buzz monitors.                                  #
     #################################################################################
 
-    @response_handler
     def instagram_top_hashtags(self, monitor_id: int, start: str,
                                end: str) -> Response:
         """Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor,
@@ -672,7 +649,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def instagram_followers(self, monitor_id: int, start: str,
                             end: str) -> Response:
         """Return the cumulative daily follower count for a targeted Instagram account in an
@@ -689,7 +665,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def instagram_sent_media(self, monitor_id: int, start: str,
                              end: str) -> Response:
         """Return media sent by admins in a targeted Instagram account.
@@ -705,7 +680,6 @@ class MonitorAPI(object):
                     "start": start,
                     "end": end})
 
-    @response_handler
     def instagram_activity(self, monitor_id: int, start: str,
                            end: str) -> Response:
         """Return information about actions (likes, comments) made by users and admins for a given account.

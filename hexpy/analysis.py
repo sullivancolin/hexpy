@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Moduel for interacting with analysis API"""
 
+import inspect
 from .base import ROOT, response_handler
 from .session import HexpySession
 from requests.models import Response
@@ -26,8 +27,10 @@ class AnalysisAPI(object):
     def __init__(self, session: HexpySession) -> None:
         super(AnalysisAPI, self).__init__()
         self.session = session.session
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in ["__init__"]:
+                setattr(self, name, response_handler(fn))
 
-    @response_handler
     def analysis_request(self, data: Dict[str, Any]) -> Response:
         """Submit a query task against 24 hours of social data.
 
@@ -36,7 +39,6 @@ class AnalysisAPI(object):
         """
         return self.session.post(self.TEMPLATE, json=data)
 
-    @response_handler
     def results(self, request_id: int) -> Response:
         """Retrieve the status of the analysis request and the results.
 

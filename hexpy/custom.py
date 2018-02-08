@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """Custom API request"""
+
+import inspect
 from .base import ROOT, response_handler
 from .session import HexpySession
 from requests.models import Response
@@ -24,8 +26,10 @@ class CustomAPI(object):
         super(CustomAPI, self).__init__()
         self.session = session.session
         self.TEMPLATE = ROOT + endpoint
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in ["__init__"]:
+                setattr(self, name, response_handler(fn))
 
-    @response_handler
     def get(self, url_params: str = "",
             params: Dict[str, Any] = None) -> Response:
         """Send get request using URL parameters and query-string parameters.
@@ -37,7 +41,6 @@ class CustomAPI(object):
         """
         return self.session.get(self.TEMPLATE + url_params, params=params)
 
-    @response_handler
     def post(
             self,
             url_params: str = "",
@@ -53,7 +56,6 @@ class CustomAPI(object):
         return self.session.post(
             self.TEMPLATE + url_params, params=params, json=data)
 
-    @response_handler
     def delete(self, url_params: str = "",
                params: Dict[str, Any] = None) -> Response:
         """Send delete request using URL parameters and query-string parameters.

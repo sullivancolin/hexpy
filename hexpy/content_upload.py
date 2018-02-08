@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Module for uploading custom content"""
 
+import inspect
 from clint.textui import progress
 from .base import ROOT, response_handler
 from .session import HexpySession
@@ -48,8 +49,10 @@ class ContentUploadAPI(object):
     def __init__(self, session: HexpySession) -> None:
         super(ContentUploadAPI, self).__init__()
         self.session = session.session
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in ["batch_upload", "__init__"]:
+                setattr(self, name, response_handler(fn))
 
-    @response_handler
     def upload(self, data: Sequence[Dict[str, Any]]
                ) -> Union[Response, Dict[str, Any]]:
         """Upload list of document dictionaries to Crimson Hexagon platform.

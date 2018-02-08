@@ -103,7 +103,7 @@ def metadata(ctx,
              team_id: int = None,
              country: str = None,
              monitor: int = None) -> None:
-    r"""Get Metadata for account team, monitors, and geography.
+    """Get Metadata for account team, monitors, and geography.
 
     \b
     Valid info
@@ -113,7 +113,8 @@ def metadata(ctx,
         * states
         * cities
         * countries
-        * details
+        * monitor_details
+        * api_documentation
     """
     session = ctx.invoke(login, expiration=True, force=False)
     client = MetadataAPI(session)
@@ -125,7 +126,7 @@ def metadata(ctx,
         "states": client.states,
         "cities": client.cities,
         "countries": client.countries,
-        "details": monitor_client.details,
+        "monitor_details": monitor_client.details,
         "api_documentation": client.api_documentation
     }
     if team_id:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for Streams API."""
-
+import inspect
 from .base import ROOT, response_handler
 from .session import HexpySession
 from requests.models import Response
@@ -25,8 +25,10 @@ class StreamsAPI(object):
     def __init__(self, session: HexpySession) -> None:
         super(StreamsAPI, self).__init__()
         self.session = session.session
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in ["__init__"]:
+                setattr(self, name, response_handler(fn))
 
-    @response_handler
     def posts(self, stream_id: int, count: int = 100) -> Response:
         """Return posts from a stream.
 
@@ -43,7 +45,6 @@ class StreamsAPI(object):
                 "count": count,
             })
 
-    @response_handler
     def stream_list(self, team_id: int) -> Response:
         """List all available streams for a team.
 
@@ -53,7 +54,6 @@ class StreamsAPI(object):
         return self.session.get(
             self.TEMPLATE + "/list/", params={"teamid": team_id})
 
-    @response_handler
     def create_stream(self, team_id: int, name: str) -> Response:
         """Create new stream for a team. System Admin Only.
 
@@ -65,7 +65,6 @@ class StreamsAPI(object):
             self.TEMPLATE, json={"teamid": team_id,
                                  "name": name})
 
-    @response_handler
     def delete_stream(self, stream_id: int) -> Response:
         """Delete a stream. System Admin Only.
 
@@ -75,7 +74,6 @@ class StreamsAPI(object):
         return self.session.delete(self.TEMPLATE + "/{stream_id}".format(
             stream_id=stream_id))
 
-    @response_handler
     def add_monitor_to_stream(self, stream_id: int,
                               monitor_id: int) -> Response:
         """Associate a monitor with a stream. System Admin Only.
@@ -88,7 +86,6 @@ class StreamsAPI(object):
             self.TEMPLATE + "/{stream_id}/monitor/{monitor_id}".format(
                 stream_id=stream_id, monitor_id=monitor_id))
 
-    @response_handler
     def remove_monitor_from_stream(self, stream_id: int,
                                    monitor_id: int) -> Response:
         """Remove association between monitor and stream.  System Admin Only.
@@ -101,7 +98,6 @@ class StreamsAPI(object):
             self.TEMPLATE + "/{stream_id}/monitor/{monitor_id}".format(
                 stream_id=stream_id, monitor_id=monitor_id))
 
-    @response_handler
     def update_stream(self, stream_id: int, name: str) -> Response:
         """Update name of stream. System Admin Only.
 
