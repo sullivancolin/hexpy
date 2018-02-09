@@ -42,9 +42,11 @@ class RealtimeAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "cashtags",
-            params={"id": monitor_id,
-                    "start": start,
-                    "top": top})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "top": top
+            })
 
     def hashtags(self, monitor_id: int, start: int = None,
                  top: int = None) -> Response:
@@ -57,9 +59,11 @@ class RealtimeAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "hashtags",
-            params={"id": monitor_id,
-                    "start": start,
-                    "top": top})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "top": top
+            })
 
     def list(self, team_id: int = None) -> Response:
         """Get the Monitors which are in Proteus
@@ -68,7 +72,9 @@ class RealtimeAPI(object):
             team_id: Integer, The id of the team to which the listed monitors belong.
         """
         return self.session.get(
-            self.TEMPLATE + "list", params={"team_id": team_id})
+            self.TEMPLATE + "list", params={
+                "team_id": team_id
+            })
 
     def configure(self, monitor_id: int) -> Response:
         """Configure the Realtime evaluators for the Monitor.
@@ -77,7 +83,9 @@ class RealtimeAPI(object):
             monitor_id: Integer, the id of the monitor being requested.
         """
         return self.session.get(
-            self.TEMPLATE + "configure", params={"id": monitor_id})
+            self.TEMPLATE + "configure", params={
+                "id": monitor_id
+            })
 
     def enable(self, monitor_id: int) -> Response:
         """Enable Realtime Data.
@@ -86,7 +94,9 @@ class RealtimeAPI(object):
             monitor_id: Integer, the id of the monitor being requested.
         """
         return self.session.get(
-            self.TEMPLATE + "enable", params={"id": monitor_id})
+            self.TEMPLATE + "enable", params={
+                "id": monitor_id
+            })
 
     def disbale(self, monitor_id: int) -> Response:
         """Disable Realtime Data.
@@ -95,7 +105,9 @@ class RealtimeAPI(object):
             monitor_id: Integer, the id of the monitor being requested.
         """
         return self.session.get(
-            self.TEMPLATE + "disable", params={"id": monitor_id})
+            self.TEMPLATE + "disable", params={
+                "id": monitor_id
+            })
 
     def detail(self, monitor_id: int) -> Response:
         """Get the Realtime evaluators details for the Monitor.
@@ -104,7 +116,9 @@ class RealtimeAPI(object):
             monitor_id: Integer, the id of the monitor being requested.
         """
         return self.session.get(
-            self.TEMPLATE + "details", params={"id": monitor_id})
+            self.TEMPLATE + "details", params={
+                "id": monitor_id
+            })
 
     def retweets(self, monitor_id: int) -> Response:
         """Get the Realtime retweets for the Monitor.
@@ -113,7 +127,9 @@ class RealtimeAPI(object):
             monitor_id: Integer, the id of the monitor being requested.
         """
         return self.session.get(
-            self.TEMPLATE + "retweets", params={"id": monitor_id})
+            self.TEMPLATE + "retweets", params={
+                "id": monitor_id
+            })
 
     def social_guids(self,
                      monitor_id: int,
@@ -145,8 +161,10 @@ class RealtimeAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "tweets",
-            params={"id": monitor_id,
-                    "start": start})
+            params={
+                "id": monitor_id,
+                "start": start
+            })
 
     def volume(self, monitor_id: int, start: int = None,
                doc_type: List = None) -> Response:
@@ -159,9 +177,11 @@ class RealtimeAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "volume",
-            params={"id": monitor_id,
-                    "start": start,
-                    "type": doc_type})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "type": doc_type
+            })
 
     def volume_by_sentiment(self, monitor_id: int, start: int,
                             doc_type: str) -> Response:
@@ -174,6 +194,8 @@ class RealtimeAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "volumebysentiment",
-            params={"id": monitor_id,
-                    "start": start,
-                    "type": doc_type})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "type": doc_type
+            })

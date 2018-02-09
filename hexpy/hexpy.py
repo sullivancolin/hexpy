@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """CLI interface for hexpy."""
+
 from datetime import datetime
 import time
 import json

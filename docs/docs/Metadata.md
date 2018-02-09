@@ -17,7 +17,7 @@ Metadata API
 
 ### team_list
 ```python
-analysis_request(data)
+team_list()
 ```
 Return a list of teams accessible to the requesting user.
 

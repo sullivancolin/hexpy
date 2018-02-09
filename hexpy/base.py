@@ -56,7 +56,7 @@ def response_handler(f: Callable) -> Callable:
         response = f(*args, **kwargs)
         if not isinstance(response, dict):
             if response.status_code not in [200, 201, 202]:
-                raise ValueError("Something Went Wrong." + response.text)
+                raise ValueError("Something Went Wrong. " + response.text)
             elif ("status" in response.json()
                   ) and response.json()["status"] == "error":
                 raise ValueError("Something Went Wrong. " + response.text)

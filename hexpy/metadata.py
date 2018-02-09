@@ -42,7 +42,9 @@ class MetadataAPI(object):
             team_id: integer id number for a team
         """
         return self.session.get(
-            self.TEMPLATE + "monitor/list", params={"team": team_id})
+            self.TEMPLATE + "monitor/list", params={
+                "team": team_id
+            })
 
     def geography(self) -> Response:
         """Return all the geographical locations that you may use to
@@ -59,7 +61,9 @@ class MetadataAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "geography/info/states",
-            params={"country": country})
+            params={
+                "country": country
+            })
 
     def cities(self, country: str) -> Response:
         """Return all the cities or urban areas defined in the given country that you may use to
@@ -70,7 +74,9 @@ class MetadataAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "geography/info/cities",
-            params={"country": country})
+            params={
+                "country": country
+            })
 
     def countries(self) -> Response:
         """Return all the countries that you may use to filter monitor results

@@ -45,7 +45,8 @@ class CustomAPI(object):
             self,
             url_params: str = "",
             params: Dict[str, Any] = None,
-            data: Dict[str, Any] = None, ) -> Response:
+            data: Dict[str, Any] = None,
+    ) -> Response:
         """Send post request using URL parameters and query-string parameters, and json data.
 
         # Arguments

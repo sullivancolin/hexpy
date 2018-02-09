@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for monitor results API"""
+
 import inspect
 from .base import ROOT, response_handler
 from hexpy.session import HexpySession
@@ -29,6 +30,12 @@ class MonitorAPI(object):
     def __init__(self, session: HexpySession) -> None:
         super(MonitorAPI, self).__init__()
         self.session = session.session
+        for name, fn in inspect.getmembers(self, inspect.ismethod):
+            if name not in [
+                    "__init__", "_aggregate_metrics", "_aggregate_dates",
+                    "aggregate"
+            ]:
+                setattr(self, name, response_handler(fn))
         self.METRICS = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,
@@ -36,12 +43,6 @@ class MonitorAPI(object):
             "top_sources": self.top_sources,
             "interest_affinities": self.interest_affinities
         }
-        for name, fn in inspect.getmembers(self, inspect.ismethod):
-            if name not in [
-                    "__init__", "_aggregate_metrics", "_aggregate_dates",
-                    "aggregate"
-            ]:
-                setattr(self, name, response_handler(fn))
 
     def _aggregate_metrics(self, monitor_id: int, date: Sequence[str],
                            metrics: Union[Sequence[str], str]
@@ -57,8 +58,8 @@ class MonitorAPI(object):
                                                     date[1])
             }
         else:
-            raise ValueError(
-                'valid metrics are {}'.format(self.METRICS.keys()))
+            raise ValueError('valid metrics are {}'.format(
+                self.METRICS.keys()))
 
     def _aggregate_dates(
             self, monitor_id: int,
@@ -132,7 +133,9 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
         return self.session.get(
-            self.TEMPLATE + "detail", params={"id": monitor_id})
+            self.TEMPLATE + "detail", params={
+                "id": monitor_id
+            })
 
     def audit(self, monitor_id: int) -> Response:
         """Return audit information about the selected monitor, sorted from most to least recent.
@@ -141,7 +144,9 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
         return self.session.get(
-            self.TEMPLATE + "audit", params={"id": monitor_id})
+            self.TEMPLATE + "audit", params={
+                "id": monitor_id
+            })
 
     def word_cloud(self,
                    monitor_id: int,
@@ -180,8 +185,10 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "trainingposts",
-            params={"id": monitor_id,
-                    "category": category})
+            params={
+                "id": monitor_id,
+                "category": category
+            })
 
     def train_monitor(self, monitor_id: int, category_id: int,
                       data: Dict[str, Any]) -> Response:
@@ -263,9 +270,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "topicwaves",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def top_sources(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
@@ -277,9 +286,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "sources",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def image_analysis(self,
                        monitor_id: int,
@@ -401,9 +412,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "demographics/age",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def ethnicity(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by ethnicity.
@@ -415,9 +428,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "demographics/ethnicity",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def gender(self, monitor_id: int, start: str, end: str) -> Response:
         """Return volume metrics for a given monitor split by gender.
@@ -429,9 +444,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "demographics/gender",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     #################################################################################
     # Geography                                                                     #
@@ -487,9 +504,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "geography/countries",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     #################################################################################
     # Twitter                                                                       #
@@ -508,9 +527,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "authors",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def twitter_metrics(self, monitor_id: int, start: str,
                         end: str) -> Response:
@@ -523,9 +544,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "twittermetrics",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def twitter_followers(self, monitor_id: int, start: str,
                           end: str) -> Response:
@@ -539,9 +562,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "twittersocial/followers",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def twitter_sent_posts(self, monitor_id: int, start: str,
                            end: str) -> Response:
@@ -554,9 +579,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "twittersocial/sentposts",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def twitter_engagement(self, monitor_id: int, start: str,
                            end: str) -> Response:
@@ -569,9 +596,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "twittersocial/totalengagement",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     #################################################################################
     # Facebook                                                                      #
@@ -591,9 +620,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "facebook/adminposts",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def facebook_likes(self, monitor_id: int, start: str,
                        end: str) -> Response:
@@ -607,9 +638,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "facebook/pagelikes",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def facebook_activity(self, monitor_id: int, start: str,
                           end: str) -> Response:
@@ -622,9 +655,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "facebook/totalactivity",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     #################################################################################
     # Instagram                                                                     #
@@ -645,9 +680,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "instagram/hashtags",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def instagram_followers(self, monitor_id: int, start: str,
                             end: str) -> Response:
@@ -661,9 +698,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "instagram/followers",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def instagram_sent_media(self, monitor_id: int, start: str,
                              end: str) -> Response:
@@ -676,9 +715,11 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "instagram/sentmedia",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })
 
     def instagram_activity(self, monitor_id: int, start: str,
                            end: str) -> Response:
@@ -691,6 +732,8 @@ class MonitorAPI(object):
         """
         return self.session.get(
             self.TEMPLATE + "instagram/totalactivity",
-            params={"id": monitor_id,
-                    "start": start,
-                    "end": end})
+            params={
+                "id": monitor_id,
+                "start": start,
+                "end": end
+            })

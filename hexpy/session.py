@@ -4,7 +4,7 @@
 import inspect
 import requests
 from requests.models import Response
-import os
+from pathlib import Path
 import json
 from getpass import getpass
 from .base import ROOT, response_handler
@@ -47,8 +47,7 @@ class HexpySession(object):
     ```
     """
 
-    CREDS_FILE = os.path.join(
-        os.path.expanduser('~'), '.hexpy', 'credentials.json')
+    CREDS_FILE = Path.home() / '.hexpy' / 'credentials.json'
 
     def __init__(self,
                  username: str = None,
@@ -105,8 +104,8 @@ class HexpySession(object):
         """
         if not path:
             path = self.CREDS_FILE
-        if not os.path.exists(os.path.split(path)[0]):
-            os.makedirs(os.path.split(path)[0])
+            if not path.exists():
+                path.parent.mkdir()
         with open(path, "w") as outfile:
             json.dump(self.auth, outfile, indent=4)
 
@@ -125,8 +124,8 @@ class HexpySession(object):
                 return cls(token=auth["auth"])
         except IOError:
             raise IOError(
-                "Credentials File not found. Please specify token or username and password."
-            )
+                "Credentials File at '{}' not found. Please specify token or username and password.".
+                format(path))
 
     def close(self):
         """Close persisted connection to API server."""

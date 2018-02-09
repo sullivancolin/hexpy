@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module for Streams API."""
+
 import inspect
 from .base import ROOT, response_handler
 from .session import HexpySession
@@ -52,7 +53,9 @@ class StreamsAPI(object):
             team_id: Integer, the id of the team.
         """
         return self.session.get(
-            self.TEMPLATE + "/list/", params={"teamid": team_id})
+            self.TEMPLATE + "/list/", params={
+                "teamid": team_id
+            })
 
     def create_stream(self, team_id: int, name: str) -> Response:
         """Create new stream for a team. System Admin Only.
@@ -62,8 +65,10 @@ class StreamsAPI(object):
             name: String, the name to associate with the newly created stream.
         """
         return self.session.post(
-            self.TEMPLATE, json={"teamid": team_id,
-                                 "name": name})
+            self.TEMPLATE, json={
+                "teamid": team_id,
+                "name": name
+            })
 
     def delete_stream(self, stream_id: int) -> Response:
         """Delete a stream. System Admin Only.
@@ -71,8 +76,8 @@ class StreamsAPI(object):
         # Arguments
             stream_id: Integer, the id of the stream to be deleted.
         """
-        return self.session.delete(self.TEMPLATE + "/{stream_id}".format(
-            stream_id=stream_id))
+        return self.session.delete(
+            self.TEMPLATE + "/{stream_id}".format(stream_id=stream_id))
 
     def add_monitor_to_stream(self, stream_id: int,
                               monitor_id: int) -> Response:
@@ -107,4 +112,6 @@ class StreamsAPI(object):
         """
         return self.session.post(
             self.TEMPLATE + "/{stream_id}".format(stream_id=stream_id),
-            json={"name": name})
+            json={
+                "name": name
+            })

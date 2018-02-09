@@ -10,16 +10,6 @@ Hexpy Command Line Interface
 * Quickly get multiple metrics from monitor results as JSON. 
 * Compose powerful shell scripts with pipe-able commands such as [jq](https://stedolan.github.io/jq/), and `xargs`.
 
-
-## Installation
-To install the most recent stable release run `pip install hexpy`.
-
-To install the console command:
-```bash
-$ git clone https://github.com/sullivancolin/hexpy.git
-$ pip install hexpy/
-```
-
 ## Usage
 
 ### Basic
