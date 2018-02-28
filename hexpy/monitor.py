@@ -5,7 +5,7 @@ import inspect
 from .base import ROOT, response_handler
 from hexpy.session import HexpySession
 from requests.models import Response
-from typing import Dict, Any, Sequence, Union
+from typing import Dict, Any, Sequence, Union, List
 
 
 class MonitorAPI(object):
@@ -191,10 +191,10 @@ class MonitorAPI(object):
             })
 
     def train_monitor(self, monitor_id: int, category_id: int,
-                      data: Dict[str, Any]) -> Response:
-        """Upload individual training document monitors programmatically.
+                      data: List[Dict[str, Any]]) -> Response:
+        """Upload training document monitors programmatically.
 
-        You may only upload one document per request. Due to the restrictions involved in using this endpoint,
+        Upload list documents of one category per request. Due to the restrictions involved in using this endpoint,
         unless you have a specific need to train monitors programmatically,
         training monitors via the user interface in ForSight will normally be the more efficient training option.
         [Reference](https://apidocs.crimsonhexagon.com/reference#training-document-upload)
@@ -202,14 +202,15 @@ class MonitorAPI(object):
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category_id: Integer, the category this content should belong to
-            data: Dictionary, document item with required fields
+            data: List of document dictionaries with required fields
         """
         return self.session.post(
             self.TEMPLATE + "train",
+            params={"id": monitor_id},
             json={
-                "monitorID": monitor_id,
-                "categoryID": category_id,
-                "document": data
+                "monitorid": monitor_id,
+                "categoryid": category_id,
+                "documents": data
             })
 
     def interest_affinities(self,
