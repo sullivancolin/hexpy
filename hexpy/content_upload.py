@@ -3,10 +3,9 @@
 
 import inspect
 from clint.textui import progress
-from .base import ROOT, response_handler
+from .base import ROOT, handle_response, rate_limited
 from .session import HexpySession
-from requests.models import Response
-from typing import Dict, Any, Sequence, Union
+from typing import Dict, Any, Sequence
 
 
 class ContentUploadAPI(object):
@@ -51,10 +50,9 @@ class ContentUploadAPI(object):
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["batch_upload", "__init__"]:
-                setattr(self, name, response_handler(fn))
+                setattr(self, name, rate_limited(fn))
 
-    def upload(self, data: Sequence[Dict[str, Any]]
-               ) -> Union[Response, Dict[str, Any]]:
+    def upload(self, data: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         """Upload list of document dictionaries to Crimson Hexagon platform.
 
         If greater than 1000 items passed, reverts to batch upload.
@@ -62,7 +60,10 @@ class ContentUploadAPI(object):
             data: list of document dictionaries  to upload.
         """
         if len(data) <= 1000:
-            return self.session.post(self.TEMPLATE, json={"items": data})
+            return handle_response(
+                self.session.post(self.TEMPLATE, json={
+                    "items": data
+                }))
         else:
             print("More than 1000 items found.  Uploading in batches of 1000.")
             return self.batch_upload(data)
@@ -79,4 +80,4 @@ class ContentUploadAPI(object):
                     [data[i:i + 1000] for i in range(0, len(data), 1000)])):
             response = self.upload(batch)
             batch_responses["Batch number {}".format(batch_num)] = response
-        return batch_responses
+        return handle_response(batch_responses)

@@ -3,11 +3,11 @@
 
 import inspect
 import requests
-from requests.models import Response
 from pathlib import Path
 import json
 from getpass import getpass
-from .base import ROOT, response_handler
+from .base import ROOT, handle_response, rate_limited
+from typing import Dict, Any
 
 
 class HexpySession(object):
@@ -57,7 +57,7 @@ class HexpySession(object):
         super(HexpySession, self).__init__()
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name == "get_token":
-                setattr(self, name, response_handler(fn))
+                setattr(self, name, rate_limited(fn))
         if not any([username, password, token]):
             raise ValueError(
                 "No credentials given. Please provide valid token or username and password"
@@ -80,7 +80,7 @@ class HexpySession(object):
     def get_token(self,
                   username: str,
                   password: str,
-                  no_expiration: bool = False) -> Response:
+                  no_expiration: bool = False) -> Dict[str, Any]:
         """Request authorization token.
 
         # Arguments
@@ -88,13 +88,13 @@ class HexpySession(object):
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        return requests.Session().get(
+        return handle_response(requests.Session().get(
             ROOT + "authenticate",
             params={
                 "username": username,
                 "password": password,
-                "noExpiration": no_expiration,
-            })
+                "noExpiration": str(no_expiration).lower(),
+            }))
 
     def save_token(self, path: str = None) -> None:
         """Save authorization token.

@@ -1,7 +1,7 @@
 .PHONY: clean clean-test clean-pyc clean-build docs
 
  ## remove all build, test, coverage and Python artifacts
-clean: clean-build clean-pyc clean-test
+clean: clean-build clean-pyc clean-test docs-clean
 
 ## remove build artifacts
 clean-build:
@@ -69,7 +69,7 @@ dist: clean
 
 ## install the package to the active Python's site-packages
 install: clean
-	pip install .[cli]
+	pip install --upgrade  .
 
 #################################################################################
 # Self Documenting Commands                                                     #

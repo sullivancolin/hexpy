@@ -259,6 +259,7 @@ def export(ctx,
            output: str = None,
            delimiter: str = ",") -> None:
     """Save Monitor posts as spreadsheet."""
+
     if delimiter == "\\t":
         delimiter = '\t'
     session = ctx.invoke(login, expiration=True, force=False)

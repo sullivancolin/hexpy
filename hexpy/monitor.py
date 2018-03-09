@@ -2,9 +2,8 @@
 """Module for monitor results API"""
 
 import inspect
-from .base import ROOT, response_handler
+from .base import ROOT, handle_response, rate_limited
 from hexpy.session import HexpySession
-from requests.models import Response
 from typing import Dict, Any, Sequence, Union, List
 
 
@@ -15,13 +14,13 @@ class MonitorAPI(object):
 
     ```python
     >>> from hexpy import HexpySession, MonitorAPI
-    >>> session = HexpySession.load_auth_from_file()
-    >>> monitor_client = MonitorAPI(session)
-    >>> details = monitor_client.details(monitor_id)
+    >>> session = HexpySession.load_auth_from_file())
+    >>> monitor_client = MonitorAPI(session))
+    >>> details = monitor_client.details(monitor_id))
     >>> start = details["resultsStart"]
     >>> end = details["resultsEnd"]
-    >>> monitor_client.posts(monitor_id, start, end)
-    >>> session.close()
+    >>> monitor_client.posts(monitor_id, start, end))
+    >>> session.close())
     ```
     """
 
@@ -35,7 +34,7 @@ class MonitorAPI(object):
                     "__init__", "_aggregate_metrics", "_aggregate_dates",
                     "aggregate"
             ]:
-                setattr(self, name, response_handler(fn))
+                setattr(self, name, rate_limited(fn))
         self.METRICS = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,
@@ -126,33 +125,35 @@ class MonitorAPI(object):
             raise ValueError(
                 "monitor_ids must be integer or list of integers to aggregate")
 
-    def details(self, monitor_id: int) -> Response:
+    def details(self, monitor_id: int) -> Dict[str, Any]:
         """Return detailed metadata about the selected monitor, including category metadata.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return self.session.get(
-            self.TEMPLATE + "detail", params={
-                "id": monitor_id
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "detail", params={
+                    "id": monitor_id
+                }))
 
-    def audit(self, monitor_id: int) -> Response:
+    def audit(self, monitor_id: int) -> Dict[str, Any]:
         """Return audit information about the selected monitor, sorted from most to least recent.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
         """
-        return self.session.get(
-            self.TEMPLATE + "audit", params={
-                "id": monitor_id
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "audit", params={
+                    "id": monitor_id
+                }))
 
     def word_cloud(self,
                    monitor_id: int,
                    start: str,
                    end: str,
-                   filter_string: str = None) -> Response:
+                   filter_string: str = None) -> Dict[str, Any]:
         """Return an alphabetized list of the top 300 words in a monitor.
 
         This data is generated using documents randomly selected from the pool defined by the submitted parameters.
@@ -163,16 +164,18 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
-        return self.session.get(
-            self.TEMPLATE + "wordcloud",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "filter": filter_string
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "wordcloud",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "filter": filter_string
+                }))
 
-    def trained_posts(self, monitor_id: int, category: int = None) -> Response:
+    def trained_posts(self, monitor_id: int,
+                      category: int = None) -> Dict[str, Any]:
         """Return a list of the training posts for a given opinion monitor.
 
         The selected monitor must be an opinion monitor; requests for other monitor types will return an error.
@@ -183,42 +186,44 @@ class MonitorAPI(object):
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category: Integer, category id to target training posts from a specific category
         """
-        return self.session.get(
-            self.TEMPLATE + "trainingposts",
-            params={
-                "id": monitor_id,
-                "category": category
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "trainingposts",
+                params={
+                    "id": monitor_id,
+                    "category": category
+                }))
 
     def train_monitor(self, monitor_id: int, category_id: int,
-                      data: List[Dict[str, Any]]) -> Response:
+                      data: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Upload training document monitors programmatically.
 
         Upload list documents of one category per request. Due to the restrictions involved in using this endpoint,
         unless you have a specific need to train monitors programmatically,
         training monitors via the user interface in ForSight will normally be the more efficient training option.
-        [Reference](https://apidocs.crimsonhexagon.com/reference#training-document-upload)
+        [Reference](https://apidocs.crimsonhexagon.com/reference#training-document-upload))
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category_id: Integer, the category this content should belong to
             data: List of document dictionaries with required fields
         """
-        return self.session.post(
-            self.TEMPLATE + "train",
-            params={"id": monitor_id},
-            json={
-                "monitorid": monitor_id,
-                "categoryid": category_id,
-                "documents": data
-            })
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE + "train",
+                params={"id": monitor_id},
+                json={
+                    "monitorid": monitor_id,
+                    "categoryid": category_id,
+                    "documents": data
+                }))
 
     def interest_affinities(self,
                             monitor_id: int,
                             start: str,
                             end: str,
                             daily: bool = False,
-                            document_source: str = None) -> Response:
+                            document_source: str = None) -> Dict[str, Any]:
         """Return information about the authors in a monitor and their affinity with a range of pre-defined topics.
 
         # Arguments
@@ -228,21 +233,22 @@ class MonitorAPI(object):
             daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range
             document_source: String, document source for affinities. valid params include `TWITTER` or `TUMBLR`
         """
-        return self.session.get(
-            self.TEMPLATE + "interestaffinities",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "daily": daily,
-                "documentSource": document_source
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "interestaffinities",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "daily": daily,
+                    "documentSource": document_source
+                }))
 
     def topics(self,
                monitor_id: int,
                start: str,
                end: str,
-               filter_string: str = None) -> Response:
+               filter_string: str = None) -> Dict[str, Any]:
         """Return the XML data that can be used to generate clustering visualizations using third-party software.
 
         # Arguments
@@ -251,16 +257,18 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
-        return self.session.get(
-            self.TEMPLATE + "topics",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "filter": filter_string
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "topics",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "filter": filter_string
+                }))
 
-    def topic_waves(self, monitor_id: int, start: str, end: str) -> Response:
+    def topic_waves(self, monitor_id: int, start: str,
+                    end: str) -> Dict[str, Any]:
         """Return the Topic waves information for a monitor.
 
         # Arguments
@@ -269,15 +277,17 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             filter_string: String, pipe-separated list of field:value pairs used to filter posts
         """
-        return self.session.get(
-            self.TEMPLATE + "topicwaves",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "topicwaves",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
-    def top_sources(self, monitor_id: int, start: str, end: str) -> Response:
+    def top_sources(self, monitor_id: int, start: str,
+                    end: str) -> Dict[str, Any]:
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
         # Arguments
@@ -285,20 +295,21 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "sources",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "sources",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def image_analysis(self,
                        monitor_id: int,
                        start: str,
                        end: str,
                        object_type: str = "",
-                       top: int = 100) -> Response:
+                       top: int = 100) -> Dict[str, Any]:
         """Return a breakdown of the top image classes within a provided monitor.
 
         # Arguments
@@ -308,22 +319,23 @@ class MonitorAPI(object):
             object_type: String, specifies type of image classes, valid values [object, scene, action, logo]
             top : Integer, if defined, only the selected number of classes will be returned
         """
-        return self.session.get(
-            self.TEMPLATE + "imageresults",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "type": object_type,
-                "top": top
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "imageresults",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "type": object_type,
+                    "top": top
+                }))
 
     def volume(self,
                monitor_id: int,
                start: str,
                end: str,
                aggregate_by_day: bool = False,
-               use_local_time: bool = False) -> Response:
+               use_local_time: bool = False) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by date.
 
         # Arguments
@@ -333,21 +345,23 @@ class MonitorAPI(object):
             aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day
             use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor
         """
-        return self.session.get(
-            self.TEMPLATE + "dayandtime",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "aggregatebyday": aggregate_by_day,
-                "uselocaltime": use_local_time
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "dayandtime",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "aggregatebyday": aggregate_by_day,
+                    "uselocaltime": use_local_time
+                }))
 
-    def sentiment_and_categories(self,
-                                 monitor_id: int,
-                                 start: str,
-                                 end: str,
-                                 hide_excluded: bool = False) -> Response:
+    def sentiment_and_categories(
+            self,
+            monitor_id: int,
+            start: str,
+            end: str,
+            hide_excluded: bool = False) -> Dict[str, Any]:
         """Return aggregate volume, sentiment, emotion and opinion category
         analysis for a given monitor.
 
@@ -357,14 +371,15 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.
         """
-        return self.session.get(
-            self.TEMPLATE + "results",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "hideExcluded": hide_excluded
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "results",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "hideExcluded": hide_excluded
+                }))
 
     def posts(self,
               monitor_id: int,
@@ -373,7 +388,7 @@ class MonitorAPI(object):
               filter_string: str = None,
               extend_limit: bool = False,
               full_contents: bool = False,
-              geotagged: bool = False) -> Response:
+              geotagged: bool = False) -> Dict[str, Any]:
         """Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
 
         # Arguments
@@ -385,17 +400,18 @@ class MonitorAPI(object):
             full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms
             geo tagged: Boolean, if True, returns only geotagged documents matching the given filter
         """
-        return self.session.get(
-            self.TEMPLATE + "posts",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "filter": filter_string,
-                "extendLimit": extend_limit,
-                "fullContents": full_contents,
-                "geotagged": geotagged
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "posts",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "filter": filter_string,
+                    "extendLimit": extend_limit,
+                    "fullContents": full_contents,
+                    "geotagged": geotagged
+                }))
 
     #################################################################################
     # Demographics                                                                  #
@@ -403,7 +419,7 @@ class MonitorAPI(object):
     # within a given monitor.                                                       #
     #################################################################################
 
-    def age(self, monitor_id: int, start: str, end: str) -> Response:
+    def age(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by age bracket.
 
         # Arguments
@@ -411,15 +427,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "demographics/age",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "demographics/age",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
-    def ethnicity(self, monitor_id: int, start: str, end: str) -> Response:
+    def ethnicity(self, monitor_id: int, start: str,
+                  end: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by ethnicity.
 
         # Arguments
@@ -427,15 +445,16 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "demographics/ethnicity",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "demographics/ethnicity",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
-    def gender(self, monitor_id: int, start: str, end: str) -> Response:
+    def gender(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by gender.
 
         # Arguments
@@ -443,13 +462,14 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "demographics/gender",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "demographics/gender",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     #################################################################################
     # Geography                                                                     #
@@ -457,7 +477,7 @@ class MonitorAPI(object):
     #################################################################################
 
     def cities(self, monitor_id: int, start: str, end: str,
-               country: str) -> Response:
+               country: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by city.
 
         # Arguments
@@ -467,17 +487,18 @@ class MonitorAPI(object):
             country: String, country code to filter cities
 
         """
-        return self.session.get(
-            self.TEMPLATE + "geography/cities",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "country": country
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "geography/cities",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "country": country
+                }))
 
     def states(self, monitor_id: int, start: str, end: str,
-               country: str) -> Response:
+               country: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by state.
 
         # Arguments
@@ -486,16 +507,18 @@ class MonitorAPI(object):
             end: String, exclusive end date in YYYY-MM-DD
             country: String, country code to filter states
         """
-        return self.session.get(
-            self.TEMPLATE + "geography/states",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end,
-                "country": country
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "geography/states",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "country": country
+                }))
 
-    def countries(self, monitor_id: int, start: str, end: str) -> Response:
+    def countries(self, monitor_id: int, start: str,
+                  end: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by country.
 
         # Arguments
@@ -503,13 +526,14 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "geography/countries",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "geography/countries",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     #################################################################################
     # Twitter                                                                       #
@@ -518,7 +542,7 @@ class MonitorAPI(object):
     #################################################################################
 
     def twitter_authors(self, monitor_id: int, start: str,
-                        end: str) -> Response:
+                        end: str) -> Dict[str, Any]:
         """Return information related to the Twitter authors who have posted in a given monitor.
 
         # Arguments
@@ -526,16 +550,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "authors",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "authors",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def twitter_metrics(self, monitor_id: int, start: str,
-                        end: str) -> Response:
+                        end: str) -> Dict[str, Any]:
         """Return information about the top hashtags, mentions, and retweets in a monitor.
 
         # Arguments
@@ -543,16 +568,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "twittermetrics",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "twittermetrics",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def twitter_followers(self, monitor_id: int, start: str,
-                          end: str) -> Response:
+                          end: str) -> Dict[str, Any]:
         """Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor
         as of the selected dates.
 
@@ -561,16 +587,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "twittersocial/followers",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "twittersocial/followers",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def twitter_sent_posts(self, monitor_id: int, start: str,
-                           end: str) -> Response:
+                           end: str) -> Dict[str, Any]:
         """Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.
 
         # Arguments
@@ -578,16 +605,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "twittersocial/sentposts",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "twittersocial/sentposts",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def twitter_engagement(self, monitor_id: int, start: str,
-                           end: str) -> Response:
+                           end: str) -> Dict[str, Any]:
         """Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.
 
         # Arguments
@@ -595,13 +623,14 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "twittersocial/totalengagement",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "twittersocial/totalengagement",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     #################################################################################
     # Facebook                                                                      #
@@ -610,7 +639,7 @@ class MonitorAPI(object):
     #################################################################################
 
     def facebook_admin_posts(self, monitor_id: int, start: str,
-                             end: str) -> Response:
+                             end: str) -> Dict[str, Any]:
         """Return those posts made by the administrators/owners of a targeted Facebook page in a
         Facebook Social Account Monitor.
 
@@ -619,16 +648,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "facebook/adminposts",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "facebook/adminposts",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def facebook_likes(self, monitor_id: int, start: str,
-                       end: str) -> Response:
+                       end: str) -> Dict[str, Any]:
         """Return the cumulative daily like count for a targeted Facebook page in a
         Facebook Social Account Monitor as of the selected dates.
 
@@ -637,16 +667,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "facebook/pagelikes",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "facebook/pagelikes",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def facebook_activity(self, monitor_id: int, start: str,
-                          end: str) -> Response:
+                          end: str) -> Dict[str, Any]:
         """Return information about actions (likes, comments, shares) made by users and admins for a given page.
 
         # Arguments
@@ -654,13 +685,14 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "facebook/totalactivity",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "facebook/totalactivity",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     #################################################################################
     # Instagram                                                                     #
@@ -669,7 +701,7 @@ class MonitorAPI(object):
     #################################################################################
 
     def instagram_top_hashtags(self, monitor_id: int, start: str,
-                               end: str) -> Response:
+                               end: str) -> Dict[str, Any]:
         """Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor,
         plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected
         (i.e. for which the hashtags are being tracked explicitly in ForSight).
@@ -679,16 +711,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "instagram/hashtags",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "instagram/hashtags",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def instagram_followers(self, monitor_id: int, start: str,
-                            end: str) -> Response:
+                            end: str) -> Dict[str, Any]:
         """Return the cumulative daily follower count for a targeted Instagram account in an
         Instagram Social Account Monitor as of the selected dates.
 
@@ -697,16 +730,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "instagram/followers",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "instagram/followers",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def instagram_sent_media(self, monitor_id: int, start: str,
-                             end: str) -> Response:
+                             end: str) -> Dict[str, Any]:
         """Return media sent by admins in a targeted Instagram account.
 
         # Arguments
@@ -714,16 +748,17 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "instagram/sentmedia",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "instagram/sentmedia",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))
 
     def instagram_activity(self, monitor_id: int, start: str,
-                           end: str) -> Response:
+                           end: str) -> Dict[str, Any]:
         """Return information about actions (likes, comments) made by users and admins for a given account.
 
         # Arguments
@@ -731,10 +766,11 @@ class MonitorAPI(object):
             start: String, inclusive start date in YYYY-MM-DD
             end: String, exclusive end date in YYYY-MM-DD
         """
-        return self.session.get(
-            self.TEMPLATE + "instagram/totalactivity",
-            params={
-                "id": monitor_id,
-                "start": start,
-                "end": end
-            })
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "instagram/totalactivity",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end
+                }))

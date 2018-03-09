@@ -2,9 +2,8 @@
 """Custom API request"""
 
 import inspect
-from .base import ROOT, response_handler
+from .base import ROOT, handle_response, rate_limited
 from .session import HexpySession
-from requests.models import Response
 from typing import Any, Dict
 
 
@@ -28,10 +27,10 @@ class CustomAPI(object):
         self.TEMPLATE = ROOT + endpoint
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
-                setattr(self, name, response_handler(fn))
+                setattr(self, name, rate_limited(fn))
 
     def get(self, url_params: str = "",
-            params: Dict[str, Any] = None) -> Response:
+            params: Dict[str, Any] = None) -> Dict[str, Any]:
         """Send get request using URL parameters and query-string parameters.
 
         # Arguments
@@ -39,14 +38,15 @@ class CustomAPI(object):
             params: Dict, querystring params.
 
         """
-        return self.session.get(self.TEMPLATE + url_params, params=params)
+        return handle_response(
+            self.session.get(self.TEMPLATE + url_params, params=params))
 
     def post(
             self,
             url_params: str = "",
             params: Dict[str, Any] = None,
             data: Dict[str, Any] = None,
-    ) -> Response:
+    ) -> Dict[str, Any]:
         """Send post request using URL parameters and query-string parameters, and json data.
 
         # Arguments
@@ -54,15 +54,17 @@ class CustomAPI(object):
             params: Dict, querystring params.
             data: Dict, json data to post.
         """
-        return self.session.post(
-            self.TEMPLATE + url_params, params=params, json=data)
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE + url_params, params=params, json=data))
 
     def delete(self, url_params: str = "",
-               params: Dict[str, Any] = None) -> Response:
+               params: Dict[str, Any] = None) -> Dict[str, Any]:
         """Send delete request using URL parameters and query-string parameters.
 
         # Arguments
             url_params: String, url params and endpoints concatenated.
             params: Dict, querystring params.
         """
-        return self.session.delete(self.TEMPLATE + url_params, params=params)
+        return handle_response(
+            self.session.delete(self.TEMPLATE + url_params, params=params))
