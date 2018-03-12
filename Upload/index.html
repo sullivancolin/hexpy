@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Sessions/">Sessions</a>
+    <a class="" href="../Session/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -175,7 +175,7 @@ To use this endpoint, please contact support and they will create a new custom c
 
 <h2 id="methods">Methods</h2>
 <h3 id="upload">upload</h3>
-<pre><code class="python">upload(data)
+<pre><code class="python">upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Upload list of document dictionaries to Crimson Hexagon platform.</p>
@@ -185,7 +185,7 @@ To use this endpoint, please contact support and they will create a new custom c
 <li>data: list of document dictionaries  to upload.</li>
 </ul>
 <h3 id="batch_upload">batch_upload</h3>
-<pre><code class="python">batch_upload(data)
+<pre><code class="python">batch_upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Batch upload list of document dictionaries to Crimson Hexagon platform.</p>

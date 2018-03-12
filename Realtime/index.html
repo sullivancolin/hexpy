@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Sessions/">Sessions</a>
+    <a class="" href="../Session/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +157,7 @@
 
 <h2 id="methods">Methods</h2>
 <h3 id="list">list</h3>
-<pre><code class="python">list(team_id)
+<pre><code class="python">list(team_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Monitors which are in Proteus</p>
@@ -166,7 +166,7 @@
 <li>team_id: Integer, The id of the team to which the listed monitors belong.</li>
 </ul>
 <h3 id="configure">configure</h3>
-<pre><code class="python">configure(monitor_id)
+<pre><code class="python">configure(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Configure the Realtime evaluators for the Monitor.</p>
@@ -175,7 +175,7 @@
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 </ul>
 <h3 id="enable">enable</h3>
-<pre><code class="python">enable(monitor_id)
+<pre><code class="python">enable(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Enable Realtime Data.</p>
@@ -184,7 +184,7 @@
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 </ul>
 <h3 id="disbale">disbale</h3>
-<pre><code class="python">disbale(monitor_id)
+<pre><code class="python">disbale(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Disable Realtime Data.</p>
@@ -193,7 +193,7 @@
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 </ul>
 <h3 id="detail">detail</h3>
-<pre><code class="python">detail(monitor_id)
+<pre><code class="python">detail(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime evaluators details for the Monitor.</p>
@@ -202,7 +202,7 @@
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 </ul>
 <h3 id="cashtags">cashtags</h3>
-<pre><code class="python">cashtags(monitor_id, start, top)
+<pre><code class="python">cashtags(monitor_id: int, start: int = None, top: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get Cashtags associated to a Monitor.</p>
@@ -213,7 +213,7 @@
 <li>top: Integer, The top N cashtags to retrieve.</li>
 </ul>
 <h3 id="hashtags">hashtags</h3>
-<pre><code class="python">hashtags(monitor_id, start, top)
+<pre><code class="python">hashtags(monitor_id: int, start: int = None, top: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get Hashtags associated to a Monitor.</p>
@@ -224,7 +224,7 @@
 <li>top: Integer, The top N hashtags to retrieve.</li>
 </ul>
 <h3 id="retweets">retweets</h3>
-<pre><code class="python">retweets(monitor_id)
+<pre><code class="python">retweets(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime retweets for the Monitor.</p>
@@ -233,18 +233,19 @@
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 </ul>
 <h3 id="social_guids">social_guids</h3>
-<pre><code class="python">social_guids(monitor_id, doc_type, start, received_after) 
+<pre><code class="python">social_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime social guids for the Monitor.</p>
 <h4 id="arguments_8">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
+<li>doct_type: String, Specifies the document type.</li>
 <li>start: Integer, specifies inclusive start date in epoch seconds.</li>
-<li>type: String, Specifies the document type.</li>
+<li>received_after: Integer, Specifies inclusive received after date in epoch seconds.</li>
 </ul>
 <h3 id="tweets">tweets</h3>
-<pre><code class="python">tweets(monitor_id, start) 
+<pre><code class="python">tweets(monitor_id: int, start: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime tweets for the Monitor.</p>
@@ -254,7 +255,7 @@
 <li>start: Integer, specifies inclusive start date in epoch seconds.</li>
 </ul>
 <h3 id="volume">volume</h3>
-<pre><code class="python">volume(monitor_id, doc_type, start) 
+<pre><code class="python">volume(monitor_id: int, start: int = None, doc_type: List = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime volume for the Monitor.</p>
@@ -262,10 +263,10 @@
 <ul>
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 <li>start: Integer, specifies inclusive start date in epoch seconds.</li>
-<li>type: List, specifies the document type to filter.</li>
+<li>doc_type: List, specifies the document type to filter.</li>
 </ul>
 <h3 id="volume_by_sentiment">volume_by_sentiment</h3>
-<pre><code class="python">volume_by_sentiment(monitor_id, doc_type, start) 
+<pre><code class="python">volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Get the Realtime volume by sentiment for the Monitor.</p>
@@ -273,7 +274,7 @@
 <ul>
 <li>monitor_id: Integer, the id of the monitor being requested.</li>
 <li>start: Integer, specifies inclusive start date in epoch seconds.</li>
-<li>type: String, specifies the document type to filter.</li>
+<li>doc_type: String, specifies the document type to filter.</li>
 </ul>
               
             </div>

@@ -18,8 +18,8 @@
   <script>
     // Current page data
     var mkdocs_page_name = "Sessions";
-    var mkdocs_page_input_path = "Sessions.md";
-    var mkdocs_page_url = "/Sessions/";
+    var mkdocs_page_input_path = "Session.md";
+    var mkdocs_page_url = "/Session/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -57,7 +57,7 @@
     <a class="current" href="./">Sessions</a>
     <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#sessions">Sessions</a></li>
+    <li class="toctree-l2"><a href="#session">Session</a></li>
     
         <ul>
         
@@ -143,7 +143,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="sessions">Sessions</h1>
+                <h1 id="session">Session</h1>
 <h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</h2>
 <p>Instantiate using token, or username. Optionally include password, or enter it at the prompt.</p>
 <pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession
@@ -175,7 +175,7 @@ Enter password: *********
 
 <h2 id="methods">Methods</h2>
 <h3 id="get_token">get_token</h3>
-<pre><code class="python">get_token(username, password, no_expiration=False)
+<pre><code class="python">get_token(username: str, password: str, no_expiration: bool = False) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Request authorization token.</p>
@@ -186,7 +186,7 @@ Enter password: *********
 <li>no_expiration: True/False token with 24 expiration.</li>
 </ul>
 <h3 id="save_token">save_token</h3>
-<pre><code class="python">save_token(path=None)
+<pre><code class="python">save_token(path: str = None) -&gt; None
 </code></pre>
 
 <p>Save authorization token.</p>
@@ -195,7 +195,7 @@ Enter password: *********
 <li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
 <h3 id="load_auth_from_file">load_auth_from_file</h3>
-<pre><code class="python">load_auth_from_file(path=None)
+<pre><code class="python">load_auth_from_file(path: str = None) -&gt; HexpySession
 </code></pre>
 
 <p>Instantiate class from previously saved credentials file.</p>
@@ -207,7 +207,7 @@ Enter password: *********
 <pre><code class="python">close()
 </code></pre>
 
-<p>Close persisted connection to API server.</p>
+<p>Close open connection to API server.</p>
               
             </div>
           </div>

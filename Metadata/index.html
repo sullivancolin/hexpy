@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Sessions/">Sessions</a>
+    <a class="" href="../Session/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1 current">
@@ -157,12 +157,12 @@
 
 <h2 id="methods">Methods</h2>
 <h3 id="team_list">team_list</h3>
-<pre><code class="python">team_list()
+<pre><code class="python">team_list() -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return a list of teams accessible to the requesting user.</p>
 <h3 id="monitor_list">monitor_list</h3>
-<pre><code class="python">monitor_list(team_id)
+<pre><code class="python">monitor_list(team_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.</p>
@@ -171,12 +171,12 @@
 <li>team_id: integer id number for a team</li>
 </ul>
 <h3 id="geography">geography</h3>
-<pre><code class="python">geography()
+<pre><code class="python">geography() -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.</p>
 <h3 id="states">states</h3>
-<pre><code class="python">states(country)
+<pre><code class="python">states(country: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.</p>
@@ -185,7 +185,7 @@
 <li>country: country code to filter states</li>
 </ul>
 <h3 id="cities">cities</h3>
-<pre><code class="python">cities(country)
+<pre><code class="python">cities(country: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. </p>
@@ -194,10 +194,15 @@
 <li>country: country: country code  to filter states</li>
 </ul>
 <h3 id="countries">countries</h3>
-<pre><code class="python">countries()
+<pre><code class="python">countries() -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Returns all the countries that you may use to filter monitor results and to upload documents with location information.</p>
+<h3 id="api_documentation">api_documentation</h3>
+<pre><code class="python">api_documentation() -&gt; Dict[str, Any]
+</code></pre>
+
+<p>Return latest JSON version of Crimson Hexagon API endpoint documentation.</p>
               
             </div>
           </div>
@@ -208,7 +213,7 @@
         <a href="../Monitor/" class="btn btn-neutral float-right" title="Monitor">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Sessions/" class="btn btn-neutral" title="Sessions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Session/" class="btn btn-neutral" title="Sessions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -234,7 +239,7 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Sessions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Session/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../Monitor/" style="color: #fcfcfc">Next &raquo;</a></span>

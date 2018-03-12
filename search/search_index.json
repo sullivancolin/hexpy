@@ -36,63 +36,63 @@
             "title": "Quick Start"
         },
         {
-            "location": "/Sessions/",
-            "text": "Sessions\n\n\nCreating a session and generating a token for API requests.\n\n\nInstantiate using token, or username. Optionally include password, or enter it at the prompt.\n\n\n>>> from hexpy import HexpySession\n>>> session = HexpySession(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> session.save_token()\n\n\n\n\nor\n\n\n>>> session = HexpySession(username=\"username@email.com\")\nEnter password: *********\n>>> session.save_token()\n\n\n\n\nor\n\n\n>>> session = HexpySession(token=\"previously_saved_token\")\n\n\n\n\nCreate instance by loading token from file.  Default is \n~/.hexpy/credentials.json\n\n\n>>> session = HexpySession.load_auth_from_file()\n\n\n\n\nCreate instance with context manager to close TCP session automatically when finished\n\n\n>>> with HexpySession.load_auth_from_file() as session:\n...:     client = MonitorAPI(session)\n...:     # use client to call API multiple times with same session\n\n>>> # session TCP connection is closed until next call to API\n\n\n\n\nMethods\n\n\nget_token\n\n\nget_token(username, password, no_expiration=False)\n\n\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\nusername: account username.\n\n\npassword: account password.\n\n\nno_expiration: True/False token with 24 expiration.\n\n\n\n\nsave_token\n\n\nsave_token(path=None)\n\n\n\n\nSave authorization token.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json\n\n\n\n\nload_auth_from_file\n\n\nload_auth_from_file(path=None)\n\n\n\n\nInstantiate class from previously saved credentials file.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json\n\n\n\n\nclose\n\n\nclose()\n\n\n\n\nClose persisted connection to API server.",
+            "location": "/Session/",
+            "text": "Session\n\n\nCreating a session and generating a token for API requests.\n\n\nInstantiate using token, or username. Optionally include password, or enter it at the prompt.\n\n\n>>> from hexpy import HexpySession\n>>> session = HexpySession(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> session.save_token()\n\n\n\n\nor\n\n\n>>> session = HexpySession(username=\"username@email.com\")\nEnter password: *********\n>>> session.save_token()\n\n\n\n\nor\n\n\n>>> session = HexpySession(token=\"previously_saved_token\")\n\n\n\n\nCreate instance by loading token from file.  Default is \n~/.hexpy/credentials.json\n\n\n>>> session = HexpySession.load_auth_from_file()\n\n\n\n\nCreate instance with context manager to close TCP session automatically when finished\n\n\n>>> with HexpySession.load_auth_from_file() as session:\n...:     client = MonitorAPI(session)\n...:     # use client to call API multiple times with same session\n\n>>> # session TCP connection is closed until next call to API\n\n\n\n\nMethods\n\n\nget_token\n\n\nget_token(username: str, password: str, no_expiration: bool = False) -> Dict[str, Any]\n\n\n\n\nRequest authorization token.\n\n\nArguments\n\n\n\n\nusername: account username.\n\n\npassword: account password.\n\n\nno_expiration: True/False token with 24 expiration.\n\n\n\n\nsave_token\n\n\nsave_token(path: str = None) -> None\n\n\n\n\nSave authorization token.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json\n\n\n\n\nload_auth_from_file\n\n\nload_auth_from_file(path: str = None) -> HexpySession\n\n\n\n\nInstantiate class from previously saved credentials file.\n\n\nArguments\n\n\n\n\npath: String, path to store credentials. default is \n~/.hexpy/credentials.json\n\n\n\n\nclose\n\n\nclose()\n\n\n\n\nClose open connection to API server.",
             "title": "Sessions"
         },
         {
-            "location": "/Sessions/#sessions",
+            "location": "/Session/#session",
             "text": "",
-            "title": "Sessions"
+            "title": "Session"
         },
         {
-            "location": "/Sessions/#creating-a-session-and-generating-a-token-for-api-requests",
+            "location": "/Session/#creating-a-session-and-generating-a-token-for-api-requests",
             "text": "Instantiate using token, or username. Optionally include password, or enter it at the prompt.  >>> from hexpy import HexpySession\n>>> session = HexpySession(username=\"username@gmail.com\", password=\"secretpassword\")\n>>> session.save_token()  or  >>> session = HexpySession(username=\"username@email.com\")\nEnter password: *********\n>>> session.save_token()  or  >>> session = HexpySession(token=\"previously_saved_token\")  Create instance by loading token from file.  Default is  ~/.hexpy/credentials.json  >>> session = HexpySession.load_auth_from_file()  Create instance with context manager to close TCP session automatically when finished  >>> with HexpySession.load_auth_from_file() as session:\n...:     client = MonitorAPI(session)\n...:     # use client to call API multiple times with same session\n\n>>> # session TCP connection is closed until next call to API",
             "title": "Creating a session and generating a token for API requests."
         },
         {
-            "location": "/Sessions/#methods",
+            "location": "/Session/#methods",
             "text": "",
             "title": "Methods"
         },
         {
-            "location": "/Sessions/#get_token",
-            "text": "get_token(username, password, no_expiration=False)  Request authorization token.",
+            "location": "/Session/#get_token",
+            "text": "get_token(username: str, password: str, no_expiration: bool = False) -> Dict[str, Any]  Request authorization token.",
             "title": "get_token"
         },
         {
-            "location": "/Sessions/#arguments",
+            "location": "/Session/#arguments",
             "text": "username: account username.  password: account password.  no_expiration: True/False token with 24 expiration.",
             "title": "Arguments"
         },
         {
-            "location": "/Sessions/#save_token",
-            "text": "save_token(path=None)  Save authorization token.",
+            "location": "/Session/#save_token",
+            "text": "save_token(path: str = None) -> None  Save authorization token.",
             "title": "save_token"
         },
         {
-            "location": "/Sessions/#arguments_1",
+            "location": "/Session/#arguments_1",
             "text": "path: String, path to store credentials. default is  ~/.hexpy/credentials.json",
             "title": "Arguments"
         },
         {
-            "location": "/Sessions/#load_auth_from_file",
-            "text": "load_auth_from_file(path=None)  Instantiate class from previously saved credentials file.",
+            "location": "/Session/#load_auth_from_file",
+            "text": "load_auth_from_file(path: str = None) -> HexpySession  Instantiate class from previously saved credentials file.",
             "title": "load_auth_from_file"
         },
         {
-            "location": "/Sessions/#arguments_2",
+            "location": "/Session/#arguments_2",
             "text": "path: String, path to store credentials. default is  ~/.hexpy/credentials.json",
             "title": "Arguments"
         },
         {
-            "location": "/Sessions/#close",
-            "text": "close()  Close persisted connection to API server.",
+            "location": "/Session/#close",
+            "text": "close()  Close open connection to API server.",
             "title": "close"
         },
         {
             "location": "/Metadata/",
-            "text": "Metadata API\n\n\nClass for working with Crimson Hexagon account and analysis metadata.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, MetadataAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> metadata_client = MetadataAPI(session)\n>>> metadata_client.team_list()\n>>> session.close()\n\n\n\n\nMethods\n\n\nteam_list\n\n\nteam_list()\n\n\n\n\nReturn a list of teams accessible to the requesting user.\n\n\nmonitor_list\n\n\nmonitor_list(team_id)\n\n\n\n\nReturns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.\n\n\nArguments\n\n\n\n\nteam_id: integer id number for a team\n\n\n\n\ngeography\n\n\ngeography()\n\n\n\n\nReturn all the geographical locations that you may use to filter monitor results and to upload documents with location information.\n\n\nstates\n\n\nstates(country)\n\n\n\n\nReturn all the states for a given country that you may use to filter monitor results and to upload documents with location information.\n\n\nArguments\n\n\n\n\ncountry: country code to filter states\n\n\n\n\ncities\n\n\ncities(country)\n\n\n\n\nReturns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. \n\n\nArguments\n\n\n\n\ncountry: country: country code  to filter states\n\n\n\n\ncountries\n\n\ncountries()\n\n\n\n\nReturns all the countries that you may use to filter monitor results and to upload documents with location information.",
+            "text": "Metadata API\n\n\nClass for working with Crimson Hexagon account and analysis metadata.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, MetadataAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> metadata_client = MetadataAPI(session)\n>>> metadata_client.team_list()\n>>> session.close()\n\n\n\n\nMethods\n\n\nteam_list\n\n\nteam_list() -> Dict[str, Any]\n\n\n\n\nReturn a list of teams accessible to the requesting user.\n\n\nmonitor_list\n\n\nmonitor_list(team_id: int) -> Dict[str, Any]\n\n\n\n\nReturns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.\n\n\nArguments\n\n\n\n\nteam_id: integer id number for a team\n\n\n\n\ngeography\n\n\ngeography() -> Dict[str, Any]\n\n\n\n\nReturn all the geographical locations that you may use to filter monitor results and to upload documents with location information.\n\n\nstates\n\n\nstates(country: str) -> Dict[str, Any]\n\n\n\n\nReturn all the states for a given country that you may use to filter monitor results and to upload documents with location information.\n\n\nArguments\n\n\n\n\ncountry: country code to filter states\n\n\n\n\ncities\n\n\ncities(country: str) -> Dict[str, Any]\n\n\n\n\nReturns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. \n\n\nArguments\n\n\n\n\ncountry: country: country code  to filter states\n\n\n\n\ncountries\n\n\ncountries() -> Dict[str, Any]\n\n\n\n\nReturns all the countries that you may use to filter monitor results and to upload documents with location information.\n\n\napi_documentation\n\n\napi_documentation() -> Dict[str, Any]\n\n\n\n\nReturn latest JSON version of Crimson Hexagon API endpoint documentation.",
             "title": "Metadata"
         },
         {
@@ -117,12 +117,12 @@
         },
         {
             "location": "/Metadata/#team_list",
-            "text": "team_list()  Return a list of teams accessible to the requesting user.",
+            "text": "team_list() -> Dict[str, Any]  Return a list of teams accessible to the requesting user.",
             "title": "team_list"
         },
         {
             "location": "/Metadata/#monitor_list",
-            "text": "monitor_list(team_id)  Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.",
+            "text": "monitor_list(team_id: int) -> Dict[str, Any]  Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.",
             "title": "monitor_list"
         },
         {
@@ -132,12 +132,12 @@
         },
         {
             "location": "/Metadata/#geography",
-            "text": "geography()  Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.",
+            "text": "geography() -> Dict[str, Any]  Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.",
             "title": "geography"
         },
         {
             "location": "/Metadata/#states",
-            "text": "states(country)  Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.",
+            "text": "states(country: str) -> Dict[str, Any]  Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.",
             "title": "states"
         },
         {
@@ -147,7 +147,7 @@
         },
         {
             "location": "/Metadata/#cities",
-            "text": "cities(country)  Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information.",
+            "text": "cities(country: str) -> Dict[str, Any]  Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information.",
             "title": "cities"
         },
         {
@@ -157,8 +157,13 @@
         },
         {
             "location": "/Metadata/#countries",
-            "text": "countries()  Returns all the countries that you may use to filter monitor results and to upload documents with location information.",
+            "text": "countries() -> Dict[str, Any]  Returns all the countries that you may use to filter monitor results and to upload documents with location information.",
             "title": "countries"
+        },
+        {
+            "location": "/Metadata/#api_documentation",
+            "text": "api_documentation() -> Dict[str, Any]  Return latest JSON version of Crimson Hexagon API endpoint documentation.",
+            "title": "api_documentation"
         },
         {
             "location": "/Monitor/",
@@ -517,7 +522,7 @@
         },
         {
             "location": "/Analysis/",
-            "text": "Analysis API\n\n\nClass for working with Crimson Hexagon Analysis API.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, AnalysisAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(session)\n>>> analysis_client.results(request_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nanaysis_requests\n\n\nanalysis_request(data)\n\n\n\n\nSubmit a query task against 24 hours of social data.\n\n\nArguments\n\n\n\n\ndata: Dictionary, query and filter parameters\n\n\n\n\nresults\n\n\nresults(request_id)\n\n\n\n\nRetrieve the status of the analysis request and the results.\n\n\nArguments\n\n\n\n\nrequest_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
+            "text": "Analysis API\n\n\nClass for working with Crimson Hexagon Analysis API.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, AnalysisAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(session)\n>>> analysis_client.results(request_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nanaysis_requests\n\n\nanalysis_request(data: Dict[str, Any]) -> Dict[str, Any]\n\n\n\n\nSubmit a query task against 24 hours of social data.\n\n\nArguments\n\n\n\n\ndata: Dictionary, query and filter parameters\n\n\n\n\nresults\n\n\nresults(request_id: int) -> Dict[str, Any]\n\n\n\n\nRetrieve the status of the analysis request and the results.\n\n\nArguments\n\n\n\n\nrequest_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
             "title": "Analysis"
         },
         {
@@ -542,7 +547,7 @@
         },
         {
             "location": "/Analysis/#anaysis_requests",
-            "text": "analysis_request(data)  Submit a query task against 24 hours of social data.",
+            "text": "analysis_request(data: Dict[str, Any]) -> Dict[str, Any]  Submit a query task against 24 hours of social data.",
             "title": "anaysis_requests"
         },
         {
@@ -552,7 +557,7 @@
         },
         {
             "location": "/Analysis/#results",
-            "text": "results(request_id)  Retrieve the status of the analysis request and the results.",
+            "text": "results(request_id: int) -> Dict[str, Any]  Retrieve the status of the analysis request and the results.",
             "title": "results"
         },
         {
@@ -562,7 +567,7 @@
         },
         {
             "location": "/Upload/",
-            "text": "Upload API\n\n\nClass for working with Content Upload API.\n\n\nYou may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you. \nReference\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, ContentUploadAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(session)\n>>> items = [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n>>> upload_client.upload(items)\n>>> session.close()\n\n\n\n\nMethods\n\n\nupload\n\n\nupload(data)\n\n\n\n\nUpload list of document dictionaries to Crimson Hexagon platform.\n\n\nIf greater than 1000 items passed, reverts to batch upload.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries  to upload.\n\n\n\n\nbatch_upload\n\n\nbatch_upload(data)\n\n\n\n\nBatch upload list of document dictionaries to Crimson Hexagon platform.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries to upload in batches of 1000.",
+            "text": "Upload API\n\n\nClass for working with Content Upload API.\n\n\nYou may use the Content Upload endpoint to upload documents for analysis.\nIn the past, users have uploaded survey responses, proprietary content,\nand other types of data not available in the Crimson Hexagon data library.\nTo use this endpoint, please contact support and they will create a new custom content type for you. \nReference\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, ContentUploadAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> upload_client = ContentUploadAPI(session)\n>>> items = [\n    {\n      \"title\": \"Example Title\",\n      \"date\": \"2010-01-26T16:14:00\",\n      \"author\": \"me\",\n      \"url\": \"http://www.crimsonhexagon.com/post1\",\n      \"contents\": \"Example content\",\n      \"language\": \"en\",\n      \"type\": \"Your_Assigned_Content_Type_Name\",\n      \"geolocation\": {\n        \"id\": \"USA.NY\"\n      }\n    },\n  ]\n>>> upload_client.upload(items)\n>>> session.close()\n\n\n\n\nMethods\n\n\nupload\n\n\nupload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]\n\n\n\n\nUpload list of document dictionaries to Crimson Hexagon platform.\n\n\nIf greater than 1000 items passed, reverts to batch upload.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries  to upload.\n\n\n\n\nbatch_upload\n\n\nbatch_upload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]\n\n\n\n\nBatch upload list of document dictionaries to Crimson Hexagon platform.\n\n\nArguments\n\n\n\n\ndata: list of document dictionaries to upload in batches of 1000.",
             "title": "Upload"
         },
         {
@@ -587,7 +592,7 @@
         },
         {
             "location": "/Upload/#upload",
-            "text": "upload(data)  Upload list of document dictionaries to Crimson Hexagon platform.  If greater than 1000 items passed, reverts to batch upload.",
+            "text": "upload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]  Upload list of document dictionaries to Crimson Hexagon platform.  If greater than 1000 items passed, reverts to batch upload.",
             "title": "upload"
         },
         {
@@ -597,7 +602,7 @@
         },
         {
             "location": "/Upload/#batch_upload",
-            "text": "batch_upload(data)  Batch upload list of document dictionaries to Crimson Hexagon platform.",
+            "text": "batch_upload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]  Batch upload list of document dictionaries to Crimson Hexagon platform.",
             "title": "batch_upload"
         },
         {
@@ -607,7 +612,7 @@
         },
         {
             "location": "/Streams/",
-            "text": "Streams API\n\n\nClass for working with Streams API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , StreamsAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> streams_client = StreamsAPI(session)\n>>> streams_client.stream_list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nposts\n\n\nposts(stream_id, count=100)\n\n\n\n\nReturn posts from a stream.\n\n\nArguments:\n\n\n\n\nstream_id: Integer, the id of the stream containing the posts.\n\n\ncount: Integer, the count of posts to retrieve from the stream, max = 100.\n\n\n\n\nstream_list\n\n\nstream_list(team_id)\n\n\n\n\nList all available Streams for a team.\n\n\nArguments\n\n\n\n\nteam_id: Integer the id of the team.\n\n\n\n\ncreate_stream\n\n\ncreate_stream(team_id, name)\n\n\n\n\nCreate new stream for a team. System Admin Only.\n\n\nArguments\n\n\n\n\nteam_id: Integer, the id of the team to associate created stream with.\n\n\nname: String, the name to associate with the newly created stream.\n\n\n\n\ndelete_stream\n\n\ndelete_stream(stream_id)\n\n\n\n\nDelete a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of the stream to be deleted.\n\n\n\n\nadd_monitor_to_stream\n\n\nadd_monitor_to_stream(stream_id, monitor_id)\n\n\n\n\nAssociate a monitor with a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be modified.\n\n\nmonitor_id: Integer, the id to be associated with the stream.\n\n\n\n\nremove_monitor_from_stream\n\n\nremove_monitor_from_stream(stream_id, monitor_id)\n\n\n\n\nRemove association between monitor and stream.  System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nmonitor_id: Integer, the id to be removed from the stream.\n\n\n\n\nupdate_stream\n\n\nupdate_stream(stream_id, name)\n\n\n\n\nUpdate name of stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nname: String, the new name to be associated with the stream.",
+            "text": "Streams API\n\n\nClass for working with Streams API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , StreamsAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> streams_client = StreamsAPI(session)\n>>> streams_client.stream_list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nposts\n\n\nposts(stream_id: int, count: int = 100) -> Dict[str, Any]\n\n\n\n\nReturn posts from a stream.\n\n\nArguments:\n\n\n\n\nstream_id: Integer, the id of the stream containing the posts.\n\n\ncount: Integer, the count of posts to retrieve from the stream, max = 100.\n\n\n\n\nstream_list\n\n\nstream_list(team_id: int) -> Dict[str, Any]\n\n\n\n\nList all available Streams for a team.\n\n\nArguments\n\n\n\n\nteam_id: Integer the id of the team.\n\n\n\n\ncreate_stream\n\n\ncreate_stream(team_id: int, name: str) -> Dict[str, Any]\n\n\n\n\nCreate new stream for a team. System Admin Only.\n\n\nArguments\n\n\n\n\nteam_id: Integer, the id of the team to associate created stream with.\n\n\nname: String, the name to associate with the newly created stream.\n\n\n\n\ndelete_stream\n\n\ndelete_stream(stream_id: int) -> Dict[str, Any]\n\n\n\n\nDelete a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of the stream to be deleted.\n\n\n\n\nadd_monitor_to_stream\n\n\nadd_monitor_to_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]\n\n\n\n\nAssociate a monitor with a stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be modified.\n\n\nmonitor_id: Integer, the id to be associated with the stream.\n\n\n\n\nremove_monitor_from_stream\n\n\nremove_monitor_from_stream(stream_id, monitor_id)\n\n\n\n\nRemove association between monitor and stream.  System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nmonitor_id: Integer, the id to be removed from the stream.\n\n\n\n\nupdate_stream\n\n\nremove_monitor_from_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]\n\n\n\n\nUpdate name of stream. System Admin Only.\n\n\nArguments\n\n\n\n\nstream_id: Integer, the id of stream to be updated.\n\n\nname: String, the new name to be associated with the stream.",
             "title": "Streams"
         },
         {
@@ -632,7 +637,7 @@
         },
         {
             "location": "/Streams/#posts",
-            "text": "posts(stream_id, count=100)  Return posts from a stream.",
+            "text": "posts(stream_id: int, count: int = 100) -> Dict[str, Any]  Return posts from a stream.",
             "title": "posts"
         },
         {
@@ -642,7 +647,7 @@
         },
         {
             "location": "/Streams/#stream_list",
-            "text": "stream_list(team_id)  List all available Streams for a team.",
+            "text": "stream_list(team_id: int) -> Dict[str, Any]  List all available Streams for a team.",
             "title": "stream_list"
         },
         {
@@ -652,7 +657,7 @@
         },
         {
             "location": "/Streams/#create_stream",
-            "text": "create_stream(team_id, name)  Create new stream for a team. System Admin Only.",
+            "text": "create_stream(team_id: int, name: str) -> Dict[str, Any]  Create new stream for a team. System Admin Only.",
             "title": "create_stream"
         },
         {
@@ -662,7 +667,7 @@
         },
         {
             "location": "/Streams/#delete_stream",
-            "text": "delete_stream(stream_id)  Delete a stream. System Admin Only.",
+            "text": "delete_stream(stream_id: int) -> Dict[str, Any]  Delete a stream. System Admin Only.",
             "title": "delete_stream"
         },
         {
@@ -672,7 +677,7 @@
         },
         {
             "location": "/Streams/#add_monitor_to_stream",
-            "text": "add_monitor_to_stream(stream_id, monitor_id)  Associate a monitor with a stream. System Admin Only.",
+            "text": "add_monitor_to_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]  Associate a monitor with a stream. System Admin Only.",
             "title": "add_monitor_to_stream"
         },
         {
@@ -692,7 +697,7 @@
         },
         {
             "location": "/Streams/#update_stream",
-            "text": "update_stream(stream_id, name)  Update name of stream. System Admin Only.",
+            "text": "remove_monitor_from_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]  Update name of stream. System Admin Only.",
             "title": "update_stream"
         },
         {
@@ -702,7 +707,7 @@
         },
         {
             "location": "/Realtime/",
-            "text": "Realtime API\n\n\nClass for working with Realtime Results API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, RealtimeAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> realtime_client = RealtimeAPI(session)\n>>> realtime_client.list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nlist\n\n\nlist(team_id)\n\n\n\n\nGet the Monitors which are in Proteus\n\n\nArguments\n\n\n\n\nteam_id: Integer, The id of the team to which the listed monitors belong.\n\n\n\n\nconfigure\n\n\nconfigure(monitor_id)\n\n\n\n\nConfigure the Realtime evaluators for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nenable\n\n\nenable(monitor_id)\n\n\n\n\nEnable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndisbale\n\n\ndisbale(monitor_id)\n\n\n\n\nDisable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndetail\n\n\ndetail(monitor_id)\n\n\n\n\nGet the Realtime evaluators details for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ncashtags\n\n\ncashtags(monitor_id, start, top)\n\n\n\n\nGet Cashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N cashtags to retrieve.\n\n\n\n\nhashtags\n\n\nhashtags(monitor_id, start, top)\n\n\n\n\nGet Hashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N hashtags to retrieve.\n\n\n\n\nretweets\n\n\nretweets(monitor_id)\n\n\n\n\nGet the Realtime retweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nsocial_guids\n\n\nsocial_guids(monitor_id, doc_type, start, received_after) \n\n\n\n\nGet the Realtime social guids for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: String, Specifies the document type.\n\n\n\n\ntweets\n\n\ntweets(monitor_id, start) \n\n\n\n\nGet the Realtime tweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\n\n\nvolume\n\n\nvolume(monitor_id, doc_type, start) \n\n\n\n\nGet the Realtime volume for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: List, specifies the document type to filter.\n\n\n\n\nvolume_by_sentiment\n\n\nvolume_by_sentiment(monitor_id, doc_type, start) \n\n\n\n\nGet the Realtime volume by sentiment for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntype: String, specifies the document type to filter.",
+            "text": "Realtime API\n\n\nClass for working with Realtime Results API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, RealtimeAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> realtime_client = RealtimeAPI(session)\n>>> realtime_client.list(team_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nlist\n\n\nlist(team_id: int) -> Dict[str, Any]\n\n\n\n\nGet the Monitors which are in Proteus\n\n\nArguments\n\n\n\n\nteam_id: Integer, The id of the team to which the listed monitors belong.\n\n\n\n\nconfigure\n\n\nconfigure(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nConfigure the Realtime evaluators for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nenable\n\n\nenable(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nEnable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndisbale\n\n\ndisbale(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nDisable Realtime Data.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ndetail\n\n\ndetail(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nGet the Realtime evaluators details for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\ncashtags\n\n\ncashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]\n\n\n\n\nGet Cashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N cashtags to retrieve.\n\n\n\n\nhashtags\n\n\nhashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]\n\n\n\n\nGet Hashtags associated to a Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ntop: Integer, The top N hashtags to retrieve.\n\n\n\n\nretweets\n\n\nretweets(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nGet the Realtime retweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\n\n\nsocial_guids\n\n\nsocial_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -> Dict[str, Any]\n\n\n\n\nGet the Realtime social guids for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\ndoct_type: String, Specifies the document type.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\nreceived_after: Integer, Specifies inclusive received after date in epoch seconds.\n\n\n\n\ntweets\n\n\ntweets(monitor_id: int, start: int = None) -> Dict[str, Any]\n\n\n\n\nGet the Realtime tweets for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\n\n\nvolume\n\n\nvolume(monitor_id: int, start: int = None, doc_type: List = None) -> Dict[str, Any]\n\n\n\n\nGet the Realtime volume for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ndoc_type: List, specifies the document type to filter.\n\n\n\n\nvolume_by_sentiment\n\n\nvolume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]\n\n\n\n\nGet the Realtime volume by sentiment for the Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, the id of the monitor being requested.\n\n\nstart: Integer, specifies inclusive start date in epoch seconds.\n\n\ndoc_type: String, specifies the document type to filter.",
             "title": "Realtime"
         },
         {
@@ -727,7 +732,7 @@
         },
         {
             "location": "/Realtime/#list",
-            "text": "list(team_id)  Get the Monitors which are in Proteus",
+            "text": "list(team_id: int) -> Dict[str, Any]  Get the Monitors which are in Proteus",
             "title": "list"
         },
         {
@@ -737,7 +742,7 @@
         },
         {
             "location": "/Realtime/#configure",
-            "text": "configure(monitor_id)  Configure the Realtime evaluators for the Monitor.",
+            "text": "configure(monitor_id: int) -> Dict[str, Any]  Configure the Realtime evaluators for the Monitor.",
             "title": "configure"
         },
         {
@@ -747,7 +752,7 @@
         },
         {
             "location": "/Realtime/#enable",
-            "text": "enable(monitor_id)  Enable Realtime Data.",
+            "text": "enable(monitor_id: int) -> Dict[str, Any]  Enable Realtime Data.",
             "title": "enable"
         },
         {
@@ -757,7 +762,7 @@
         },
         {
             "location": "/Realtime/#disbale",
-            "text": "disbale(monitor_id)  Disable Realtime Data.",
+            "text": "disbale(monitor_id: int) -> Dict[str, Any]  Disable Realtime Data.",
             "title": "disbale"
         },
         {
@@ -767,7 +772,7 @@
         },
         {
             "location": "/Realtime/#detail",
-            "text": "detail(monitor_id)  Get the Realtime evaluators details for the Monitor.",
+            "text": "detail(monitor_id: int) -> Dict[str, Any]  Get the Realtime evaluators details for the Monitor.",
             "title": "detail"
         },
         {
@@ -777,7 +782,7 @@
         },
         {
             "location": "/Realtime/#cashtags",
-            "text": "cashtags(monitor_id, start, top)  Get Cashtags associated to a Monitor.",
+            "text": "cashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]  Get Cashtags associated to a Monitor.",
             "title": "cashtags"
         },
         {
@@ -787,7 +792,7 @@
         },
         {
             "location": "/Realtime/#hashtags",
-            "text": "hashtags(monitor_id, start, top)  Get Hashtags associated to a Monitor.",
+            "text": "hashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]  Get Hashtags associated to a Monitor.",
             "title": "hashtags"
         },
         {
@@ -797,7 +802,7 @@
         },
         {
             "location": "/Realtime/#retweets",
-            "text": "retweets(monitor_id)  Get the Realtime retweets for the Monitor.",
+            "text": "retweets(monitor_id: int) -> Dict[str, Any]  Get the Realtime retweets for the Monitor.",
             "title": "retweets"
         },
         {
@@ -807,17 +812,17 @@
         },
         {
             "location": "/Realtime/#social_guids",
-            "text": "social_guids(monitor_id, doc_type, start, received_after)   Get the Realtime social guids for the Monitor.",
+            "text": "social_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -> Dict[str, Any]  Get the Realtime social guids for the Monitor.",
             "title": "social_guids"
         },
         {
             "location": "/Realtime/#arguments_8",
-            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: String, Specifies the document type.",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  doct_type: String, Specifies the document type.  start: Integer, specifies inclusive start date in epoch seconds.  received_after: Integer, Specifies inclusive received after date in epoch seconds.",
             "title": "Arguments"
         },
         {
             "location": "/Realtime/#tweets",
-            "text": "tweets(monitor_id, start)   Get the Realtime tweets for the Monitor.",
+            "text": "tweets(monitor_id: int, start: int = None) -> Dict[str, Any]  Get the Realtime tweets for the Monitor.",
             "title": "tweets"
         },
         {
@@ -827,27 +832,27 @@
         },
         {
             "location": "/Realtime/#volume",
-            "text": "volume(monitor_id, doc_type, start)   Get the Realtime volume for the Monitor.",
+            "text": "volume(monitor_id: int, start: int = None, doc_type: List = None) -> Dict[str, Any]  Get the Realtime volume for the Monitor.",
             "title": "volume"
         },
         {
             "location": "/Realtime/#arguments_10",
-            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: List, specifies the document type to filter.",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  doc_type: List, specifies the document type to filter.",
             "title": "Arguments"
         },
         {
             "location": "/Realtime/#volume_by_sentiment",
-            "text": "volume_by_sentiment(monitor_id, doc_type, start)   Get the Realtime volume by sentiment for the Monitor.",
+            "text": "volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]  Get the Realtime volume by sentiment for the Monitor.",
             "title": "volume_by_sentiment"
         },
         {
             "location": "/Realtime/#arguments_11",
-            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  type: String, specifies the document type to filter.",
+            "text": "monitor_id: Integer, the id of the monitor being requested.  start: Integer, specifies inclusive start date in epoch seconds.  doc_type: String, specifies the document type to filter.",
             "title": "Arguments"
         },
         {
             "location": "/Custom/",
-            "text": "Custom API\n\n\nClass for creating a custom API\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , CustomAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> custom_client = CustomAPI(session, \"/some/endpoint/\")\n>>> custom_client.get(url_params=\"<url_param1>/path\", params={\"query_string_param\":some_value})\n>>> session.close()\n\n\n\n\nMethods\n\n\nget\n\n\nget(url_params, params=None)\n\n\n\n\nend get request using URL parameters and query-string parameters.\n\n\nArguments:\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\n\n\npost\n\n\npost(url_params, params=None, data=None)\n\n\n\n\nSend post request using URL parameters and query-string parameters, and json data.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\ndata: Dict, json data to post.\n\n\n\n\ndelete\n\n\ndelete(url_params, params=None)\n\n\n\n\nSend delete request using URL parameters and query-string parameters.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.",
+            "text": "Custom API\n\n\nClass for creating a custom API\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession , CustomAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> custom_client = CustomAPI(session, \"/some/endpoint/\")\n>>> custom_client.get(url_params=\"<url_param1>/path\", params={\"query_string_param\":some_value})\n>>> session.close()\n\n\n\n\nMethods\n\n\nget\n\n\nget(url_params: str = \"\", params: Dict[str, Any] = None) -> Dict[str, Any]\n\n\n\n\nend get request using URL parameters and query-string parameters.\n\n\nArguments:\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\n\n\npost\n\n\npost(url_params: str = \"\", params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -> Dict[str, Any]\n\n\n\n\nSend post request using URL parameters and query-string parameters, and json data.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.\n\n\ndata: Dict, json data to post.\n\n\n\n\ndelete\n\n\ndelete(url_params: str = \"\", params: Dict[str, Any] = None) -> Dict[str, Any]\n\n\n\n\nSend delete request using URL parameters and query-string parameters.\n\n\nArguments\n\n\n\n\nurl_params: String, url params and endpoints concatenated.\n\n\nparams: Dict, querystring params.",
             "title": "Custom"
         },
         {
@@ -872,7 +877,7 @@
         },
         {
             "location": "/Custom/#get",
-            "text": "get(url_params, params=None)  end get request using URL parameters and query-string parameters.",
+            "text": "get(url_params: str = \"\", params: Dict[str, Any] = None) -> Dict[str, Any]  end get request using URL parameters and query-string parameters.",
             "title": "get"
         },
         {
@@ -882,7 +887,7 @@
         },
         {
             "location": "/Custom/#post",
-            "text": "post(url_params, params=None, data=None)  Send post request using URL parameters and query-string parameters, and json data.",
+            "text": "post(url_params: str = \"\", params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -> Dict[str, Any]  Send post request using URL parameters and query-string parameters, and json data.",
             "title": "post"
         },
         {
@@ -892,7 +897,7 @@
         },
         {
             "location": "/Custom/#delete",
-            "text": "delete(url_params, params=None)  Send delete request using URL parameters and query-string parameters.",
+            "text": "delete(url_params: str = \"\", params: Dict[str, Any] = None) -> Dict[str, Any]  Send delete request using URL parameters and query-string parameters.",
             "title": "delete"
         },
         {

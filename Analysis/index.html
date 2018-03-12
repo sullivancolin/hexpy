@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Sessions/">Sessions</a>
+    <a class="" href="../Session/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +157,7 @@
 
 <h2 id="methods">Methods</h2>
 <h3 id="anaysis_requests">anaysis_requests</h3>
-<pre><code class="python">analysis_request(data)
+<pre><code class="python">analysis_request(data: Dict[str, Any]) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Submit a query task against 24 hours of social data.</p>
@@ -166,7 +166,7 @@
 <li>data: Dictionary, query and filter parameters</li>
 </ul>
 <h3 id="results">results</h3>
-<pre><code class="python">results(request_id)
+<pre><code class="python">results(request_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Retrieve the status of the analysis request and the results.</p>

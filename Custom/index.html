@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Sessions/">Sessions</a>
+    <a class="" href="../Session/">Sessions</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -157,7 +157,7 @@
 
 <h2 id="methods">Methods</h2>
 <h3 id="get">get</h3>
-<pre><code class="python">get(url_params, params=None)
+<pre><code class="python">get(url_params: str = &quot;&quot;, params: Dict[str, Any] = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>end get request using URL parameters and query-string parameters.</p>
@@ -167,7 +167,7 @@
 <li>params: Dict, querystring params.</li>
 </ul>
 <h3 id="post">post</h3>
-<pre><code class="python">post(url_params, params=None, data=None)
+<pre><code class="python">post(url_params: str = &quot;&quot;, params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Send post request using URL parameters and query-string parameters, and json data.</p>
@@ -178,7 +178,7 @@
 <li>data: Dict, json data to post.</li>
 </ul>
 <h3 id="delete">delete</h3>
-<pre><code class="python">delete(url_params, params=None)
+<pre><code class="python">delete(url_params: str = &quot;&quot;, params: Dict[str, Any] = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Send delete request using URL parameters and query-string parameters.</p>
