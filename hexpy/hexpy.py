@@ -88,8 +88,7 @@ def results(ctx,
         start = details["resultsStart"]
         end = details["resultsEnd"]
         results = client.aggregate(monitor_id, [(start, end)], list(metrics))
-    click.echo(
-        json.dumps(results[0]["results"][0], indent=4, ensure_ascii=False))
+    click.echo(json.dumps(results[0]["results"][0], ensure_ascii=False))
 
 
 @cli.command()
@@ -131,16 +130,13 @@ def metadata(ctx,
         "api_documentation": client.api_documentation
     }
     if team_id:
-        return click.echo(
-            json.dumps(metadata[info](team_id=team_id), indent=4))
+        return click.echo(json.dumps(metadata[info](team_id=team_id)))
     elif country:
-        return click.echo(
-            json.dumps(metadata[info](country=country), indent=4))
+        return click.echo(json.dumps(metadata[info](country=country)))
     elif monitor:
-        return click.echo(
-            json.dumps(metadata[info](monitor_id=monitor), indent=4))
+        return click.echo(json.dumps(metadata[info](monitor_id=monitor)))
     else:
-        return click.echo(json.dumps(metadata[info](), indent=4))
+        return click.echo(json.dumps(metadata[info]()))
 
 
 @cli.command()
@@ -220,7 +216,7 @@ def upload(ctx,
         pass
 
     response = client.upload(data=data)
-    click.echo(json.dumps(response, indent=4))
+    click.echo(json.dumps(response))
     spinner = Halo(text='Success!', spinner='dots')
     spinner.succeed()
 
@@ -327,7 +323,7 @@ def query(ctx, query_file):
             results = client.results(request_id)
     else:
         results = response
-    click.echo(json.dumps(results, indent=4, ensure_ascii=False))
+    click.echo(json.dumps(results, ensure_ascii=False))
 
 
 if __name__ == '__main__':
