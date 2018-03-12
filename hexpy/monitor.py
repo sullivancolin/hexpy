@@ -4,7 +4,7 @@
 import inspect
 from .base import ROOT, handle_response, rate_limited
 from hexpy.session import HexpySession
-from typing import Dict, Any, Sequence, Union, List
+from typing import Dict, Any, Sequence, Union, List, Callable
 
 
 class MonitorAPI(object):
@@ -35,7 +35,7 @@ class MonitorAPI(object):
                     "aggregate"
             ]:
                 setattr(self, name, rate_limited(fn))
-        self.METRICS = {
+        self.METRICS: Dict[str, Callable] = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,
             "sentiment_and_categories": self.sentiment_and_categories,

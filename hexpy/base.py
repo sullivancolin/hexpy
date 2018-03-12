@@ -2,7 +2,7 @@
 """global variables for the API URL and rate limiting."""
 
 import functools
-from typing import Callable, Dict, Any, Union
+from typing import Callable, Dict, Any, Union, Deque
 import time
 import threading
 import collections
@@ -17,7 +17,7 @@ MAX_CALLS = 120
 def rate_limited(func: Callable,
                  max_calls: int = MAX_CALLS,
                  period: int = ONE_MINUTE) -> Callable:
-    calls = collections.deque()
+    calls: Deque = collections.deque()
 
     # Add thread safety
     lock = threading.RLock()

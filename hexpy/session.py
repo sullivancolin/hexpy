@@ -47,7 +47,7 @@ class HexpySession(object):
     ```
     """
 
-    CREDS_FILE = Path.home() / '.hexpy' / 'credentials.json'
+    CRED_FILE = Path.home() / '.hexpy' / 'credentials.json'
 
     def __init__(self,
                  username: str = None,
@@ -103,10 +103,14 @@ class HexpySession(object):
             path: String, path to store credentials. default is `~/.hexpy/credentials.json`
         """
         if not path:
-            path = self.CREDS_FILE
-            if not path.exists():
-                path.parent.mkdir()
-        with open(path, "w") as outfile:
+            cred_path = self.CRED_FILE
+        else:
+            cred_path = Path(path)
+        if not cred_path.exists():
+            parent = cred_path.parent
+            if not parent.exists():
+                cred_path.parent.mkdir()
+        with open(cred_path, "w") as outfile:
             json.dump(self.auth, outfile, indent=4)
 
     @classmethod
@@ -118,14 +122,16 @@ class HexpySession(object):
         """
         try:
             if not path:
-                path = cls.CREDS_FILE
-            with open(path) as infile:
+                cred_path = cls.CRED_FILE
+            else:
+                cred_path = Path(path)
+            with open(cred_path) as infile:
                 auth = json.load(infile)
                 return cls(token=auth["auth"])
         except IOError:
             raise IOError(
                 "Credentials File at '{}' not found. Please specify token or username and password.".
-                format(path))
+                format(cred_path))
 
     def close(self):
         """Close persisted connection to API server."""

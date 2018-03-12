@@ -2,7 +2,7 @@
 """Tests for `hexpy` package."""
 
 import pytest
-from hexpy.base import response_handler
+from hexpy.base import handle_response, rate_limited
 from hexpy import HexpySession, MonitorAPI
 from requests.models import Response
 import json
@@ -17,9 +17,8 @@ def test_response_handler():
     r1.status_code = 403
     r1._content = bytes(json.dumps({"status": "error"}), 'utf-8')
 
-    @response_handler
     def test_response(r):
-        return r
+        return handle_response(r)
 
     with pytest.raises(ValueError) as e:
         test_response(r1)

@@ -16,7 +16,7 @@ from .content_upload import ContentUploadAPI
 from .analysis import AnalysisAPI
 from .metadata import MetadataAPI
 import pendulum
-from typing import Sequence
+from typing import Sequence, Dict, Callable
 
 
 @click.group()
@@ -119,7 +119,7 @@ def metadata(ctx,
     session = ctx.invoke(login, expiration=True, force=False)
     client = MetadataAPI(session)
     monitor_client = MonitorAPI(session)
-    metadata = {
+    metadata: Dict[str, Callable] = {
         "team_list": client.team_list,
         "monitor_list": client.monitor_list,
         "geography": client.geography,
