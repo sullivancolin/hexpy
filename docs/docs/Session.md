@@ -1,4 +1,4 @@
-Sessions
+Session
 =============
 
 ## Creating a session and generating a token for API requests.
@@ -37,7 +37,7 @@ Create instance with context manager to close TCP session automatically when fin
 ### get_token
 
 ```python
-get_token(username, password, no_expiration=False)
+get_token(username: str, password: str, no_expiration: bool = False) -> Dict[str, Any]
 ```
 
 Request authorization token.
@@ -49,7 +49,7 @@ Request authorization token.
 
 ### save_token
 ```python
-save_token(path=None)
+save_token(path: str = None) -> None
 ```
 Save authorization token.
 #### Arguments
@@ -57,7 +57,7 @@ Save authorization token.
 
 ### load_auth_from_file
 ```python
-load_auth_from_file(path=None)
+load_auth_from_file(path: str = None) -> HexpySession
 ```
 Instantiate class from previously saved credentials file.
 #### Arguments
@@ -68,5 +68,5 @@ Instantiate class from previously saved credentials file.
 ```python
 close()
 ```
-Close persisted connection to API server.
+Close open connection to API server.
 

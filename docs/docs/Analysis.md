@@ -16,7 +16,7 @@
 
 ### anaysis_requests
 ```python
-analysis_request(data)
+analysis_request(data: Dict[str, Any]) -> Dict[str, Any]
 ```
 Submit a query task against 24 hours of social data.
 
@@ -25,7 +25,7 @@ Submit a query task against 24 hours of social data.
 
 ### results
 ```python
-results(request_id)
+results(request_id: int) -> Dict[str, Any]
 ```
 Retrieve the status of the analysis request and the results.
 

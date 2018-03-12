@@ -66,7 +66,7 @@ class RealtimeAPI(object):
                     "top": top
                 }))
 
-    def list(self, team_id: int = None) -> Dict[str, Any]:
+    def list(self, team_id: int) -> Dict[str, Any]:
         """Get the Monitors which are in Proteus
 
         # Arguments
@@ -147,8 +147,9 @@ class RealtimeAPI(object):
 
         # Arguments
             monitor_id: Integer, the id of the monitor being requested.
+            doc_type: String, Specifies the document type.
             start: Integer, specifies inclusive start date in epoch seconds.
-            type: String, Specifies the document type.
+            received_after: Integer, Specifies inclusive received after date in epoch seconds.
         """
         return handle_response(
             self.session.get(
@@ -156,7 +157,7 @@ class RealtimeAPI(object):
                 params={
                     "id": monitor_id,
                     "start": start,
-                    "receivedAfter": received_after,
+                    "receivedafter": received_after,
                     "type": doc_type
                 }))
 
@@ -182,7 +183,7 @@ class RealtimeAPI(object):
         # Arguments
             monitor_id: Integer, the id of the monitor being requested.
             start: Integer, specifies inclusive start date in epoch seconds.
-            type: List, specifies the document type to filter.
+            doc_type: List, specifies the document type to filter.
         """
         return handle_response(
             self.session.get(
@@ -200,7 +201,7 @@ class RealtimeAPI(object):
         # Arguments
             monitor_id: Integer, the id of the monitor being requested.
             start: Integer, specifies inclusive start date in epoch seconds.
-            type: String, specifies the document type to filter.
+            doc_type: String, specifies the document type to filter.
         """
         return handle_response(
             self.session.get(

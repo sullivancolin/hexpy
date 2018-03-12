@@ -17,7 +17,7 @@ Realtime API
 
 ### list
 ```python
-list(team_id)
+list(team_id: int) -> Dict[str, Any]
 ```
 Get the Monitors which are in Proteus
 
@@ -26,7 +26,7 @@ Get the Monitors which are in Proteus
 
 ### configure
 ```python
-configure(monitor_id)
+configure(monitor_id: int) -> Dict[str, Any]
 ```
 Configure the Realtime evaluators for the Monitor.
 
@@ -35,7 +35,7 @@ Configure the Realtime evaluators for the Monitor.
 
 ### enable
 ```python
-enable(monitor_id)
+enable(monitor_id: int) -> Dict[str, Any]
 ```
 Enable Realtime Data.
 
@@ -44,7 +44,7 @@ Enable Realtime Data.
 
 ### disbale
 ```python
-disbale(monitor_id)
+disbale(monitor_id: int) -> Dict[str, Any]
 ```
 Disable Realtime Data.
 
@@ -53,7 +53,7 @@ Disable Realtime Data.
 
 ### detail
 ```python
-detail(monitor_id)
+detail(monitor_id: int) -> Dict[str, Any]
 ```
 Get the Realtime evaluators details for the Monitor.
 
@@ -62,7 +62,7 @@ Get the Realtime evaluators details for the Monitor.
 
 ### cashtags
 ```python
-cashtags(monitor_id, start, top)
+cashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]
 ```
 Get Cashtags associated to a Monitor.
 
@@ -73,7 +73,7 @@ Get Cashtags associated to a Monitor.
 
 ### hashtags
 ```python
-hashtags(monitor_id, start, top)
+hashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]
 ```
 Get Hashtags associated to a Monitor.
 
@@ -84,7 +84,7 @@ Get Hashtags associated to a Monitor.
 
 ### retweets
 ```python
-retweets(monitor_id)
+retweets(monitor_id: int) -> Dict[str, Any]
 ```
 Get the Realtime retweets for the Monitor.
 
@@ -93,18 +93,19 @@ Get the Realtime retweets for the Monitor.
 
 ### social_guids
 ```python
-social_guids(monitor_id, doc_type, start, received_after) 
+social_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -> Dict[str, Any]
 ```
 Get the Realtime social guids for the Monitor.
 
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.
+* doct_type: String, Specifies the document type.
 * start: Integer, specifies inclusive start date in epoch seconds.
-* type: String, Specifies the document type.
+* received_after: Integer, Specifies inclusive received after date in epoch seconds.
 
 ### tweets
 ```python
-tweets(monitor_id, start) 
+tweets(monitor_id: int, start: int = None) -> Dict[str, Any]
 ```
 Get the Realtime tweets for the Monitor.
 
@@ -114,22 +115,22 @@ Get the Realtime tweets for the Monitor.
 
 ### volume
 ```python
-volume(monitor_id, doc_type, start) 
+volume(monitor_id: int, start: int = None, doc_type: List = None) -> Dict[str, Any]
 ```
 Get the Realtime volume for the Monitor.
 
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.
 * start: Integer, specifies inclusive start date in epoch seconds.
-* type: List, specifies the document type to filter.
+* doc_type: List, specifies the document type to filter.
 
 ### volume_by_sentiment
 ```python
-volume_by_sentiment(monitor_id, doc_type, start) 
+volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]
 ```
 Get the Realtime volume by sentiment for the Monitor.
 
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.
 * start: Integer, specifies inclusive start date in epoch seconds.
-* type: String, specifies the document type to filter.
+* doc_type: String, specifies the document type to filter.

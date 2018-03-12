@@ -17,7 +17,7 @@ Custom API
 
 ### get
 ```python
-get(url_params, params=None)
+get(url_params: str = "", params: Dict[str, Any] = None) -> Dict[str, Any]
 ```
 end get request using URL parameters and query-string parameters.
 
@@ -27,7 +27,7 @@ end get request using URL parameters and query-string parameters.
 
 ### post
 ```python
-post(url_params, params=None, data=None)
+post(url_params: str = "", params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -> Dict[str, Any]
 ```
 Send post request using URL parameters and query-string parameters, and json data.
 
@@ -38,7 +38,7 @@ Send post request using URL parameters and query-string parameters, and json dat
 
 ### delete
 ```python
-delete(url_params, params=None)
+delete(url_params: str = "", params: Dict[str, Any] = None) -> Dict[str, Any]
 ```
 Send delete request using URL parameters and query-string parameters.
 

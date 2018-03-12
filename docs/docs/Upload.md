@@ -35,7 +35,7 @@ To use this endpoint, please contact support and they will create a new custom c
 
 ### upload
 ```python
-upload(data)
+upload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]
 ```
 Upload list of document dictionaries to Crimson Hexagon platform.
 
@@ -45,7 +45,7 @@ If greater than 1000 items passed, reverts to batch upload.
 
 ### batch_upload
 ```python
-batch_upload(data)
+batch_upload(data: Sequence[Dict[str, Any]]) -> Dict[str, Any]
 ```
 Batch upload list of document dictionaries to Crimson Hexagon platform.
 

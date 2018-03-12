@@ -90,6 +90,6 @@ class MetadataAPI(object):
             self.session.get(self.TEMPLATE + "geography/info/countries"))
 
     def api_documentation(self) -> Dict[str, Any]:
-        """Return latest version of API endpoint documentation."""
+        """Return latest JSON version of Crimson Hexagon API endpoint documentation."""
         return handle_response(
             self.session.get(self.TEMPLATE + "documentation"))

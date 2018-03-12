@@ -17,7 +17,7 @@ Streams API
 
 ### posts
 ```python
-posts(stream_id, count=100)
+posts(stream_id: int, count: int = 100) -> Dict[str, Any]
 ```
 Return posts from a stream.
 
@@ -27,7 +27,7 @@ Return posts from a stream.
 
 ### stream_list
 ```python
-stream_list(team_id)
+stream_list(team_id: int) -> Dict[str, Any]
 ```
 List all available Streams for a team.
 
@@ -36,7 +36,7 @@ List all available Streams for a team.
 
 ### create_stream
 ```python
-create_stream(team_id, name)
+create_stream(team_id: int, name: str) -> Dict[str, Any]
 ```
 Create new stream for a team. System Admin Only.
 
@@ -46,7 +46,7 @@ Create new stream for a team. System Admin Only.
 
 ### delete_stream
 ```python
-delete_stream(stream_id)
+delete_stream(stream_id: int) -> Dict[str, Any]
 ```
 Delete a stream. System Admin Only.
 
@@ -55,7 +55,7 @@ Delete a stream. System Admin Only.
 
 ### add_monitor_to_stream
 ```python
-add_monitor_to_stream(stream_id, monitor_id)
+add_monitor_to_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]
 ```
 Associate a monitor with a stream. System Admin Only.
 
@@ -75,7 +75,7 @@ Remove association between monitor and stream.  System Admin Only.
 
 ### update_stream
 ```python
-update_stream(stream_id, name)
+remove_monitor_from_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]
 ```
 Update name of stream. System Admin Only.
 
