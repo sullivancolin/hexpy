@@ -3,7 +3,7 @@ site_description: A Python client for the Crimson Hexagon API.
 # repo_url: https://github.com/sullivancolin/hexpy
 pages:
     - Home: index.md
-    - Sessions: Session.md
+    - Session: Session.md
     - Metadata: Metadata.md
     - Monitor: Monitor.md
     - Analysis: Analysis.md

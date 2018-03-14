@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """CLI interface for hexpy."""
-
-from datetime import datetime
 import time
 import json
 import pandas as pd
@@ -13,7 +11,7 @@ from clint.textui import progress
 from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
-from .analysis import AnalysisAPI
+from .streams import StreamsAPI
 from .metadata import MetadataAPI
 import pendulum
 from typing import Sequence, Dict, Callable
@@ -307,23 +305,20 @@ def export(ctx,
 
 
 @cli.command()
-@click.argument('query_file')
+@click.argument('stream_id', type=int)
+@click.argument('stop_after', type=int)
 @click.pass_context
-def query(ctx, query_file):
-    """Submit a query task on 24 hours of data."""
+def stream(ctx, stream_id: int, stop_after: int = 100):
+    """stream real time posts"""
     session = ctx.invoke(login, expiration=True, force=False)
-    client = AnalysisAPI(session)
-    query_json = json.load(open(query_file))
-    response = client.analysis_request(query_json)
-    if response["status"] == "WAITING":
-        request_id = response["resultId"]
-        results = client.results(request_id)
-        while results["status"] == "WAITING":
-            time.sleep(10)
-            results = client.results(request_id)
-    else:
-        results = response
-    click.echo(json.dumps(results, ensure_ascii=False))
+    client = StreamsAPI(session)
+    so_far = 0
+    while so_far < stop_after:
+        posts = client.posts(stream_id)["posts"]
+        so_far += len(posts)
+        for p in posts:
+            click.echo(json.dumps(p, ensure_ascii=False))
+        time.sleep(10)
 
 
 if __name__ == '__main__':
