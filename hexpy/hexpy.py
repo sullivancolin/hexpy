@@ -306,13 +306,15 @@ def export(ctx,
 
 @cli.command()
 @click.argument('stream_id', type=int)
-@click.argument('stop_after', type=int)
+@click.option('stop_after', type=int, default=100)
 @click.pass_context
 def stream(ctx, stream_id: int, stop_after: int = 100):
-    """stream real time posts"""
+    """stream real time posts, stop after a maximum of 10K."""
     session = ctx.invoke(login, expiration=True, force=False)
     client = StreamsAPI(session)
     so_far = 0
+    if stop_after > 10000:
+        stop_after = 10000
     while so_far < stop_after:
         posts = client.posts(stream_id)["posts"]
         so_far += len(posts)

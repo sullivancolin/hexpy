@@ -66,7 +66,7 @@ Instantiate class from previously saved credentials file.
 ### close
 
 ```python
-close()
+close() -> None
 ```
 Close open connection to API server.
 

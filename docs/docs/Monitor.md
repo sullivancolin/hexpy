@@ -21,7 +21,7 @@ Monitor API
 ### details
 
 ```python
-details(monitor_id)
+details(monitor_id: int) -> Dict[str, Any]
 ```
 
 Return detailed metadata about the selected monitor, including category metadata.
@@ -31,7 +31,7 @@ Return detailed metadata about the selected monitor, including category metadata
 
 ### audit
 ```python
-audit(monitor_id)
+audit(monitor_id: int) -> Dict[str, Any]
 ```
 
 Return audit information about the selected monitor, sorted from most to least recent.
@@ -41,7 +41,7 @@ Return audit information about the selected monitor, sorted from most to least r
 
 ### word_cloud
 ```python
-word_cloud(monitor_id, start, end, filter_string=None)
+word_cloud(monitor_id: int, start: str, end: str, filter_string: str = None) -> Dict[str, Any]
 ```
 
 Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.
@@ -55,7 +55,7 @@ Return an alphabetized list of the top 300 words in a monitor. This data is gene
 
 ### trained_posts
 ```python
-trained_posts(monitor_id, category=None)
+trained_posts(monitor_id: int, category: int = None) -> Dict[str, Any]
 ```
 
 Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.
@@ -66,7 +66,7 @@ Return a list of the training posts for a given opinion monitor. The selected mo
 
 ### train_monitor
 ```python
-train_monitor(monitor_id, category_id, data)
+train_monitor(monitor_id: int, category_id: int, data: List[Dict[str, Any]]) -> Dict[str, Any]
 ```
 
 Upload individual training document monitors programmatically.
@@ -80,7 +80,7 @@ Upload a list documents of one category per request. Due to the restrictions inv
 
 ### interest_affinities
 ```python
-interest_affinities(monitor_id, start, end, daily=False, document_source=None)
+interest_affinities(monitor_id: int, start: str, end: str, daily: bool = False, document_source: str = None) -> Dict[str, Any]
 ```
 
 Return information about the authors in a monitor and their affinity with a range of pre-defined topics.
@@ -94,7 +94,7 @@ Return information about the authors in a monitor and their affinity with a rang
 
 ### top_sources
 ```python
-top_sources(monitor_id, start, end)
+top_sources(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 
 Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
@@ -106,7 +106,7 @@ Return volume information related to the sites and content sources (e.g. Twitter
 
 ### image_analysis
 ```python
-image_analysis(monitor_id, start, end, object_type="", top=100)
+image_analysis(monitor_id: int, start: str, end: str, object_type: str = "", top: int = 100) -> Dict[str, Any]
 ```
 
 Return a breakdown of the top image classes within a provided monitor.
@@ -120,7 +120,7 @@ Return a breakdown of the top image classes within a provided monitor.
 
 ### volume
 ```python
-volume(monitor_id, start, end, aggregate_by_day=False, use_local_time=False)
+volume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]
 ```
 
 Return volume metrics for a given monitor split by date.
@@ -134,7 +134,7 @@ Return volume metrics for a given monitor split by date.
 
 ### sentiment_and_categories
 ```python
-sentiment_and_categories(monitor_id, start, end, hide_excluded=False)
+sentiment_and_categories(monitor_id: int, start: str, end: str, hide_excluded: bool = False) -> Dict[str, Any]
 ```
 
 Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.
@@ -148,7 +148,7 @@ Return aggregate volume, sentiment, emotion and opinion category analysis for a 
 
 ### aggregate
 ```python
-aggregate(monitor_ids, dates, metrics)
+aggregate(monitor_ids: Union[Sequence[int], int], dates: Union[Sequence[str], Sequence[Sequence[str]]], metrics: Union[Sequence[str], str]) -> Sequence[Dict[str, Any]]
 ```
 Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
 
@@ -167,7 +167,7 @@ Return aggregated results for one or monitor ids, for one or more date pairs, fo
 
 ### posts
 ```python
-posts(monitor_id, start, end, filter_string=None, extend_limit=False, full_contents=False, geotagged=False)
+posts(monitor_id: int, start: str, end: str, filter_string: str = None, extend_limit: bool = False, full_contents: bool = False, geotagged: bool = False) -> Dict[str, Any]
 ```
 
 Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
@@ -187,7 +187,7 @@ This collection of endpoints provide demographic volume metrics for users within
 
 ### age
 ```python
-age(monitor_id, start, end)
+age(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return volume metrics for a given monitor split by age bracket.
 
@@ -199,7 +199,7 @@ Return volume metrics for a given monitor split by age bracket.
 
 ### ethnicity
 ```python
-ethnicity(monitor_id, start, end)
+ethnicity(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return volume metrics for a given monitor split by ethnicity.
 
@@ -210,7 +210,7 @@ Return volume metrics for a given monitor split by ethnicity.
 
 ### gender
 ```python
-gender(monitor_id, start, end)
+gender(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return volume metrics for a given monitor split by gender.
 
@@ -224,7 +224,7 @@ Geography
 
 ### cities
 ```python
-cities(monitor_id, start, end, country)
+cities(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]
 ```
 Return volume metrics for a given monitor split by city.
 
@@ -236,7 +236,7 @@ Return volume metrics for a given monitor split by city.
 
 ### states
 ```python
-states(monitor_id, start, end, country)
+states(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]
 ```
 Return volume metrics for a given monitor split by state.
 
@@ -248,7 +248,7 @@ Return volume metrics for a given monitor split by state.
 
 ### countries
 ```python
-countries(monitor_id, start, end)
+countries(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 
 Return volume metrics for a given monitor split by country.
@@ -265,7 +265,7 @@ This collection of endpoints relate provide metrics specific to Twitter from eit
 
 ### twitter_authors
 ```python
-twitter_authors(monitor_id, start, end)
+twitter_authors(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information related to the Twitter authors who have posted in a given monitor.
 
@@ -276,7 +276,7 @@ Return information related to the Twitter authors who have posted in a given mon
 
 ### twitter_metrics
 ```python
-twitter_metrics(monitor_id, start, end)
+twitter_metrics(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information about the top hashtags, mentions, and retweets in a monitor.
 
@@ -287,7 +287,7 @@ Return information about the top hashtags, mentions, and retweets in a monitor.
 
 ### twitter_followers
 ```python
-twitter_followers(monitor_id, start, end)
+twitter_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.
 #### Arguments
@@ -297,7 +297,7 @@ Return the cumulative daily follower count for a targeted Twitter account in a T
 
 ### twitter_sent_posts
 ```python
-twitter_sent_posts(monitor_id, start, end)
+twitter_sent_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.
 
@@ -308,7 +308,7 @@ Return information about posts sent by the owner of a target Twitter account in 
 
 ### twitter_engagement
 ```python
-twitter_engagement(monitor_id, start, end):
+twitter_engagement(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.
 
@@ -322,7 +322,7 @@ Facebook
 
 ### facebook_admin_posts
 ```python
-facebook_admin_posts(monitor_id, start, end)
+facebook_admin_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.
 
@@ -333,7 +333,7 @@ Return those posts made by the administrators/owners of a targeted Facebook page
 
 ### facebook_likes
 ```python
-facebook_likes(monitor_id, start, end)
+facebook_likes(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.
 
@@ -344,7 +344,7 @@ Return the cumulative daily like count for a targeted Facebook page in a Faceboo
 
 ### facebook_activity
 ```python
-facebook_activity(monitor_id, start, end)
+facebook_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information about actions (likes, comments, shares) made by users and admins for a given page.
 
@@ -358,7 +358,7 @@ Instagram
 
 ### instagram_top_hashtags
 ```python
-instagram_top_hashtags(monitor_id, start, end)
+instagram_top_hashtags(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).
 
@@ -369,7 +369,7 @@ Return the Top 50 most occurring Hashtags contained within the posts analyzed in
 
 ### instagram_followers
 ```python
-instagram_followers(monitor_id, start, end)
+instagram_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.
 
@@ -380,7 +380,7 @@ Return the cumulative daily follower count for a targeted Instagram account in a
 
 ### instagram_sent_media
 ```python
-instagram_sent_media(monitor_id, start, end)
+instagram_sent_media(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return media sent by admins in a targeted Instagram account.
 
@@ -391,7 +391,7 @@ Return media sent by admins in a targeted Instagram account.
 
 ### instagram_activity
 ```python
-instagram_activity(monitor_id, start, end)
+instagram_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
 Return information about actions (likes, comments) made by users and admins for a given account.
 

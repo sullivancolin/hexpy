@@ -65,7 +65,7 @@ Associate a monitor with a stream. System Admin Only.
 
 ### remove_monitor_from_stream
 ```python
-remove_monitor_from_stream(stream_id, monitor_id)
+remove_monitor_from_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]
 ```
 Remove association between monitor and stream.  System Admin Only.
 
@@ -75,7 +75,7 @@ Remove association between monitor and stream.  System Admin Only.
 
 ### update_stream
 ```python
-remove_monitor_from_stream(stream_id: int, monitor_id: int) -> Dict[str, Any]
+update_stream(stream_id: int, name: str) -> Dict[str, Any]
 ```
 Update name of stream. System Admin Only.
 
