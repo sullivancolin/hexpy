@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Session/">Sessions</a>
+    <a class="" href="../Session/">Session</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -170,7 +170,7 @@
 
 <h2 id="methods">Methods</h2>
 <h3 id="details">details</h3>
-<pre><code class="python">details(monitor_id)
+<pre><code class="python">details(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return detailed metadata about the selected monitor, including category metadata.</p>
@@ -179,7 +179,7 @@
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 </ul>
 <h3 id="audit">audit</h3>
-<pre><code class="python">audit(monitor_id)
+<pre><code class="python">audit(monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return audit information about the selected monitor, sorted from most to least recent.</p>
@@ -188,7 +188,7 @@
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 </ul>
 <h3 id="word_cloud">word_cloud</h3>
-<pre><code class="python">word_cloud(monitor_id, start, end, filter_string=None)
+<pre><code class="python">word_cloud(monitor_id: int, start: str, end: str, filter_string: str = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.</p>
@@ -200,7 +200,7 @@
 <li>filter_string: String, pipe-separated list of field:value pairs used to filter posts</li>
 </ul>
 <h3 id="trained_posts">trained_posts</h3>
-<pre><code class="python">trained_posts(monitor_id, category=None)
+<pre><code class="python">trained_posts(monitor_id: int, category: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.</p>
@@ -210,7 +210,7 @@
 <li>category: Integer, category id to target training posts from a specific category</li>
 </ul>
 <h3 id="train_monitor">train_monitor</h3>
-<pre><code class="python">train_monitor(monitor_id, category_id, data)
+<pre><code class="python">train_monitor(monitor_id: int, category_id: int, data: List[Dict[str, Any]]) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Upload individual training document monitors programmatically.</p>
@@ -222,7 +222,7 @@
 <li>data: List of document dictionaries with required fields</li>
 </ul>
 <h3 id="interest_affinities">interest_affinities</h3>
-<pre><code class="python">interest_affinities(monitor_id, start, end, daily=False, document_source=None)
+<pre><code class="python">interest_affinities(monitor_id: int, start: str, end: str, daily: bool = False, document_source: str = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about the authors in a monitor and their affinity with a range of pre-defined topics.</p>
@@ -235,7 +235,7 @@
 <li>document_source: String, document source for affinities. valid params include <code>TWITTER</code> or <code>TUMBLR</code></li>
 </ul>
 <h3 id="top_sources">top_sources</h3>
-<pre><code class="python">top_sources(monitor_id, start, end)
+<pre><code class="python">top_sources(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.</p>
@@ -246,7 +246,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="image_analysis">image_analysis</h3>
-<pre><code class="python">image_analysis(monitor_id, start, end, object_type=&quot;&quot;, top=100)
+<pre><code class="python">image_analysis(monitor_id: int, start: str, end: str, object_type: str = &quot;&quot;, top: int = 100) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return a breakdown of the top image classes within a provided monitor.</p>
@@ -259,7 +259,7 @@
 <li>top : Integer, if defined, only the selected number of classes will be returned</li>
 </ul>
 <h3 id="volume">volume</h3>
-<pre><code class="python">volume(monitor_id, start, end, aggregate_by_day=False, use_local_time=False)
+<pre><code class="python">volume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by date.</p>
@@ -272,7 +272,7 @@
 <li>use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor</li>
 </ul>
 <h3 id="sentiment_and_categories">sentiment_and_categories</h3>
-<pre><code class="python">sentiment_and_categories(monitor_id, start, end, hide_excluded=False)
+<pre><code class="python">sentiment_and_categories(monitor_id: int, start: str, end: str, hide_excluded: bool = False) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.</p>
@@ -284,7 +284,7 @@
 <li>hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.</li>
 </ul>
 <h3 id="aggregate">aggregate</h3>
-<pre><code class="python">aggregate(monitor_ids, dates, metrics)
+<pre><code class="python">aggregate(monitor_ids: Union[Sequence[int], int], dates: Union[Sequence[str], Sequence[Sequence[str]]], metrics: Union[Sequence[str], str]) -&gt; Sequence[Dict[str, Any]]
 </code></pre>
 
 <p>Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.</p>
@@ -303,7 +303,7 @@
 <li>metrics: String or list of Strings, metric(s) to aggregate upon</li>
 </ul>
 <h3 id="posts">posts</h3>
-<pre><code class="python">posts(monitor_id, start, end, filter_string=None, extend_limit=False, full_contents=False, geotagged=False)
+<pre><code class="python">posts(monitor_id: int, start: str, end: str, filter_string: str = None, extend_limit: bool = False, full_contents: bool = False, geotagged: bool = False) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.</p>
@@ -320,7 +320,7 @@
 <h2 id="demographics">Demographics</h2>
 <p>This collection of endpoints provide demographic volume metrics for users within a given monitor.</p>
 <h3 id="age">age</h3>
-<pre><code class="python">age(monitor_id, start, end)
+<pre><code class="python">age(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by age bracket.</p>
@@ -331,7 +331,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="ethnicity">ethnicity</h3>
-<pre><code class="python">ethnicity(monitor_id, start, end)
+<pre><code class="python">ethnicity(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by ethnicity.</p>
@@ -342,7 +342,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="gender">gender</h3>
-<pre><code class="python">gender(monitor_id, start, end)
+<pre><code class="python">gender(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by gender.</p>
@@ -354,7 +354,7 @@
 </ul>
 <h2 id="geography">Geography</h2>
 <h3 id="cities">cities</h3>
-<pre><code class="python">cities(monitor_id, start, end, country)
+<pre><code class="python">cities(monitor_id: int, start: str, end: str, country: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by city.</p>
@@ -366,7 +366,7 @@
 <li>country: String, country code to filter cities</li>
 </ul>
 <h3 id="states">states</h3>
-<pre><code class="python">states(monitor_id, start, end, country)
+<pre><code class="python">states(monitor_id: int, start: str, end: str, country: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by state.</p>
@@ -378,7 +378,7 @@
 <li>country: String, country code to filter states</li>
 </ul>
 <h3 id="countries">countries</h3>
-<pre><code class="python">countries(monitor_id, start, end)
+<pre><code class="python">countries(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by country.</p>
@@ -391,7 +391,7 @@
 <h2 id="twitter">Twitter</h2>
 <p>This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. </p>
 <h3 id="twitter_authors">twitter_authors</h3>
-<pre><code class="python">twitter_authors(monitor_id, start, end)
+<pre><code class="python">twitter_authors(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information related to the Twitter authors who have posted in a given monitor.</p>
@@ -402,7 +402,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_metrics">twitter_metrics</h3>
-<pre><code class="python">twitter_metrics(monitor_id, start, end)
+<pre><code class="python">twitter_metrics(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about the top hashtags, mentions, and retweets in a monitor.</p>
@@ -413,7 +413,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_followers">twitter_followers</h3>
-<pre><code class="python">twitter_followers(monitor_id, start, end)
+<pre><code class="python">twitter_followers(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.</p>
@@ -424,7 +424,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_sent_posts">twitter_sent_posts</h3>
-<pre><code class="python">twitter_sent_posts(monitor_id, start, end)
+<pre><code class="python">twitter_sent_posts(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.</p>
@@ -435,7 +435,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_engagement">twitter_engagement</h3>
-<pre><code class="python">twitter_engagement(monitor_id, start, end):
+<pre><code class="python">twitter_engagement(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.</p>
@@ -447,7 +447,7 @@
 </ul>
 <h2 id="facebook">Facebook</h2>
 <h3 id="facebook_admin_posts">facebook_admin_posts</h3>
-<pre><code class="python">facebook_admin_posts(monitor_id, start, end)
+<pre><code class="python">facebook_admin_posts(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.</p>
@@ -458,7 +458,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="facebook_likes">facebook_likes</h3>
-<pre><code class="python">facebook_likes(monitor_id, start, end)
+<pre><code class="python">facebook_likes(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.</p>
@@ -469,7 +469,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="facebook_activity">facebook_activity</h3>
-<pre><code class="python">facebook_activity(monitor_id, start, end)
+<pre><code class="python">facebook_activity(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about actions (likes, comments, shares) made by users and admins for a given page.</p>
@@ -481,7 +481,7 @@
 </ul>
 <h2 id="instagram">Instagram</h2>
 <h3 id="instagram_top_hashtags">instagram_top_hashtags</h3>
-<pre><code class="python">instagram_top_hashtags(monitor_id, start, end)
+<pre><code class="python">instagram_top_hashtags(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).</p>
@@ -492,7 +492,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_followers">instagram_followers</h3>
-<pre><code class="python">instagram_followers(monitor_id, start, end)
+<pre><code class="python">instagram_followers(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.</p>
@@ -503,7 +503,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_sent_media">instagram_sent_media</h3>
-<pre><code class="python">instagram_sent_media(monitor_id, start, end)
+<pre><code class="python">instagram_sent_media(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return media sent by admins in a targeted Instagram account.</p>
@@ -514,7 +514,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_activity">instagram_activity</h3>
-<pre><code class="python">instagram_activity(monitor_id, start, end)
+<pre><code class="python">instagram_activity(monitor_id: int, start: str, end: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return information about actions (likes, comments) made by users and admins for a given account.</p>

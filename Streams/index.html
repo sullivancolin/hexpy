@@ -54,7 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <a class="" href="../Session/">Sessions</a>
+    <a class="" href="../Session/">Session</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -205,7 +205,7 @@
 <li>monitor_id: Integer, the id to be associated with the stream.</li>
 </ul>
 <h3 id="remove_monitor_from_stream">remove_monitor_from_stream</h3>
-<pre><code class="python">remove_monitor_from_stream(stream_id, monitor_id)
+<pre><code class="python">remove_monitor_from_stream(stream_id: int, monitor_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Remove association between monitor and stream.  System Admin Only.</p>
@@ -215,7 +215,7 @@
 <li>monitor_id: Integer, the id to be removed from the stream.</li>
 </ul>
 <h3 id="update_stream">update_stream</h3>
-<pre><code class="python">remove_monitor_from_stream(stream_id: int, monitor_id: int) -&gt; Dict[str, Any]
+<pre><code class="python">update_stream(stream_id: int, name: str) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Update name of stream. System Admin Only.</p>
