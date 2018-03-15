@@ -306,7 +306,7 @@ def export(ctx,
 
 @cli.command()
 @click.argument('stream_id', type=int)
-@click.option('stop_after', type=int, default=100)
+@click.option('--stop_after', '-s', type=int, default=100)
 @click.pass_context
 def stream(ctx, stream_id: int, stop_after: int = 100):
     """stream real time posts, stop after a maximum of 10K."""
