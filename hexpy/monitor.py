@@ -57,8 +57,7 @@ class MonitorAPI(object):
                                                     date[1])
             }
         else:
-            raise ValueError('valid metrics are {}'.format(
-                self.METRICS.keys()))
+            raise ValueError(f'valid metrics are {self.Metrics.keys()}')
 
     def _aggregate_dates(
             self, monitor_id: int,
@@ -133,9 +132,7 @@ class MonitorAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "detail", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "detail", params={"id": monitor_id}))
 
     def audit(self, monitor_id: int) -> Dict[str, Any]:
         """Return audit information about the selected monitor, sorted from most to least recent.
@@ -145,9 +142,7 @@ class MonitorAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "audit", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "audit", params={"id": monitor_id}))
 
     def word_cloud(self,
                    monitor_id: int,

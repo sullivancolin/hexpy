@@ -130,8 +130,8 @@ class HexpySession(object):
                 return cls(token=auth["auth"])
         except IOError:
             raise IOError(
-                "Credentials File at '{}' not found. Please specify token or username and password.".
-                format(cred_path))
+                f"Credentials File at '{cred_path}' not found. Please specify token or username and password."
+            )
 
     def close(self):
         """Close persisted connection to API server."""

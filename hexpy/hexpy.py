@@ -171,7 +171,7 @@ def upload(ctx,
 
     # Handle titles
     if "title" not in items.columns:
-        items["title"] = ["Post {}".format(i) for i in range(len(items))]
+        items["title"] = [f"Post {i}" for i in range(len(items))]
 
     # Handle language code
     if "language" not in items.columns:
@@ -293,13 +293,13 @@ def export(ctx,
     df = df.set_index('date')
     df = df.sort_index(ascending=False)
     if output:
-        info = output
+        name = output
     else:
-        info = "{}_{}_Posts".format(monitor_id, info.replace(" ", "_"))
+        name = f"{monitor_id}_{info.replace(' ', '_')}_Posts"
     if file_type == "csv":
-        df.to_csv(info + ".csv", index=True, sep=delimiter)
+        df.to_csv(name + ".csv", index=True, sep=delimiter)
     else:
-        df.to_excel(info + ".xlsx", index=True)
+        df.to_excel(name + ".xlsx", index=True)
     spinner = Halo(text='Done!', spinner='dots')
     spinner.succeed()
 
@@ -308,19 +308,26 @@ def export(ctx,
 @click.argument('stream_id', type=int)
 @click.option('--stop_after', '-s', type=int, default=100)
 @click.pass_context
-def stream(ctx, stream_id: int, stop_after: int = 100):
-    """stream real time posts, stop after a maximum of 10K."""
+def stream_posts(ctx, stream_id: int, stop_after: int = 100):
+    """stream posts in real time, stop after a maximum of 10K."""
     session = ctx.invoke(login, expiration=True, force=False)
     client = StreamsAPI(session)
     so_far = 0
+    request_count = 0
     if stop_after > 10000:
         stop_after = 10000
     while so_far < stop_after:
-        posts = client.posts(stream_id)["posts"]
+        if request_count == 119:
+            time.sleep(60)
+            request_count = 0
+        request_count += 1
+        response = client.posts(stream_id)
+        posts = response["posts"]
         so_far += len(posts)
         for p in posts:
             click.echo(json.dumps(p, ensure_ascii=False))
-        time.sleep(10)
+        if response["totalPostsAvailable"] == 0:
+            time.sleep(.5)
 
 
 if __name__ == '__main__':

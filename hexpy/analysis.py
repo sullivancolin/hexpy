@@ -45,5 +45,4 @@ class AnalysisAPI(object):
             request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "/{request_id}".format(request_id=request_id)))
+            self.session.get(self.TEMPLATE + f"/{request_id}"))

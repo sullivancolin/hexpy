@@ -17,6 +17,7 @@ MAX_CALLS = 120
 def rate_limited(func: Callable,
                  max_calls: int = MAX_CALLS,
                  period: int = ONE_MINUTE) -> Callable:
+    """Limit the number of times a function can be called."""
     calls: Deque = collections.deque()
 
     # Add thread safety
@@ -31,8 +32,8 @@ def rate_limited(func: Callable,
                 sleeptime = until - time.time()
                 if sleeptime > 0:
                     print(
-                        "Rate Limit Reached. (Sleeping for {} seconds)".format(
-                            round(sleeptime)))
+                        f"Rate Limit Reached. (Sleeping for {round(sleeptime)} seconds)"
+                    )
                     time.sleep(sleeptime)
                 while len(calls) > 0:
                     calls.popleft()

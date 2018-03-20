@@ -61,9 +61,7 @@ class ContentUploadAPI(object):
         """
         if len(data) <= 1000:
             return handle_response(
-                self.session.post(self.TEMPLATE, json={
-                    "items": data
-                }))
+                self.session.post(self.TEMPLATE, json={"items": data}))
         else:
             print("More than 1000 items found.  Uploading in batches of 1000.")
             return self.batch_upload(data)
@@ -79,5 +77,5 @@ class ContentUploadAPI(object):
                 progress.bar(
                     [data[i:i + 1000] for i in range(0, len(data), 1000)])):
             response = self.upload(batch)
-            batch_responses["Batch number {}".format(batch_num)] = response
+            batch_responses[f"Batch number {batch_num}"] = response
         return handle_response(batch_responses)

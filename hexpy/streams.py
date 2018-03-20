@@ -42,8 +42,7 @@ class StreamsAPI(object):
 
         return handle_response(
             self.session.get(
-                self.TEMPLATE +
-                "/{stream_id}/posts".format(stream_id=stream_id),
+                self.TEMPLATE + f"/{stream_id}/posts",
                 params={
                     "count": count,
                 }))
@@ -56,9 +55,7 @@ class StreamsAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "/list/", params={
-                    "teamid": team_id
-                }))
+                self.TEMPLATE + "/list/", params={"teamid": team_id}))
 
     def create_stream(self, team_id: int, name: str) -> Dict[str, Any]:
         """Create new stream for a team. System Admin Only.
@@ -81,8 +78,7 @@ class StreamsAPI(object):
             stream_id: Integer, the id of the stream to be deleted.
         """
         return handle_response(
-            self.session.delete(
-                self.TEMPLATE + "/{stream_id}".format(stream_id=stream_id)))
+            self.session.delete(self.TEMPLATE + f"/{stream_id}"))
 
     def add_monitor_to_stream(self, stream_id: int,
                               monitor_id: int) -> Dict[str, Any]:
@@ -94,8 +90,7 @@ class StreamsAPI(object):
         """
         return handle_response(
             self.session.post(
-                self.TEMPLATE + "/{stream_id}/monitor/{monitor_id}".format(
-                    stream_id=stream_id, monitor_id=monitor_id)))
+                self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}"))
 
     def remove_monitor_from_stream(self, stream_id: int,
                                    monitor_id: int) -> Dict[str, Any]:
@@ -107,8 +102,7 @@ class StreamsAPI(object):
         """
         return handle_response(
             self.session.delete(
-                self.TEMPLATE + "/{stream_id}/monitor/{monitor_id}".format(
-                    stream_id=stream_id, monitor_id=monitor_id)))
+                self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}"))
 
     def update_stream(self, stream_id: int, name: str) -> Dict[str, Any]:
         """Update name of stream. System Admin Only.
@@ -119,7 +113,4 @@ class StreamsAPI(object):
         """
         return handle_response(
             self.session.post(
-                self.TEMPLATE + "/{stream_id}".format(stream_id=stream_id),
-                json={
-                    "name": name
-                }))
+                self.TEMPLATE + f"/{stream_id}", json={"name": name}))
