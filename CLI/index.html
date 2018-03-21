@@ -161,11 +161,11 @@
 
 <h3 id="commands">Commands</h3>
 <ul>
-<li><strong>export</strong>  Save Monitor posts as spreadsheet.</li>
+<li><strong>export</strong>  Epxort Monitor posts as csv or excel spreadsheet or json.</li>
 <li><strong>login</strong>   Get valid authorization from user.</li>
-<li><strong>query</strong>   Request 24 analysis for provided query.</li>
+<li><strong>stream_posts</strong>  Stream up to 10K real-time posts to json or csv.</li>
 <li><strong>results</strong> Get Monitor results for 1 or more metrics.</li>
-<li><strong>upload</strong>  Upload spreadsheet file as custom content.</li>
+<li><strong>upload</strong>  Upload csv or excel spreadsheet file as custom content.</li>
 <li><strong>metadata</strong> Get Metadata for account team, monitors, and geography.</li>
 </ul>
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
@@ -177,11 +177,11 @@ Enter password: ***********
 ✔ Success!
 </code></pre>
 
-<p>Get list of monitors for the users team</p>
-<pre><code class="bash">hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'
+<p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<pre><code class="bash">hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'
 </code></pre>
 
-<p>Upload CSV file as <code>my_custom_types</code> with English language code and tab delimted columns.</p>
+<p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.</p>
 <pre><code class="bash">$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
 </code></pre>
 
@@ -189,7 +189,7 @@ Enter password: ***********
 <pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 </code></pre>
 
-<p>Get CSV data with volume information for the monitor for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<p>Get CSV data with monitor volume information for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
 <pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 &quot;2017-01-04T00:00:00&quot;,74
 &quot;2017-01-05T00:00:00&quot;,101
@@ -205,11 +205,23 @@ Enter password: ***********
 </code></pre>
 
 <p>Export Monitor posts to excel file called <code>my_export.xlsx</code></p>
-<pre><code class="bash">$ hexpy export MONITOR_ID --file_type excel --output my_export
+<pre><code class="bash">$ hexpy export MONITOR_ID --output_type excel --filename my_export
+</code></pre>
+
+<p>Export Monitor posts as json and redirect to <code>my_export.json</code></p>
+<pre><code class="bash">$ hexpy export MONITOR_ID --output_type json &gt; my_export.json
 </code></pre>
 
 <p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids</p>
 <pre><code class="bash">cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
+</code></pre>
+
+<p>Stream up to 1K real-time posts to json in the terminal</p>
+<pre><code>hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
+</code></pre>
+
+<p>Stream up to 10K real-time posts to a csv file with tab delimiter </p>
+<pre><code>hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' &gt; my_csv_file.csv
 </code></pre>
               
             </div>
