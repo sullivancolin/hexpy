@@ -15,7 +15,7 @@ test_requirements = ['pytest']
 
 setup(
     name='hexpy',
-    version='0.3.5',
+    version='0.4.0',
     description="Python Client for Crimson Hexagon API",
     long_description_markdown_filename='README.md',
     author="Colin Sullivan",
