@@ -7,7 +7,6 @@ import numpy as np
 import click
 from halo import Halo
 from getpass import getpass
-from clint.textui import progress
 from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
@@ -15,6 +14,35 @@ from .streams import StreamsAPI
 from .metadata import MetadataAPI
 import pendulum
 from typing import Sequence, Dict, Callable
+
+
+def posts_json_to_df(docs):
+    """Convert post json to flattened pandas dataframe."""
+
+    items = []
+
+    for doc in docs:
+        record = {}
+        for key, val in doc.items():
+            if isinstance(val, str):
+                if key == "contents" or key == "title":
+                    record[key] = val.replace("\n", " ").replace("\r", " ")
+                else:
+                    record[key] = val
+            elif key.endswith("Scores") and len(val) > 0:
+                category_name = key.split("Scores")[0]
+                category_max_index = np.argmax([x["score"] for x in val])
+                category = val[category_max_index][category_name + "Name"]
+                record[category_name + "Name"] = category
+            elif isinstance(val, dict):
+                for subkey, subval in val.items():
+                    record[key + "_" + subkey] = subval
+        items.append(record)
+
+    df = pd.DataFrame.from_records(items)
+    df = df.set_index('date')
+    df = df.sort_index(ascending=False)
+    return df
 
 
 @click.group()
@@ -77,6 +105,7 @@ def results(ctx,
         * interest_affinities
         * sentiment_and_categories
     """
+
     session = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(session)
     if date_range:
@@ -93,14 +122,15 @@ def results(ctx,
 @click.option('--team_id', '-t', default=None, help='team id for monitor list')
 @click.option(
     '--country', '-c', default=None, help='country code for city or state geo')
-@click.option('--monitor', '-m', default=None, help='monitor id for details')
+@click.option(
+    '--monitor_id', '-m', default=None, help='monitor id for details')
 @click.argument('info', type=str)
 @click.pass_context
 def metadata(ctx,
              info: str,
              team_id: int = None,
              country: str = None,
-             monitor: int = None) -> None:
+             monitor_id: int = None) -> None:
     """Get Metadata for account team, monitors, and geography.
 
     \b
@@ -114,6 +144,7 @@ def metadata(ctx,
         * monitor_details
         * api_documentation
     """
+
     session = ctx.invoke(login, expiration=True, force=False)
     client = MetadataAPI(session)
     monitor_client = MonitorAPI(session)
@@ -131,8 +162,8 @@ def metadata(ctx,
         return click.echo(json.dumps(metadata[info](team_id=team_id)))
     elif country:
         return click.echo(json.dumps(metadata[info](country=country)))
-    elif monitor:
-        return click.echo(json.dumps(metadata[info](monitor_id=monitor)))
+    elif monitor_id:
+        return click.echo(json.dumps(metadata[info](monitor_id=monitor_id)))
     else:
         return click.echo(json.dumps(metadata[info]()))
 
@@ -143,7 +174,7 @@ def metadata(ctx,
     '--content_type',
     '-c',
     default=None,
-    help='Custom content type, as declared in Forsight.')
+    help='Custom content type, as specified in Forsight.')
 @click.option('--delimiter', '-d', default=",", help='CSV column delimiter.')
 @click.option(
     '--language', '-l', default="en", help='language code of documents')
@@ -154,6 +185,9 @@ def upload(ctx,
            delimiter: str = ",",
            language: str = "en") -> None:
     """Upload spreadsheet file as custom content."""
+
+    if delimiter == "\\t":
+        delimiter = '\t'
     session = ctx.invoke(login, expiration=True, force=False)
     client = ContentUploadAPI(session)
     if filename.endswith(".csv"):
@@ -225,13 +259,13 @@ def upload(ctx,
     '--limit/--no-limit',
     '-l',
     default=True,
-    help='Limit export to 500 posts or extend to 10K.')
+    help='Limit export to 500 posts or extend to 10K. (default=limit)')
 @click.option(
-    '--file_type',
-    '-f',
-    type=click.Choice(['csv', 'excel']),
+    '--output_type',
+    '-o',
+    type=click.Choice(['csv', 'excel', 'json']),
     default="csv",
-    help='file type of export.')
+    help='file type of export. (default=csv)')
 @click.option(
     '--dates',
     '-d',
@@ -239,20 +273,24 @@ def upload(ctx,
     default=None,
     help='start and end date of export in YYYY-MM-DD format.')
 @click.option(
-    '--output',
-    '-o',
+    '--filename',
+    '-f',
     default=None,
-    help='output filename. Default is monitor name.')
-@click.option('--delimiter', '-d', default=",", help='CSV column delimiter.')
+    help='filename. Default is monitor name.')
+@click.option(
+    '--delimiter',
+    '-d',
+    default=",",
+    help='CSV column delimiter in quotes.(default=\',\')')
 @click.pass_context
 def export(ctx,
            monitor_id: int,
            limit: bool = True,
            dates: Sequence[str] = None,
-           file_type: str = "csv",
-           output: str = None,
+           output_type: str = "csv",
+           filename: str = None,
            delimiter: str = ",") -> None:
-    """Save Monitor posts as spreadsheet."""
+    """Export monitor posts as json or to a spreadsheet."""
 
     if delimiter == "\\t":
         delimiter = '\t'
@@ -269,65 +307,83 @@ def export(ctx,
         docs = client.posts(
             monitor_id, start, end, extend_limit=not limit)["posts"]
 
-    items = []
-
-    for doc in progress.bar(docs):
-        record = {}
-        for key, val in doc.items():
-            if isinstance(val, str):
-                if key == "contents" or key == "title":
-                    record[key] = val.replace("\n", " ").replace("\r", " ")
-                else:
-                    record[key] = val
-            elif key.endswith("Scores") and len(val) > 0:
-                category_name = key.split("Scores")[0]
-                category_max_index = np.argmax([x["score"] for x in val])
-                category = val[category_max_index][category_name + "Name"]
-                record[category_name + "Name"] = category
-            elif isinstance(val, dict):
-                for subkey, subval in val.items():
-                    record[key + "_" + subkey] = subval
-        items.append(record)
-
-    df = pd.DataFrame.from_records(items)
-    df = df.set_index('date')
-    df = df.sort_index(ascending=False)
-    if output:
-        name = output
+    if output_type == "json":
+        for p in docs:
+            click.echo(json.dumps(p, ensure_ascii=False))
     else:
-        name = f"{monitor_id}_{info.replace(' ', '_')}_Posts"
-    if file_type == "csv":
-        df.to_csv(name + ".csv", index=True, sep=delimiter)
-    else:
-        df.to_excel(name + ".xlsx", index=True)
-    spinner = Halo(text='Done!', spinner='dots')
-    spinner.succeed()
+        df = posts_json_to_df(docs)
+
+        if filename:
+            name = filename
+        else:
+            name = f"{monitor_id}_{info.replace(' ', '_')}_Posts"
+        if output_type == "csv":
+            df.to_csv(name + ".csv", index=True, sep=delimiter)
+        elif output_type == "excel":
+            df.to_excel(name + ".xlsx", index=True)
+        else:
+            raise click.ClickException(
+                "Output type must be either csv, excel or json")
+        spinner = Halo(text='Done!', spinner='dots')
+        spinner.succeed()
 
 
 @cli.command()
 @click.argument('stream_id', type=int)
-@click.option('--stop_after', '-s', type=int, default=100)
+@click.option(
+    '--stop_after',
+    '-s',
+    type=int,
+    default=100,
+    help='Stop streaming after number of posts reached. (default=100)')
+@click.option(
+    '--output_type',
+    '-o',
+    type=click.Choice(['json', 'csv']),
+    default="json",
+    help='type of data to output. (default=json)')
+@click.option(
+    '--delimiter',
+    '-d',
+    default=",",
+    help='CSV column delimiter in quotes.(default=\',\')')
 @click.pass_context
-def stream_posts(ctx, stream_id: int, stop_after: int = 100):
-    """stream posts in real time, stop after a maximum of 10K."""
+def stream_posts(ctx,
+                 stream_id: int,
+                 stop_after: int = 100,
+                 output_type: str = json,
+                 delimiter: str = ","):
+    """Stream posts in real time, stop after a maximum of 10K."""
+
+    if delimiter == "\\t":
+        delimiter = '\t'
     session = ctx.invoke(login, expiration=True, force=False)
     client = StreamsAPI(session)
     so_far = 0
     request_count = 0
+    first_fetch = True
     if stop_after > 10000:
         stop_after = 10000
-    while so_far < stop_after:
-        if request_count == 119:
-            time.sleep(60)
-            request_count = 0
+    while so_far < stop_after and request_count < 10000:
         request_count += 1
         response = client.posts(stream_id)
         posts = response["posts"]
         so_far += len(posts)
-        for p in posts:
-            click.echo(json.dumps(p, ensure_ascii=False))
+        if output_type == "json":
+            for p in posts:
+                click.echo(json.dumps(p, ensure_ascii=False))
+        elif output_type == "csv":
+            df = posts_json_to_df(posts)
+            if first_fetch:
+                click.echo(df.to_csv(sep=delimiter).strip())
+                first_fetch = False
+            else:
+                click.echo(df.to_csv(header=None, sep=delimiter).strip())
+        else:
+            raise click.ClickException(
+                "Output type must be either csv or json")
         if response["totalPostsAvailable"] == 0:
-            time.sleep(.5)
+            time.sleep(.6)
 
 
 if __name__ == '__main__':

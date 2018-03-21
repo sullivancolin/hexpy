@@ -18,11 +18,11 @@ $ hexpy [OPTIONS] COMMAND [ARGS]...
 ```
 
 ### Commands
-* **export**  Save Monitor posts as spreadsheet.
+* **export**  Epxort Monitor posts as csv or excel spreadsheet or json.
 * **login**   Get valid authorization from user.
-* **query**   Request 24 analysis for provided query.
+* **stream_posts**  Stream up to 10K real-time posts to json or csv.
 * **results** Get Monitor results for 1 or more metrics.
-* **upload**  Upload spreadsheet file as custom content.
+* **upload**  Upload csv or excel spreadsheet file as custom content.
 * **metadata** Get Metadata for account team, monitors, and geography.
 
 See how each `hexpy` command works by running `hexpy COMMAND --help`
@@ -37,12 +37,12 @@ Enter password: ***********
 ✔ Success!
 ```
 
-Get list of monitors for the users team
+Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/)
 ```bash
-hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | .id'
+hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'
 ```
 
-Upload CSV file as `my_custom_types` with English language code and tab delimted columns.
+Upload TSV file as `my_custom_type` with English as the language that has tab delimited columns.
 ```bash
 $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
 ```
@@ -52,7 +52,7 @@ Get word cloud and volume information from the monitor in the specified date ran
 $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 ```
 
-Get CSV data with volume information for the monitor for each day using [jq](https://stedolan.github.io/jq/)
+Get CSV data with monitor volume information for each day using [jq](https://stedolan.github.io/jq/)
 ```bash
 $ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 "2017-01-04T00:00:00",74
@@ -70,10 +70,25 @@ $ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDa
 
 Export Monitor posts to excel file called `my_export.xlsx`
 ```bash
-$ hexpy export MONITOR_ID --file_type excel --output my_export
+$ hexpy export MONITOR_ID --output_type excel --filename my_export
+```
+
+Export Monitor posts as json and redirect to `my_export.json`
+```bash
+$ hexpy export MONITOR_ID --output_type json > my_export.json
 ```
 
 Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids
 ```bash
 cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
+```
+
+Stream up to 1K real-time posts to json in the terminal
+```
+hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
+```
+
+Stream up to 10K real-time posts to a csv file with tab delimiter 
+```
+hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' > my_csv_file.csv
 ```
