@@ -84,11 +84,11 @@ cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
 ```
 
 Stream up to 1K real-time posts to json in the terminal
-```
+```bash
 hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
 ```
 
 Stream up to 10K real-time posts to a csv file with tab delimiter 
-```
+```bash
 hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' > my_csv_file.csv
 ```
