@@ -57,7 +57,7 @@ class MonitorAPI(object):
                                                     date[1])
             }
         else:
-            raise ValueError(f'valid metrics are {self.Metrics.keys()}')
+            raise ValueError(f'valid metrics are {self.METRICS.keys()}')
 
     def _aggregate_dates(
             self, monitor_id: int,

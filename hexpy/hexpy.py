@@ -14,6 +14,7 @@ from .streams import StreamsAPI
 from .metadata import MetadataAPI
 import pendulum
 from typing import Sequence, Dict, Callable
+from click_help_colors import HelpColorsGroup
 
 
 def posts_json_to_df(docs):
@@ -45,7 +46,10 @@ def posts_json_to_df(docs):
     return df
 
 
-@click.group()
+@click.group(
+    cls=HelpColorsGroup,
+    help_headers_color='blue',
+    help_options_color='yellow')
 def cli():
     """Command Line interface for working with Crimson Hexagon API."""
     pass
@@ -351,7 +355,7 @@ def export(ctx,
 def stream_posts(ctx,
                  stream_id: int,
                  stop_after: int = 100,
-                 output_type: str = json,
+                 output_type: str = 'json',
                  delimiter: str = ","):
     """Stream posts in real time, stop after a maximum of 10K."""
 
