@@ -41,8 +41,6 @@ def posts_json_to_df(docs):
         items.append(record)
 
     df = pd.DataFrame.from_records(items)
-    df = df.set_index('date')
-    df = df.sort_index(ascending=False)
     return df
 
 
@@ -146,12 +144,14 @@ def metadata(ctx,
         * cities
         * countries
         * monitor_details
+        * stream_list
         * api_documentation
     """
 
     session = ctx.invoke(login, expiration=True, force=False)
     client = MetadataAPI(session)
     monitor_client = MonitorAPI(session)
+    stream_client = StreamsAPI(session)
     metadata: Dict[str, Callable] = {
         "team_list": client.team_list,
         "monitor_list": client.monitor_list,
@@ -160,6 +160,7 @@ def metadata(ctx,
         "cities": client.cities,
         "countries": client.countries,
         "monitor_details": monitor_client.details,
+        "stream_list": stream_client.stream_list,
         "api_documentation": client.api_documentation
     }
     if team_id:
@@ -322,9 +323,9 @@ def export(ctx,
         else:
             name = f"{monitor_id}_{info.replace(' ', '_')}_Posts"
         if output_type == "csv":
-            df.to_csv(name + ".csv", index=True, sep=delimiter)
+            df.to_csv(name + ".csv", index=False, sep=delimiter)
         elif output_type == "excel":
-            df.to_excel(name + ".xlsx", index=True)
+            df.to_excel(name + ".xlsx", index=False)
         else:
             raise click.ClickException(
                 "Output type must be either csv, excel or json")
@@ -379,10 +380,11 @@ def stream_posts(ctx,
         elif output_type == "csv":
             df = posts_json_to_df(posts)
             if first_fetch:
-                click.echo(df.to_csv(sep=delimiter).strip())
+                click.echo(df.to_csv(sep=delimiter, index=False).strip())
                 first_fetch = False
             else:
-                click.echo(df.to_csv(header=None, sep=delimiter).strip())
+                click.echo(
+                    df.to_csv(header=None, sep=delimiter, index=False).strip())
         else:
             raise click.ClickException(
                 "Output type must be either csv or json")
