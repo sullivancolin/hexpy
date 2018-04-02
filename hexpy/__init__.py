@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Top-level package for hexpy."""
 
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 
 from .session import HexpySession
 from .monitor import MonitorAPI
