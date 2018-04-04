@@ -156,21 +156,26 @@
 </ul>
 <h2 id="usage">Usage</h2>
 <h3 id="basic">Basic</h3>
-<pre><code class="bash">$ hexpy [OPTIONS] COMMAND [ARGS]...
+<pre><code>$ hexpy --help
+Usage: hexpy [OPTIONS] COMMAND [ARGS]...
+
+  Command Line interface for working with Crimson Hexagon API.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  export        Export monitor posts as json or to a...
+  login         Session login credentials.
+  metadata      Get Metadata for account team, monitors, and...
+  results       Get Monitor results for 1 or more metrics.
+  stream_posts  Stream posts in real time, stop after a...
+  upload        Upload spreadsheet file as custom content.
 </code></pre>
 
-<h3 id="commands">Commands</h3>
-<ul>
-<li><strong>export</strong>  Epxort Monitor posts as csv or excel spreadsheet or json.</li>
-<li><strong>login</strong>   Get valid authorization from user.</li>
-<li><strong>stream_posts</strong>  Stream up to 10K real-time posts to json or csv.</li>
-<li><strong>results</strong> Get Monitor results for 1 or more metrics.</li>
-<li><strong>upload</strong>  Upload csv or excel spreadsheet file as custom content.</li>
-<li><strong>metadata</strong> Get Metadata for account team, monitors, and geography.</li>
-</ul>
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples</h2>
-<p>Login to Crimson API with you credentials</p>
+<p>Login to Crimson API with you credentials and save your token</p>
 <pre><code class="bash">$ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
@@ -189,7 +194,7 @@ Enter password: ***********
 <pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 </code></pre>
 
-<p>Get CSV data with monitor volume information for each day using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<p>Get monitor volume information for each day  as a CSV using <a href="https://stedolan.github.io/jq/">jq</a></p>
 <pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 &quot;2017-01-04T00:00:00&quot;,74
 &quot;2017-01-05T00:00:00&quot;,101
@@ -213,10 +218,10 @@ Enter password: ***********
 </code></pre>
 
 <p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids</p>
-<pre><code class="bash">cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
+<pre><code class="bash">cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel
 </code></pre>
 
-<p>Stream up to 1K real-time posts to json in the terminal</p>
+<p>Stream 1K real-time posts to json in the terminal</p>
 <pre><code class="bash">hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
 </code></pre>
 
