@@ -34,7 +34,7 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
 >>> from hexpy import HexpyAuthorization, MonitorAPI
 >>> auth = HexpyAuthorization(username="user@email.com", password="crimson_login")
 >>> monitor_results_client=MonitorAPI(auth)
->>> monitor_results_client.details(monitor_id)
+>>> monitor_results_client.details(MONITOR_ID)
 {'categories': [{'hidden': False,
    'id': 6054759055,
    'name': 'Basic Positive',

@@ -7,6 +7,9 @@ import time
 import threading
 import collections
 from requests.models import Response
+import logging
+
+logger = logging.getLogger(__name__)
 
 ROOT = "https://api.crimsonhexagon.com/api/"
 
@@ -31,7 +34,7 @@ def rate_limited(func: Callable,
                 until = time.time() + period - (calls[-1] - calls[0])
                 sleeptime = until - time.time()
                 if sleeptime > 0:
-                    print(
+                    logger.info(
                         f"Rate Limit Reached. (Sleeping for {round(sleeptime)} seconds)"
                     )
                     time.sleep(sleeptime)

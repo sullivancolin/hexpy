@@ -13,23 +13,30 @@ Hexpy Command Line Interface
 ## Usage
 
 ### Basic
-```bash
-$ hexpy [OPTIONS] COMMAND [ARGS]...
-```
 
-### Commands
-* **export**  Epxort Monitor posts as csv or excel spreadsheet or json.
-* **login**   Get valid authorization from user.
-* **stream_posts**  Stream up to 10K real-time posts to json or csv.
-* **results** Get Monitor results for 1 or more metrics.
-* **upload**  Upload csv or excel spreadsheet file as custom content.
-* **metadata** Get Metadata for account team, monitors, and geography.
+```
+$ hexpy --help
+Usage: hexpy [OPTIONS] COMMAND [ARGS]...
+
+  Command Line interface for working with Crimson Hexagon API.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  export        Export monitor posts as json or to a...
+  login         Session login credentials.
+  metadata      Get Metadata for account team, monitors, and...
+  results       Get Monitor results for 1 or more metrics.
+  stream_posts  Stream posts in real time, stop after a...
+  upload        Upload spreadsheet file as custom content.
+```
 
 See how each `hexpy` command works by running `hexpy COMMAND --help`
 
 ## Examples
 
-Login to Crimson API with you credentials
+Login to Crimson API with you credentials and save your token
 ```bash
 $ hexpy login --force
 Enter username: username@email.com
@@ -52,7 +59,7 @@ Get word cloud and volume information from the monitor in the specified date ran
 $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 ```
 
-Get CSV data with monitor volume information for each day using [jq](https://stedolan.github.io/jq/)
+Get monitor volume information for each day  as a CSV using [jq](https://stedolan.github.io/jq/)
 ```bash
 $ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
 "2017-01-04T00:00:00",74
@@ -80,10 +87,10 @@ $ hexpy export MONITOR_ID --output_type json > my_export.json
 
 Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids
 ```bash
-cat ids.txt | xargs -n 1 -P 4 hexpy export -f excel
+cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel
 ```
 
-Stream up to 1K real-time posts to json in the terminal
+Stream 1K real-time posts to json in the terminal
 ```bash
 hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
 ```
