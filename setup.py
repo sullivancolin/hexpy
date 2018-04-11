@@ -10,15 +10,19 @@ requirements = [
     "openpyxl>=2.4.8", "pendulum>=1.3.2"
 ]
 
-setup_requirements = ['pytest-runner', 'setuptools-markdown']
+setup_requirements = ['pytest-runner', 'setuptools>=38.6.0', 'wheel>=0.31.0']
 
 test_requirements = ['pytest']
+
+with open("README.md") as infile:
+    long_description = infile.read()
 
 setup(
     name='hexpy',
     version='0.4.1',
     description="Python Client for Crimson Hexagon API",
-    long_description_markdown_filename='README.md',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Colin Sullivan",
     author_email='csullivan@crimsonhexagon.com',
     url='https://github.com/sullivancolin/hexpy',
