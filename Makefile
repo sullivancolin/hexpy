@@ -27,12 +27,12 @@ clean-test:
 	rm -fr .cache/
 	rm -fr .pytest_cache
 
-## check style with flake8
+## check style with flake8, mypy, yapf
 lint:
 	flake8 hexpy tests +
-	mypy hexpy
+	mypy hexpy --ignore-missing-imports
 
-## run tests quickly with the default Python
+## run tests with the default Python
 test:
 	pytest
 
@@ -51,7 +51,7 @@ coverage:
 docs: docs-clean
 	cd docs/; mkdocs build
 
-## serve docss
+## serve docs
 serve-docs: docs
 	cd docs/; mkdocs serve
 
@@ -75,13 +75,17 @@ bumpversion: clean
 dist: clean
 	python setup.py bdist_wheel
 
-## install the package to the active Python's site-packages
+## install the package to the pipenv virtualenv
 install: clean
-	pip install --upgrade  .
+	pipenv install -e . --three
 
-#################################################################################
-# Self Documenting Commands                                                     #
-#################################################################################
+## install the package and all development dependencies to the pipenv virtualenv
+install-dev: clean
+	pipenv install -e . --dev --three
+
+##############################################################################
+# Self Documenting Commands                                                  #
+##############################################################################
 .DEFAULT_GOAL := show-help
 # See <https://gist.github.com/klmr/575726c7e05d8780505a> for explanation.
 .PHONY: show-help

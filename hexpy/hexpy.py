@@ -12,6 +12,7 @@ from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
 from .streams import StreamsAPI
 from .metadata import MetadataAPI
+from hexpy import __version__
 import pendulum
 from typing import Sequence, Dict, Callable
 from click_help_colors import HelpColorsGroup
@@ -48,6 +49,7 @@ def posts_json_to_df(docs):
     cls=HelpColorsGroup,
     help_headers_color='blue',
     help_options_color='yellow')
+@click.version_option(version=__version__)
 def cli():
     """Command Line interface for working with Crimson Hexagon API."""
     pass

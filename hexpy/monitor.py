@@ -407,11 +407,11 @@ class MonitorAPI:
                     "geotagged": geotagged
                 }))
 
-    #################################################################################
-    # Demographics                                                                  #
-    # This collection of endpoints provide demographic volume metrics for users     #
-    # within a given monitor.                                                       #
-    #################################################################################
+    ##########################################################################
+    # Demographics                                                           #
+    # This collection of endpoints provide demographic volume Metrics        #
+    #  for users within a given monitor.                                     #
+    ##########################################################################
 
     def age(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
         """Return volume metrics for a given monitor split by age bracket.
@@ -465,10 +465,10 @@ class MonitorAPI:
                     "end": end
                 }))
 
-    #################################################################################
-    # Geography                                                                     #
-    #                                                                               #
-    #################################################################################
+    ##########################################################################
+    # Geography                                                              #
+    #                                                                        #
+    ##########################################################################
 
     def cities(self, monitor_id: int, start: str, end: str,
                country: str) -> Dict[str, Any]:
@@ -529,11 +529,11 @@ class MonitorAPI:
                     "end": end
                 }))
 
-    #################################################################################
-    # Twitter                                                                       #
-    # This collection of endpoints relate provide metrics specific to Twitter from  #
-    # either Social Account or Buzz monitors.                                       #
-    #################################################################################
+    ##########################################################################
+    # Twitter                                                                #
+    # This collection of endpoints relate provide metrics specific to        #
+    # Twitter from either Social Account or Buzz monitors.                   #
+    ##########################################################################
 
     def twitter_authors(self, monitor_id: int, start: str,
                         end: str) -> Dict[str, Any]:
@@ -626,11 +626,11 @@ class MonitorAPI:
                     "end": end
                 }))
 
-    #################################################################################
-    # Facebook                                                                      #
-    # This collection of endpoints relate provide metrics specific to Facebook from #
-    # either Social Account or Buzz monitors.                                       #
-    #################################################################################
+    ##########################################################################
+    # Facebook                                                               #
+    # This collection of endpoints relate provide metrics specific to        #
+    # Facebook from either Social Account or Buzz monitors.                  #
+    ##########################################################################
 
     def facebook_admin_posts(self, monitor_id: int, start: str,
                              end: str) -> Dict[str, Any]:
@@ -688,11 +688,11 @@ class MonitorAPI:
                     "end": end
                 }))
 
-    #################################################################################
-    # Instagram                                                                     #
-    # This collection of endpoints relate provide metrics specific to Instagram     #
-    # from either Social Account or Buzz monitors.                                  #
-    #################################################################################
+    ##########################################################################
+    # Instagram                                                              #
+    # This collection of endpoints relate provide metrics specific           #
+    # to Instagram from either Social Account or Buzz monitors.              #
+    ##########################################################################
 
     def instagram_top_hashtags(self, monitor_id: int, start: str,
                                end: str) -> Dict[str, Any]:
