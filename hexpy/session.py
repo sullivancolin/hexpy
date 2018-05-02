@@ -10,7 +10,7 @@ from .base import ROOT, handle_response, rate_limited
 from typing import Dict, Any
 
 
-class HexpySession(object):
+class HexpySession:
     """Class for generating a token for use with all API requests.
 
     # Example Usage
@@ -54,7 +54,6 @@ class HexpySession(object):
                  password: str = None,
                  token: str = None,
                  no_expiration: bool = False) -> None:
-        super(HexpySession, self).__init__()
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name == "get_token":
                 setattr(self, name, rate_limited(fn))

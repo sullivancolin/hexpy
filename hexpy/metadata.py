@@ -7,7 +7,7 @@ from .base import ROOT, handle_response, rate_limited
 from .session import HexpySession
 
 
-class MetadataAPI(object):
+class MetadataAPI:
     """Class for working with Crimson Hexagon account and analysis metadata.
 
     # Example usage.
@@ -24,7 +24,6 @@ class MetadataAPI(object):
     TEMPLATE = ROOT
 
     def __init__(self, session: HexpySession) -> None:
-        super(MetadataAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
@@ -43,9 +42,7 @@ class MetadataAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "monitor/list", params={
-                    "team": team_id
-                }))
+                self.TEMPLATE + "monitor/list", params={"team": team_id}))
 
     def geography(self) -> Dict[str, Any]:
         """Return all the geographical locations that you may use to
@@ -64,9 +61,7 @@ class MetadataAPI(object):
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "geography/info/states",
-                params={
-                    "country": country
-                }))
+                params={"country": country}))
 
     def cities(self, country: str) -> Dict[str, Any]:
         """Return all the cities or urban areas defined in the given country that you may use to
@@ -78,9 +73,7 @@ class MetadataAPI(object):
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "geography/info/cities",
-                params={
-                    "country": country
-                }))
+                params={"country": country}))
 
     def countries(self) -> Dict[str, Any]:
         """Return all the countries that you may use to filter monitor results

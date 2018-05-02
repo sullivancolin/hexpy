@@ -8,7 +8,7 @@ from .session import HexpySession
 from typing import Dict, Any, Sequence
 
 
-class ContentUploadAPI(object):
+class ContentUploadAPI:
     """Class for working with Content Upload API.
 
     You may use the Content Upload endpoint to upload documents for analysis.
@@ -46,7 +46,6 @@ class ContentUploadAPI(object):
     TEMPLATE = ROOT + "content/upload"
 
     def __init__(self, session: HexpySession) -> None:
-        super(ContentUploadAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["batch_upload", "__init__"]:

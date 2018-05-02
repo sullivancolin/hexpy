@@ -7,7 +7,7 @@ from .base import ROOT, handle_response, rate_limited
 from .session import HexpySession
 
 
-class StreamsAPI(object):
+class StreamsAPI:
     """Class for working with Streams API.
 
     # Example usage.
@@ -24,7 +24,6 @@ class StreamsAPI(object):
     TEMPLATE = ROOT + "stream"
 
     def __init__(self, session: HexpySession) -> None:
-        super(StreamsAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:

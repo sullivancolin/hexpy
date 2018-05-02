@@ -7,7 +7,7 @@ from .session import HexpySession
 from typing import Any, Dict
 
 
-class CustomAPI(object):
+class CustomAPI:
     """Class for creating a custom API.
 
     # Example usage.
@@ -22,7 +22,6 @@ class CustomAPI(object):
     """
 
     def __init__(self, session: HexpySession, endpoint: str) -> None:
-        super(CustomAPI, self).__init__()
         self.session = session.session
         self.TEMPLATE = ROOT + endpoint
         for name, fn in inspect.getmembers(self, inspect.ismethod):

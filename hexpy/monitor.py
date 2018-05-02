@@ -7,7 +7,7 @@ from hexpy.session import HexpySession
 from typing import Dict, Any, Sequence, Union, List, Callable
 
 
-class MonitorAPI(object):
+class MonitorAPI:
     """Class for working with Crimson Hexagon Monitor API.
 
     # Example usage.
@@ -27,7 +27,6 @@ class MonitorAPI(object):
     TEMPLATE = ROOT + "monitor/"
 
     def __init__(self, session: HexpySession) -> None:
-        super(MonitorAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in [

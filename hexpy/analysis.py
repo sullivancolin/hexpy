@@ -7,7 +7,7 @@ from .session import HexpySession
 from typing import Dict, Any
 
 
-class AnalysisAPI(object):
+class AnalysisAPI:
     """Class for working with Crimson Hexagon Analysis API.
 
     # Example Usage
@@ -24,7 +24,6 @@ class AnalysisAPI(object):
     TEMPLATE = ROOT + "results"
 
     def __init__(self, session: HexpySession) -> None:
-        super(AnalysisAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:

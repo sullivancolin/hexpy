@@ -7,7 +7,7 @@ from .session import HexpySession
 from typing import List, Dict, Any
 
 
-class RealtimeAPI(object):
+class RealtimeAPI:
     """Class for working with RealtimeAPI.
 
     # Example usage.
@@ -24,7 +24,6 @@ class RealtimeAPI(object):
     TEMPLATE = ROOT + "realtime/monitor/"
 
     def __init__(self, session: HexpySession) -> None:
-        super(RealtimeAPI, self).__init__()
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
@@ -74,9 +73,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "list", params={
-                    "team_id": team_id
-                }))
+                self.TEMPLATE + "list", params={"team_id": team_id}))
 
     def configure(self, monitor_id: int) -> Dict[str, Any]:
         """Configure the Realtime evaluators for the Monitor.
@@ -86,9 +83,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "configure", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "configure", params={"id": monitor_id}))
 
     def enable(self, monitor_id: int) -> Dict[str, Any]:
         """Enable Realtime Data.
@@ -98,9 +93,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "enable", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "enable", params={"id": monitor_id}))
 
     def disbale(self, monitor_id: int) -> Dict[str, Any]:
         """Disable Realtime Data.
@@ -110,9 +103,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "disable", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "disable", params={"id": monitor_id}))
 
     def detail(self, monitor_id: int) -> Dict[str, Any]:
         """Get the Realtime evaluators details for the Monitor.
@@ -122,9 +113,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "details", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "details", params={"id": monitor_id}))
 
     def retweets(self, monitor_id: int) -> Dict[str, Any]:
         """Get the Realtime retweets for the Monitor.
@@ -134,9 +123,7 @@ class RealtimeAPI(object):
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "retweets", params={
-                    "id": monitor_id
-                }))
+                self.TEMPLATE + "retweets", params={"id": monitor_id}))
 
     def social_guids(self,
                      monitor_id: int,
