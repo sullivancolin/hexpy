@@ -145,19 +145,19 @@
               
                 <h1 id="session">Session</h1>
 <h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</h2>
-<p>Instantiate using token, or username. Optionally include password, or enter it at the prompt.</p>
+<p>Login using token, or username. Optionally include password, or enter it at the prompt.</p>
 <pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession
-&gt;&gt;&gt; session = HexpySession(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
-&gt;&gt;&gt; session.save_token()
+&gt;&gt;&gt; session = HexpySession.login(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
+&gt;&gt;&gt; session.save_token()  # saving token to ~/.hexpy/credentials.json
 </code></pre>
 
 <p>or</p>
-<pre><code class="python">&gt;&gt;&gt; session = HexpySession(username=&quot;username@email.com&quot;)
+<pre><code class="python">&gt;&gt;&gt; session = HexpySession.login(username=&quot;username@email.com&quot;)
 Enter password: *********
 &gt;&gt;&gt; session.save_token()
 </code></pre>
 
-<p>or</p>
+<p>or instantiate a session using a token</p>
 <pre><code class="python">&gt;&gt;&gt; session = HexpySession(token=&quot;previously_saved_token&quot;)
 </code></pre>
 
@@ -174,11 +174,11 @@ Enter password: *********
 </code></pre>
 
 <h2 id="methods">Methods</h2>
-<h3 id="get_token">get_token</h3>
-<pre><code class="python">get_token(username: str, password: str, no_expiration: bool = False) -&gt; Dict[str, Any]
+<h3 id="login">login</h3>
+<pre><code class="python">login(username: str, password: str = None, no_expiration: bool = False) -&gt; HexpySession
 </code></pre>
 
-<p>Request authorization token.</p>
+<p>Instantiate class from username and password.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
 <li>username: account username.</li>
