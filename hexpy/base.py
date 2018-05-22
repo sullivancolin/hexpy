@@ -17,9 +17,9 @@ ONE_MINUTE = 60
 MAX_CALLS = 120
 
 
-def rate_limited(func: Callable,
-                 max_calls: int = MAX_CALLS,
-                 period: int = ONE_MINUTE) -> Callable:
+def rate_limited(
+    func: Callable, max_calls: int = MAX_CALLS, period: int = ONE_MINUTE
+) -> Callable:
     """Limit the number of times a function can be called."""
     calls: Deque = collections.deque()
 
@@ -52,15 +52,13 @@ def rate_limited(func: Callable,
     return wrapper
 
 
-def handle_response(
-        response: Union[Response, Dict[str, Any]]) -> Dict[str, Any]:
+def handle_response(response: Union[Response, Dict[str, Any]]) -> Dict[str, Any]:
     """Ensure responses do not contain errors, and Rate Limit is obeyed."""
 
     if not isinstance(response, dict):
         if response.status_code not in [200, 201, 202]:
             raise ValueError("Something Went Wrong. " + response.text)
-        elif ("status" in response.json()
-              ) and response.json()["status"] == "error":
+        elif ("status" in response.json()) and response.json()["status"] == "error":
             raise ValueError("Something Went Wrong. " + response.text)
         return response.json()
     return response

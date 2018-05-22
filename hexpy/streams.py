@@ -41,10 +41,9 @@ class StreamsAPI:
 
         return handle_response(
             self.session.get(
-                self.TEMPLATE + f"/{stream_id}/posts",
-                params={
-                    "count": count,
-                }))
+                self.TEMPLATE + f"/{stream_id}/posts", params={"count": count}
+            )
+        )
 
     def stream_list(self, team_id: int) -> Dict[str, Any]:
         """List all available streams for a team.
@@ -53,8 +52,8 @@ class StreamsAPI:
             team_id: Integer, the id of the team.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "/list/", params={"teamid": team_id}))
+            self.session.get(self.TEMPLATE + "/list/", params={"teamid": team_id})
+        )
 
     def create_stream(self, team_id: int, name: str) -> Dict[str, Any]:
         """Create new stream for a team. System Admin Only.
@@ -64,11 +63,8 @@ class StreamsAPI:
             name: String, the name to associate with the newly created stream.
         """
         return handle_response(
-            self.session.post(
-                self.TEMPLATE, json={
-                    "teamid": team_id,
-                    "name": name
-                }))
+            self.session.post(self.TEMPLATE, json={"teamid": team_id, "name": name})
+        )
 
     def delete_stream(self, stream_id: int) -> Dict[str, Any]:
         """Delete a stream. System Admin Only.
@@ -76,11 +72,9 @@ class StreamsAPI:
         # Arguments
             stream_id: Integer, the id of the stream to be deleted.
         """
-        return handle_response(
-            self.session.delete(self.TEMPLATE + f"/{stream_id}"))
+        return handle_response(self.session.delete(self.TEMPLATE + f"/{stream_id}"))
 
-    def add_monitor_to_stream(self, stream_id: int,
-                              monitor_id: int) -> Dict[str, Any]:
+    def add_monitor_to_stream(self, stream_id: int, monitor_id: int) -> Dict[str, Any]:
         """Associate a monitor with a stream. System Admin Only.
 
         # Arguments
@@ -88,11 +82,12 @@ class StreamsAPI:
             monitor_id: Integer, the id to be associated with the stream.
         """
         return handle_response(
-            self.session.post(
-                self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}"))
+            self.session.post(self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}")
+        )
 
-    def remove_monitor_from_stream(self, stream_id: int,
-                                   monitor_id: int) -> Dict[str, Any]:
+    def remove_monitor_from_stream(
+        self, stream_id: int, monitor_id: int
+    ) -> Dict[str, Any]:
         """Remove association between monitor and stream.  System Admin Only.
 
         # Arguments
@@ -100,8 +95,8 @@ class StreamsAPI:
             monitor_id: Integer, the id to be removed from the stream.
         """
         return handle_response(
-            self.session.delete(
-                self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}"))
+            self.session.delete(self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}")
+        )
 
     def update_stream(self, stream_id: int, name: str) -> Dict[str, Any]:
         """Update name of stream. System Admin Only.
@@ -111,5 +106,5 @@ class StreamsAPI:
             name: String, the new name to be associated with the stream.
         """
         return handle_response(
-            self.session.post(
-                self.TEMPLATE + f"/{stream_id}", json={"name": name}))
+            self.session.post(self.TEMPLATE + f"/{stream_id}", json={"name": name})
+        )

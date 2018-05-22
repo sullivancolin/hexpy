@@ -29,8 +29,9 @@ class RealtimeAPI:
             if name not in ["__init__"]:
                 setattr(self, name, rate_limited(fn))
 
-    def cashtags(self, monitor_id: int, start: int = None,
-                 top: int = None) -> Dict[str, Any]:
+    def cashtags(
+        self, monitor_id: int, start: int = None, top: int = None
+    ) -> Dict[str, Any]:
         """Get Cashtags associated to a Monitor.
 
         # Arguments
@@ -41,14 +42,13 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "cashtags",
-                params={
-                    "id": monitor_id,
-                    "start": start,
-                    "top": top
-                }))
+                params={"id": monitor_id, "start": start, "top": top},
+            )
+        )
 
-    def hashtags(self, monitor_id: int, start: int = None,
-                 top: int = None) -> Dict[str, Any]:
+    def hashtags(
+        self, monitor_id: int, start: int = None, top: int = None
+    ) -> Dict[str, Any]:
         """Get Hashtags associated to a Monitor.
 
         # Arguments
@@ -59,11 +59,9 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "hashtags",
-                params={
-                    "id": monitor_id,
-                    "start": start,
-                    "top": top
-                }))
+                params={"id": monitor_id, "start": start, "top": top},
+            )
+        )
 
     def list(self, team_id: int) -> Dict[str, Any]:
         """Get the Monitors which are in Proteus
@@ -72,8 +70,8 @@ class RealtimeAPI:
             team_id: Integer, The id of the team to which the listed monitors belong.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "list", params={"team_id": team_id}))
+            self.session.get(self.TEMPLATE + "list", params={"team_id": team_id})
+        )
 
     def configure(self, monitor_id: int) -> Dict[str, Any]:
         """Configure the Realtime evaluators for the Monitor.
@@ -82,8 +80,8 @@ class RealtimeAPI:
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "configure", params={"id": monitor_id}))
+            self.session.get(self.TEMPLATE + "configure", params={"id": monitor_id})
+        )
 
     def enable(self, monitor_id: int) -> Dict[str, Any]:
         """Enable Realtime Data.
@@ -92,8 +90,8 @@ class RealtimeAPI:
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "enable", params={"id": monitor_id}))
+            self.session.get(self.TEMPLATE + "enable", params={"id": monitor_id})
+        )
 
     def disbale(self, monitor_id: int) -> Dict[str, Any]:
         """Disable Realtime Data.
@@ -102,8 +100,8 @@ class RealtimeAPI:
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "disable", params={"id": monitor_id}))
+            self.session.get(self.TEMPLATE + "disable", params={"id": monitor_id})
+        )
 
     def detail(self, monitor_id: int) -> Dict[str, Any]:
         """Get the Realtime evaluators details for the Monitor.
@@ -112,8 +110,8 @@ class RealtimeAPI:
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "details", params={"id": monitor_id}))
+            self.session.get(self.TEMPLATE + "details", params={"id": monitor_id})
+        )
 
     def retweets(self, monitor_id: int) -> Dict[str, Any]:
         """Get the Realtime retweets for the Monitor.
@@ -122,14 +120,16 @@ class RealtimeAPI:
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "retweets", params={"id": monitor_id}))
+            self.session.get(self.TEMPLATE + "retweets", params={"id": monitor_id})
+        )
 
-    def social_guids(self,
-                     monitor_id: int,
-                     doc_type: str,
-                     start: int = None,
-                     received_after: int = None) -> Dict[str, Any]:
+    def social_guids(
+        self,
+        monitor_id: int,
+        doc_type: str,
+        start: int = None,
+        received_after: int = None,
+    ) -> Dict[str, Any]:
         """Get the Realtime social guids for the Monitor.
 
         # Arguments
@@ -145,8 +145,10 @@ class RealtimeAPI:
                     "id": monitor_id,
                     "start": start,
                     "receivedafter": received_after,
-                    "type": doc_type
-                }))
+                    "type": doc_type,
+                },
+            )
+        )
 
     def tweets(self, monitor_id: int, start: int = None) -> Dict[str, Any]:
         """Get the Realtime tweets for the Monitor.
@@ -157,14 +159,13 @@ class RealtimeAPI:
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "tweets",
-                params={
-                    "id": monitor_id,
-                    "start": start
-                }))
+                self.TEMPLATE + "tweets", params={"id": monitor_id, "start": start}
+            )
+        )
 
-    def volume(self, monitor_id: int, start: int = None,
-               doc_type: List = None) -> Dict[str, Any]:
+    def volume(
+        self, monitor_id: int, start: int = None, doc_type: List = None
+    ) -> Dict[str, Any]:
         """Get the Realtime volume for the Monitor.
 
         # Arguments
@@ -175,14 +176,13 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "volume",
-                params={
-                    "id": monitor_id,
-                    "start": start,
-                    "type": doc_type
-                }))
+                params={"id": monitor_id, "start": start, "type": doc_type},
+            )
+        )
 
-    def volume_by_sentiment(self, monitor_id: int, start: int,
-                            doc_type: str) -> Dict[str, Any]:
+    def volume_by_sentiment(
+        self, monitor_id: int, start: int, doc_type: str
+    ) -> Dict[str, Any]:
         """Get the Realtime volume by sentiment for the Monitor.
 
         # Arguments
@@ -193,8 +193,6 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "volumebysentiment",
-                params={
-                    "id": monitor_id,
-                    "start": start,
-                    "type": doc_type
-                }))
+                params={"id": monitor_id, "start": start, "type": doc_type},
+            )
+        )

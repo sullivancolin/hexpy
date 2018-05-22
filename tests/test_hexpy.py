@@ -15,7 +15,7 @@ def test_auth():
 def test_response_handler():
     r1 = Response()
     r1.status_code = 403
-    r1._content = bytes(json.dumps({"status": "error"}), 'utf-8')
+    r1._content = bytes(json.dumps({"status": "error"}), "utf-8")
 
     def test_response(r):
         return handle_response(r)
@@ -27,4 +27,4 @@ def test_response_handler():
         test_response(r1)
 
     data = {"some": "suff"}
-    r1._content = bytes(json.dumps({"some": "stuff"}), 'utf-8')
+    r1._content = bytes(json.dumps({"some": "stuff"}), "utf-8")

@@ -7,7 +7,6 @@ name = "pypi"
 "e1839a8" = {path = ".", editable = true}
 
 [dev-packages]
-yapf = "*"
 mypy = "*"
 "flake8" = "*"
 bumpversion = "*"
@@ -18,6 +17,7 @@ tox = "*"
 coverage = "*"
 pytest = "*"
 "e1839a8" = {path = ".", editable = true}
+black = "*"
 
 [requires]
 python_version = "3.6"

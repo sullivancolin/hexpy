@@ -1,7 +1,7 @@
 A Python Client for the Crimson Hexagon API
 ===========================================
 
-**hexpy** is a simple python package for working with the Crimson Hexagon API
+**hexpy** is a simple python package for working with the [Crimson Hexagon API](https://apidocs.crimsonhexagon.com/)
 
 ## Why use this client?
 

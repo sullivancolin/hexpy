@@ -28,8 +28,9 @@ class CustomAPI:
             if name not in ["__init__"]:
                 setattr(self, name, rate_limited(fn))
 
-    def get(self, url_params: str = "",
-            params: Dict[str, Any] = None) -> Dict[str, Any]:
+    def get(
+        self, url_params: str = "", params: Dict[str, Any] = None
+    ) -> Dict[str, Any]:
         """Send get request using URL parameters and query-string parameters.
 
         # Arguments
@@ -38,13 +39,14 @@ class CustomAPI:
 
         """
         return handle_response(
-            self.session.get(self.TEMPLATE + url_params, params=params))
+            self.session.get(self.TEMPLATE + url_params, params=params)
+        )
 
     def post(
-            self,
-            url_params: str = "",
-            params: Dict[str, Any] = None,
-            data: Dict[str, Any] = None,
+        self,
+        url_params: str = "",
+        params: Dict[str, Any] = None,
+        data: Dict[str, Any] = None,
     ) -> Dict[str, Any]:
         """Send post request using URL parameters and query-string parameters, and json data.
 
@@ -54,11 +56,12 @@ class CustomAPI:
             data: Dict, json data to post.
         """
         return handle_response(
-            self.session.post(
-                self.TEMPLATE + url_params, params=params, json=data))
+            self.session.post(self.TEMPLATE + url_params, params=params, json=data)
+        )
 
-    def delete(self, url_params: str = "",
-               params: Dict[str, Any] = None) -> Dict[str, Any]:
+    def delete(
+        self, url_params: str = "", params: Dict[str, Any] = None
+    ) -> Dict[str, Any]:
         """Send delete request using URL parameters and query-string parameters.
 
         # Arguments
@@ -66,4 +69,5 @@ class CustomAPI:
             params: Dict, querystring params.
         """
         return handle_response(
-            self.session.delete(self.TEMPLATE + url_params, params=params))
+            self.session.delete(self.TEMPLATE + url_params, params=params)
+        )

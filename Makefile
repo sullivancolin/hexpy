@@ -27,9 +27,10 @@ clean-test:
 	rm -fr .cache/
 	rm -fr .pytest_cache
 
-## check style with flake8, mypy, yapf
-lint:
-	flake8 hexpy tests +
+## check style with flake8, mypy, black
+lint: clean
+	black . --check
+	flake8 hexpy tests --exit-zero
 	mypy hexpy --ignore-missing-imports
 
 ## run tests with the default Python
@@ -45,7 +46,7 @@ coverage:
 	coverage run --source hexpy -m pytest
 	coverage report -m
 	coverage html
-	$(BROWSER) htmlcov/index.html
+	open -a "Google Chrome" htmlcov/index.html
 
 ## generate Mkdocs HTML documentation
 docs: docs-clean

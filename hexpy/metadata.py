@@ -41,15 +41,14 @@ class MetadataAPI:
             team_id: integer id number for a team
         """
         return handle_response(
-            self.session.get(
-                self.TEMPLATE + "monitor/list", params={"team": team_id}))
+            self.session.get(self.TEMPLATE + "monitor/list", params={"team": team_id})
+        )
 
     def geography(self) -> Dict[str, Any]:
         """Return all the geographical locations that you may use to
         filter monitor results and to upload documents with location information.
         """
-        return handle_response(
-            self.session.get(self.TEMPLATE + "geography/info/all"))
+        return handle_response(self.session.get(self.TEMPLATE + "geography/info/all"))
 
     def states(self, country: str) -> Dict[str, Any]:
         """Return all the states for a given country that you may use to
@@ -60,8 +59,9 @@ class MetadataAPI:
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "geography/info/states",
-                params={"country": country}))
+                self.TEMPLATE + "geography/info/states", params={"country": country}
+            )
+        )
 
     def cities(self, country: str) -> Dict[str, Any]:
         """Return all the cities or urban areas defined in the given country that you may use to
@@ -72,17 +72,18 @@ class MetadataAPI:
         """
         return handle_response(
             self.session.get(
-                self.TEMPLATE + "geography/info/cities",
-                params={"country": country}))
+                self.TEMPLATE + "geography/info/cities", params={"country": country}
+            )
+        )
 
     def countries(self) -> Dict[str, Any]:
         """Return all the countries that you may use to filter monitor results
         and to upload documents with location information.
         """
         return handle_response(
-            self.session.get(self.TEMPLATE + "geography/info/countries"))
+            self.session.get(self.TEMPLATE + "geography/info/countries")
+        )
 
     def api_documentation(self) -> Dict[str, Any]:
         """Return latest JSON version of Crimson Hexagon API endpoint documentation."""
-        return handle_response(
-            self.session.get(self.TEMPLATE + "documentation"))
+        return handle_response(self.session.get(self.TEMPLATE + "documentation"))

@@ -19,12 +19,12 @@ class HexpySession:
 
     ```python
     >>> from hexpy import HexpySession
-    >>> session = HexpySession(username="username@gmail.com", password="secretpassword")
+    >>> session = HexpySession.login(username="username@gmail.com", password="secretpassword")
     >>> session.save_token()
     ```
     or
     ```python
-    >>> session = HexpySession(username="username@email.com")
+    >>> session = HexpySession.login(username="username@email.com")
     Enter password: *********
     >>> session.save_token()
     ```
@@ -47,39 +47,21 @@ class HexpySession:
     ```
     """
 
-    CRED_FILE = Path.home() / '.hexpy' / 'credentials.json'
+    CRED_FILE = Path.home() / ".hexpy" / "credentials.json"
 
-    def __init__(self,
-                 username: str = None,
-                 password: str = None,
-                 token: str = None,
-                 no_expiration: bool = False) -> None:
+    def __init__(self, token: str) -> None:
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name == "get_token":
                 setattr(self, name, rate_limited(fn))
-        if not any([username, password, token]):
-            raise ValueError(
-                "No credentials given. Please provide valid token or username and password"
-            )
-        else:
-            if not token:
-                if username and not password:
-                    password = getpass(prompt='Enter password: ')
-                elif password and not username:
-                    raise ValueError("Missing username.")
-                self.auth = self.get_token(username, password, no_expiration)
-                self.session = requests.Session()
-                self.session.params = {"auth": self.auth["auth"]}
-            else:
-                # TODO Test of validity of provided token
-                self.auth = {"auth": token}
-                self.session = requests.Session()
-                self.session.params = self.auth
 
-    def get_token(self,
-                  username: str,
-                  password: str,
-                  no_expiration: bool = False) -> Dict[str, Any]:
+        self.auth = {"auth": token}
+        self.session = requests.Session()
+        self.session.params = self.auth
+
+    @classmethod
+    def get_token_(
+        cls, username: str, password: str, no_expiration: bool = False
+    ) -> Dict[str, Any]:
         """Request authorization token.
 
         # Arguments
@@ -87,13 +69,16 @@ class HexpySession:
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
         """
-        return handle_response(requests.Session().get(
-            ROOT + "authenticate",
-            params={
-                "username": username,
-                "password": password,
-                "noExpiration": str(no_expiration).lower(),
-            }))
+        return handle_response(
+            requests.Session().get(
+                ROOT + "authenticate",
+                params={
+                    "username": username,
+                    "password": password,
+                    "noExpiration": str(no_expiration).lower(),
+                },
+            )
+        )
 
     def save_token(self, path: str = None) -> None:
         """Save authorization token.
@@ -113,11 +98,27 @@ class HexpySession:
             json.dump(self.auth, outfile, indent=4)
 
     @classmethod
+    def login(cls, username: str, password: str = None, no_expiration: bool = False):
+        """
+        Instantiate class from username and password.
+
+        # Arguments
+            username: String, account username.
+            password: String, account password.
+            no_expiration: Boolean, if True, token does not expire in 24 hours.
+        """
+        if password is None:
+            password = getpass(prompt="Enter password: ")
+
+        auth = cls.get_token_(username, password, no_expiration)
+        return cls(auth["auth"])
+
+    @classmethod
     def load_auth_from_file(cls, path: str = None):
         """Instantiate class from previously saved credentials file.
 
         # Arguments
-            path: path to store credentials. default is default is `~/.hexpy/credentials.json`
+            path: String, path to store credentials. default is default is `~/.hexpy/credentials.json`
         """
         try:
             if not path:

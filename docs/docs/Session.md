@@ -3,19 +3,19 @@ Session
 
 ## Creating a session and generating a token for API requests.
 
-Instantiate using token, or username. Optionally include password, or enter it at the prompt.
+Login using token, or username. Optionally include password, or enter it at the prompt.
 ```python
 >>> from hexpy import HexpySession
->>> session = HexpySession(username="username@gmail.com", password="secretpassword")
->>> session.save_token()
+>>> session = HexpySession.login(username="username@gmail.com", password="secretpassword")
+>>> session.save_token()  # saving token to ~/.hexpy/credentials.json
 ```
 or
 ```python
->>> session = HexpySession(username="username@email.com")
+>>> session = HexpySession.login(username="username@email.com")
 Enter password: *********
 >>> session.save_token()
 ```
-or
+or instantiate a session using a token
 ```python
 >>> session = HexpySession(token="previously_saved_token")
 ```
@@ -34,15 +34,12 @@ Create instance with context manager to close TCP session automatically when fin
 
 ## Methods
 
-### get_token
-
+### login
 ```python
-get_token(username: str, password: str, no_expiration: bool = False) -> Dict[str, Any]
+login(username: str, password: str = None, no_expiration: bool = False) -> HexpySession
 ```
-
-Request authorization token.
+Instantiate class from username and password.
 #### Arguments
-
 * username: account username.
 * password: account password.
 * no_expiration: True/False token with 24 expiration.
