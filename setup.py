@@ -25,7 +25,7 @@ with open("README.md") as infile:
 
 setup(
     name="hexpy",
-    version="0.4.2",
+    version="version='0.4.3'",
     description="Python Client for Crimson Hexagon API",
     long_description=long_description,
     long_description_content_type="text/markdown",

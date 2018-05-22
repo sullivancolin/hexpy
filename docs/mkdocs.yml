@@ -14,4 +14,4 @@ pages:
     - Command Line Interface: CLI.md
 theme: readthedocs
 extra:
-    version: 0.4.2
+    version: 0.4.3
