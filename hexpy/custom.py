@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Custom API request"""
 
 import inspect

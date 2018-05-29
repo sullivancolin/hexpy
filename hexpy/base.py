@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """global variables for the API URL and rate limiting."""
 
 import functools

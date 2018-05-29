@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module for interacting with analysis API"""
 
 import inspect

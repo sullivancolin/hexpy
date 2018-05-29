@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """CLI interface for hexpy."""
 import time
 import json
@@ -233,10 +232,14 @@ def upload(
     # Check for required fields
     try:
         assert {
-            "contents", "date", "author", "language", "type", "title", "url"
-        }.issubset(
-            set(items.columns)
-        )
+            "contents",
+            "date",
+            "author",
+            "language",
+            "type",
+            "title",
+            "url",
+        }.issubset(set(items.columns))
     except AssertionError:
         raise click.ClickException(
             "1 or more missing fields.  Required fields: contents, date, author, language, type, title, url"
@@ -251,9 +254,7 @@ def upload(
     # Covert data to list of dictionaries
     data = items[
         ["title", "date", "contents", "type", "language", "author", "url"]
-    ].to_dict(
-        orient="records"
-    )
+    ].to_dict(orient="records")
 
     # TODO Handle Geography
     if "geography" in items.columns:

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module for Realtime Results Api."""
 
 import inspect

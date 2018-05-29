@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module for uploading custom content"""
 
 import inspect
@@ -74,7 +73,7 @@ class ContentUploadAPI:
         """
         batch_responses = {}
         for batch_num, batch in enumerate(
-            progress.bar([data[i:i + 1000] for i in range(0, len(data), 1000)])
+            progress.bar([data[i : i + 1000] for i in range(0, len(data), 1000)])
         ):
             response = self.upload(batch)
             batch_responses[f"Batch number {batch_num}"] = response

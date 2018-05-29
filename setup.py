@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """The setup script."""
 
 from setuptools import setup, find_packages
@@ -35,6 +34,7 @@ setup(
     packages=find_packages(include=["hexpy"]),
     include_package_data=True,
     install_requires=requirements,
+    python_requires=">=3.6",
     zip_safe=False,
     keywords="hexpy",
     entry_points={"console_scripts": ["hexpy = hexpy.hexpy:cli"]},

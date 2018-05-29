@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module for monitor results API"""
 
 import inspect
@@ -30,7 +29,10 @@ class MonitorAPI:
         self.session = session.session
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in [
-                "__init__", "_aggregate_metrics", "_aggregate_dates", "aggregate"
+                "__init__",
+                "_aggregate_metrics",
+                "_aggregate_dates",
+                "aggregate",
             ]:
                 setattr(self, name, rate_limited(fn))
         self.METRICS: Dict[str, Callable] = {
@@ -490,7 +492,10 @@ class MonitorAPI:
             self.session.get(
                 self.TEMPLATE + "geography/cities",
                 params={
-                    "id": monitor_id, "start": start, "end": end, "country": country
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "country": country,
                 },
             )
         )
@@ -510,7 +515,10 @@ class MonitorAPI:
             self.session.get(
                 self.TEMPLATE + "geography/states",
                 params={
-                    "id": monitor_id, "start": start, "end": end, "country": country
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "country": country,
                 },
             )
         )

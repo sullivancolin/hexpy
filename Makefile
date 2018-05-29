@@ -74,7 +74,7 @@ bumpversion: clean
 
 ## builds source and wheel package
 dist: clean
-	python setup.py bdist_wheel
+	python setup.py sdist bdist_wheel
 
 ## install the package to the pipenv virtualenv
 install: clean
