@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Crimson Api Documentation - hexpy</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Crimson Api Documentation";
+    var mkdocs_page_input_path = "crimson_api_docs.md";
+    var mkdocs_page_url = "/crimson_api_docs/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> hexpy</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Session/">Session</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Metadata/">Metadata</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Monitor/">Monitor</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Analysis/">Analysis</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Upload/">Upload</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Streams/">Streams</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Realtime/">Realtime</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Custom/">Custom</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../CLI/">Command Line Interface</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Crimson Api Documentation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#crimson-hexagon-api-documenttion">Crimson Hexagon API Documenttion</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#endpoints">Endpoints</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">hexpy</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Crimson Api Documentation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="crimson-hexagon-api-documenttion">Crimson Hexagon API Documenttion</h1>
+<p><strong>ROOT_URL = <code>https://api.crimsonhexagon.com/api/</code></strong></p>
+<h3 id="endpoints">Endpoints</h3>
+<ul>
+<li><a href="#analysis-request">Analysis Request</a></li>
+<li><a href="#analysis-results">Analysis Results</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#authors">Authors</a></li>
+<li><a href="#content-upload">Content Upload</a></li>
+<li><a href="#day-and-time">Day and Time</a></li>
+<li><a href="#demographics-age">Demographics - Age</a></li>
+<li><a href="#demographics-gender">Demographics - Gender</a></li>
+<li><a href="#facebook-admin-posts">Facebook Admin Posts</a></li>
+<li><a href="#facebook-page-likes">Facebook Page Likes</a></li>
+<li><a href="#facebook-total-activity">Facebook Total Activity</a></li>
+<li><a href="#geography-all-resources">Geography - All Resources</a></li>
+<li><a href="#geography-cities">Geography - Cities</a></li>
+<li><a href="#geography-countries">Geography - Countries</a></li>
+<li><a href="#geography-states">Geography - States</a></li>
+<li><a href="#get-monitor-creation-report">Get Monitor Creation Report</a></li>
+<li><a href="#get-social-site-report">Get Social Site Report</a></li>
+<li><a href="#get-user-activity-report">Get User Activity Report</a></li>
+<li><a href="#get-user-invitation-report">Get User Invitation Report</a></li>
+<li><a href="#image-analysis">Image analysis</a></li>
+<li><a href="#instagram-followers">Instagram Followers</a></li>
+<li><a href="#instagram-hashtags">Instagram Hashtags</a></li>
+<li><a href="#instagram-sent-media">Instagram Sent Media</a></li>
+<li><a href="#instagram-total-activity">Instagram Total Activity</a></li>
+<li><a href="#interest-affinities">Interest Affinities</a></li>
+<li><a href="#monitor-audit">Monitor Audit</a></li>
+<li><a href="#monitor-detail">Monitor Detail</a></li>
+<li><a href="#monitor-dump">Monitor Dump</a></li>
+<li><a href="#monitor-image-results">Monitor Image Results</a></li>
+<li><a href="#monitor-list">Monitor List</a></li>
+<li><a href="#monitor-results">Monitor Results</a></li>
+<li><a href="#monitor-results-by-city">Monitor Results by City</a></li>
+<li><a href="#monitor-results-by-country">Monitor Results by Country</a></li>
+<li><a href="#monitor-results-by-state">Monitor Results by State</a></li>
+<li><a href="#monitor-training-posts">Monitor Training Posts</a></li>
+<li><a href="#posts">Posts</a></li>
+<li><a href="#realtime-cashtags">Realtime Cashtags</a></li>
+<li><a href="#realtime-configure">Realtime Configure</a></li>
+<li><a href="#realtime-details">Realtime Details</a></li>
+<li><a href="#realtime-disable">Realtime Disable</a></li>
+<li><a href="#realtime-enable">Realtime Enable</a></li>
+<li><a href="#realtime-hashtags">Realtime Hashtags</a></li>
+<li><a href="#realtime-monitor-list">Realtime Monitor List</a></li>
+<li><a href="#realtime-retweets">Realtime Retweets</a></li>
+<li><a href="#realtime-socialguids">Realtime SocialGuids</a></li>
+<li><a href="#realtime-tweets">Realtime Tweets</a></li>
+<li><a href="#realtime-volume">Realtime Volume</a></li>
+<li><a href="#realtime-volume-by-sentiment">Realtime Volume by Sentiment</a></li>
+<li><a href="#stream-add-monitor">Stream Add Monitor</a></li>
+<li><a href="#stream-create">Stream Create</a></li>
+<li><a href="#stream-delete">Stream Delete</a></li>
+<li><a href="#stream-list">Stream List</a></li>
+<li><a href="#stream-posts">Stream Posts</a></li>
+<li><a href="#stream-remove-monitor">Stream Remove Monitor</a></li>
+<li><a href="#stream-update-monitor">Stream Update Monitor</a></li>
+<li><a href="#team-list">Team List</a></li>
+<li><a href="#top-sites-and-content-sources">Top Sites and Content Sources</a></li>
+<li><a href="#topic-clustering">Topic Clustering</a></li>
+<li><a href="#topic-waves">Topic Waves</a></li>
+<li><a href="#training-document-upload">Training Document Upload</a></li>
+<li><a href="#twitter-engagement-metrics">Twitter Engagement Metrics</a></li>
+<li><a href="#twitter-followers">Twitter Followers</a></li>
+<li><a href="#twitter-sent-posts">Twitter Sent Posts</a></li>
+<li><a href="#twitter-total-engagement">Twitter Total Engagement</a></li>
+<li><a href="#volume">Volume</a></li>
+<li><a href="#whitelistblacklist">WhitelistBlacklist</a></li>
+<li><a href="#word-cloud">Word Cloud</a></li>
+</ul>
+<h4 id="analysis-request">Analysis Request</h4>
+<h5 id="to-submit-an-analysis-task-for-asynchronous-processing-category-results">To submit an analysis task for asynchronous processing  - Category: results</h5>
+<h5 id="results-post"><code>/results</code> - POST</h5>
+<h5 id="parameters">Parameters</h5>
+<h5 id="response">Response</h5>
+<ul>
+<li><code>status</code> - Defines the status of the analysis. Refer to Response Statuses table for additional information<ul>
+<li>Type: Status</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>resultId</code> - Defines the unique identifier by which the analysis status/results can be retrieved<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>retrieveAt</code> - Nullable. ISO8601 formatted date indicating a suggested time to re-attempt result retrieval if the status is WAITING<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>request</code> - Defines the original request parameters made to invoke this analysis<ul>
+<li>Type: ApiAnalysisTaskRequest</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>resultsUri</code> - Defines the URI that can be queried to retrieve the analysis status/results in the future<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>contractInfo</code> - If requested, the contract info after this request has been processed.<ul>
+<li>Type: ApiAnalysisContractInfo</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="analysis-results">Analysis Results</h4>
+<h5 id="to-retrieve-the-status-of-the-analysis-task-and-the-results-category-results">To retrieve the status of the analysis task and the results - Category: results</h5>
+<h5 id="resultsresultid-get"><code>/results/{resultId}</code> - GET</h5>
+<h5 id="parameters_1">Parameters</h5>
+<h5 id="response_1">Response</h5>
+<ul>
+<li><code>status</code> - Defines the status of the analysis. Refer to Response Statuses table for additional information<ul>
+<li>Type: Status</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>resultId</code> - Defines the unique identifier by which the analysis status/results can be retrieved<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>retrieveAt</code> - Nullable. ISO8601 formatted date indicating a suggested time to re-attempt result retrieval if the status is WAITING<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>request</code> - Defines the original request parameters made to invoke this analysis<ul>
+<li>Type: ApiAnalysisTaskRequest</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>resultsUri</code> - Defines the URI that can be queried to retrieve the analysis status/results in the future<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>contractInfo</code> - If requested, the contract info after this request has been processed.<ul>
+<li>Type: ApiAnalysisContractInfo</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>resultId</code> - Identificator of the task response<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>status</code> - Current status of analysis task<ul>
+<li>Type: Status</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>analysisResults</code> - Analysis result<ul>
+<li>Type: AnalysisResults</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>message</code> - Result message<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>request</code> - Related task request<ul>
+<li>Type: ApiAnalysisTaskRequest</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="authentication">Authentication</h4>
+<h5 id="generate-authentication-tokens-for-use-in-api-requests-category-admin">Generate authentication tokens for use in API requests - Category: admin</h5>
+<h5 id="authenticate-get"><code>/authenticate</code> - GET</h5>
+<h5 id="parameters_2">Parameters</h5>
+<ul>
+<li><code>username</code> - Username of the requesting user<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>password</code> - Password of the requesting user<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>force</code> - If true, forces authentication token update for the requesting user<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>noExpiration</code> - If true, the authentication token returned will not expire<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_2">Response</h5>
+<ul>
+<li><code>auth</code> - Authentication token<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>expires</code> - Token expiration date (24 hours from token creation). If noExpiration = true, this field will not be returned<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="authors">Authors</h4>
+<h5 id="information-about-twitter-authors-in-a-monitor-category-results">Information about Twitter authors in a monitor - Category: results</h5>
+<h5 id="monitorauthors-get"><code>/monitor/authors</code> - GET</h5>
+<h5 id="parameters_3">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_3">Response</h5>
+<ul>
+<li><code>authors</code> - JSON array of zero or more authors objects that contain author-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="content-upload">Content Upload</h4>
+<h5 id="upload-content-via-the-api-category-admin">Upload content via the API - Category: admin</h5>
+<h5 id="contentupload-post"><code>/content/upload</code> - POST</h5>
+<h5 id="parameters_4">Parameters</h5>
+<h5 id="response_4">Response</h5>
+<ul>
+<li><code>uploadCount</code> - The number of posts that were successfully uploaded<ul>
+<li>Type: Integer</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>DocumentsUploadedInLastTwentyFourHours</code> - If requested, the number of documents this organization has uploaded in the last twenty four hours.<ul>
+<li>Type: Long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>ContractedDocumentsWithinTwentyFourHours</code> - If requested, the number of documents this organization can upload in a rolling twenty four hour period.<ul>
+<li>Type: Long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="day-and-time">Day and Time</h4>
+<h5 id="volume-information-for-a-monitor-aggregated-by-time-of-day-or-day-of-week-category-results">Volume information for a monitor aggregated by time of day or day of week) - Category: results</h5>
+<h5 id="monitordayandtime-get"><code>/monitor/dayandtime</code> - GET</h5>
+<h5 id="parameters_5">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>aggregatebyday</code> - If true, volume information will be aggregated by day of the week instead of time of day<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>uselocaltime</code> - If true, volume aggregation will use the time local to the publishing author of a post when determining counts by day/time, instead of converting that time to the timezone of the selected monitor<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_5">Response</h5>
+<ul>
+<li><code>volumes</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="demographics-age">Demographics - Age</h4>
+<h5 id="daily-volume-information-for-age-in-a-monitor-category-results">Daily volume information for age in a monitor - Category: results</h5>
+<h5 id="monitordemographicsage-get"><code>/monitor/demographics/age</code> - GET</h5>
+<h5 id="parameters_6">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_6">Response</h5>
+<ul>
+<li><code>ageCounts</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="demographics-gender">Demographics - Gender</h4>
+<h5 id="daily-volume-information-for-gender-in-a-monitor-category-results">Daily volume information for gender in a monitor - Category: results</h5>
+<h5 id="monitordemographicsgender-get"><code>/monitor/demographics/gender</code> - GET</h5>
+<h5 id="parameters_7">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_7">Response</h5>
+<ul>
+<li><code>genderCounts</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="facebook-admin-posts">Facebook Admin Posts</h4>
+<h5 id="daily-likes-comments-and-shares-for-individual-admin-posts-made-by-a-facebook-account-in-a-facebook-social-account-monitor-category-social">Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social</h5>
+<h5 id="monitorfacebookadminposts-get"><code>/monitor/facebook/adminposts</code> - GET</h5>
+<h5 id="parameters_8">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_8">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="facebook-page-likes">Facebook Page Likes</h4>
+<h5 id="total-page-likes-as-of-the-requested-dates-for-a-facebook-social-monitor-category-social">Total page likes as of the requested dates for a Facebook social monitor - Category: social</h5>
+<h5 id="monitorfacebookpagelikes-get"><code>/monitor/facebook/pagelikes</code> - GET</h5>
+<h5 id="parameters_9">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_9">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="facebook-total-activity">Facebook Total Activity</h4>
+<h5 id="daily-total-likes-comments-and-shares-on-admin-and-user-posts-for-a-facebook-account-in-a-facebook-social-monitor-category-social">Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social</h5>
+<h5 id="monitorfacebooktotalactivity-get"><code>/monitor/facebook/totalactivity</code> - GET</h5>
+<h5 id="parameters_10">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_10">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="geography-all-resources">Geography - All Resources</h4>
+<h5 id="returns-all-the-available-geolocation-resources-category-util">Returns all the available geolocation resources - Category: util</h5>
+<h5 id="geographyinfoall-get"><code>/geography/info/all</code> - GET</h5>
+<h5 id="parameters_11">Parameters</h5>
+<h5 id="response_11">Response</h5>
+<ul>
+<li><code>resources</code> - JSON array with the geography resources<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="geography-cities">Geography - Cities</h4>
+<h5 id="returns-all-the-available-cities-urban-areas-in-the-given-country-category-util">Returns all the available cities / urban areas in the given country - Category: util</h5>
+<h5 id="geographyinfocities-get"><code>/geography/info/cities</code> - GET</h5>
+<h5 id="parameters_12">Parameters</h5>
+<ul>
+<li><code>country</code> - Specifies the ISO 3166 3 letter country code<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_12">Response</h5>
+<ul>
+<li><code>resources</code> - JSON array with the geography resources<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="geography-countries">Geography - Countries</h4>
+<h5 id="returns-all-the-available-countries-category-util">Returns all the available countries - Category: util</h5>
+<h5 id="geographyinfocountries-get"><code>/geography/info/countries</code> - GET</h5>
+<h5 id="parameters_13">Parameters</h5>
+<h5 id="response_13">Response</h5>
+<ul>
+<li><code>resources</code> - JSON array with the geography resources<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="geography-states">Geography - States</h4>
+<h5 id="returns-all-the-available-states-regions-in-the-given-country-category-util">Returns all the available states / regions in the given country - Category: util</h5>
+<h5 id="geographyinfostates-get"><code>/geography/info/states</code> - GET</h5>
+<h5 id="parameters_14">Parameters</h5>
+<ul>
+<li><code>country</code> - Specifies the ISO 3166 3 letter country code<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_14">Response</h5>
+<ul>
+<li><code>resources</code> - JSON array with the geography resources<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="get-monitor-creation-report">Get Monitor Creation Report</h4>
+<h5 id="returns-a-list-of-teams-within-an-organization-and-how-many-monitors-were-created-during-a-given-time-period-category-reports">Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports</h5>
+<h5 id="reportmonitorcreation-get"><code>/report/monitorCreation</code> - GET</h5>
+<h5 id="parameters_15">Parameters</h5>
+<ul>
+<li><code>organizationId</code> - The id of the organization being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_15">Response</h5>
+<ul>
+<li><code>data</code> - List of 0..n monitor creation report rows<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="get-social-site-report">Get Social Site Report</h4>
+<h5 id="returns-a-list-of-social-sites-and-associated-usernames-for-teams-within-an-organization-also-indicates-which-of-the-social-sites-have-failed-and-when-category-reports">Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports</h5>
+<h5 id="reportsocialsites-get"><code>/report/socialSites</code> - GET</h5>
+<h5 id="parameters_16">Parameters</h5>
+<ul>
+<li><code>organizationId</code> - The id of the organization being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_16">Response</h5>
+<ul>
+<li><code>data</code> - List of 0..n social site report rows<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="get-user-activity-report">Get User Activity Report</h4>
+<h5 id="returns-a-list-of-users-within-an-organization-including-information-on-when-they-last-logged-into-the-platform-the-last-monitor-they-created-and-the-last-monitor-they-viewed-category-reports">Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports</h5>
+<h5 id="reportuseractivity-get"><code>/report/userActivity</code> - GET</h5>
+<h5 id="parameters_17">Parameters</h5>
+<ul>
+<li><code>organizationId</code> - The id of the organization being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_17">Response</h5>
+<ul>
+<li><code>data</code> - List of 0..n user activity report rows<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="get-user-invitation-report">Get User Invitation Report</h4>
+<h5 id="returns-a-list-of-users-within-an-organization-and-which-teams-they-were-invited-to-also-indicates-when-the-invitation-was-sent-and-when-it-was-accepted-category-reports">Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports</h5>
+<h5 id="reportuserinvitations-get"><code>/report/userInvitations</code> - GET</h5>
+<h5 id="parameters_18">Parameters</h5>
+<ul>
+<li><code>organizationId</code> - The id of the organization being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_18">Response</h5>
+<ul>
+<li><code>data</code> - List of 0..n user invitation report rows<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="image-analysis">Image analysis</h4>
+<h5 id="to-return-image-classification-data-category-util">To return image classification data - Category: util</h5>
+<h5 id="imageanalysis-get"><code>/imageanalysis</code> - GET</h5>
+<h5 id="parameters_19">Parameters</h5>
+<ul>
+<li><code>url</code> - Image URL<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_19">Response</h5>
+<ul>
+<li><code>imgData</code> - Message object contains request parameters and image classification result<ul>
+<li>Type: ImageAnalysisData</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="instagram-followers">Instagram Followers</h4>
+<h5 id="total-daily-follower-counts-for-instagram-social-account-monitors-category-social">Total daily follower counts for Instagram social account monitors - Category: social</h5>
+<h5 id="monitorinstagramfollowers-get"><code>/monitor/instagram/followers</code> - GET</h5>
+<h5 id="parameters_20">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_20">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="instagram-hashtags">Instagram Hashtags</h4>
+<h5 id="total-daily-volume-by-instagram-hashtags-for-specific-monitor-category-social">Total daily volume by Instagram hashtags for specific monitor - Category: social</h5>
+<h5 id="monitorinstagramhashtags-get"><code>/monitor/instagram/hashtags</code> - GET</h5>
+<h5 id="parameters_21">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_21">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="instagram-sent-media">Instagram Sent Media</h4>
+<h5 id="daily-likes-comments-and-tags-for-individual-media-posted-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social">Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social</h5>
+<h5 id="monitorinstagramsentmedia-get"><code>/monitor/instagram/sentmedia</code> - GET</h5>
+<h5 id="parameters_22">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_22">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="instagram-total-activity">Instagram Total Activity</h4>
+<h5 id="daily-likes-comments-and-shares-for-individual-admin-posts-made-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social">Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social</h5>
+<h5 id="monitorinstagramtotalactivity-get"><code>/monitor/instagram/totalactivity</code> - GET</h5>
+<h5 id="parameters_23">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_23">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="interest-affinities">Interest Affinities</h4>
+<h5 id="aggregate-affinities-for-the-selected-monitor-over-a-given-date-range-category-visualizations">Aggregate affinities for the selected monitor over a given date range - Category: visualizations</h5>
+<h5 id="monitorinterestaffinities-get"><code>/monitor/interestaffinities</code> - GET</h5>
+<h5 id="parameters_24">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>daily</code> - If true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range.<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>documentsource</code> - document source for affinities. valid params [TWITTER, TUMBLR]<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_24">Response</h5>
+<ul>
+<li><code>startDate</code> - Inclusive start date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Exclusive end date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>affinityInfo</code> - JSON array of affinity objects containing information about the top affinities for the date range selected<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-audit">Monitor Audit</h4>
+<h5 id="audit-information-about-the-selected-monitor-category-admin">Audit information about the selected monitor - Category: admin</h5>
+<h5 id="monitoraudit-get"><code>/monitor/audit</code> - GET</h5>
+<h5 id="parameters_25">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor to be audited<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_25">Response</h5>
+<ul>
+<li><code>auditInfo</code> - JSON array of audit events pertaining to the selected monitor<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-detail">Monitor Detail</h4>
+<h5 id="attributes-of-the-specified-monitor-category-admin">Attributes of the specified monitor - Category: admin</h5>
+<h5 id="monitordetail-get"><code>/monitor/detail</code> - GET</h5>
+<h5 id="parameters_26">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_26">Response</h5>
+<ul>
+<li><code>monitorDetail</code> - JSON array of monitor details<ul>
+<li>Type: MonitorDetailModel</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-dump">Monitor Dump</h4>
+<h5 id="get-detailed-information-of-the-monitor-category-admin">Get detailed information of the monitor - Category: admin</h5>
+<h5 id="monitordump-get"><code>/monitor/dump</code> - GET</h5>
+<h5 id="parameters_27">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_27">Response</h5>
+<ul>
+<li><code>monitorDump</code> - Monitor dump<ul>
+<li>Type: MonitorDumpModel</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-image-results">Monitor Image Results</h4>
+<h5 id="daily-image-results-for-a-monitor-category-results">Daily image results for a monitor - Category: results</h5>
+<h5 id="monitorimageresults-get"><code>/monitor/imageresults</code> - GET</h5>
+<h5 id="parameters_28">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>type</code> - Specifies type of image classes, valid values [object, scene, action, logo]<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>top</code> - If defined, only the top number of results will be returned<ul>
+<li>Type: Integer</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_28">Response</h5>
+<ul>
+<li><code>results</code> - JSON array of zero or more daily image results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-list">Monitor List</h4>
+<h5 id="list-of-monitors-available-to-the-passed-in-username-category-admin">List of monitors available to the passed in username - Category: admin</h5>
+<h5 id="monitorlist-get"><code>/monitor/list</code> - GET</h5>
+<h5 id="parameters_29">Parameters</h5>
+<ul>
+<li><code>team</code> - The id of the team to which the listed monitors belong<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_29">Response</h5>
+<ul>
+<li><code>monitors</code> - JSON array of monitors viewable by the user<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-results">Monitor Results</h4>
+<h5 id="daily-results-for-a-monitor-category-results">Daily results for a monitor - Category: results</h5>
+<h5 id="monitorresults-get"><code>/monitor/results</code> - GET</h5>
+<h5 id="parameters_30">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>hideExcluded</code> - If true, categories set as hidden will not be included in category proportion calculations<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_30">Response</h5>
+<ul>
+<li><code>results</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-results-by-city">Monitor Results by City</h4>
+<h5 id="returns-all-the-monitor-results-grouped-by-the-cities-urban-areas-in-a-given-country-if-given-category-results">Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results</h5>
+<h5 id="monitorgeographycities-get"><code>/monitor/geography/cities</code> - GET</h5>
+<h5 id="parameters_31">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>country</code> - Specifies the ISO 3166 3 letter country code, if not given all cities in the world will be returned<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_31">Response</h5>
+<ul>
+<li><code>startDate</code> - Requested start date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Requested end date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalVolume</code> - Volume matching the defined geography filter<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>data</code> - JSON array of monitor geography result information<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-results-by-country">Monitor Results by Country</h4>
+<h5 id="returns-all-the-monitor-results-grouped-by-country-category-results">Returns all the monitor results grouped by country - Category: results</h5>
+<h5 id="monitorgeographycountries-get"><code>/monitor/geography/countries</code> - GET</h5>
+<h5 id="parameters_32">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_32">Response</h5>
+<ul>
+<li><code>startDate</code> - Requested start date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Requested end date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalVolume</code> - Volume matching the defined geography filter<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>data</code> - JSON array of monitor geography result information<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-results-by-state">Monitor Results by State</h4>
+<h5 id="returns-all-the-monitor-results-grouped-by-the-country-states-regions-category-results">Returns all the monitor results grouped by the country states / regions - Category: results</h5>
+<h5 id="monitorgeographystates-get"><code>/monitor/geography/states</code> - GET</h5>
+<h5 id="parameters_33">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>country</code> - Specifies the ISO 3166 3 letter country code<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_33">Response</h5>
+<ul>
+<li><code>startDate</code> - Requested start date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Requested end date<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalVolume</code> - Volume matching the defined geography filter<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>data</code> - JSON array of monitor geography result information<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="monitor-training-posts">Monitor Training Posts</h4>
+<h5 id="download-training-posts-for-a-monitor-category-admin">Download training posts for a monitor - Category: admin</h5>
+<h5 id="monitortrainingposts-get"><code>/monitor/trainingposts</code> - GET</h5>
+<h5 id="parameters_34">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>category</code> - Category id to target training posts from a specific category<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_34">Response</h5>
+<ul>
+<li><code>trainingPosts</code> - JSON array of training posts for the selected monitor or category in a monitor<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="posts">Posts</h4>
+<h5 id="information-about-posts-in-a-monitor-category-visualizations">Information about posts in a monitor - Category: visualizations</h5>
+<h5 id="monitorposts-get-post"><code>/monitor/posts</code> - GET || POST</h5>
+<h5 id="parameters_35">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>MISSING</code> - Optional JSON payload to filter response<ul>
+<li>Type: MonitorPostsFilter</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>filter</code> - Pipe-separated list of field:value pairs used to filter results by given parameters<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>extendLimit</code> - If true, increases the limit of returned posts from 500 per call to 10,000 per call<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>fullContents</code> - If true, the contents field will return the original, complete post contents instead of truncating around search terms<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>geotagged</code> - If true, returns only geotagged documents matching and the given filter, if false or undefined any post matching the given filter<ul>
+<li>Type: boolean</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_35">Response</h5>
+<ul>
+<li><code>posts</code> - JSON array of zero or more post objects that contain post-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalPostsAvailable</code> - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.<ul>
+<li>Type: int</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-cashtags">Realtime Cashtags</h4>
+<h5 id="get-cashtags-associated-to-a-monitor-category-monitors">Get Cashtags associated to a Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorcashtags-get"><code>/realtime/monitor/cashtags</code> - GET</h5>
+<h5 id="parameters_36">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>top</code> - The top N cashtags to retrieve<ul>
+<li>Type: Integer</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_36">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-configure">Realtime Configure</h4>
+<h5 id="configure-the-realtime-evaluators-for-the-monitor-category-monitors">Configure the Realtime evaluators for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorconfigure-get"><code>/realtime/monitor/configure</code> - GET</h5>
+<h5 id="parameters_37">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_37">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-details">Realtime Details</h4>
+<h5 id="get-the-realtime-evaluators-details-for-the-monitor-category-monitors">Get the Realtime evaluators details for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitordetail-get"><code>/realtime/monitor/detail</code> - GET</h5>
+<h5 id="parameters_38">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_38">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-disable">Realtime Disable</h4>
+<h5 id="disable-realtime-data-category-monitors">Disable Realtime Data - Category: monitors</h5>
+<h5 id="realtimemonitordisable-get"><code>/realtime/monitor/disable</code> - GET</h5>
+<h5 id="parameters_39">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_39">Response</h5>
+<hr />
+<h4 id="realtime-enable">Realtime Enable</h4>
+<h5 id="enable-realtime-data-category-monitors">Enable Realtime Data - Category: monitors</h5>
+<h5 id="realtimemonitorenable-get"><code>/realtime/monitor/enable</code> - GET</h5>
+<h5 id="parameters_40">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_40">Response</h5>
+<hr />
+<h4 id="realtime-hashtags">Realtime Hashtags</h4>
+<h5 id="get-hashtags-associated-to-a-monitor-category-monitors">Get Hashtags associated to a Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorhashtags-get"><code>/realtime/monitor/hashtags</code> - GET</h5>
+<h5 id="parameters_41">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>top</code> - The top N hashtags to retrieve<ul>
+<li>Type: Integer</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_41">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-monitor-list">Realtime Monitor List</h4>
+<h5 id="get-the-monitors-which-are-in-proteus-category-monitors">Get the Monitors which are in Proteus - Category: monitors</h5>
+<h5 id="realtimemonitorlist-get"><code>/realtime/monitor/list</code> - GET</h5>
+<h5 id="parameters_42">Parameters</h5>
+<ul>
+<li><code>team</code> - The id of the team to which the listed monitors belong<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_42">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-retweets">Realtime Retweets</h4>
+<h5 id="get-the-realtime-retweets-for-the-monitor-category-monitors">Get the Realtime retweets for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorretweets-get"><code>/realtime/monitor/retweets</code> - GET</h5>
+<h5 id="parameters_43">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_43">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-socialguids">Realtime SocialGuids</h4>
+<h5 id="get-the-realtime-social-guids-for-the-monitor-category-monitors">Get the Realtime social guids for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorsocialguids-get"><code>/realtime/monitor/socialguids</code> - GET</h5>
+<h5 id="parameters_44">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>type</code> - Specifies the document type<ul>
+<li>Type: String</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>receivedafter</code> - Specifies inclusive receivedafter date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_44">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-tweets">Realtime Tweets</h4>
+<h5 id="get-the-realtime-tweets-for-the-monitor-category-monitors">Get the Realtime tweets for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitortweets-get"><code>/realtime/monitor/tweets</code> - GET</h5>
+<h5 id="parameters_45">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_45">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-volume">Realtime Volume</h4>
+<h5 id="get-the-realtime-volume-for-the-monitor-category-monitors">Get the Realtime volume for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorvolume-get"><code>/realtime/monitor/volume</code> - GET</h5>
+<h5 id="parameters_46">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>type</code> - Specifies the document type to filter<ul>
+<li>Type: List</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_46">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="realtime-volume-by-sentiment">Realtime Volume by Sentiment</h4>
+<h5 id="get-the-realtime-volume-by-sentiment-for-the-monitor-category-monitors">Get the Realtime volume by sentiment for the Monitor - Category: monitors</h5>
+<h5 id="realtimemonitorvolumebysentiment-get"><code>/realtime/monitor/volumebysentiment</code> - GET</h5>
+<h5 id="parameters_47">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in epoch seconds<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>type</code> - Specifies the document type to filter<ul>
+<li>Type: List</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_47">Response</h5>
+<ul>
+<li><code>realtimeData</code> - JSON object of monitor realtime data<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="stream-add-monitor">Stream Add Monitor</h4>
+<h5 id="stream-add-monitor-association-category-admin">Stream Add Monitor Association - Category: admin</h5>
+<h5 id="streamstreamidmonitormonitorid-post"><code>/stream/{streamid}/monitor/{monitorid}</code> - POST</h5>
+<h5 id="parameters_48">Parameters</h5>
+<ul>
+<li><code>streamId</code> - The id of the stream<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>monitorId</code> - The id of the monitor to which the association will be created<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_48">Response</h5>
+<hr />
+<h4 id="stream-create">Stream Create</h4>
+<h5 id="stream-creation-category-admin">Stream creation - Category: admin</h5>
+<h5 id="stream-post"><code>/stream</code> - POST</h5>
+<h5 id="parameters_49">Parameters</h5>
+<h5 id="response_49">Response</h5>
+<ul>
+<li><code>stream</code> - Stream information<ul>
+<li>Type: StreamModel</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>path</code> - Stream path<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="stream-delete">Stream Delete</h4>
+<h5 id="stream-deletion-category-admin">Stream deletion - Category: admin</h5>
+<h5 id="streamstreamid-delete"><code>/stream/{streamid}</code> - DELETE</h5>
+<h5 id="parameters_50">Parameters</h5>
+<ul>
+<li><code>streamId</code> - The id of the stream to delete<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_50">Response</h5>
+<hr />
+<h4 id="stream-list">Stream List</h4>
+<h5 id="list-of-streams-available-to-the-passed-in-username-category-admin">List of streams available to the passed in username - Category: admin</h5>
+<h5 id="streamlist-get"><code>/stream/list</code> - GET</h5>
+<h5 id="parameters_51">Parameters</h5>
+<ul>
+<li><code>teamid</code> - The id of the team to which the listed streams belong<ul>
+<li>Type: Long</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_51">Response</h5>
+<ul>
+<li><code>streams</code> - JSON array of streams viewable by the user<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="stream-posts">Stream Posts</h4>
+<h5 id="information-about-posts-in-a-stream-category-results">Information about posts in a stream - Category: results</h5>
+<h5 id="streamstreamidposts-get"><code>/stream/{streamid}/posts</code> - GET</h5>
+<h5 id="parameters_52">Parameters</h5>
+<ul>
+<li><code>streamId</code> - The id of the stream to which the realtime information belongs<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>count</code> - The maximum number of posts to fetch from the stream<ul>
+<li>Type: Integer</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_52">Response</h5>
+<ul>
+<li><code>posts</code> - JSON array of zero or more post objects that contain post-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalPostsAvailable</code> - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.<ul>
+<li>Type: int</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="stream-remove-monitor">Stream Remove Monitor</h4>
+<h5 id="stream-remove-monitor-association-category-admin">Stream Remove Monitor Association - Category: admin</h5>
+<h5 id="streamstreamidmonitormonitorid-delete"><code>/stream/{streamid}/monitor/{monitorid}</code> - DELETE</h5>
+<h5 id="parameters_53">Parameters</h5>
+<ul>
+<li><code>streamId</code> - The id of the stream<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>monitorId</code> - The id of the monitor to which the association will be removed<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_53">Response</h5>
+<hr />
+<h4 id="stream-update-monitor">Stream Update Monitor</h4>
+<h5 id="stream-update-monitor-data-category-admin">Stream Update Monitor Data - Category: admin</h5>
+<h5 id="streamstreamid-post"><code>/stream/{streamid}</code> - POST</h5>
+<h5 id="parameters_54">Parameters</h5>
+<ul>
+<li><code>streamId</code> - The id of the stream<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_54">Response</h5>
+<hr />
+<h4 id="team-list">Team List</h4>
+<h5 id="list-of-teams-accessible-to-the-current-user-category-admin">List of teams accessible to the current user - Category: admin</h5>
+<h5 id="teamlist-get"><code>/team/list</code> - GET</h5>
+<h5 id="parameters_55">Parameters</h5>
+<h5 id="response_55">Response</h5>
+<ul>
+<li><code>teams</code> - JSON array of teams accessible by the user<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="top-sites-and-content-sources">Top Sites and Content Sources</h4>
+<h5 id="content-source-breakdown-and-top-sites-category-results">Content source breakdown and top sites - Category: results</h5>
+<h5 id="monitorsources-get"><code>/monitor/sources</code> - GET</h5>
+<h5 id="parameters_56">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_56">Response</h5>
+<ul>
+<li><code>contentSources</code> - JSON array of zero or more content sources objects that contain results for each date requested<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="topic-clustering">Topic Clustering</h4>
+<h5 id="xml-data-that-can-be-used-to-generate-clustering-visualizations-using-third-party-software-category-visualizations">XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations</h5>
+<h5 id="monitortopics-get-post"><code>/monitor/topics</code> - GET || POST</h5>
+<h5 id="parameters_57">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>MISSING</code> - Optional JSON payload to filter response<ul>
+<li>Type: MonitorPostsFilter</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>filter</code> - Pipe-separated list of field:value pairs used to filter results by given parameters<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_57">Response</h5>
+<ul>
+<li><code>clustering</code> - XML string for generating visualizations<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="topic-waves">Topic Waves</h4>
+<h5 id="topic-waves-information-for-a-monitor-category-visualizations">Topic waves information for a monitor - Category: visualizations</h5>
+<h5 id="monitortopicwaves-get-post"><code>/monitor/topicwaves</code> - GET || POST</h5>
+<h5 id="parameters_58">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>MISSING</code> - Optional JSON payload to filter response<ul>
+<li>Type: MonitorPostsFilter</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_58">Response</h5>
+<ul>
+<li><code>startDate</code> - Inclusive start date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Exclusive end date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>timezone</code> - IANA timezone identifier specifying the timezone for all dates in the response<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>groupBy</code> - Defines the grouping for the volume information<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>totalTopicsVolume</code> - Total Volume for the topics<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>topics</code> - JSON array of 1..n topics volume information for grouped periods<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="training-document-upload">Training Document Upload</h4>
+<h5 id="train-monitors-via-the-api-category-util">Train monitors via the API - Category: util</h5>
+<h5 id="monitortrain-post"><code>/monitor/train</code> - POST</h5>
+<h5 id="parameters_59">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being trained<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_59">Response</h5>
+<ul>
+<li><code>message</code> - Success response indicating a training post has been sucessfully uploaded<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="twitter-engagement-metrics">Twitter Engagement Metrics</h4>
+<h5 id="engagement-metrics-for-twitter-content-in-a-monitor-category-results">Engagement metrics for Twitter content in a monitor - Category: results</h5>
+<h5 id="monitortwittermetrics-get"><code>/monitor/twittermetrics</code> - GET</h5>
+<h5 id="parameters_60">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_60">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="twitter-followers">Twitter Followers</h4>
+<h5 id="total-daily-follower-counts-for-twitter-social-account-monitors-category-social">Total daily follower counts for Twitter Social Account monitors - Category: social</h5>
+<h5 id="monitortwittersocialfollowers-get"><code>/monitor/twittersocial/followers</code> - GET</h5>
+<h5 id="parameters_61">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_61">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="twitter-sent-posts">Twitter Sent Posts</h4>
+<h5 id="daily-retweets-replies-and-impressions-for-individual-posts-made-by-a-twitter-account-in-a-twitter-social-account-monitor-category-social">Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social</h5>
+<h5 id="monitortwittersocialsentposts-get"><code>/monitor/twittersocial/sentposts</code> - GET</h5>
+<h5 id="parameters_62">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_62">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="twitter-total-engagement">Twitter Total Engagement</h4>
+<h5 id="daily-retweets-replies-and-mentions-for-a-targeted-twitter-account-in-a-twitter-social-account-monitor-category-social">Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social</h5>
+<h5 id="monitortwittersocialtotalengagement-get"><code>/monitor/twittersocial/totalengagement</code> - GET</h5>
+<h5 id="parameters_63">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_63">Response</h5>
+<ul>
+<li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="volume">Volume</h4>
+<h5 id="volume-of-total-posts-in-a-monitor-category-results">Volume of total posts in a monitor - Category: results</h5>
+<h5 id="monitorvolume-get"><code>/monitor/volume</code> - GET</h5>
+<h5 id="parameters_64">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>groupBy</code> - Specifies how the volume data over the date range will be grouped. Valid values: [HOURLY, DAILY, WEEKLY, MONTHLY]. Defaults to DAILY. Grouping requires a date range of at least 1 full unit; e.g., WEEKLY requires a date range of at least 1 week. Grouping only returns full units so the range may be truncated. e.g., 2017-01-15 to 2017-03-15 with MONTHLY grouping will return a date range of 2017-02-01 to 2017-03-01. A monitor must have complete results for the specified date range. If any day in the range is missing results an error will be returned.<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_64">Response</h5>
+<ul>
+<li><code>startDate</code> - Inclusive start date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>endDate</code> - Exclusive end date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss<ul>
+<li>Type: Date</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>timezone</code> - IANA timezone identifier specifying the timezone for all dates in the response<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>groupBy</code> - Defines the grouping for the volume information<ul>
+<li>Type: String</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>numberOfDocuments</code> - Total volume for this period<ul>
+<li>Type: long</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+<li><code>volume</code> - JSON array of 1..n volume information for grouped periods<ul>
+<li>Type: List</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="whitelistblacklist">WhitelistBlacklist</h4>
+<h5 id="detailed-information-about-a-specific-whitelistblacklists-associated-to-the-monitor-category-visualizations">Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations</h5>
+<h5 id="whitelistblacklistwhitelistblacklistiddetail-get-post"><code>/whitelistblacklist/{whitelistblacklistid}/detail</code> - GET || POST</h5>
+<h5 id="parameters_65">Parameters</h5>
+<ul>
+<li><code>whitelistBlacklistId</code> - The id of the whitelistblacklist being requested<ul>
+<li>Type: Long</li>
+<li>Required = True</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_65">Response</h5>
+<ul>
+<li><code>whitelistblacklistdetail</code> - JSON object of whitelistblacklist detail<ul>
+<li>Type: WhitelistBlacklistDetailModel</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="word-cloud">Word Cloud</h4>
+<h5 id="word-frequency-information-for-posts-in-a-monitor-category-visualizations">Word frequency information for posts in a monitor - Category: visualizations</h5>
+<h5 id="monitorwordcloud-get-post"><code>/monitor/wordcloud</code> - GET || POST</h5>
+<h5 id="parameters_66">Parameters</h5>
+<ul>
+<li><code>id</code> - The id of the monitor being requested<ul>
+<li>Type: long</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>start</code> - Specifies inclusive start date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>end</code> - Specifies exclusive end date in YYYY-MM-DD<ul>
+<li>Type: Date</li>
+<li>Required = True</li>
+</ul>
+</li>
+<li><code>MISSING</code> - Optional JSON payload to filter response<ul>
+<li>Type: MonitorPostsFilter</li>
+<li>Required = False</li>
+</ul>
+</li>
+<li><code>filter</code> - Pipe-separated list of field:value pairs used to filter results by given parameters<ul>
+<li>Type: String</li>
+<li>Required = False</li>
+</ul>
+</li>
+</ul>
+<h5 id="response_66">Response</h5>
+<ul>
+<li><code>data</code> - Map of the top 300 terms appearing in a monitor to their frequency in that monitor<ul>
+<li>Type: Map</li>
+<li>Restricted = False</li>
+</ul>
+</li>
+</ul>
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../CLI/" class="btn btn-neutral" title="Command Line Interface"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../CLI/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

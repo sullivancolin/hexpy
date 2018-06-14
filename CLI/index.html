@@ -113,6 +113,11 @@
     </ul>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../crimson_api_docs/">Crimson Api Documentation</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -162,15 +167,17 @@ Usage: hexpy [OPTIONS] COMMAND [ARGS]...
   Command Line interface for working with Crimson Hexagon API.
 
 Options:
-  --help  Show this message and exit.
+  --version  Show the version and exit.
+  --help     Show this message and exit.
 
 Commands:
-  export        Export monitor posts as json or to a...
-  login         Session login credentials.
-  metadata      Get Metadata for account team, monitors, and...
-  results       Get Monitor results for 1 or more metrics.
-  stream_posts  Stream posts in real time, stop after a...
-  upload        Upload spreadsheet file as custom content.
+  api_documentation  Get API documentation for all endpoints.
+  export             Export monitor posts as json or to a...
+  login              Session login credentials.
+  metadata           Get Metadata for account team, monitors, and...
+  results            Get Monitor results for 1 or more metrics.
+  stream_posts       Stream posts in real time, stop after a...
+  upload             Upload spreadsheet file as custom content.
 </code></pre>
 
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
@@ -180,6 +187,10 @@ Commands:
 Enter username: username@email.com
 Enter password: ***********
 ✔ Success!
+</code></pre>
+
+<p>Get Up-to-date API documentation as an html file</p>
+<pre><code class="bash">hexpy api_documentation -o html
 </code></pre>
 
 <p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a></p>
@@ -235,6 +246,8 @@ Enter password: ***********
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="../crimson_api_docs/" class="btn btn-neutral float-right" title="Crimson Api Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
       
         <a href="../Custom/" class="btn btn-neutral" title="Custom"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
@@ -264,6 +277,8 @@ Enter password: ***********
       
         <span><a href="../Custom/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../crimson_api_docs/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
