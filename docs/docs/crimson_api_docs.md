@@ -1,76 +1,75 @@
 # Crimson Hexagon API Documenttion
 **ROOT_URL = `https://api.crimsonhexagon.com/api/`**
 
-### Table of Contents
-* [Analysis Request](#0)
-* [Analysis Results](#1)
-* [Authentication](#2)
-* [Authors](#3)
-* [Content Upload](#4)
-* [Day and Time](#5)
-* [Demographics - Age](#6)
-* [Demographics - Gender](#7)
-* [Facebook Admin Posts](#8)
-* [Facebook Page Likes](#9)
-* [Facebook Total Activity](#10)
-* [Geography - All Resources](#11)
-* [Geography - Cities](#12)
-* [Geography - Countries](#13)
-* [Geography - States](#14)
-* [Get Monitor Creation Report](#15)
-* [Get Social Site Report](#16)
-* [Get User Activity Report](#17)
-* [Get User Invitation Report](#18)
-* [Image analysis](#19)
-* [Instagram Followers](#20)
-* [Instagram Hashtags](#21)
-* [Instagram Sent Media](#22)
-* [Instagram Total Activity](#23)
-* [Interest Affinities](#24)
-* [Monitor Audit](#25)
-* [Monitor Detail](#26)
-* [Monitor Dump](#27)
-* [Monitor Image Results](#28)
-* [Monitor List](#29)
-* [Monitor Results](#30)
-* [Monitor Results by City](#31)
-* [Monitor Results by Country](#32)
-* [Monitor Results by State](#33)
-* [Monitor Training Posts](#34)
-* [Posts](#35)
-* [Realtime Cashtags](#36)
-* [Realtime Configure](#37)
-* [Realtime Details](#38)
-* [Realtime Disable](#39)
-* [Realtime Enable](#40)
-* [Realtime Hashtags](#41)
-* [Realtime Monitor List](#42)
-* [Realtime Retweets](#43)
-* [Realtime SocialGuids](#44)
-* [Realtime Tweets](#45)
-* [Realtime Volume](#46)
-* [Realtime Volume by Sentiment](#47)
-* [Stream Add Monitor](#48)
-* [Stream Create](#49)
-* [Stream Delete](#50)
-* [Stream List](#51)
-* [Stream Posts](#52)
-* [Stream Remove Monitor](#53)
-* [Stream Update Monitor](#54)
-* [Team List](#55)
-* [Top Sites and Content Sources](#56)
-* [Topic Clustering](#57)
-* [Topic Waves](#58)
-* [Training Document Upload](#59)
-* [Twitter Engagement Metrics](#60)
-* [Twitter Followers](#61)
-* [Twitter Sent Posts](#62)
-* [Twitter Total Engagement](#63)
-* [Volume](#64)
-* [WhitelistBlacklist](#65)
-* [Word Cloud](#66)
+### Endpoints
+* [Analysis Request](#analysis-request)
+* [Analysis Results](#analysis-results)
+* [Authentication](#authentication)
+* [Authors](#authors)
+* [Content Upload](#content-upload)
+* [Day and Time](#day-and-time)
+* [Demographics - Age](#demographics-age)
+* [Demographics - Gender](#demographics-gender)
+* [Facebook Admin Posts](#facebook-admin-posts)
+* [Facebook Page Likes](#facebook-page-likes)
+* [Facebook Total Activity](#facebook-total-activity)
+* [Geography - All Resources](#geography-all-resources)
+* [Geography - Cities](#geography-cities)
+* [Geography - Countries](#geography-countries)
+* [Geography - States](#geography-states)
+* [Get Monitor Creation Report](#get-monitor-creation-report)
+* [Get Social Site Report](#get-social-site-report)
+* [Get User Activity Report](#get-user-activity-report)
+* [Get User Invitation Report](#get-user-invitation-report)
+* [Image analysis](#image-analysis)
+* [Instagram Followers](#instagram-followers)
+* [Instagram Hashtags](#instagram-hashtags)
+* [Instagram Sent Media](#instagram-sent-media)
+* [Instagram Total Activity](#instagram-total-activity)
+* [Interest Affinities](#interest-affinities)
+* [Monitor Audit](#monitor-audit)
+* [Monitor Detail](#monitor-detail)
+* [Monitor Dump](#monitor-dump)
+* [Monitor Image Results](#monitor-image-results)
+* [Monitor List](#monitor-list)
+* [Monitor Results](#monitor-results)
+* [Monitor Results by City](#monitor-results-by-city)
+* [Monitor Results by Country](#monitor-results-by-country)
+* [Monitor Results by State](#monitor-results-by-state)
+* [Monitor Training Posts](#monitor-training-posts)
+* [Posts](#posts)
+* [Realtime Cashtags](#realtime-cashtags)
+* [Realtime Configure](#realtime-configure)
+* [Realtime Details](#realtime-details)
+* [Realtime Disable](#realtime-disable)
+* [Realtime Enable](#realtime-enable)
+* [Realtime Hashtags](#realtime-hashtags)
+* [Realtime Monitor List](#realtime-monitor-list)
+* [Realtime Retweets](#realtime-retweets)
+* [Realtime SocialGuids](#realtime-socialguids)
+* [Realtime Tweets](#realtime-tweets)
+* [Realtime Volume](#realtime-volume)
+* [Realtime Volume by Sentiment](#realtime-volume-by-sentiment)
+* [Stream Add Monitor](#stream-add-monitor)
+* [Stream Create](#stream-create)
+* [Stream Delete](#stream-delete)
+* [Stream List](#stream-list)
+* [Stream Posts](#stream-posts)
+* [Stream Remove Monitor](#stream-remove-monitor)
+* [Stream Update Monitor](#stream-update-monitor)
+* [Team List](#team-list)
+* [Top Sites and Content Sources](#top-sites-and-content-sources)
+* [Topic Clustering](#topic-clustering)
+* [Topic Waves](#topic-waves)
+* [Training Document Upload](#training-document-upload)
+* [Twitter Engagement Metrics](#twitter-engagement-metrics)
+* [Twitter Followers](#twitter-followers)
+* [Twitter Sent Posts](#twitter-sent-posts)
+* [Twitter Total Engagement](#twitter-total-engagement)
+* [Volume](#volume)
+* [WhitelistBlacklist](#whitelistblacklist)
+* [Word Cloud](#word-cloud)
 
-<a name="0"></a>
 #### Analysis Request
 ##### To submit an analysis task for asynchronous processing  - Category: results
 ##### `/results` - POST
@@ -95,9 +94,10 @@
 * `contractInfo` - If requested, the contract info after this request has been processed.
 	- Type: ApiAnalysisContractInfo
 	- Restricted = False
+
+
 -------------------------
 
-<a name="1"></a>
 #### Analysis Results
 ##### To retrieve the status of the analysis task and the results - Category: results
 ##### `/results/{resultId}` - GET
@@ -137,9 +137,10 @@
 * `request` - Related task request
 	- Type: ApiAnalysisTaskRequest
 	- Restricted = False
+
+
 -------------------------
 
-<a name="2"></a>
 #### Authentication
 ##### Generate authentication tokens for use in API requests - Category: admin
 ##### `/authenticate` - GET
@@ -164,9 +165,10 @@
 * `expires` - Token expiration date (24 hours from token creation). If noExpiration = true, this field will not be returned
 	- Type: Date
 	- Restricted = False
+
+
 -------------------------
 
-<a name="3"></a>
 #### Authors
 ##### Information about Twitter authors in a monitor - Category: results
 ##### `/monitor/authors` - GET
@@ -185,9 +187,10 @@
 * `authors` - JSON array of zero or more authors objects that contain author-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="4"></a>
 #### Content Upload
 ##### Upload content via the API - Category: admin
 ##### `/content/upload` - POST
@@ -203,9 +206,10 @@
 * `ContractedDocumentsWithinTwentyFourHours` - If requested, the number of documents this organization can upload in a rolling twenty four hour period.
 	- Type: Long
 	- Restricted = False
+
+
 -------------------------
 
-<a name="5"></a>
 #### Day and Time
 ##### Volume information for a monitor aggregated by time of day or day of week) - Category: results
 ##### `/monitor/dayandtime` - GET
@@ -230,9 +234,10 @@
 * `volumes` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="6"></a>
 #### Demographics - Age
 ##### Daily volume information for age in a monitor - Category: results
 ##### `/monitor/demographics/age` - GET
@@ -251,9 +256,10 @@
 * `ageCounts` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="7"></a>
 #### Demographics - Gender
 ##### Daily volume information for gender in a monitor - Category: results
 ##### `/monitor/demographics/gender` - GET
@@ -272,9 +278,10 @@
 * `genderCounts` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="8"></a>
 #### Facebook Admin Posts
 ##### Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social
 ##### `/monitor/facebook/adminposts` - GET
@@ -293,9 +300,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="9"></a>
 #### Facebook Page Likes
 ##### Total page likes as of the requested dates for a Facebook social monitor - Category: social
 ##### `/monitor/facebook/pagelikes` - GET
@@ -314,9 +322,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="10"></a>
 #### Facebook Total Activity
 ##### Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social
 ##### `/monitor/facebook/totalactivity` - GET
@@ -335,9 +344,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="11"></a>
 #### Geography - All Resources
 ##### Returns all the available geolocation resources - Category: util
 ##### `/geography/info/all` - GET
@@ -347,9 +357,10 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="12"></a>
 #### Geography - Cities
 ##### Returns all the available cities / urban areas in the given country - Category: util
 ##### `/geography/info/cities` - GET
@@ -362,9 +373,10 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="13"></a>
 #### Geography - Countries
 ##### Returns all the available countries - Category: util
 ##### `/geography/info/countries` - GET
@@ -374,9 +386,10 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="14"></a>
 #### Geography - States
 ##### Returns all the available states / regions in the given country - Category: util
 ##### `/geography/info/states` - GET
@@ -389,9 +402,10 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="15"></a>
 #### Get Monitor Creation Report
 ##### Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports
 ##### `/report/monitorCreation` - GET
@@ -404,9 +418,10 @@
 * `data` - List of 0..n monitor creation report rows
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="16"></a>
 #### Get Social Site Report
 ##### Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports
 ##### `/report/socialSites` - GET
@@ -419,9 +434,10 @@
 * `data` - List of 0..n social site report rows
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="17"></a>
 #### Get User Activity Report
 ##### Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports
 ##### `/report/userActivity` - GET
@@ -434,9 +450,10 @@
 * `data` - List of 0..n user activity report rows
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="18"></a>
 #### Get User Invitation Report
 ##### Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports
 ##### `/report/userInvitations` - GET
@@ -449,9 +466,10 @@
 * `data` - List of 0..n user invitation report rows
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="19"></a>
 #### Image analysis
 ##### To return image classification data - Category: util
 ##### `/imageanalysis` - GET
@@ -464,9 +482,10 @@
 * `imgData` - Message object contains request parameters and image classification result
 	- Type: ImageAnalysisData
 	- Restricted = False
+
+
 -------------------------
 
-<a name="20"></a>
 #### Instagram Followers
 ##### Total daily follower counts for Instagram social account monitors - Category: social
 ##### `/monitor/instagram/followers` - GET
@@ -485,9 +504,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="21"></a>
 #### Instagram Hashtags
 ##### Total daily volume by Instagram hashtags for specific monitor - Category: social
 ##### `/monitor/instagram/hashtags` - GET
@@ -506,9 +526,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="22"></a>
 #### Instagram Sent Media
 ##### Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social
 ##### `/monitor/instagram/sentmedia` - GET
@@ -527,9 +548,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="23"></a>
 #### Instagram Total Activity
 ##### Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social
 ##### `/monitor/instagram/totalactivity` - GET
@@ -548,9 +570,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="24"></a>
 #### Interest Affinities
 ##### Aggregate affinities for the selected monitor over a given date range - Category: visualizations
 ##### `/monitor/interestaffinities` - GET
@@ -581,9 +604,10 @@
 * `affinityInfo` - JSON array of affinity objects containing information about the top affinities for the date range selected
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="25"></a>
 #### Monitor Audit
 ##### Audit information about the selected monitor - Category: admin
 ##### `/monitor/audit` - GET
@@ -596,9 +620,10 @@
 * `auditInfo` - JSON array of audit events pertaining to the selected monitor
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="26"></a>
 #### Monitor Detail
 ##### Attributes of the specified monitor - Category: admin
 ##### `/monitor/detail` - GET
@@ -611,9 +636,10 @@
 * `monitorDetail` - JSON array of monitor details
 	- Type: MonitorDetailModel
 	- Restricted = False
+
+
 -------------------------
 
-<a name="27"></a>
 #### Monitor Dump
 ##### Get detailed information of the monitor - Category: admin
 ##### `/monitor/dump` - GET
@@ -626,9 +652,10 @@
 * `monitorDump` - Monitor dump
 	- Type: MonitorDumpModel
 	- Restricted = False
+
+
 -------------------------
 
-<a name="28"></a>
 #### Monitor Image Results
 ##### Daily image results for a monitor - Category: results
 ##### `/monitor/imageresults` - GET
@@ -653,9 +680,10 @@
 * `results` - JSON array of zero or more daily image results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="29"></a>
 #### Monitor List
 ##### List of monitors available to the passed in username - Category: admin
 ##### `/monitor/list` - GET
@@ -668,9 +696,10 @@
 * `monitors` - JSON array of monitors viewable by the user
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="30"></a>
 #### Monitor Results
 ##### Daily results for a monitor - Category: results
 ##### `/monitor/results` - GET
@@ -692,9 +721,10 @@
 * `results` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="31"></a>
 #### Monitor Results by City
 ##### Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results
 ##### `/monitor/geography/cities` - GET
@@ -725,9 +755,10 @@
 * `data` - JSON array of monitor geography result information
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="32"></a>
 #### Monitor Results by Country
 ##### Returns all the monitor results grouped by country - Category: results
 ##### `/monitor/geography/countries` - GET
@@ -755,9 +786,10 @@
 * `data` - JSON array of monitor geography result information
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="33"></a>
 #### Monitor Results by State
 ##### Returns all the monitor results grouped by the country states / regions - Category: results
 ##### `/monitor/geography/states` - GET
@@ -788,9 +820,10 @@
 * `data` - JSON array of monitor geography result information
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="34"></a>
 #### Monitor Training Posts
 ##### Download training posts for a monitor - Category: admin
 ##### `/monitor/trainingposts` - GET
@@ -806,9 +839,10 @@
 * `trainingPosts` - JSON array of training posts for the selected monitor or category in a monitor
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="35"></a>
 #### Posts
 ##### Information about posts in a monitor - Category: visualizations
 ##### `/monitor/posts` - GET || POST
@@ -845,9 +879,10 @@
 * `totalPostsAvailable` - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.
 	- Type: int
 	- Restricted = False
+
+
 -------------------------
 
-<a name="36"></a>
 #### Realtime Cashtags
 ##### Get Cashtags associated to a Monitor - Category: monitors
 ##### `/realtime/monitor/cashtags` - GET
@@ -866,9 +901,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="37"></a>
 #### Realtime Configure
 ##### Configure the Realtime evaluators for the Monitor - Category: monitors
 ##### `/realtime/monitor/configure` - GET
@@ -881,9 +917,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="38"></a>
 #### Realtime Details
 ##### Get the Realtime evaluators details for the Monitor - Category: monitors
 ##### `/realtime/monitor/detail` - GET
@@ -896,9 +933,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="39"></a>
 #### Realtime Disable
 ##### Disable Realtime Data - Category: monitors
 ##### `/realtime/monitor/disable` - GET
@@ -908,9 +946,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="40"></a>
 #### Realtime Enable
 ##### Enable Realtime Data - Category: monitors
 ##### `/realtime/monitor/enable` - GET
@@ -920,9 +959,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="41"></a>
 #### Realtime Hashtags
 ##### Get Hashtags associated to a Monitor - Category: monitors
 ##### `/realtime/monitor/hashtags` - GET
@@ -941,9 +981,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="42"></a>
 #### Realtime Monitor List
 ##### Get the Monitors which are in Proteus - Category: monitors
 ##### `/realtime/monitor/list` - GET
@@ -956,9 +997,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="43"></a>
 #### Realtime Retweets
 ##### Get the Realtime retweets for the Monitor - Category: monitors
 ##### `/realtime/monitor/retweets` - GET
@@ -971,9 +1013,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="44"></a>
 #### Realtime SocialGuids
 ##### Get the Realtime social guids for the Monitor - Category: monitors
 ##### `/realtime/monitor/socialguids` - GET
@@ -995,9 +1038,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="45"></a>
 #### Realtime Tweets
 ##### Get the Realtime tweets for the Monitor - Category: monitors
 ##### `/realtime/monitor/tweets` - GET
@@ -1013,9 +1057,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="46"></a>
 #### Realtime Volume
 ##### Get the Realtime volume for the Monitor - Category: monitors
 ##### `/realtime/monitor/volume` - GET
@@ -1034,9 +1079,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="47"></a>
 #### Realtime Volume by Sentiment
 ##### Get the Realtime volume by sentiment for the Monitor - Category: monitors
 ##### `/realtime/monitor/volumebysentiment` - GET
@@ -1055,9 +1101,10 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
 
-<a name="48"></a>
 #### Stream Add Monitor
 ##### Stream Add Monitor Association - Category: admin
 ##### `/stream/{streamid}/monitor/{monitorid}` - POST
@@ -1070,9 +1117,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="49"></a>
 #### Stream Create
 ##### Stream creation - Category: admin
 ##### `/stream` - POST
@@ -1085,9 +1133,10 @@
 * `path` - Stream path
 	- Type: String
 	- Restricted = False
+
+
 -------------------------
 
-<a name="50"></a>
 #### Stream Delete
 ##### Stream deletion - Category: admin
 ##### `/stream/{streamid}` - DELETE
@@ -1097,9 +1146,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="51"></a>
 #### Stream List
 ##### List of streams available to the passed in username - Category: admin
 ##### `/stream/list` - GET
@@ -1112,9 +1162,10 @@
 * `streams` - JSON array of streams viewable by the user
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="52"></a>
 #### Stream Posts
 ##### Information about posts in a stream - Category: results
 ##### `/stream/{streamid}/posts` - GET
@@ -1133,9 +1184,10 @@
 * `totalPostsAvailable` - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.
 	- Type: int
 	- Restricted = False
+
+
 -------------------------
 
-<a name="53"></a>
 #### Stream Remove Monitor
 ##### Stream Remove Monitor Association - Category: admin
 ##### `/stream/{streamid}/monitor/{monitorid}` - DELETE
@@ -1148,9 +1200,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="54"></a>
 #### Stream Update Monitor
 ##### Stream Update Monitor Data - Category: admin
 ##### `/stream/{streamid}` - POST
@@ -1160,9 +1213,10 @@
 	- Required = True
 
 ##### Response
+
+
 -------------------------
 
-<a name="55"></a>
 #### Team List
 ##### List of teams accessible to the current user - Category: admin
 ##### `/team/list` - GET
@@ -1172,9 +1226,10 @@
 * `teams` - JSON array of teams accessible by the user
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="56"></a>
 #### Top Sites and Content Sources
 ##### Content source breakdown and top sites - Category: results
 ##### `/monitor/sources` - GET
@@ -1193,9 +1248,10 @@
 * `contentSources` - JSON array of zero or more content sources objects that contain results for each date requested
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="57"></a>
 #### Topic Clustering
 ##### XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations
 ##### `/monitor/topics` - GET || POST
@@ -1220,9 +1276,10 @@
 * `clustering` - XML string for generating visualizations
 	- Type: String
 	- Restricted = False
+
+
 -------------------------
 
-<a name="58"></a>
 #### Topic Waves
 ##### Topic waves information for a monitor - Category: visualizations
 ##### `/monitor/topicwaves` - GET || POST
@@ -1259,9 +1316,10 @@
 * `topics` - JSON array of 1..n topics volume information for grouped periods
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="59"></a>
 #### Training Document Upload
 ##### Train monitors via the API - Category: util
 ##### `/monitor/train` - POST
@@ -1274,9 +1332,10 @@
 * `message` - Success response indicating a training post has been sucessfully uploaded
 	- Type: String
 	- Restricted = False
+
+
 -------------------------
 
-<a name="60"></a>
 #### Twitter Engagement Metrics
 ##### Engagement metrics for Twitter content in a monitor - Category: results
 ##### `/monitor/twittermetrics` - GET
@@ -1295,9 +1354,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="61"></a>
 #### Twitter Followers
 ##### Total daily follower counts for Twitter Social Account monitors - Category: social
 ##### `/monitor/twittersocial/followers` - GET
@@ -1316,9 +1376,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="62"></a>
 #### Twitter Sent Posts
 ##### Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social
 ##### `/monitor/twittersocial/sentposts` - GET
@@ -1337,9 +1398,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="63"></a>
 #### Twitter Total Engagement
 ##### Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social
 ##### `/monitor/twittersocial/totalengagement` - GET
@@ -1358,9 +1420,10 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="64"></a>
 #### Volume
 ##### Volume of total posts in a monitor - Category: results
 ##### `/monitor/volume` - GET
@@ -1397,9 +1460,10 @@
 * `volume` - JSON array of 1..n volume information for grouped periods
 	- Type: List
 	- Restricted = False
+
+
 -------------------------
 
-<a name="65"></a>
 #### WhitelistBlacklist
 ##### Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations
 ##### `/whitelistblacklist/{whitelistblacklistid}/detail` - GET || POST
@@ -1412,9 +1476,10 @@
 * `whitelistblacklistdetail` - JSON object of whitelistblacklist detail
 	- Type: WhitelistBlacklistDetailModel
 	- Restricted = False
+
+
 -------------------------
 
-<a name="66"></a>
 #### Word Cloud
 ##### Word frequency information for posts in a monitor - Category: visualizations
 ##### `/monitor/wordcloud` - GET || POST
@@ -1439,4 +1504,6 @@
 * `data` - Map of the top 300 terms appearing in a monitor to their frequency in that monitor
 	- Type: Map
 	- Restricted = False
+
+
 -------------------------
