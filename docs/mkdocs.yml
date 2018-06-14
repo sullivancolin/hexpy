@@ -15,4 +15,4 @@ pages:
     - Crimson Api Documentation: crimson_api_docs.md
 theme: readthedocs
 extra:
-    version: 0.4.3
+    version: 0.4.4

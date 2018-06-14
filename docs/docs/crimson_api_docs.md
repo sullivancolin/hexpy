@@ -1,4 +1,4 @@
-# Crimson Hexagon API Documenttion
+# Crimson Hexagon API Documentation
 **ROOT_URL = `https://api.crimsonhexagon.com/api/`**
 
 ### Endpoints

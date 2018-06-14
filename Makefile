@@ -72,7 +72,7 @@ releasedocs:
 
 ## upload wheel
 upload: dist
-	twine upload -r pypi dist/*.whl
+	twine upload -r pypi dist/hexpy*
 
 ## increment the version, and tag in git
 bumpversion: clean

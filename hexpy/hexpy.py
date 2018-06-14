@@ -105,7 +105,7 @@ def format_endpoint(endpoint, index_num):
 
 def docs_to_text(json_docs, mode="markdown"):
     endpoints = json_docs["endpoints"]
-    doc = f"# Crimson Hexagon API Documenttion\n**ROOT_URL = `{ROOT}`**\n\n### Endpoints\n"
+    doc = f"# Crimson Hexagon API Documentation\n**ROOT_URL = `{ROOT}`**\n\n### Endpoints\n"
 
     for i, e in enumerate(endpoints):
 
