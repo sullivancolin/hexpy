@@ -12,6 +12,7 @@ pages:
     - Realtime: Realtime.md
     - Custom: Custom.md
     - Command Line Interface: CLI.md
+    - Crimson Api Documentation: crimson_api_docs.md
 theme: readthedocs
 extra:
     version: 0.4.3

@@ -4,8 +4,11 @@ import json
 import pandas as pd
 import numpy as np
 import click
+import requests
+import re
 from halo import Halo
 from getpass import getpass
+from .base import ROOT
 from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
@@ -13,8 +16,10 @@ from .streams import StreamsAPI
 from .metadata import MetadataAPI
 from hexpy import __version__
 import pendulum
+import pathlib
 from typing import Sequence, Dict, Callable
 from click_help_colors import HelpColorsGroup
+import os
 
 
 def posts_json_to_df(docs):
@@ -42,6 +47,78 @@ def posts_json_to_df(docs):
 
     df = pd.DataFrame.from_records(items)
     return df
+
+
+ENDPOINT_TEMPLATE = """
+#### {title}
+##### {description} - Category: {category}
+##### `{url}` - {method}
+##### Parameters
+{params}
+##### Response
+{results}\n\n-------------------------"""
+
+
+def format_parameter(param):
+    if "name" in param:
+        name = param["name"]
+    else:
+        name = "MISSING"
+    param_type = param["type"]
+    required = param["required"]
+    description = param["description"]
+
+    return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Required = {required}\n"
+
+
+def format_response(response):
+    if "name" in response:
+        name = response["name"]
+    else:
+        name = "MISSING"
+    param_type = response["type"]
+    restricted = response["restricted"]
+    description = response["description"]
+
+    return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
+
+
+def format_endpoint(endpoint, index_num):
+    title = endpoint["endpoint"]
+    url = endpoint["url"]
+    method = endpoint["method"]
+    description = endpoint["description"]
+    category = endpoint["category"]
+    params = "".join([format_parameter(param) for param in endpoint["parameters"]])
+    results = "".join([format_response(r) for r in endpoint["response"]])
+
+    return ENDPOINT_TEMPLATE.format(
+        title=title,
+        url=url,
+        method=method,
+        description=description,
+        category=category,
+        params=params,
+        results=results,
+    )
+
+
+def docs_to_text(json_docs, mode="markdown"):
+    endpoints = json_docs["endpoints"]
+    doc = f"# Crimson Hexagon API Documenttion\n**ROOT_URL = `{ROOT}`**\n\n### Endpoints\n"
+
+    for i, e in enumerate(endpoints):
+
+        if mode == "md":
+            anchor = e["endpoint"].lower().replace("-", " ")
+            anchor = re.sub(r"\s+", "-", anchor)
+        elif mode == "gfm":
+            anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
+        else:
+            raise click.ClickException("Invalid markdown mode")
+        doc += f"* [{e['endpoint']}](#{anchor})\n"
+
+    return doc + "\n".join([format_endpoint(e, i) for i, e in enumerate(endpoints)])
 
 
 @click.group(
@@ -144,7 +221,6 @@ def metadata(
         * countries
         * monitor_details
         * stream_list
-        * api_documentation
     """
 
     session = ctx.invoke(login, expiration=True, force=False)
@@ -160,7 +236,6 @@ def metadata(
         "countries": client.countries,
         "monitor_details": monitor_client.details,
         "stream_list": stream_client.stream_list,
-        "api_documentation": client.api_documentation,
     }
     if team_id:
         return click.echo(json.dumps(metadata[info](team_id=team_id)))
@@ -170,6 +245,47 @@ def metadata(
         return click.echo(json.dumps(metadata[info](monitor_id=monitor_id)))
     else:
         return click.echo(json.dumps(metadata[info]()))
+
+
+@cli.command()
+@click.option(
+    "--output_type",
+    "-o",
+    type=click.Choice(["markdown", "html", "json"]),
+    default="json",
+    help="file type of export. (default=json)",
+)
+@click.pass_context
+def api_documentation(ctx, output_type: str = "json"):
+    """Get API documentation for all endpoints.
+
+    \b
+    output types
+        * JSON (default)
+        * Markdown File
+        * HTML File
+    """
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = MetadataAPI(session)
+    json_docs = client.api_documentation()
+    if output_type == "json":
+        click.echo(json.dumps(json_docs))
+        return
+    if output_type == "markdown":
+        md = docs_to_text(json_docs, "md")
+        with open("crimson_api_docs.md", "w") as outfile:
+            outfile.write(md)
+    else:
+        md = docs_to_text(json_docs, "gfm")
+        html = requests.post(
+            "https://api.github.com/markdown",
+            data=json.dumps({"text": md, "mode": "markdown"}),
+        ).text
+        path = pathlib.Path(os.path.dirname(os.path.realpath(__file__)))
+        with open(path / "head.html") as infile:
+            html = infile.read() + html + "</article></body></html>"
+        with open("crimson_api_docs.html", "w") as outfile:
+            outfile.write(html)
 
 
 @cli.command()

@@ -21,15 +21,17 @@ Usage: hexpy [OPTIONS] COMMAND [ARGS]...
   Command Line interface for working with Crimson Hexagon API.
 
 Options:
-  --help  Show this message and exit.
+  --version  Show the version and exit.
+  --help     Show this message and exit.
 
 Commands:
-  export        Export monitor posts as json or to a...
-  login         Session login credentials.
-  metadata      Get Metadata for account team, monitors, and...
-  results       Get Monitor results for 1 or more metrics.
-  stream_posts  Stream posts in real time, stop after a...
-  upload        Upload spreadsheet file as custom content.
+  api_documentation  Get API documentation for all endpoints.
+  export             Export monitor posts as json or to a...
+  login              Session login credentials.
+  metadata           Get Metadata for account team, monitors, and...
+  results            Get Monitor results for 1 or more metrics.
+  stream_posts       Stream posts in real time, stop after a...
+  upload             Upload spreadsheet file as custom content.
 ```
 
 See how each `hexpy` command works by running `hexpy COMMAND --help`
@@ -42,6 +44,11 @@ $ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
 ✔ Success!
+```
+
+Get Up-to-date API documentation as an html file
+```bash
+hexpy api_documentation -o html
 ```
 
 Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/)

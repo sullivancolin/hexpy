@@ -17,7 +17,6 @@ tox = "*"
 coverage = "*"
 pytest = "*"
 "e1839a8" = {path = ".", editable = true}
-black = ">=18.5b0"
 
 [requires]
 python_version = "3.6"

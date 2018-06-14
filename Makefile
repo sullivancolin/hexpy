@@ -50,10 +50,14 @@ coverage:
 
 ## generate Mkdocs HTML documentation
 docs: docs-clean
+	hexpy api_documentation -o markdown -m md
+	mv crimson_api_docs.md docs/docs/
 	cd docs/; mkdocs build
 
 ## serve docs
 serve-docs: docs
+	hexpy api_documentation -o markdown -m md
+	mv crimson_api_docs.md docs/docs/
 	cd docs/; mkdocs serve
 
 ## remove previously build docs
@@ -62,7 +66,9 @@ docs-clean:
 
 ## generate Mkdocs HTML documentation, commit to gh-pages branch and push to github
 releasedocs:
-	cd docs/; mkdocs gh-deploy
+	hexpy api_documentation -o markdown -m md
+	mv crimson_api_docs.md docs/docs/
+	cd docs/; mkdocs gh-deploy --verbose
 
 ## upload wheel
 upload: dist
