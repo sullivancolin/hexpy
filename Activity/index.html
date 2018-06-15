@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Upload - hexpy</title>
+  <title>Activty Reports - hexpy</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Upload";
-    var mkdocs_page_input_path = "Upload.md";
-    var mkdocs_page_url = "/Upload/";
+    var mkdocs_page_name = "Activty Reports";
+    var mkdocs_page_input_path = "Activity.md";
+    var mkdocs_page_url = "/Activity/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -72,25 +72,9 @@
     <a class="" href="../Analysis/">Analysis</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Upload</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#upload-api">Upload API</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#class-for-working-with-content-upload-api">Class for working with Content Upload API.</a></li>
-        
-            <li><a class="toctree-l3" href="#example-usage">Example Usage</a></li>
-        
-            <li><a class="toctree-l3" href="#methods">Methods</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../Upload/">Upload</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -108,9 +92,25 @@
     <a class="" href="../Custom/">Custom</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../Activity/">Activty Reports</a>
+    <a class="current" href="./">Activty Reports</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#activity-api">Activity API</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#class-for-working-with-crimson-hexagon-activity-report-api">Class for working with Crimson Hexagon Activity Report API.</a></li>
+        
+            <li><a class="toctree-l3" href="#example-usage">Example Usage</a></li>
+        
+            <li><a class="toctree-l3" href="#methods">Methods</a></li>
+        
+        </ul>
+    
+
+    </ul>
 	    </li>
           
             <li class="toctree-l1">
@@ -145,7 +145,7 @@
     
       
     
-    <li>Upload</li>
+    <li>Activty Reports</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -155,53 +155,52 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="upload-api">Upload API</h1>
-<h3 id="class-for-working-with-content-upload-api">Class for working with Content Upload API.</h3>
-<p>You may use the Content Upload endpoint to upload documents for analysis.
-In the past, users have uploaded survey responses, proprietary content,
-and other types of data not available in the Crimson Hexagon data library.
-To use this endpoint, please contact support and they will create a new custom content type for you. <a href="https://apidocs.crimsonhexagon.com/reference#content-upload-1">Reference</a></p>
+                <h1 id="activity-api">Activity API</h1>
+<h2 id="class-for-working-with-crimson-hexagon-activity-report-api">Class for working with Crimson Hexagon Activity Report API.</h2>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, ContentUploadAPI
+<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, ActivityAPI
 &gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; upload_client = ContentUploadAPI(session)
-&gt;&gt;&gt; items = [
-    {
-      &quot;title&quot;: &quot;Example Title&quot;,
-      &quot;date&quot;: &quot;2010-01-26T16:14:00&quot;,
-      &quot;author&quot;: &quot;me&quot;,
-      &quot;url&quot;: &quot;http://www.crimsonhexagon.com/post1&quot;,
-      &quot;contents&quot;: &quot;Example content&quot;,
-      &quot;language&quot;: &quot;en&quot;,
-      &quot;type&quot;: &quot;Your_Assigned_Content_Type_Name&quot;,
-      &quot;geolocation&quot;: {
-        &quot;id&quot;: &quot;USA.NY&quot;
-      }
-    },
-  ]
-&gt;&gt;&gt; upload_client.upload(items)
+&gt;&gt;&gt; activity_client = ActivityAPI(session)
+&gt;&gt;&gt; activity_client.monitor_creation(organization_id)
 &gt;&gt;&gt; session.close()
 </code></pre>
 
 <h2 id="methods">Methods</h2>
-<h3 id="upload">upload</h3>
-<pre><code class="python">upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
+<h3 id="monitor_creation">monitor_creation</h3>
+<pre><code class="python">monitor_creation(organization_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
-<p>Upload list of document dictionaries to Crimson Hexagon platform.</p>
-<p>If greater than 1000 items passed, reverts to batch upload.</p>
+<p>Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
-<li>data: list of document dictionaries  to upload.</li>
+<li>organiztion_id: Integer, the id of the organization being requested.</li>
 </ul>
-<h3 id="batch_upload">batch_upload</h3>
-<pre><code class="python">batch_upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
+<h3 id="social_sites">social_sites</h3>
+<pre><code class="python">social_sites(organization_id: int) -&gt; Dict[str, Any]
 </code></pre>
 
-<p>Batch upload list of document dictionaries to Crimson Hexagon platform.</p>
+<p>Get Social Site Report and associated usernames for Teams within an Organization.</p>
 <h4 id="arguments_1">Arguments</h4>
 <ul>
-<li>data: list of document dictionaries to upload in batches of 1000.</li>
+<li>organiztion_id: Integer, the id of the organization being requested.</li>
+</ul>
+<h3 id="user_activity">user_activity</h3>
+<pre><code class="python">user_activity(organization_id: int) -&gt; Dict[str, Any]
+</code></pre>
+
+<p>Get a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.</p>
+<h4 id="arguments_2">Arguments</h4>
+<ul>
+<li>organiztion_id: Integer, the id of the organization being requested.</li>
+</ul>
+<h3 id="user_invitations">user_invitations</h3>
+<pre><code class="python">user_invitations(organization_id: int) -&gt; Dict[str, Any]
+</code></pre>
+
+<p>Get a list of users within an Organization and which Team(s) they were invited to.</p>
+<h4 id="arguments_3">Arguments</h4>
+<ul>
+<li>organiztion_id: Integer, the id of the organization being requested.</li>
 </ul>
               
             </div>
@@ -210,10 +209,10 @@ To use this endpoint, please contact support and they will create a new custom c
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Streams/" class="btn btn-neutral float-right" title="Streams">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../CLI/" class="btn btn-neutral float-right" title="Command Line Interface">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Analysis/" class="btn btn-neutral" title="Analysis"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Custom/" class="btn btn-neutral" title="Custom"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -239,10 +238,10 @@ To use this endpoint, please contact support and they will create a new custom c
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Analysis/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Custom/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Streams/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../CLI/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

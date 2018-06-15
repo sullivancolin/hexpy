@@ -120,6 +120,11 @@
           
             <li class="toctree-l1">
 		
+    <a class="" href="../Activity/">Activty Reports</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
     <a class="" href="../CLI/">Command Line Interface</a>
 	    </li>
           
@@ -204,8 +209,8 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 <li>filter_string: String, pipe-separated list of field:value pairs used to filter posts</li>
 </ul>
-<h3 id="trained_posts">trained_posts</h3>
-<pre><code class="python">trained_posts(monitor_id: int, category: int = None) -&gt; Dict[str, Any]
+<h3 id="training_posts">training_posts</h3>
+<pre><code class="python">training_posts(monitor_id: int, category: int = None) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.</p>
@@ -250,8 +255,8 @@
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
-<h3 id="image_analysis">image_analysis</h3>
-<pre><code class="python">image_analysis(monitor_id: int, start: str, end: str, object_type: str = &quot;&quot;, top: int = 100) -&gt; Dict[str, Any]
+<h3 id="image_results">image_results</h3>
+<pre><code class="python">image_results(monitor_id: int, start: str, end: str, object_type: str = &quot;&quot;, top: int = 100) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return a breakdown of the top image classes within a provided monitor.</p>
@@ -264,11 +269,23 @@
 <li>top : Integer, if defined, only the selected number of classes will be returned</li>
 </ul>
 <h3 id="volume">volume</h3>
-<pre><code class="python">volume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -&gt; Dict[str, Any]
+<pre><code class="python">volume(monitor_id: int, start: str, end: str, group_by: str = &quot;DAILY&quot;) -&gt; Dict[str, Any]
+</code></pre>
+
+<p>Return volume of total posts in a monitor.</p>
+<h4 id="arguments_8">Arguments</h4>
+<ul>
+<li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
+<li>start: String, inclusive start date in YYYY-MM-DD</li>
+<li>end: String, exclusive end date in YYYY-MM-DD</li>
+<li>group_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]</li>
+</ul>
+<h3 id="dayandtime">dayandtime</h3>
+<pre><code class="python">dayandtime(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -&gt; Dict[str, Any]
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by date.</p>
-<h4 id="arguments_8">Arguments</h4>
+<h4 id="arguments_9">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -281,7 +298,7 @@
 </code></pre>
 
 <p>Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.</p>
-<h4 id="arguments_9">Arguments</h4>
+<h4 id="arguments_10">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -301,7 +318,7 @@
 <li>'interest_affinities'</li>
 <li>'sentiment_and_categories'</li>
 </ul>
-<h4 id="arguments_10">Arguments</h4>
+<h4 id="arguments_11">Arguments</h4>
 <ul>
 <li>monitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested</li>
 <li>dates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings</li>
@@ -312,7 +329,7 @@
 </code></pre>
 
 <p>Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.</p>
-<h4 id="arguments_11">Arguments</h4>
+<h4 id="arguments_12">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -329,7 +346,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by age bracket.</p>
-<h4 id="arguments_12">Arguments</h4>
+<h4 id="arguments_13">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -340,7 +357,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by ethnicity.</p>
-<h4 id="arguments_13">Arguments</h4>
+<h4 id="arguments_14">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -351,7 +368,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by gender.</p>
-<h4 id="arguments_14">Arguments</h4>
+<h4 id="arguments_15">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -363,7 +380,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by city.</p>
-<h4 id="arguments_15">Arguments</h4>
+<h4 id="arguments_16">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -375,7 +392,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by state.</p>
-<h4 id="arguments_16">Arguments</h4>
+<h4 id="arguments_17">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -387,7 +404,7 @@
 </code></pre>
 
 <p>Return volume metrics for a given monitor split by country.</p>
-<h4 id="arguments_17">Arguments</h4>
+<h4 id="arguments_18">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -400,7 +417,7 @@
 </code></pre>
 
 <p>Return information related to the Twitter authors who have posted in a given monitor.</p>
-<h4 id="arguments_18">Arguments</h4>
+<h4 id="arguments_19">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -411,7 +428,7 @@
 </code></pre>
 
 <p>Return information about the top hashtags, mentions, and retweets in a monitor.</p>
-<h4 id="arguments_19">Arguments</h4>
+<h4 id="arguments_20">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -422,7 +439,7 @@
 </code></pre>
 
 <p>Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.</p>
-<h4 id="arguments_20">Arguments</h4>
+<h4 id="arguments_21">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -433,7 +450,7 @@
 </code></pre>
 
 <p>Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.</p>
-<h4 id="arguments_21">Arguments</h4>
+<h4 id="arguments_22">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -444,7 +461,7 @@
 </code></pre>
 
 <p>Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.</p>
-<h4 id="arguments_22">Arguments</h4>
+<h4 id="arguments_23">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -456,7 +473,7 @@
 </code></pre>
 
 <p>Return those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.</p>
-<h4 id="arguments_23">Arguments</h4>
+<h4 id="arguments_24">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -467,7 +484,7 @@
 </code></pre>
 
 <p>Return the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.</p>
-<h4 id="arguments_24">Arguments</h4>
+<h4 id="arguments_25">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -478,7 +495,7 @@
 </code></pre>
 
 <p>Return information about actions (likes, comments, shares) made by users and admins for a given page.</p>
-<h4 id="arguments_25">Arguments</h4>
+<h4 id="arguments_26">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -490,7 +507,7 @@
 </code></pre>
 
 <p>Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).</p>
-<h4 id="arguments_26">Arguments</h4>
+<h4 id="arguments_27">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -501,7 +518,7 @@
 </code></pre>
 
 <p>Return the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.</p>
-<h4 id="arguments_27">Arguments</h4>
+<h4 id="arguments_28">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -512,7 +529,7 @@
 </code></pre>
 
 <p>Return media sent by admins in a targeted Instagram account.</p>
-<h4 id="arguments_28">Arguments</h4>
+<h4 id="arguments_29">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
@@ -523,7 +540,7 @@
 </code></pre>
 
 <p>Return information about actions (likes, comments) made by users and admins for a given account.</p>
-<h4 id="arguments_29">Arguments</h4>
+<h4 id="arguments_30">Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>

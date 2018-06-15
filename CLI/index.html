@@ -92,6 +92,11 @@
     <a class="" href="../Custom/">Custom</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../Activity/">Activty Reports</a>
+	    </li>
+          
             <li class="toctree-l1 current">
 		
     <a class="current" href="./">Command Line Interface</a>
@@ -193,8 +198,12 @@ Enter password: ***********
 <pre><code class="bash">hexpy api_documentation -o html
 </code></pre>
 
+<p>Get list of all teams a user's teams.</p>
+<pre><code class="bash">hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
+</code></pre>
+
 <p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a></p>
-<pre><code class="bash">hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'
+<pre><code class="bash">hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
 </code></pre>
 
 <p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.</p>
@@ -206,7 +215,7 @@ Enter password: ***********
 </code></pre>
 
 <p>Get monitor volume information for each day  as a CSV using <a href="https://stedolan.github.io/jq/">jq</a></p>
-<pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
+<pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'
 &quot;2017-01-04T00:00:00&quot;,74
 &quot;2017-01-05T00:00:00&quot;,101
 &quot;2017-01-06T00:00:00&quot;,67
@@ -249,7 +258,7 @@ Enter password: ***********
         <a href="../crimson_api_docs/" class="btn btn-neutral float-right" title="Crimson Api Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Custom/" class="btn btn-neutral" title="Custom"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Activity/" class="btn btn-neutral" title="Activty Reports"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -275,7 +284,7 @@ Enter password: ***********
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Custom/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Activity/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../crimson_api_docs/" style="color: #fcfcfc">Next &raquo;</a></span>

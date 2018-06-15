@@ -167,7 +167,7 @@
         },
         {
             "location": "/Monitor/",
-            "text": "Monitor API\n\n\nClass for working with Crimson Hexagon Monitor API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> monitor_client = MonitorAPI(session)\n>>> details = monitor_client.details(monitor_id)\n>>> start = details[\"resultsStart\"]\n>>> end = details[\"resultsEnd\"]\n>>> monitor_client.posts(monitor_id, start, end)\n>>> session.close()\n\n\n\n\nMethods\n\n\ndetails\n\n\ndetails(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nReturn detailed metadata about the selected monitor, including category metadata.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\naudit\n\n\naudit(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nReturn audit information about the selected monitor, sorted from most to least recent.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\nword_cloud\n\n\nword_cloud(monitor_id: int, start: str, end: str, filter_string: str = None) -> Dict[str, Any]\n\n\n\n\nReturn an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter_string: String, pipe-separated list of field:value pairs used to filter posts\n\n\n\n\ntrained_posts\n\n\ntrained_posts(monitor_id: int, category: int = None) -> Dict[str, Any]\n\n\n\n\nReturn a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory: Integer, category id to target training posts from a specific category\n\n\n\n\ntrain_monitor\n\n\ntrain_monitor(monitor_id: int, category_id: int, data: List[Dict[str, Any]]) -> Dict[str, Any]\n\n\n\n\nUpload individual training document monitors programmatically.\n\n\nUpload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. \nReference\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory_id: Integer, the category this content should belong to\n\n\ndata: List of document dictionaries with required fields\n\n\n\n\ninterest_affinities\n\n\ninterest_affinities(monitor_id: int, start: str, end: str, daily: bool = False, document_source: str = None) -> Dict[str, Any]\n\n\n\n\nReturn information about the authors in a monitor and their affinity with a range of pre-defined topics.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ndaily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range\n\n\ndocument_source: String, document source for affinities. valid params include \nTWITTER\n or \nTUMBLR\n\n\n\n\ntop_sources\n\n\ntop_sources(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nimage_analysis\n\n\nimage_analysis(monitor_id: int, start: str, end: str, object_type: str = \"\", top: int = 100) -> Dict[str, Any]\n\n\n\n\nReturn a breakdown of the top image classes within a provided monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nobject_type: String, specifies type of image classes, valid values [object, scene, action, logo]\n\n\ntop : Integer, if defined, only the selected number of classes will be returned\n\n\n\n\nvolume\n\n\nvolume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by date.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\naggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day\n\n\nuse_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor\n\n\n\n\nsentiment_and_categories\n\n\nsentiment_and_categories(monitor_id: int, start: str, end: str, hide_excluded: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nhide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.\n\n\n\n\naggregate\n\n\naggregate(monitor_ids: Union[Sequence[int], int], dates: Union[Sequence[str], Sequence[Sequence[str]]], metrics: Union[Sequence[str], str]) -> Sequence[Dict[str, Any]]\n\n\n\n\nReturn aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.\n\n\nValid metrics\n\n\n\n\n'volume'\n\n\n'word_cloud'\n\n\n'top_sources'\n\n\n'interest_affinities'\n\n\n'sentiment_and_categories'\n\n\n\n\nArguments\n\n\n\n\nmonitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested\n\n\ndates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings\n\n\nmetrics: String or list of Strings, metric(s) to aggregate upon\n\n\n\n\nposts\n\n\nposts(monitor_id: int, start: str, end: str, filter_string: str = None, extend_limit: bool = False, full_contents: bool = False, geotagged: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter_string: String, pipe-separated list of field:value pairs used to filter posts\n\n\nextend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call\n\n\nfull_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms\n\n\ngeotagged: Boolean, if True, returns only geotagged documents matching the given filter\n\n\n\n\nDemographics\n\n\nThis collection of endpoints provide demographic volume metrics for users within a given monitor.\n\n\nage\n\n\nage(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by age bracket.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nethnicity\n\n\nethnicity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by ethnicity.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ngender\n\n\ngender(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by gender.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nGeography\n\n\ncities\n\n\ncities(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by city.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter cities\n\n\n\n\nstates\n\n\nstates(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by state.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter states\n\n\n\n\ncountries\n\n\ncountries(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by country.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nTwitter\n\n\nThis collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. \n\n\ntwitter_authors\n\n\ntwitter_authors(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information related to the Twitter authors who have posted in a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_metrics\n\n\ntwitter_metrics(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about the top hashtags, mentions, and retweets in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_followers\n\n\ntwitter_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_sent_posts\n\n\ntwitter_sent_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_engagement\n\n\ntwitter_engagement(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about retweets, replies, and @mentions for a Twitter Social Account monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nFacebook\n\n\nfacebook_admin_posts\n\n\nfacebook_admin_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_likes\n\n\nfacebook_likes(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_activity\n\n\nfacebook_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about actions (likes, comments, shares) made by users and admins for a given page.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nInstagram\n\n\ninstagram_top_hashtags\n\n\ninstagram_top_hashtags(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_followers\n\n\ninstagram_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_sent_media\n\n\ninstagram_sent_media(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn media sent by admins in a targeted Instagram account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_activity\n\n\ninstagram_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about actions (likes, comments) made by users and admins for a given account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD",
+            "text": "Monitor API\n\n\nClass for working with Crimson Hexagon Monitor API.\n\n\nExample usage.\n\n\n>>> from hexpy import HexpySession, MonitorAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> monitor_client = MonitorAPI(session)\n>>> details = monitor_client.details(monitor_id)\n>>> start = details[\"resultsStart\"]\n>>> end = details[\"resultsEnd\"]\n>>> monitor_client.posts(monitor_id, start, end)\n>>> session.close()\n\n\n\n\nMethods\n\n\ndetails\n\n\ndetails(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nReturn detailed metadata about the selected monitor, including category metadata.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\naudit\n\n\naudit(monitor_id: int) -> Dict[str, Any]\n\n\n\n\nReturn audit information about the selected monitor, sorted from most to least recent.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\n\n\nword_cloud\n\n\nword_cloud(monitor_id: int, start: str, end: str, filter_string: str = None) -> Dict[str, Any]\n\n\n\n\nReturn an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter_string: String, pipe-separated list of field:value pairs used to filter posts\n\n\n\n\ntraining_posts\n\n\ntraining_posts(monitor_id: int, category: int = None) -> Dict[str, Any]\n\n\n\n\nReturn a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory: Integer, category id to target training posts from a specific category\n\n\n\n\ntrain_monitor\n\n\ntrain_monitor(monitor_id: int, category_id: int, data: List[Dict[str, Any]]) -> Dict[str, Any]\n\n\n\n\nUpload individual training document monitors programmatically.\n\n\nUpload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. \nReference\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\ncategory_id: Integer, the category this content should belong to\n\n\ndata: List of document dictionaries with required fields\n\n\n\n\ninterest_affinities\n\n\ninterest_affinities(monitor_id: int, start: str, end: str, daily: bool = False, document_source: str = None) -> Dict[str, Any]\n\n\n\n\nReturn information about the authors in a monitor and their affinity with a range of pre-defined topics.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ndaily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range\n\n\ndocument_source: String, document source for affinities. valid params include \nTWITTER\n or \nTUMBLR\n\n\n\n\ntop_sources\n\n\ntop_sources(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nimage_results\n\n\nimage_results(monitor_id: int, start: str, end: str, object_type: str = \"\", top: int = 100) -> Dict[str, Any]\n\n\n\n\nReturn a breakdown of the top image classes within a provided monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nobject_type: String, specifies type of image classes, valid values [object, scene, action, logo]\n\n\ntop : Integer, if defined, only the selected number of classes will be returned\n\n\n\n\nvolume\n\n\nvolume(monitor_id: int, start: str, end: str, group_by: str = \"DAILY\") -> Dict[str, Any]\n\n\n\n\nReturn volume of total posts in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ngroup_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]\n\n\n\n\ndayandtime\n\n\ndayandtime(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by date.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\naggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day\n\n\nuse_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor\n\n\n\n\nsentiment_and_categories\n\n\nsentiment_and_categories(monitor_id: int, start: str, end: str, hide_excluded: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nhide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.\n\n\n\n\naggregate\n\n\naggregate(monitor_ids: Union[Sequence[int], int], dates: Union[Sequence[str], Sequence[Sequence[str]]], metrics: Union[Sequence[str], str]) -> Sequence[Dict[str, Any]]\n\n\n\n\nReturn aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.\n\n\nValid metrics\n\n\n\n\n'volume'\n\n\n'word_cloud'\n\n\n'top_sources'\n\n\n'interest_affinities'\n\n\n'sentiment_and_categories'\n\n\n\n\nArguments\n\n\n\n\nmonitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested\n\n\ndates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings\n\n\nmetrics: String or list of Strings, metric(s) to aggregate upon\n\n\n\n\nposts\n\n\nposts(monitor_id: int, start: str, end: str, filter_string: str = None, extend_limit: bool = False, full_contents: bool = False, geotagged: bool = False) -> Dict[str, Any]\n\n\n\n\nReturn post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\nfilter_string: String, pipe-separated list of field:value pairs used to filter posts\n\n\nextend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call\n\n\nfull_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms\n\n\ngeotagged: Boolean, if True, returns only geotagged documents matching the given filter\n\n\n\n\nDemographics\n\n\nThis collection of endpoints provide demographic volume metrics for users within a given monitor.\n\n\nage\n\n\nage(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by age bracket.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nethnicity\n\n\nethnicity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by ethnicity.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ngender\n\n\ngender(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by gender.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nGeography\n\n\ncities\n\n\ncities(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by city.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter cities\n\n\n\n\nstates\n\n\nstates(monitor_id: int, start: str, end: str, country: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by state.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\ncountry: String, country code to filter states\n\n\n\n\ncountries\n\n\ncountries(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn volume metrics for a given monitor split by country.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nTwitter\n\n\nThis collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. \n\n\ntwitter_authors\n\n\ntwitter_authors(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information related to the Twitter authors who have posted in a given monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_metrics\n\n\ntwitter_metrics(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about the top hashtags, mentions, and retweets in a monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_followers\n\n\ntwitter_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_sent_posts\n\n\ntwitter_sent_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ntwitter_engagement\n\n\ntwitter_engagement(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about retweets, replies, and @mentions for a Twitter Social Account monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nFacebook\n\n\nfacebook_admin_posts\n\n\nfacebook_admin_posts(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn those posts made by the administrators/owners of a targeted Facebook page in a Facebook Social Account Monitor.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_likes\n\n\nfacebook_likes(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily like count for a targeted Facebook page in a Facebook Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nfacebook_activity\n\n\nfacebook_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about actions (likes, comments, shares) made by users and admins for a given page.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\nInstagram\n\n\ninstagram_top_hashtags\n\n\ninstagram_top_hashtags(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor, plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected (i.e. for which the hashtags are being tracked explicitly in ForSight).\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_followers\n\n\ninstagram_followers(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn the cumulative daily follower count for a targeted Instagram account in an Instagram Social Account Monitor as of the selected dates.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_sent_media\n\n\ninstagram_sent_media(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn media sent by admins in a targeted Instagram account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD\n\n\n\n\ninstagram_activity\n\n\ninstagram_activity(monitor_id: int, start: str, end: str) -> Dict[str, Any]\n\n\n\n\nReturn information about actions (likes, comments) made by users and admins for a given account.\n\n\nArguments\n\n\n\n\nmonitor_id: Integer, id of the monitor or monitor filter being requested\n\n\nstart: String, inclusive start date in YYYY-MM-DD\n\n\nend: String, exclusive end date in YYYY-MM-DD",
             "title": "Monitor"
         },
         {
@@ -221,9 +221,9 @@
             "title": "Arguments"
         },
         {
-            "location": "/Monitor/#trained_posts",
-            "text": "trained_posts(monitor_id: int, category: int = None) -> Dict[str, Any]  Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.",
-            "title": "trained_posts"
+            "location": "/Monitor/#training_posts",
+            "text": "training_posts(monitor_id: int, category: int = None) -> Dict[str, Any]  Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.",
+            "title": "training_posts"
         },
         {
             "location": "/Monitor/#arguments_3",
@@ -261,9 +261,9 @@
             "title": "Arguments"
         },
         {
-            "location": "/Monitor/#image_analysis",
-            "text": "image_analysis(monitor_id: int, start: str, end: str, object_type: str = \"\", top: int = 100) -> Dict[str, Any]  Return a breakdown of the top image classes within a provided monitor.",
-            "title": "image_analysis"
+            "location": "/Monitor/#image_results",
+            "text": "image_results(monitor_id: int, start: str, end: str, object_type: str = \"\", top: int = 100) -> Dict[str, Any]  Return a breakdown of the top image classes within a provided monitor.",
+            "title": "image_results"
         },
         {
             "location": "/Monitor/#arguments_7",
@@ -272,11 +272,21 @@
         },
         {
             "location": "/Monitor/#volume",
-            "text": "volume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]  Return volume metrics for a given monitor split by date.",
+            "text": "volume(monitor_id: int, start: str, end: str, group_by: str = \"DAILY\") -> Dict[str, Any]  Return volume of total posts in a monitor.",
             "title": "volume"
         },
         {
             "location": "/Monitor/#arguments_8",
+            "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  group_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Monitor/#dayandtime",
+            "text": "dayandtime(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]  Return volume metrics for a given monitor split by date.",
+            "title": "dayandtime"
+        },
+        {
+            "location": "/Monitor/#arguments_9",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  aggregate_by_day: Boolean, if True, volume information will be aggregated by day of the week instead of time of day  use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor",
             "title": "Arguments"
         },
@@ -286,7 +296,7 @@
             "title": "sentiment_and_categories"
         },
         {
-            "location": "/Monitor/#arguments_9",
+            "location": "/Monitor/#arguments_10",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.",
             "title": "Arguments"
         },
@@ -301,7 +311,7 @@
             "title": "Valid metrics"
         },
         {
-            "location": "/Monitor/#arguments_10",
+            "location": "/Monitor/#arguments_11",
             "text": "monitor_ids: Integer or list of Integers, id(s) of the monitor(s) being requested  dates: Tuple of Strings or list of Tuples, pair(s) of 'YYYY-MM-DD' date strings  metrics: String or list of Strings, metric(s) to aggregate upon",
             "title": "Arguments"
         },
@@ -311,7 +321,7 @@
             "title": "posts"
         },
         {
-            "location": "/Monitor/#arguments_11",
+            "location": "/Monitor/#arguments_12",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  filter_string: String, pipe-separated list of field:value pairs used to filter posts  extend_limit: Boolean if True increase limit of returned posts from 500 per call to 10000 per call  full_contents: Boolean, if True, the contents field will return the original, complete posts contents instead of truncating around search terms  geotagged: Boolean, if True, returns only geotagged documents matching the given filter",
             "title": "Arguments"
         },
@@ -326,7 +336,7 @@
             "title": "age"
         },
         {
-            "location": "/Monitor/#arguments_12",
+            "location": "/Monitor/#arguments_13",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -336,7 +346,7 @@
             "title": "ethnicity"
         },
         {
-            "location": "/Monitor/#arguments_13",
+            "location": "/Monitor/#arguments_14",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -346,7 +356,7 @@
             "title": "gender"
         },
         {
-            "location": "/Monitor/#arguments_14",
+            "location": "/Monitor/#arguments_15",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -361,7 +371,7 @@
             "title": "cities"
         },
         {
-            "location": "/Monitor/#arguments_15",
+            "location": "/Monitor/#arguments_16",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  country: String, country code to filter cities",
             "title": "Arguments"
         },
@@ -371,7 +381,7 @@
             "title": "states"
         },
         {
-            "location": "/Monitor/#arguments_16",
+            "location": "/Monitor/#arguments_17",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD  country: String, country code to filter states",
             "title": "Arguments"
         },
@@ -381,7 +391,7 @@
             "title": "countries"
         },
         {
-            "location": "/Monitor/#arguments_17",
+            "location": "/Monitor/#arguments_18",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -396,7 +406,7 @@
             "title": "twitter_authors"
         },
         {
-            "location": "/Monitor/#arguments_18",
+            "location": "/Monitor/#arguments_19",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -406,7 +416,7 @@
             "title": "twitter_metrics"
         },
         {
-            "location": "/Monitor/#arguments_19",
+            "location": "/Monitor/#arguments_20",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -416,7 +426,7 @@
             "title": "twitter_followers"
         },
         {
-            "location": "/Monitor/#arguments_20",
+            "location": "/Monitor/#arguments_21",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -426,7 +436,7 @@
             "title": "twitter_sent_posts"
         },
         {
-            "location": "/Monitor/#arguments_21",
+            "location": "/Monitor/#arguments_22",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -436,7 +446,7 @@
             "title": "twitter_engagement"
         },
         {
-            "location": "/Monitor/#arguments_22",
+            "location": "/Monitor/#arguments_23",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -451,7 +461,7 @@
             "title": "facebook_admin_posts"
         },
         {
-            "location": "/Monitor/#arguments_23",
+            "location": "/Monitor/#arguments_24",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -461,7 +471,7 @@
             "title": "facebook_likes"
         },
         {
-            "location": "/Monitor/#arguments_24",
+            "location": "/Monitor/#arguments_25",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -471,7 +481,7 @@
             "title": "facebook_activity"
         },
         {
-            "location": "/Monitor/#arguments_25",
+            "location": "/Monitor/#arguments_26",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -486,7 +496,7 @@
             "title": "instagram_top_hashtags"
         },
         {
-            "location": "/Monitor/#arguments_26",
+            "location": "/Monitor/#arguments_27",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -496,7 +506,7 @@
             "title": "instagram_followers"
         },
         {
-            "location": "/Monitor/#arguments_27",
+            "location": "/Monitor/#arguments_28",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -506,7 +516,7 @@
             "title": "instagram_sent_media"
         },
         {
-            "location": "/Monitor/#arguments_28",
+            "location": "/Monitor/#arguments_29",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
@@ -516,13 +526,13 @@
             "title": "instagram_activity"
         },
         {
-            "location": "/Monitor/#arguments_29",
+            "location": "/Monitor/#arguments_30",
             "text": "monitor_id: Integer, id of the monitor or monitor filter being requested  start: String, inclusive start date in YYYY-MM-DD  end: String, exclusive end date in YYYY-MM-DD",
             "title": "Arguments"
         },
         {
             "location": "/Analysis/",
-            "text": "Analysis API\n\n\nClass for working with Crimson Hexagon Analysis API.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, AnalysisAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(session)\n>>> analysis_client.results(request_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nanaysis_requests\n\n\nanalysis_request(data: Dict[str, Any]) -> Dict[str, Any]\n\n\n\n\nSubmit a query task against 24 hours of social data.\n\n\nArguments\n\n\n\n\ndata: Dictionary, query and filter parameters\n\n\n\n\nresults\n\n\nresults(request_id: int) -> Dict[str, Any]\n\n\n\n\nRetrieve the status of the analysis request and the results.\n\n\nArguments\n\n\n\n\nrequest_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
+            "text": "Analysis API\n\n\nClass for working with Crimson Hexagon Analysis API.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, AnalysisAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> analysis_client = AnalysisAPI(session)\n>>> analysis_client.results(request_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nanalysis_request\n\n\nanalysis_request(data: Dict[str, Any]) -> Dict[str, Any]\n\n\n\n\nSubmit a query task against 24 hours of social data.\n\n\nArguments\n\n\n\n\ndata: Dictionary, query and filter parameters\n\n\n\n\nresults\n\n\nresults(request_id: int) -> Dict[str, Any]\n\n\n\n\nRetrieve the status of the analysis request and the results.\n\n\nArguments\n\n\n\n\nrequest_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints",
             "title": "Analysis"
         },
         {
@@ -546,9 +556,9 @@
             "title": "Methods"
         },
         {
-            "location": "/Analysis/#anaysis_requests",
+            "location": "/Analysis/#analysis_request",
             "text": "analysis_request(data: Dict[str, Any]) -> Dict[str, Any]  Submit a query task against 24 hours of social data.",
-            "title": "anaysis_requests"
+            "title": "analysis_request"
         },
         {
             "location": "/Analysis/#arguments",
@@ -906,8 +916,73 @@
             "title": "Arguments"
         },
         {
+            "location": "/Activity/",
+            "text": "Activity API\n\n\nClass for working with Crimson Hexagon Activity Report API.\n\n\nExample Usage\n\n\n>>> from hexpy import HexpySession, ActivityAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> activity_client = ActivityAPI(session)\n>>> activity_client.monitor_creation(organization_id)\n>>> session.close()\n\n\n\n\nMethods\n\n\nmonitor_creation\n\n\nmonitor_creation(organization_id: int) -> Dict[str, Any]\n\n\n\n\nGet Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.\n\n\nArguments\n\n\n\n\norganiztion_id: Integer, the id of the organization being requested.\n\n\n\n\nsocial_sites\n\n\nsocial_sites(organization_id: int) -> Dict[str, Any]\n\n\n\n\nGet Social Site Report and associated usernames for Teams within an Organization.\n\n\nArguments\n\n\n\n\norganiztion_id: Integer, the id of the organization being requested.\n\n\n\n\nuser_activity\n\n\nuser_activity(organization_id: int) -> Dict[str, Any]\n\n\n\n\nGet a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.\n\n\nArguments\n\n\n\n\norganiztion_id: Integer, the id of the organization being requested.\n\n\n\n\nuser_invitations\n\n\nuser_invitations(organization_id: int) -> Dict[str, Any]\n\n\n\n\nGet a list of users within an Organization and which Team(s) they were invited to.\n\n\nArguments\n\n\n\n\norganiztion_id: Integer, the id of the organization being requested.",
+            "title": "Activty Reports"
+        },
+        {
+            "location": "/Activity/#activity-api",
+            "text": "",
+            "title": "Activity API"
+        },
+        {
+            "location": "/Activity/#class-for-working-with-crimson-hexagon-activity-report-api",
+            "text": "",
+            "title": "Class for working with Crimson Hexagon Activity Report API."
+        },
+        {
+            "location": "/Activity/#example-usage",
+            "text": ">>> from hexpy import HexpySession, ActivityAPI\n>>> session = HexpySession.load_auth_from_file()\n>>> activity_client = ActivityAPI(session)\n>>> activity_client.monitor_creation(organization_id)\n>>> session.close()",
+            "title": "Example Usage"
+        },
+        {
+            "location": "/Activity/#methods",
+            "text": "",
+            "title": "Methods"
+        },
+        {
+            "location": "/Activity/#monitor_creation",
+            "text": "monitor_creation(organization_id: int) -> Dict[str, Any]  Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.",
+            "title": "monitor_creation"
+        },
+        {
+            "location": "/Activity/#arguments",
+            "text": "organiztion_id: Integer, the id of the organization being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Activity/#social_sites",
+            "text": "social_sites(organization_id: int) -> Dict[str, Any]  Get Social Site Report and associated usernames for Teams within an Organization.",
+            "title": "social_sites"
+        },
+        {
+            "location": "/Activity/#arguments_1",
+            "text": "organiztion_id: Integer, the id of the organization being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Activity/#user_activity",
+            "text": "user_activity(organization_id: int) -> Dict[str, Any]  Get a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.",
+            "title": "user_activity"
+        },
+        {
+            "location": "/Activity/#arguments_2",
+            "text": "organiztion_id: Integer, the id of the organization being requested.",
+            "title": "Arguments"
+        },
+        {
+            "location": "/Activity/#user_invitations",
+            "text": "user_invitations(organization_id: int) -> Dict[str, Any]  Get a list of users within an Organization and which Team(s) they were invited to.",
+            "title": "user_invitations"
+        },
+        {
+            "location": "/Activity/#arguments_3",
+            "text": "organiztion_id: Integer, the id of the organization being requested.",
+            "title": "Arguments"
+        },
+        {
             "location": "/CLI/",
-            "text": "Hexpy Command Line Interface\n\n\nhexpy\n comes with a console script for conveniently automating several common tasks\n\n\nHelpful Commands\n\n\n\n\nExport sample of monitor posts to a spreadsheet.\n\n\nEasily upload a spreadsheet as custom content for analysis in ForSight.\n\n\nQuickly get multiple metrics from monitor results as JSON. \n\n\nCompose powerful shell scripts with pipe-able commands such as \njq\n, and \nxargs\n.\n\n\n\n\nUsage\n\n\nBasic\n\n\n$ hexpy --help\nUsage: hexpy [OPTIONS] COMMAND [ARGS]...\n\n  Command Line interface for working with Crimson Hexagon API.\n\nOptions:\n  --version  Show the version and exit.\n  --help     Show this message and exit.\n\nCommands:\n  api_documentation  Get API documentation for all endpoints.\n  export             Export monitor posts as json or to a...\n  login              Session login credentials.\n  metadata           Get Metadata for account team, monitors, and...\n  results            Get Monitor results for 1 or more metrics.\n  stream_posts       Stream posts in real time, stop after a...\n  upload             Upload spreadsheet file as custom content.\n\n\n\n\nSee how each \nhexpy\n command works by running \nhexpy COMMAND --help\n\n\nExamples\n\n\nLogin to Crimson API with you credentials and save your token\n\n\n$ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!\n\n\n\n\nGet Up-to-date API documentation as an html file\n\n\nhexpy api_documentation -o html\n\n\n\n\nGet list of monitors for a user's team using \njq\n\n\nhexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'\n\n\n\n\nUpload TSV file as \nmy_custom_type\n with English as the language that has tab delimited columns.\n\n\n$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'\n\n\n\n\nGet word cloud and volume information from the monitor in the specified date range.\n\n\n$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01\n\n\n\n\nGet monitor volume information for each day  as a CSV using \njq\n\n\n$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...\n\n\n\n\nExport Monitor posts to excel file called \nmy_export.xlsx\n\n\n$ hexpy export MONITOR_ID --output_type excel --filename my_export\n\n\n\n\nExport Monitor posts as json and redirect to \nmy_export.json\n\n\n$ hexpy export MONITOR_ID --output_type json > my_export.json\n\n\n\n\nExport posts to excel for multiple monitors in parallel from a file containing a list of monitor ids\n\n\ncat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel\n\n\n\n\nStream 1K real-time posts to json in the terminal\n\n\nhexpy stream_posts STREAM_ID --stop_after 1000 --output_type json \n\n\n\n\nStream up to 10K real-time posts to a csv file with tab delimiter \n\n\nhexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\\t' > my_csv_file.csv",
+            "text": "Hexpy Command Line Interface\n\n\nhexpy\n comes with a console script for conveniently automating several common tasks\n\n\nHelpful Commands\n\n\n\n\nExport sample of monitor posts to a spreadsheet.\n\n\nEasily upload a spreadsheet as custom content for analysis in ForSight.\n\n\nQuickly get multiple metrics from monitor results as JSON. \n\n\nCompose powerful shell scripts with pipe-able commands such as \njq\n, and \nxargs\n.\n\n\n\n\nUsage\n\n\nBasic\n\n\n$ hexpy --help\nUsage: hexpy [OPTIONS] COMMAND [ARGS]...\n\n  Command Line interface for working with Crimson Hexagon API.\n\nOptions:\n  --version  Show the version and exit.\n  --help     Show this message and exit.\n\nCommands:\n  api_documentation  Get API documentation for all endpoints.\n  export             Export monitor posts as json or to a...\n  login              Session login credentials.\n  metadata           Get Metadata for account team, monitors, and...\n  results            Get Monitor results for 1 or more metrics.\n  stream_posts       Stream posts in real time, stop after a...\n  upload             Upload spreadsheet file as custom content.\n\n\n\n\nSee how each \nhexpy\n command works by running \nhexpy COMMAND --help\n\n\nExamples\n\n\nLogin to Crimson API with you credentials and save your token\n\n\n$ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!\n\n\n\n\nGet Up-to-date API documentation as an html file\n\n\nhexpy api_documentation -o html\n\n\n\n\nGet list of all teams a user's teams.\n\n\nhexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\\t'\n\n\n\n\nGet list of monitors for a user's team using \njq\n\n\nhexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\\t'\n\n\n\n\nUpload TSV file as \nmy_custom_type\n with English as the language that has tab delimited columns.\n\n\n$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'\n\n\n\n\nGet word cloud and volume information from the monitor in the specified date range.\n\n\n$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01\n\n\n\n\nGet monitor volume information for each day  as a CSV using \njq\n\n\n$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...\n\n\n\n\nExport Monitor posts to excel file called \nmy_export.xlsx\n\n\n$ hexpy export MONITOR_ID --output_type excel --filename my_export\n\n\n\n\nExport Monitor posts as json and redirect to \nmy_export.json\n\n\n$ hexpy export MONITOR_ID --output_type json > my_export.json\n\n\n\n\nExport posts to excel for multiple monitors in parallel from a file containing a list of monitor ids\n\n\ncat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel\n\n\n\n\nStream 1K real-time posts to json in the terminal\n\n\nhexpy stream_posts STREAM_ID --stop_after 1000 --output_type json \n\n\n\n\nStream up to 10K real-time posts to a csv file with tab delimiter \n\n\nhexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\\t' > my_csv_file.csv",
             "title": "Command Line Interface"
         },
         {
@@ -932,7 +1007,7 @@
         },
         {
             "location": "/CLI/#examples",
-            "text": "Login to Crimson API with you credentials and save your token  $ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!  Get Up-to-date API documentation as an html file  hexpy api_documentation -o html  Get list of monitors for a user's team using  jq  hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'  Upload TSV file as  my_custom_type  with English as the language that has tab delimited columns.  $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'  Get word cloud and volume information from the monitor in the specified date range.  $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01  Get monitor volume information for each day  as a CSV using  jq  $ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...  Export Monitor posts to excel file called  my_export.xlsx  $ hexpy export MONITOR_ID --output_type excel --filename my_export  Export Monitor posts as json and redirect to  my_export.json  $ hexpy export MONITOR_ID --output_type json > my_export.json  Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids  cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel  Stream 1K real-time posts to json in the terminal  hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json   Stream up to 10K real-time posts to a csv file with tab delimiter   hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\\t' > my_csv_file.csv",
+            "text": "Login to Crimson API with you credentials and save your token  $ hexpy login --force\nEnter username: username@email.com\nEnter password: ***********\n\u2714 Success!  Get Up-to-date API documentation as an html file  hexpy api_documentation -o html  Get list of all teams a user's teams.  hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\\t'  Get list of monitors for a user's team using  jq  hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\\t'  Upload TSV file as  my_custom_type  with English as the language that has tab delimited columns.  $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\\t'  Get word cloud and volume information from the monitor in the specified date range.  $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01  Get monitor volume information for each day  as a CSV using  jq  $ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'\n\"2017-01-04T00:00:00\",74\n\"2017-01-05T00:00:00\",101\n\"2017-01-06T00:00:00\",67\n\"2017-01-07T00:00:00\",58\n\"2017-01-08T00:00:00\",64\n\"2017-01-09T00:00:00\",72\n\"2017-01-10T00:00:00\",92\n\"2017-01-11T00:00:00\",72\n\"2017-01-12T00:00:00\",133\n\"2017-01-13T00:00:00\",67\n...  Export Monitor posts to excel file called  my_export.xlsx  $ hexpy export MONITOR_ID --output_type excel --filename my_export  Export Monitor posts as json and redirect to  my_export.json  $ hexpy export MONITOR_ID --output_type json > my_export.json  Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids  cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel  Stream 1K real-time posts to json in the terminal  hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json   Stream up to 10K real-time posts to a csv file with tab delimiter   hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\\t' > my_csv_file.csv",
             "title": "Examples"
         },
         {
