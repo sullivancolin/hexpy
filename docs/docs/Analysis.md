@@ -14,7 +14,7 @@
 
 ## Methods
 
-### anaysis_requests
+### analysis_request
 ```python
 analysis_request(data: Dict[str, Any]) -> Dict[str, Any]
 ```

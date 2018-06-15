@@ -53,9 +53,9 @@ Return an alphabetized list of the top 300 words in a monitor. This data is gene
 * filter_string: String, pipe-separated list of field:value pairs used to filter posts
 
 
-### trained_posts
+### training_posts
 ```python
-trained_posts(monitor_id: int, category: int = None) -> Dict[str, Any]
+training_posts(monitor_id: int, category: int = None) -> Dict[str, Any]
 ```
 
 Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.
@@ -104,9 +104,9 @@ Return volume information related to the sites and content sources (e.g. Twitter
 * start: String, inclusive start date in YYYY-MM-DD
 * end: String, exclusive end date in YYYY-MM-DD
 
-### image_analysis
+### image_results
 ```python
-image_analysis(monitor_id: int, start: str, end: str, object_type: str = "", top: int = 100) -> Dict[str, Any]
+image_results(monitor_id: int, start: str, end: str, object_type: str = "", top: int = 100) -> Dict[str, Any]
 ```
 
 Return a breakdown of the top image classes within a provided monitor.
@@ -120,7 +120,20 @@ Return a breakdown of the top image classes within a provided monitor.
 
 ### volume
 ```python
-volume(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]
+volume(monitor_id: int, start: str, end: str, group_by: str = "DAILY") -> Dict[str, Any]
+```
+
+Return volume of total posts in a monitor.
+
+#### Arguments
+* monitor_id: Integer, id of the monitor or monitor filter being requested
+* start: String, inclusive start date in YYYY-MM-DD
+* end: String, exclusive end date in YYYY-MM-DD
+* group_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]
+
+### dayandtime
+```python
+dayandtime(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]
 ```
 
 Return volume metrics for a given monitor split by date.

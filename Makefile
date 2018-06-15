@@ -8,7 +8,6 @@ clean-build:
 	rm -fr build/
 	rm -fr dist/
 	rm -fr .eggs/
-	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -f {} +
 
 ## remove Python file artifacts
@@ -65,7 +64,7 @@ docs-clean:
 	cd docs/; rm -rf site/;
 
 ## generate Mkdocs HTML documentation, commit to gh-pages branch and push to github
-releasedocs:
+releasedocs: docs-clean
 	hexpy api_documentation -o markdown
 	mv crimson_api_docs.md docs/docs/
 	cd docs/; mkdocs gh-deploy --verbose
@@ -84,11 +83,11 @@ dist: clean
 
 ## install the package to the pipenv virtualenv
 install: clean
-	pipenv install -e . --three
+	pipenv install --three
 
 ## install the package and all development dependencies to the pipenv virtualenv
 install-dev: clean
-	pipenv install -e . --dev --three
+	pipenv install --dev --three
 
 ##############################################################################
 # Self Documenting Commands                                                  #

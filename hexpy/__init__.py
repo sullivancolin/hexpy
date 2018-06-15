@@ -10,6 +10,7 @@ from .analysis import AnalysisAPI
 from .content_upload import ContentUploadAPI
 from .custom import CustomAPI
 from .realtime import RealtimeAPI
+from .activity import ActivityAPI
 
 
 __all__ = [
@@ -21,4 +22,5 @@ __all__ = [
     "ContentUploadAPI",
     "CustomAPI",
     "RealtimeAPI",
+    "ActivityAPI",
 ]

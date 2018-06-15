@@ -51,9 +51,14 @@ Get Up-to-date API documentation as an html file
 hexpy api_documentation -o html
 ```
 
+Get list of all teams a user's teams.
+```bash
+hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
+```
+
 Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/)
 ```bash
-hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv'
+hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
 ```
 
 Upload TSV file as `my_custom_type` with English as the language that has tab delimited columns.
@@ -68,7 +73,7 @@ $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 
 Get monitor volume information for each day  as a CSV using [jq](https://stedolan.github.io/jq/)
 ```bash
-$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volumes[] | [.startDate, .numberOfDocuments] | @csv'
+$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'
 "2017-01-04T00:00:00",74
 "2017-01-05T00:00:00",101
 "2017-01-06T00:00:00",67

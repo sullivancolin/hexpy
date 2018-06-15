@@ -11,6 +11,7 @@ pages:
     - Streams: Streams.md
     - Realtime: Realtime.md
     - Custom: Custom.md
+    - Activty Reports: Activity.md
     - Command Line Interface: CLI.md
     - Crimson Api Documentation: crimson_api_docs.md
 theme: readthedocs

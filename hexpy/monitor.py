@@ -171,7 +171,7 @@ class MonitorAPI:
             )
         )
 
-    def trained_posts(self, monitor_id: int, category: int = None) -> Dict[str, Any]:
+    def training_posts(self, monitor_id: int, category: int = None) -> Dict[str, Any]:
         """Return a list of the training posts for a given opinion monitor.
 
         The selected monitor must be an opinion monitor; requests for other monitor types will return an error.
@@ -300,7 +300,7 @@ class MonitorAPI:
             )
         )
 
-    def image_analysis(
+    def image_results(
         self,
         monitor_id: int,
         start: str,
@@ -331,6 +331,29 @@ class MonitorAPI:
         )
 
     def volume(
+        self, monitor_id: int, start: str, end: str, group_by: str = "DAILY"
+    ) -> Dict[str, Any]:
+        """Return volume of total posts in a monitor.
+
+        # Arguments
+            monitor_id: Integer, id of the monitor or monitor filter being requested
+            start: String, inclusive start date in YYYY-MM-DD
+            end: String, exclusive end date in YYYY-MM-DD
+            group_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]
+        """
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "volume",
+                params={
+                    "id": monitor_id,
+                    "start": start,
+                    "end": end,
+                    "aggregatebyday": group_by,
+                },
+            )
+        )
+
+    def dayandtime(
         self,
         monitor_id: int,
         start: str,
@@ -338,7 +361,7 @@ class MonitorAPI:
         aggregate_by_day: bool = False,
         use_local_time: bool = False,
     ) -> Dict[str, Any]:
-        """Return volume metrics for a given monitor split by date.
+        """Return volume information for a monitor aggregated by time of day or day of week.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
