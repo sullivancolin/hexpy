@@ -44,6 +44,8 @@ def posts_json_to_df(docs):
             elif isinstance(val, dict):
                 for subkey, subval in val.items():
                     record[key + "_" + subkey] = subval
+            elif isinstance(val, int):
+                record[key] = val
         items.append(record)
 
     df = pd.DataFrame.from_records(items)
@@ -555,6 +557,13 @@ def train(
     help="file type of export. (default=csv)",
 )
 @click.option(
+    "--post_type",
+    "-p",
+    type=click.Choice(["post_list", "training_posts"]),
+    default="post_list",
+    help="export monitor posts or training documents.",
+)
+@click.option(
     "--dates",
     "-d",
     nargs=2,
@@ -577,6 +586,7 @@ def export(
     limit: bool = True,
     dates: Sequence[str] = None,
     output_type: str = "csv",
+    post_type: str = "post_list",
     filename: str = None,
     separator: str = ",",
 ) -> None:
@@ -588,14 +598,18 @@ def export(
     client = MonitorAPI(session)
     details = client.details(monitor_id)
     info = details["name"]
-    if dates:
-        docs = client.posts(monitor_id, dates[0], dates[1], extend_limit=not limit)[
-            "posts"
-        ]
-    else:
-        start = details["resultsStart"]
-        end = details["resultsEnd"]
-        docs = client.posts(monitor_id, start, end, extend_limit=not limit)["posts"]
+
+    if post_type == "post_list":
+        if dates:
+            docs = client.posts(monitor_id, dates[0], dates[1], extend_limit=not limit)[
+                "posts"
+            ]
+        else:
+            start = details["resultsStart"]
+            end = details["resultsEnd"]
+            docs = client.posts(monitor_id, start, end, extend_limit=not limit)["posts"]
+    elif post_type == "training_posts":
+        docs = client.training_posts(monitor_id)["trainingPosts"]
 
     if output_type == "json":
         for p in docs:
