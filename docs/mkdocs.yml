@@ -16,4 +16,4 @@ pages:
     - Crimson Api Documentation: crimson_api_docs.md
 theme: 'material'
 extra:
-    version: 0.4.4
+    version: 0.4.5
