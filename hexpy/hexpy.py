@@ -526,13 +526,12 @@ def train(
         ].to_dict(orient="records")
         if len(data) > 1000:
             for batch in bar([data[i : i + 1000] for i in range(0, len(data), 1000)]):
-                # response = client.train_monitor(
-                #     monitor_id=monitor_id, category_id=int(val), data=batch
-                # )
-                pass
-        # response = client.train_monitor(
-        #     monitor_id=monitor_id, category_id=int(val), data=data
-        # )
+                response = client.train_monitor(
+                    monitor_id=monitor_id, category_id=int(val), data=batch
+                )
+        response = client.train_monitor(
+            monitor_id=monitor_id, category_id=int(val), data=data
+        )
         category = reverse_category_dict[val]
         spinner = Halo(
             text=f"Successfuly uploaded {len(data)} {category} docs!", spinner="dots"

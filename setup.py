@@ -30,7 +30,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Colin Sullivan",
     author_email="csullivan@crimsonhexagon.com",
-    url="https://github.com/sullivancolin/hexpy",
+    url="https://sullivancolin.github.io/hexpy/",
     packages=find_packages(include=["hexpy"]),
     include_package_data=True,
     install_requires=requirements,
