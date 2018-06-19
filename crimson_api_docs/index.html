@@ -1,156 +1,5968 @@
+
+
+
+
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  
-  <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Crimson Api Documentation - hexpy</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="../css/highlight.css">
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "Crimson Api Documentation";
-    var mkdocs_page_input_path = "crimson_api_docs.md";
-    var mkdocs_page_url = "/crimson_api_docs/";
-  </script>
-  
-  <script src="../js/jquery-2.1.1.min.js"></script>
-  <script src="../js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
-  
-</head>
-
-<body class="wy-body-for-nav" role="document">
-
-  <div class="wy-grid-for-nav">
-
+<html lang="en" class="no-js">
+  <head>
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-      <div class="wy-side-nav-search">
-        <a href=".." class="icon icon-home"> hexpy</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-  </form>
-</div>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A Python client for the Crimson Hexagon API.">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
+    
+    
+      
+        <title>Crimson Api Documentation - hexpy</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
+      
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#crimson-hexagon-api-documentation" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href=".." title="hexpy" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
       </div>
-
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-	<ul class="current">
-	  
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            <li class="toctree-l1">
-		
-    <a class="" href="..">Home</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Session/">Session</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Metadata/">Metadata</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Monitor/">Monitor</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Analysis/">Analysis</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Upload/">Upload</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Streams/">Streams</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Realtime/">Realtime</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Custom/">Custom</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../Activity/">Activty Reports</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../CLI/">Command Line Interface</a>
-	    </li>
-          
-            <li class="toctree-l1 current">
-		
-    <a class="current" href="./">Crimson Api Documentation</a>
-    <ul class="subnav">
             
-    <li class="toctree-l2"><a href="#crimson-hexagon-api-documentation">Crimson Hexagon API Documentation</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#endpoints">Endpoints</a></li>
-        
-        </ul>
-    
-
-    </ul>
-	    </li>
+              <span class="md-header-nav__topic">
+                hexpy
+              </span>
+              <span class="md-header-nav__topic">
+                Crimson Api Documentation
+              </span>
+            
           
-        </ul>
+        </div>
       </div>
-      &nbsp;
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href="..">hexpy</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="..">Docs</a> &raquo;</li>
-    
-      
-    
-    <li>Crimson Api Documentation</li>
-    <li class="wy-breadcrumbs-aside">
-      
-    </li>
-  </ul>
-  <hr/>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-          <div role="main">
-            <div class="section">
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/sullivancolin/hexpy/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    hexpy
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/sullivancolin/hexpy/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Session/" title="Session" class="md-nav__link">
+      Session
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Metadata/" title="Metadata" class="md-nav__link">
+      Metadata
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Monitor/" title="Monitor" class="md-nav__link">
+      Monitor
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Analysis/" title="Analysis" class="md-nav__link">
+      Analysis
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Upload/" title="Upload" class="md-nav__link">
+      Upload
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Streams/" title="Streams" class="md-nav__link">
+      Streams
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Realtime/" title="Realtime" class="md-nav__link">
+      Realtime
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Custom/" title="Custom" class="md-nav__link">
+      Custom
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../Activity/" title="Activty Reports" class="md-nav__link">
+      Activty Reports
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../CLI/" title="Command Line Interface" class="md-nav__link">
+      Command Line Interface
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Crimson Api Documentation
+      </label>
+    
+    <a href="./" title="Crimson Api Documentation" class="md-nav__link md-nav__link--active">
+      Crimson Api Documentation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" title="Endpoints" class="md-nav__link">
+    Endpoints
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analysis-request" title="Analysis Request" class="md-nav__link">
+    Analysis Request
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-submit-an-analysis-task-for-asynchronous-processing-category-results" title="To submit an analysis task for asynchronous processing  - Category: results" class="md-nav__link">
+    To submit an analysis task for asynchronous processing  - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-post" title="/results - POST" class="md-nav__link">
+    /results - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-results" title="Analysis Results" class="md-nav__link">
+    Analysis Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-retrieve-the-status-of-the-analysis-task-and-the-results-category-results" title="To retrieve the status of the analysis task and the results - Category: results" class="md-nav__link">
+    To retrieve the status of the analysis task and the results - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultsresultid-get" title="/results/{resultId} - GET" class="md-nav__link">
+    /results/{resultId} - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-authentication-tokens-for-use-in-api-requests-category-admin" title="Generate authentication tokens for use in API requests - Category: admin" class="md-nav__link">
+    Generate authentication tokens for use in API requests - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticate-get" title="/authenticate - GET" class="md-nav__link">
+    /authenticate - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authors" title="Authors" class="md-nav__link">
+    Authors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-twitter-authors-in-a-monitor-category-results" title="Information about Twitter authors in a monitor - Category: results" class="md-nav__link">
+    Information about Twitter authors in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorauthors-get" title="/monitor/authors - GET" class="md-nav__link">
+    /monitor/authors - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_3" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-upload" title="Content Upload" class="md-nav__link">
+    Content Upload
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-content-via-the-api-category-admin" title="Upload content via the API - Category: admin" class="md-nav__link">
+    Upload content via the API - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contentupload-post" title="/content/upload - POST" class="md-nav__link">
+    /content/upload - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_4" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-and-time" title="Day and Time" class="md-nav__link">
+    Day and Time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volume-information-for-a-monitor-aggregated-by-time-of-day-or-day-of-week-category-results" title="Volume information for a monitor aggregated by time of day or day of week) - Category: results" class="md-nav__link">
+    Volume information for a monitor aggregated by time of day or day of week) - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordayandtime-get" title="/monitor/dayandtime - GET" class="md-nav__link">
+    /monitor/dayandtime - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_5" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demographics-age" title="Demographics - Age" class="md-nav__link">
+    Demographics - Age
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-volume-information-for-age-in-a-monitor-category-results" title="Daily volume information for age in a monitor - Category: results" class="md-nav__link">
+    Daily volume information for age in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordemographicsage-get" title="/monitor/demographics/age - GET" class="md-nav__link">
+    /monitor/demographics/age - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_6" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demographics-gender" title="Demographics - Gender" class="md-nav__link">
+    Demographics - Gender
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-volume-information-for-gender-in-a-monitor-category-results" title="Daily volume information for gender in a monitor - Category: results" class="md-nav__link">
+    Daily volume information for gender in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordemographicsgender-get" title="/monitor/demographics/gender - GET" class="md-nav__link">
+    /monitor/demographics/gender - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_7" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-admin-posts" title="Facebook Admin Posts" class="md-nav__link">
+    Facebook Admin Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-shares-for-individual-admin-posts-made-by-a-facebook-account-in-a-facebook-social-account-monitor-category-social" title="Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebookadminposts-get" title="/monitor/facebook/adminposts - GET" class="md-nav__link">
+    /monitor/facebook/adminposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_8" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-page-likes" title="Facebook Page Likes" class="md-nav__link">
+    Facebook Page Likes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-page-likes-as-of-the-requested-dates-for-a-facebook-social-monitor-category-social" title="Total page likes as of the requested dates for a Facebook social monitor - Category: social" class="md-nav__link">
+    Total page likes as of the requested dates for a Facebook social monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebookpagelikes-get" title="/monitor/facebook/pagelikes - GET" class="md-nav__link">
+    /monitor/facebook/pagelikes - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_9" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-total-activity" title="Facebook Total Activity" class="md-nav__link">
+    Facebook Total Activity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-total-likes-comments-and-shares-on-admin-and-user-posts-for-a-facebook-account-in-a-facebook-social-monitor-category-social" title="Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social" class="md-nav__link">
+    Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebooktotalactivity-get" title="/monitor/facebook/totalactivity - GET" class="md-nav__link">
+    /monitor/facebook/totalactivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_10" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-all-resources" title="Geography - All Resources" class="md-nav__link">
+    Geography - All Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-geolocation-resources-category-util" title="Returns all the available geolocation resources - Category: util" class="md-nav__link">
+    Returns all the available geolocation resources - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfoall-get" title="/geography/info/all - GET" class="md-nav__link">
+    /geography/info/all - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_11" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-cities" title="Geography - Cities" class="md-nav__link">
+    Geography - Cities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-cities-urban-areas-in-the-given-country-category-util" title="Returns all the available cities / urban areas in the given country - Category: util" class="md-nav__link">
+    Returns all the available cities / urban areas in the given country - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfocities-get" title="/geography/info/cities - GET" class="md-nav__link">
+    /geography/info/cities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_12" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-countries" title="Geography - Countries" class="md-nav__link">
+    Geography - Countries
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-countries-category-util" title="Returns all the available countries - Category: util" class="md-nav__link">
+    Returns all the available countries - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfocountries-get" title="/geography/info/countries - GET" class="md-nav__link">
+    /geography/info/countries - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_13" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-states" title="Geography - States" class="md-nav__link">
+    Geography - States
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-states-regions-in-the-given-country-category-util" title="Returns all the available states / regions in the given country - Category: util" class="md-nav__link">
+    Returns all the available states / regions in the given country - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfostates-get" title="/geography/info/states - GET" class="md-nav__link">
+    /geography/info/states - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_14" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-monitor-creation-report" title="Get Monitor Creation Report" class="md-nav__link">
+    Get Monitor Creation Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-teams-within-an-organization-and-how-many-monitors-were-created-during-a-given-time-period-category-reports" title="Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports" class="md-nav__link">
+    Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportmonitorcreation-get" title="/report/monitorCreation - GET" class="md-nav__link">
+    /report/monitorCreation - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_15" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-social-site-report" title="Get Social Site Report" class="md-nav__link">
+    Get Social Site Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-social-sites-and-associated-usernames-for-teams-within-an-organization-also-indicates-which-of-the-social-sites-have-failed-and-when-category-reports" title="Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports" class="md-nav__link">
+    Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportsocialsites-get" title="/report/socialSites - GET" class="md-nav__link">
+    /report/socialSites - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_16" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_16" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-activity-report" title="Get User Activity Report" class="md-nav__link">
+    Get User Activity Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-users-within-an-organization-including-information-on-when-they-last-logged-into-the-platform-the-last-monitor-they-created-and-the-last-monitor-they-viewed-category-reports" title="Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports" class="md-nav__link">
+    Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportuseractivity-get" title="/report/userActivity - GET" class="md-nav__link">
+    /report/userActivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_17" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_17" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-invitation-report" title="Get User Invitation Report" class="md-nav__link">
+    Get User Invitation Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-users-within-an-organization-and-which-teams-they-were-invited-to-also-indicates-when-the-invitation-was-sent-and-when-it-was-accepted-category-reports" title="Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports" class="md-nav__link">
+    Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportuserinvitations-get" title="/report/userInvitations - GET" class="md-nav__link">
+    /report/userInvitations - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_18" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_18" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-analysis" title="Image analysis" class="md-nav__link">
+    Image analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-return-image-classification-data-category-util" title="To return image classification data - Category: util" class="md-nav__link">
+    To return image classification data - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imageanalysis-get" title="/imageanalysis - GET" class="md-nav__link">
+    /imageanalysis - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_19" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_19" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-followers" title="Instagram Followers" class="md-nav__link">
+    Instagram Followers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-follower-counts-for-instagram-social-account-monitors-category-social" title="Total daily follower counts for Instagram social account monitors - Category: social" class="md-nav__link">
+    Total daily follower counts for Instagram social account monitors - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramfollowers-get" title="/monitor/instagram/followers - GET" class="md-nav__link">
+    /monitor/instagram/followers - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_20" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_20" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-hashtags" title="Instagram Hashtags" class="md-nav__link">
+    Instagram Hashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-volume-by-instagram-hashtags-for-specific-monitor-category-social" title="Total daily volume by Instagram hashtags for specific monitor - Category: social" class="md-nav__link">
+    Total daily volume by Instagram hashtags for specific monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramhashtags-get" title="/monitor/instagram/hashtags - GET" class="md-nav__link">
+    /monitor/instagram/hashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_21" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_21" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-sent-media" title="Instagram Sent Media" class="md-nav__link">
+    Instagram Sent Media
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-tags-for-individual-media-posted-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social" title="Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramsentmedia-get" title="/monitor/instagram/sentmedia - GET" class="md-nav__link">
+    /monitor/instagram/sentmedia - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_22" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_22" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-total-activity" title="Instagram Total Activity" class="md-nav__link">
+    Instagram Total Activity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-shares-for-individual-admin-posts-made-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social" title="Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramtotalactivity-get" title="/monitor/instagram/totalactivity - GET" class="md-nav__link">
+    /monitor/instagram/totalactivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_23" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_23" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interest-affinities" title="Interest Affinities" class="md-nav__link">
+    Interest Affinities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregate-affinities-for-the-selected-monitor-over-a-given-date-range-category-visualizations" title="Aggregate affinities for the selected monitor over a given date range - Category: visualizations" class="md-nav__link">
+    Aggregate affinities for the selected monitor over a given date range - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinterestaffinities-get" title="/monitor/interestaffinities - GET" class="md-nav__link">
+    /monitor/interestaffinities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_24" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_24" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-audit" title="Monitor Audit" class="md-nav__link">
+    Monitor Audit
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audit-information-about-the-selected-monitor-category-admin" title="Audit information about the selected monitor - Category: admin" class="md-nav__link">
+    Audit information about the selected monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoraudit-get" title="/monitor/audit - GET" class="md-nav__link">
+    /monitor/audit - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_25" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_25" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-detail" title="Monitor Detail" class="md-nav__link">
+    Monitor Detail
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes-of-the-specified-monitor-category-admin" title="Attributes of the specified monitor - Category: admin" class="md-nav__link">
+    Attributes of the specified monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordetail-get" title="/monitor/detail - GET" class="md-nav__link">
+    /monitor/detail - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_26" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_26" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-dump" title="Monitor Dump" class="md-nav__link">
+    Monitor Dump
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-detailed-information-of-the-monitor-category-admin" title="Get detailed information of the monitor - Category: admin" class="md-nav__link">
+    Get detailed information of the monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordump-get" title="/monitor/dump - GET" class="md-nav__link">
+    /monitor/dump - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_27" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_27" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-image-results" title="Monitor Image Results" class="md-nav__link">
+    Monitor Image Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-image-results-for-a-monitor-category-results" title="Daily image results for a monitor - Category: results" class="md-nav__link">
+    Daily image results for a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorimageresults-get" title="/monitor/imageresults - GET" class="md-nav__link">
+    /monitor/imageresults - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_28" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_28" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-list" title="Monitor List" class="md-nav__link">
+    Monitor List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-monitors-available-to-the-passed-in-username-category-admin" title="List of monitors available to the passed in username - Category: admin" class="md-nav__link">
+    List of monitors available to the passed in username - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorlist-get" title="/monitor/list - GET" class="md-nav__link">
+    /monitor/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_29" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_29" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results" title="Monitor Results" class="md-nav__link">
+    Monitor Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-results-for-a-monitor-category-results" title="Daily results for a monitor - Category: results" class="md-nav__link">
+    Daily results for a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorresults-get" title="/monitor/results - GET" class="md-nav__link">
+    /monitor/results - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_30" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_30" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-city" title="Monitor Results by City" class="md-nav__link">
+    Monitor Results by City
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-the-cities-urban-areas-in-a-given-country-if-given-category-results" title="Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographycities-get" title="/monitor/geography/cities - GET" class="md-nav__link">
+    /monitor/geography/cities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_31" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_31" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-country" title="Monitor Results by Country" class="md-nav__link">
+    Monitor Results by Country
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-country-category-results" title="Returns all the monitor results grouped by country - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by country - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographycountries-get" title="/monitor/geography/countries - GET" class="md-nav__link">
+    /monitor/geography/countries - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_32" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_32" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-state" title="Monitor Results by State" class="md-nav__link">
+    Monitor Results by State
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-the-country-states-regions-category-results" title="Returns all the monitor results grouped by the country states / regions - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by the country states / regions - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographystates-get" title="/monitor/geography/states - GET" class="md-nav__link">
+    /monitor/geography/states - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_33" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_33" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-training-posts" title="Monitor Training Posts" class="md-nav__link">
+    Monitor Training Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-training-posts-for-a-monitor-category-admin" title="Download training posts for a monitor - Category: admin" class="md-nav__link">
+    Download training posts for a monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortrainingposts-get" title="/monitor/trainingposts - GET" class="md-nav__link">
+    /monitor/trainingposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_34" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_34" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#posts" title="Posts" class="md-nav__link">
+    Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-posts-in-a-monitor-category-visualizations" title="Information about posts in a monitor - Category: visualizations" class="md-nav__link">
+    Information about posts in a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorposts-get-post" title="/monitor/posts - GET || POST" class="md-nav__link">
+    /monitor/posts - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_35" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_35" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-cashtags" title="Realtime Cashtags" class="md-nav__link">
+    Realtime Cashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-cashtags-associated-to-a-monitor-category-monitors" title="Get Cashtags associated to a Monitor - Category: monitors" class="md-nav__link">
+    Get Cashtags associated to a Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorcashtags-get" title="/realtime/monitor/cashtags - GET" class="md-nav__link">
+    /realtime/monitor/cashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_36" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_36" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-configure" title="Realtime Configure" class="md-nav__link">
+    Realtime Configure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-realtime-evaluators-for-the-monitor-category-monitors" title="Configure the Realtime evaluators for the Monitor - Category: monitors" class="md-nav__link">
+    Configure the Realtime evaluators for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorconfigure-get" title="/realtime/monitor/configure - GET" class="md-nav__link">
+    /realtime/monitor/configure - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_37" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_37" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-details" title="Realtime Details" class="md-nav__link">
+    Realtime Details
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-evaluators-details-for-the-monitor-category-monitors" title="Get the Realtime evaluators details for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime evaluators details for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitordetail-get" title="/realtime/monitor/detail - GET" class="md-nav__link">
+    /realtime/monitor/detail - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_38" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_38" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-disable" title="Realtime Disable" class="md-nav__link">
+    Realtime Disable
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disable-realtime-data-category-monitors" title="Disable Realtime Data - Category: monitors" class="md-nav__link">
+    Disable Realtime Data - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitordisable-get" title="/realtime/monitor/disable - GET" class="md-nav__link">
+    /realtime/monitor/disable - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_39" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_39" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-enable" title="Realtime Enable" class="md-nav__link">
+    Realtime Enable
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-realtime-data-category-monitors" title="Enable Realtime Data - Category: monitors" class="md-nav__link">
+    Enable Realtime Data - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorenable-get" title="/realtime/monitor/enable - GET" class="md-nav__link">
+    /realtime/monitor/enable - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_40" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_40" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-hashtags" title="Realtime Hashtags" class="md-nav__link">
+    Realtime Hashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-hashtags-associated-to-a-monitor-category-monitors" title="Get Hashtags associated to a Monitor - Category: monitors" class="md-nav__link">
+    Get Hashtags associated to a Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorhashtags-get" title="/realtime/monitor/hashtags - GET" class="md-nav__link">
+    /realtime/monitor/hashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_41" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_41" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-monitor-list" title="Realtime Monitor List" class="md-nav__link">
+    Realtime Monitor List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-monitors-which-are-in-proteus-category-monitors" title="Get the Monitors which are in Proteus - Category: monitors" class="md-nav__link">
+    Get the Monitors which are in Proteus - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorlist-get" title="/realtime/monitor/list - GET" class="md-nav__link">
+    /realtime/monitor/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_42" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_42" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-retweets" title="Realtime Retweets" class="md-nav__link">
+    Realtime Retweets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-retweets-for-the-monitor-category-monitors" title="Get the Realtime retweets for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime retweets for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorretweets-get" title="/realtime/monitor/retweets - GET" class="md-nav__link">
+    /realtime/monitor/retweets - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_43" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_43" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-socialguids" title="Realtime SocialGuids" class="md-nav__link">
+    Realtime SocialGuids
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-social-guids-for-the-monitor-category-monitors" title="Get the Realtime social guids for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime social guids for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorsocialguids-get" title="/realtime/monitor/socialguids - GET" class="md-nav__link">
+    /realtime/monitor/socialguids - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_44" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_44" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-tweets" title="Realtime Tweets" class="md-nav__link">
+    Realtime Tweets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-tweets-for-the-monitor-category-monitors" title="Get the Realtime tweets for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime tweets for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitortweets-get" title="/realtime/monitor/tweets - GET" class="md-nav__link">
+    /realtime/monitor/tweets - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_45" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_45" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-volume" title="Realtime Volume" class="md-nav__link">
+    Realtime Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-volume-for-the-monitor-category-monitors" title="Get the Realtime volume for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime volume for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorvolume-get" title="/realtime/monitor/volume - GET" class="md-nav__link">
+    /realtime/monitor/volume - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_46" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_46" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-volume-by-sentiment" title="Realtime Volume by Sentiment" class="md-nav__link">
+    Realtime Volume by Sentiment
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-volume-by-sentiment-for-the-monitor-category-monitors" title="Get the Realtime volume by sentiment for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime volume by sentiment for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorvolumebysentiment-get" title="/realtime/monitor/volumebysentiment - GET" class="md-nav__link">
+    /realtime/monitor/volumebysentiment - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_47" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_47" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-add-monitor" title="Stream Add Monitor" class="md-nav__link">
+    Stream Add Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-add-monitor-association-category-admin" title="Stream Add Monitor Association - Category: admin" class="md-nav__link">
+    Stream Add Monitor Association - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidmonitormonitorid-post" title="/stream/{streamid}/monitor/{monitorid} - POST" class="md-nav__link">
+    /stream/{streamid}/monitor/{monitorid} - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_48" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_48" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-create" title="Stream Create" class="md-nav__link">
+    Stream Create
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-creation-category-admin" title="Stream creation - Category: admin" class="md-nav__link">
+    Stream creation - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-post" title="/stream - POST" class="md-nav__link">
+    /stream - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_49" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_49" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-delete" title="Stream Delete" class="md-nav__link">
+    Stream Delete
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-deletion-category-admin" title="Stream deletion - Category: admin" class="md-nav__link">
+    Stream deletion - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamid-delete" title="/stream/{streamid} - DELETE" class="md-nav__link">
+    /stream/{streamid} - DELETE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_50" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_50" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-list" title="Stream List" class="md-nav__link">
+    Stream List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-streams-available-to-the-passed-in-username-category-admin" title="List of streams available to the passed in username - Category: admin" class="md-nav__link">
+    List of streams available to the passed in username - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamlist-get" title="/stream/list - GET" class="md-nav__link">
+    /stream/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_51" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_51" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-posts" title="Stream Posts" class="md-nav__link">
+    Stream Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-posts-in-a-stream-category-results" title="Information about posts in a stream - Category: results" class="md-nav__link">
+    Information about posts in a stream - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidposts-get" title="/stream/{streamid}/posts - GET" class="md-nav__link">
+    /stream/{streamid}/posts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_52" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_52" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-remove-monitor" title="Stream Remove Monitor" class="md-nav__link">
+    Stream Remove Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-remove-monitor-association-category-admin" title="Stream Remove Monitor Association - Category: admin" class="md-nav__link">
+    Stream Remove Monitor Association - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidmonitormonitorid-delete" title="/stream/{streamid}/monitor/{monitorid} - DELETE" class="md-nav__link">
+    /stream/{streamid}/monitor/{monitorid} - DELETE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_53" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_53" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-update-monitor" title="Stream Update Monitor" class="md-nav__link">
+    Stream Update Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-update-monitor-data-category-admin" title="Stream Update Monitor Data - Category: admin" class="md-nav__link">
+    Stream Update Monitor Data - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamid-post" title="/stream/{streamid} - POST" class="md-nav__link">
+    /stream/{streamid} - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_54" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_54" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#team-list" title="Team List" class="md-nav__link">
+    Team List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-teams-accessible-to-the-current-user-category-admin" title="List of teams accessible to the current user - Category: admin" class="md-nav__link">
+    List of teams accessible to the current user - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teamlist-get" title="/team/list - GET" class="md-nav__link">
+    /team/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_55" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_55" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-sites-and-content-sources" title="Top Sites and Content Sources" class="md-nav__link">
+    Top Sites and Content Sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-source-breakdown-and-top-sites-category-results" title="Content source breakdown and top sites - Category: results" class="md-nav__link">
+    Content source breakdown and top sites - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorsources-get" title="/monitor/sources - GET" class="md-nav__link">
+    /monitor/sources - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_56" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_56" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-clustering" title="Topic Clustering" class="md-nav__link">
+    Topic Clustering
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-data-that-can-be-used-to-generate-clustering-visualizations-using-third-party-software-category-visualizations" title="XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations" class="md-nav__link">
+    XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortopics-get-post" title="/monitor/topics - GET || POST" class="md-nav__link">
+    /monitor/topics - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_57" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_57" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-waves" title="Topic Waves" class="md-nav__link">
+    Topic Waves
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#topic-waves-information-for-a-monitor-category-visualizations" title="Topic waves information for a monitor - Category: visualizations" class="md-nav__link">
+    Topic waves information for a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortopicwaves-get-post" title="/monitor/topicwaves - GET || POST" class="md-nav__link">
+    /monitor/topicwaves - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_58" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_58" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-document-upload" title="Training Document Upload" class="md-nav__link">
+    Training Document Upload
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train-monitors-via-the-api-category-util" title="Train monitors via the API - Category: util" class="md-nav__link">
+    Train monitors via the API - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortrain-post" title="/monitor/train - POST" class="md-nav__link">
+    /monitor/train - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_59" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_59" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-engagement-metrics" title="Twitter Engagement Metrics" class="md-nav__link">
+    Twitter Engagement Metrics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#engagement-metrics-for-twitter-content-in-a-monitor-category-results" title="Engagement metrics for Twitter content in a monitor - Category: results" class="md-nav__link">
+    Engagement metrics for Twitter content in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittermetrics-get" title="/monitor/twittermetrics - GET" class="md-nav__link">
+    /monitor/twittermetrics - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_60" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_60" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-followers" title="Twitter Followers" class="md-nav__link">
+    Twitter Followers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-follower-counts-for-twitter-social-account-monitors-category-social" title="Total daily follower counts for Twitter Social Account monitors - Category: social" class="md-nav__link">
+    Total daily follower counts for Twitter Social Account monitors - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialfollowers-get" title="/monitor/twittersocial/followers - GET" class="md-nav__link">
+    /monitor/twittersocial/followers - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_61" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_61" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-sent-posts" title="Twitter Sent Posts" class="md-nav__link">
+    Twitter Sent Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-retweets-replies-and-impressions-for-individual-posts-made-by-a-twitter-account-in-a-twitter-social-account-monitor-category-social" title="Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social" class="md-nav__link">
+    Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialsentposts-get" title="/monitor/twittersocial/sentposts - GET" class="md-nav__link">
+    /monitor/twittersocial/sentposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_62" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_62" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-total-engagement" title="Twitter Total Engagement" class="md-nav__link">
+    Twitter Total Engagement
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-retweets-replies-and-mentions-for-a-targeted-twitter-account-in-a-twitter-social-account-monitor-category-social" title="Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social" class="md-nav__link">
+    Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialtotalengagement-get" title="/monitor/twittersocial/totalengagement - GET" class="md-nav__link">
+    /monitor/twittersocial/totalengagement - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_63" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_63" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume" title="Volume" class="md-nav__link">
+    Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volume-of-total-posts-in-a-monitor-category-results" title="Volume of total posts in a monitor - Category: results" class="md-nav__link">
+    Volume of total posts in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorvolume-get" title="/monitor/volume - GET" class="md-nav__link">
+    /monitor/volume - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_64" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_64" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelistblacklist" title="WhitelistBlacklist" class="md-nav__link">
+    WhitelistBlacklist
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed-information-about-a-specific-whitelistblacklists-associated-to-the-monitor-category-visualizations" title="Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations" class="md-nav__link">
+    Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelistblacklistwhitelistblacklistiddetail-get-post" title="/whitelistblacklist/{whitelistblacklistid}/detail - GET || POST" class="md-nav__link">
+    /whitelistblacklist/{whitelistblacklistid}/detail - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_65" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_65" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#word-cloud" title="Word Cloud" class="md-nav__link">
+    Word Cloud
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-frequency-information-for-posts-in-a-monitor-category-visualizations" title="Word frequency information for posts in a monitor - Category: visualizations" class="md-nav__link">
+    Word frequency information for posts in a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorwordcloud-get-post" title="/monitor/wordcloud - GET || POST" class="md-nav__link">
+    /monitor/wordcloud - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_66" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_66" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#endpoints" title="Endpoints" class="md-nav__link">
+    Endpoints
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analysis-request" title="Analysis Request" class="md-nav__link">
+    Analysis Request
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-submit-an-analysis-task-for-asynchronous-processing-category-results" title="To submit an analysis task for asynchronous processing  - Category: results" class="md-nav__link">
+    To submit an analysis task for asynchronous processing  - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#results-post" title="/results - POST" class="md-nav__link">
+    /results - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analysis-results" title="Analysis Results" class="md-nav__link">
+    Analysis Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-retrieve-the-status-of-the-analysis-task-and-the-results-category-results" title="To retrieve the status of the analysis task and the results - Category: results" class="md-nav__link">
+    To retrieve the status of the analysis task and the results - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultsresultid-get" title="/results/{resultId} - GET" class="md-nav__link">
+    /results/{resultId} - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-authentication-tokens-for-use-in-api-requests-category-admin" title="Generate authentication tokens for use in API requests - Category: admin" class="md-nav__link">
+    Generate authentication tokens for use in API requests - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authenticate-get" title="/authenticate - GET" class="md-nav__link">
+    /authenticate - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authors" title="Authors" class="md-nav__link">
+    Authors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-twitter-authors-in-a-monitor-category-results" title="Information about Twitter authors in a monitor - Category: results" class="md-nav__link">
+    Information about Twitter authors in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorauthors-get" title="/monitor/authors - GET" class="md-nav__link">
+    /monitor/authors - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_3" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-upload" title="Content Upload" class="md-nav__link">
+    Content Upload
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-content-via-the-api-category-admin" title="Upload content via the API - Category: admin" class="md-nav__link">
+    Upload content via the API - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contentupload-post" title="/content/upload - POST" class="md-nav__link">
+    /content/upload - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_4" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#day-and-time" title="Day and Time" class="md-nav__link">
+    Day and Time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volume-information-for-a-monitor-aggregated-by-time-of-day-or-day-of-week-category-results" title="Volume information for a monitor aggregated by time of day or day of week) - Category: results" class="md-nav__link">
+    Volume information for a monitor aggregated by time of day or day of week) - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordayandtime-get" title="/monitor/dayandtime - GET" class="md-nav__link">
+    /monitor/dayandtime - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_5" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demographics-age" title="Demographics - Age" class="md-nav__link">
+    Demographics - Age
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-volume-information-for-age-in-a-monitor-category-results" title="Daily volume information for age in a monitor - Category: results" class="md-nav__link">
+    Daily volume information for age in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordemographicsage-get" title="/monitor/demographics/age - GET" class="md-nav__link">
+    /monitor/demographics/age - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_6" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#demographics-gender" title="Demographics - Gender" class="md-nav__link">
+    Demographics - Gender
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-volume-information-for-gender-in-a-monitor-category-results" title="Daily volume information for gender in a monitor - Category: results" class="md-nav__link">
+    Daily volume information for gender in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordemographicsgender-get" title="/monitor/demographics/gender - GET" class="md-nav__link">
+    /monitor/demographics/gender - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_7" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-admin-posts" title="Facebook Admin Posts" class="md-nav__link">
+    Facebook Admin Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-shares-for-individual-admin-posts-made-by-a-facebook-account-in-a-facebook-social-account-monitor-category-social" title="Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebookadminposts-get" title="/monitor/facebook/adminposts - GET" class="md-nav__link">
+    /monitor/facebook/adminposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_8" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-page-likes" title="Facebook Page Likes" class="md-nav__link">
+    Facebook Page Likes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-page-likes-as-of-the-requested-dates-for-a-facebook-social-monitor-category-social" title="Total page likes as of the requested dates for a Facebook social monitor - Category: social" class="md-nav__link">
+    Total page likes as of the requested dates for a Facebook social monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebookpagelikes-get" title="/monitor/facebook/pagelikes - GET" class="md-nav__link">
+    /monitor/facebook/pagelikes - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_9" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#facebook-total-activity" title="Facebook Total Activity" class="md-nav__link">
+    Facebook Total Activity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-total-likes-comments-and-shares-on-admin-and-user-posts-for-a-facebook-account-in-a-facebook-social-monitor-category-social" title="Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social" class="md-nav__link">
+    Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorfacebooktotalactivity-get" title="/monitor/facebook/totalactivity - GET" class="md-nav__link">
+    /monitor/facebook/totalactivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_10" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-all-resources" title="Geography - All Resources" class="md-nav__link">
+    Geography - All Resources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-geolocation-resources-category-util" title="Returns all the available geolocation resources - Category: util" class="md-nav__link">
+    Returns all the available geolocation resources - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfoall-get" title="/geography/info/all - GET" class="md-nav__link">
+    /geography/info/all - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_11" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-cities" title="Geography - Cities" class="md-nav__link">
+    Geography - Cities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-cities-urban-areas-in-the-given-country-category-util" title="Returns all the available cities / urban areas in the given country - Category: util" class="md-nav__link">
+    Returns all the available cities / urban areas in the given country - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfocities-get" title="/geography/info/cities - GET" class="md-nav__link">
+    /geography/info/cities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_12" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-countries" title="Geography - Countries" class="md-nav__link">
+    Geography - Countries
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-countries-category-util" title="Returns all the available countries - Category: util" class="md-nav__link">
+    Returns all the available countries - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfocountries-get" title="/geography/info/countries - GET" class="md-nav__link">
+    /geography/info/countries - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_13" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geography-states" title="Geography - States" class="md-nav__link">
+    Geography - States
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-available-states-regions-in-the-given-country-category-util" title="Returns all the available states / regions in the given country - Category: util" class="md-nav__link">
+    Returns all the available states / regions in the given country - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geographyinfostates-get" title="/geography/info/states - GET" class="md-nav__link">
+    /geography/info/states - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_14" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-monitor-creation-report" title="Get Monitor Creation Report" class="md-nav__link">
+    Get Monitor Creation Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-teams-within-an-organization-and-how-many-monitors-were-created-during-a-given-time-period-category-reports" title="Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports" class="md-nav__link">
+    Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportmonitorcreation-get" title="/report/monitorCreation - GET" class="md-nav__link">
+    /report/monitorCreation - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_15" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-social-site-report" title="Get Social Site Report" class="md-nav__link">
+    Get Social Site Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-social-sites-and-associated-usernames-for-teams-within-an-organization-also-indicates-which-of-the-social-sites-have-failed-and-when-category-reports" title="Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports" class="md-nav__link">
+    Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportsocialsites-get" title="/report/socialSites - GET" class="md-nav__link">
+    /report/socialSites - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_16" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_16" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-activity-report" title="Get User Activity Report" class="md-nav__link">
+    Get User Activity Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-users-within-an-organization-including-information-on-when-they-last-logged-into-the-platform-the-last-monitor-they-created-and-the-last-monitor-they-viewed-category-reports" title="Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports" class="md-nav__link">
+    Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportuseractivity-get" title="/report/userActivity - GET" class="md-nav__link">
+    /report/userActivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_17" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_17" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-user-invitation-report" title="Get User Invitation Report" class="md-nav__link">
+    Get User Invitation Report
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-a-list-of-users-within-an-organization-and-which-teams-they-were-invited-to-also-indicates-when-the-invitation-was-sent-and-when-it-was-accepted-category-reports" title="Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports" class="md-nav__link">
+    Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reportuserinvitations-get" title="/report/userInvitations - GET" class="md-nav__link">
+    /report/userInvitations - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_18" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_18" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-analysis" title="Image analysis" class="md-nav__link">
+    Image analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-return-image-classification-data-category-util" title="To return image classification data - Category: util" class="md-nav__link">
+    To return image classification data - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#imageanalysis-get" title="/imageanalysis - GET" class="md-nav__link">
+    /imageanalysis - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_19" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_19" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-followers" title="Instagram Followers" class="md-nav__link">
+    Instagram Followers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-follower-counts-for-instagram-social-account-monitors-category-social" title="Total daily follower counts for Instagram social account monitors - Category: social" class="md-nav__link">
+    Total daily follower counts for Instagram social account monitors - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramfollowers-get" title="/monitor/instagram/followers - GET" class="md-nav__link">
+    /monitor/instagram/followers - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_20" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_20" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-hashtags" title="Instagram Hashtags" class="md-nav__link">
+    Instagram Hashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-volume-by-instagram-hashtags-for-specific-monitor-category-social" title="Total daily volume by Instagram hashtags for specific monitor - Category: social" class="md-nav__link">
+    Total daily volume by Instagram hashtags for specific monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramhashtags-get" title="/monitor/instagram/hashtags - GET" class="md-nav__link">
+    /monitor/instagram/hashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_21" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_21" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-sent-media" title="Instagram Sent Media" class="md-nav__link">
+    Instagram Sent Media
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-tags-for-individual-media-posted-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social" title="Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramsentmedia-get" title="/monitor/instagram/sentmedia - GET" class="md-nav__link">
+    /monitor/instagram/sentmedia - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_22" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_22" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instagram-total-activity" title="Instagram Total Activity" class="md-nav__link">
+    Instagram Total Activity
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-likes-comments-and-shares-for-individual-admin-posts-made-by-an-instagram-account-in-an-instagram-social-account-monitor-category-social" title="Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social" class="md-nav__link">
+    Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinstagramtotalactivity-get" title="/monitor/instagram/totalactivity - GET" class="md-nav__link">
+    /monitor/instagram/totalactivity - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_23" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_23" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interest-affinities" title="Interest Affinities" class="md-nav__link">
+    Interest Affinities
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aggregate-affinities-for-the-selected-monitor-over-a-given-date-range-category-visualizations" title="Aggregate affinities for the selected monitor over a given date range - Category: visualizations" class="md-nav__link">
+    Aggregate affinities for the selected monitor over a given date range - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorinterestaffinities-get" title="/monitor/interestaffinities - GET" class="md-nav__link">
+    /monitor/interestaffinities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_24" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_24" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-audit" title="Monitor Audit" class="md-nav__link">
+    Monitor Audit
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audit-information-about-the-selected-monitor-category-admin" title="Audit information about the selected monitor - Category: admin" class="md-nav__link">
+    Audit information about the selected monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoraudit-get" title="/monitor/audit - GET" class="md-nav__link">
+    /monitor/audit - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_25" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_25" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-detail" title="Monitor Detail" class="md-nav__link">
+    Monitor Detail
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributes-of-the-specified-monitor-category-admin" title="Attributes of the specified monitor - Category: admin" class="md-nav__link">
+    Attributes of the specified monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordetail-get" title="/monitor/detail - GET" class="md-nav__link">
+    /monitor/detail - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_26" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_26" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-dump" title="Monitor Dump" class="md-nav__link">
+    Monitor Dump
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-detailed-information-of-the-monitor-category-admin" title="Get detailed information of the monitor - Category: admin" class="md-nav__link">
+    Get detailed information of the monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitordump-get" title="/monitor/dump - GET" class="md-nav__link">
+    /monitor/dump - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_27" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_27" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-image-results" title="Monitor Image Results" class="md-nav__link">
+    Monitor Image Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-image-results-for-a-monitor-category-results" title="Daily image results for a monitor - Category: results" class="md-nav__link">
+    Daily image results for a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorimageresults-get" title="/monitor/imageresults - GET" class="md-nav__link">
+    /monitor/imageresults - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_28" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_28" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-list" title="Monitor List" class="md-nav__link">
+    Monitor List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-monitors-available-to-the-passed-in-username-category-admin" title="List of monitors available to the passed in username - Category: admin" class="md-nav__link">
+    List of monitors available to the passed in username - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorlist-get" title="/monitor/list - GET" class="md-nav__link">
+    /monitor/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_29" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_29" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results" title="Monitor Results" class="md-nav__link">
+    Monitor Results
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-results-for-a-monitor-category-results" title="Daily results for a monitor - Category: results" class="md-nav__link">
+    Daily results for a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorresults-get" title="/monitor/results - GET" class="md-nav__link">
+    /monitor/results - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_30" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_30" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-city" title="Monitor Results by City" class="md-nav__link">
+    Monitor Results by City
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-the-cities-urban-areas-in-a-given-country-if-given-category-results" title="Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographycities-get" title="/monitor/geography/cities - GET" class="md-nav__link">
+    /monitor/geography/cities - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_31" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_31" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-country" title="Monitor Results by Country" class="md-nav__link">
+    Monitor Results by Country
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-country-category-results" title="Returns all the monitor results grouped by country - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by country - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographycountries-get" title="/monitor/geography/countries - GET" class="md-nav__link">
+    /monitor/geography/countries - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_32" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_32" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-results-by-state" title="Monitor Results by State" class="md-nav__link">
+    Monitor Results by State
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns-all-the-monitor-results-grouped-by-the-country-states-regions-category-results" title="Returns all the monitor results grouped by the country states / regions - Category: results" class="md-nav__link">
+    Returns all the monitor results grouped by the country states / regions - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorgeographystates-get" title="/monitor/geography/states - GET" class="md-nav__link">
+    /monitor/geography/states - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_33" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_33" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-training-posts" title="Monitor Training Posts" class="md-nav__link">
+    Monitor Training Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#download-training-posts-for-a-monitor-category-admin" title="Download training posts for a monitor - Category: admin" class="md-nav__link">
+    Download training posts for a monitor - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortrainingposts-get" title="/monitor/trainingposts - GET" class="md-nav__link">
+    /monitor/trainingposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_34" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_34" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#posts" title="Posts" class="md-nav__link">
+    Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-posts-in-a-monitor-category-visualizations" title="Information about posts in a monitor - Category: visualizations" class="md-nav__link">
+    Information about posts in a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorposts-get-post" title="/monitor/posts - GET || POST" class="md-nav__link">
+    /monitor/posts - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_35" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_35" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-cashtags" title="Realtime Cashtags" class="md-nav__link">
+    Realtime Cashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-cashtags-associated-to-a-monitor-category-monitors" title="Get Cashtags associated to a Monitor - Category: monitors" class="md-nav__link">
+    Get Cashtags associated to a Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorcashtags-get" title="/realtime/monitor/cashtags - GET" class="md-nav__link">
+    /realtime/monitor/cashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_36" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_36" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-configure" title="Realtime Configure" class="md-nav__link">
+    Realtime Configure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-realtime-evaluators-for-the-monitor-category-monitors" title="Configure the Realtime evaluators for the Monitor - Category: monitors" class="md-nav__link">
+    Configure the Realtime evaluators for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorconfigure-get" title="/realtime/monitor/configure - GET" class="md-nav__link">
+    /realtime/monitor/configure - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_37" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_37" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-details" title="Realtime Details" class="md-nav__link">
+    Realtime Details
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-evaluators-details-for-the-monitor-category-monitors" title="Get the Realtime evaluators details for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime evaluators details for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitordetail-get" title="/realtime/monitor/detail - GET" class="md-nav__link">
+    /realtime/monitor/detail - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_38" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_38" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-disable" title="Realtime Disable" class="md-nav__link">
+    Realtime Disable
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disable-realtime-data-category-monitors" title="Disable Realtime Data - Category: monitors" class="md-nav__link">
+    Disable Realtime Data - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitordisable-get" title="/realtime/monitor/disable - GET" class="md-nav__link">
+    /realtime/monitor/disable - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_39" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_39" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-enable" title="Realtime Enable" class="md-nav__link">
+    Realtime Enable
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-realtime-data-category-monitors" title="Enable Realtime Data - Category: monitors" class="md-nav__link">
+    Enable Realtime Data - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorenable-get" title="/realtime/monitor/enable - GET" class="md-nav__link">
+    /realtime/monitor/enable - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_40" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_40" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-hashtags" title="Realtime Hashtags" class="md-nav__link">
+    Realtime Hashtags
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-hashtags-associated-to-a-monitor-category-monitors" title="Get Hashtags associated to a Monitor - Category: monitors" class="md-nav__link">
+    Get Hashtags associated to a Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorhashtags-get" title="/realtime/monitor/hashtags - GET" class="md-nav__link">
+    /realtime/monitor/hashtags - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_41" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_41" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-monitor-list" title="Realtime Monitor List" class="md-nav__link">
+    Realtime Monitor List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-monitors-which-are-in-proteus-category-monitors" title="Get the Monitors which are in Proteus - Category: monitors" class="md-nav__link">
+    Get the Monitors which are in Proteus - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorlist-get" title="/realtime/monitor/list - GET" class="md-nav__link">
+    /realtime/monitor/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_42" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_42" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-retweets" title="Realtime Retweets" class="md-nav__link">
+    Realtime Retweets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-retweets-for-the-monitor-category-monitors" title="Get the Realtime retweets for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime retweets for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorretweets-get" title="/realtime/monitor/retweets - GET" class="md-nav__link">
+    /realtime/monitor/retweets - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_43" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_43" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-socialguids" title="Realtime SocialGuids" class="md-nav__link">
+    Realtime SocialGuids
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-social-guids-for-the-monitor-category-monitors" title="Get the Realtime social guids for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime social guids for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorsocialguids-get" title="/realtime/monitor/socialguids - GET" class="md-nav__link">
+    /realtime/monitor/socialguids - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_44" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_44" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-tweets" title="Realtime Tweets" class="md-nav__link">
+    Realtime Tweets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-tweets-for-the-monitor-category-monitors" title="Get the Realtime tweets for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime tweets for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitortweets-get" title="/realtime/monitor/tweets - GET" class="md-nav__link">
+    /realtime/monitor/tweets - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_45" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_45" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-volume" title="Realtime Volume" class="md-nav__link">
+    Realtime Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-volume-for-the-monitor-category-monitors" title="Get the Realtime volume for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime volume for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorvolume-get" title="/realtime/monitor/volume - GET" class="md-nav__link">
+    /realtime/monitor/volume - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_46" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_46" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtime-volume-by-sentiment" title="Realtime Volume by Sentiment" class="md-nav__link">
+    Realtime Volume by Sentiment
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-realtime-volume-by-sentiment-for-the-monitor-category-monitors" title="Get the Realtime volume by sentiment for the Monitor - Category: monitors" class="md-nav__link">
+    Get the Realtime volume by sentiment for the Monitor - Category: monitors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realtimemonitorvolumebysentiment-get" title="/realtime/monitor/volumebysentiment - GET" class="md-nav__link">
+    /realtime/monitor/volumebysentiment - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_47" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_47" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-add-monitor" title="Stream Add Monitor" class="md-nav__link">
+    Stream Add Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-add-monitor-association-category-admin" title="Stream Add Monitor Association - Category: admin" class="md-nav__link">
+    Stream Add Monitor Association - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidmonitormonitorid-post" title="/stream/{streamid}/monitor/{monitorid} - POST" class="md-nav__link">
+    /stream/{streamid}/monitor/{monitorid} - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_48" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_48" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-create" title="Stream Create" class="md-nav__link">
+    Stream Create
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-creation-category-admin" title="Stream creation - Category: admin" class="md-nav__link">
+    Stream creation - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-post" title="/stream - POST" class="md-nav__link">
+    /stream - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_49" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_49" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-delete" title="Stream Delete" class="md-nav__link">
+    Stream Delete
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-deletion-category-admin" title="Stream deletion - Category: admin" class="md-nav__link">
+    Stream deletion - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamid-delete" title="/stream/{streamid} - DELETE" class="md-nav__link">
+    /stream/{streamid} - DELETE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_50" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_50" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-list" title="Stream List" class="md-nav__link">
+    Stream List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-streams-available-to-the-passed-in-username-category-admin" title="List of streams available to the passed in username - Category: admin" class="md-nav__link">
+    List of streams available to the passed in username - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamlist-get" title="/stream/list - GET" class="md-nav__link">
+    /stream/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_51" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_51" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-posts" title="Stream Posts" class="md-nav__link">
+    Stream Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#information-about-posts-in-a-stream-category-results" title="Information about posts in a stream - Category: results" class="md-nav__link">
+    Information about posts in a stream - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidposts-get" title="/stream/{streamid}/posts - GET" class="md-nav__link">
+    /stream/{streamid}/posts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_52" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_52" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-remove-monitor" title="Stream Remove Monitor" class="md-nav__link">
+    Stream Remove Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-remove-monitor-association-category-admin" title="Stream Remove Monitor Association - Category: admin" class="md-nav__link">
+    Stream Remove Monitor Association - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamidmonitormonitorid-delete" title="/stream/{streamid}/monitor/{monitorid} - DELETE" class="md-nav__link">
+    /stream/{streamid}/monitor/{monitorid} - DELETE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_53" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_53" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream-update-monitor" title="Stream Update Monitor" class="md-nav__link">
+    Stream Update Monitor
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stream-update-monitor-data-category-admin" title="Stream Update Monitor Data - Category: admin" class="md-nav__link">
+    Stream Update Monitor Data - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#streamstreamid-post" title="/stream/{streamid} - POST" class="md-nav__link">
+    /stream/{streamid} - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_54" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_54" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#team-list" title="Team List" class="md-nav__link">
+    Team List
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-teams-accessible-to-the-current-user-category-admin" title="List of teams accessible to the current user - Category: admin" class="md-nav__link">
+    List of teams accessible to the current user - Category: admin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teamlist-get" title="/team/list - GET" class="md-nav__link">
+    /team/list - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_55" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_55" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-sites-and-content-sources" title="Top Sites and Content Sources" class="md-nav__link">
+    Top Sites and Content Sources
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#content-source-breakdown-and-top-sites-category-results" title="Content source breakdown and top sites - Category: results" class="md-nav__link">
+    Content source breakdown and top sites - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorsources-get" title="/monitor/sources - GET" class="md-nav__link">
+    /monitor/sources - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_56" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_56" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-clustering" title="Topic Clustering" class="md-nav__link">
+    Topic Clustering
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-data-that-can-be-used-to-generate-clustering-visualizations-using-third-party-software-category-visualizations" title="XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations" class="md-nav__link">
+    XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortopics-get-post" title="/monitor/topics - GET || POST" class="md-nav__link">
+    /monitor/topics - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_57" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_57" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#topic-waves" title="Topic Waves" class="md-nav__link">
+    Topic Waves
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#topic-waves-information-for-a-monitor-category-visualizations" title="Topic waves information for a monitor - Category: visualizations" class="md-nav__link">
+    Topic waves information for a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortopicwaves-get-post" title="/monitor/topicwaves - GET || POST" class="md-nav__link">
+    /monitor/topicwaves - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_58" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_58" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#training-document-upload" title="Training Document Upload" class="md-nav__link">
+    Training Document Upload
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train-monitors-via-the-api-category-util" title="Train monitors via the API - Category: util" class="md-nav__link">
+    Train monitors via the API - Category: util
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortrain-post" title="/monitor/train - POST" class="md-nav__link">
+    /monitor/train - POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_59" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_59" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-engagement-metrics" title="Twitter Engagement Metrics" class="md-nav__link">
+    Twitter Engagement Metrics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#engagement-metrics-for-twitter-content-in-a-monitor-category-results" title="Engagement metrics for Twitter content in a monitor - Category: results" class="md-nav__link">
+    Engagement metrics for Twitter content in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittermetrics-get" title="/monitor/twittermetrics - GET" class="md-nav__link">
+    /monitor/twittermetrics - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_60" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_60" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-followers" title="Twitter Followers" class="md-nav__link">
+    Twitter Followers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#total-daily-follower-counts-for-twitter-social-account-monitors-category-social" title="Total daily follower counts for Twitter Social Account monitors - Category: social" class="md-nav__link">
+    Total daily follower counts for Twitter Social Account monitors - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialfollowers-get" title="/monitor/twittersocial/followers - GET" class="md-nav__link">
+    /monitor/twittersocial/followers - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_61" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_61" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-sent-posts" title="Twitter Sent Posts" class="md-nav__link">
+    Twitter Sent Posts
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-retweets-replies-and-impressions-for-individual-posts-made-by-a-twitter-account-in-a-twitter-social-account-monitor-category-social" title="Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social" class="md-nav__link">
+    Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialsentposts-get" title="/monitor/twittersocial/sentposts - GET" class="md-nav__link">
+    /monitor/twittersocial/sentposts - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_62" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_62" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#twitter-total-engagement" title="Twitter Total Engagement" class="md-nav__link">
+    Twitter Total Engagement
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daily-retweets-replies-and-mentions-for-a-targeted-twitter-account-in-a-twitter-social-account-monitor-category-social" title="Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social" class="md-nav__link">
+    Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitortwittersocialtotalengagement-get" title="/monitor/twittersocial/totalengagement - GET" class="md-nav__link">
+    /monitor/twittersocial/totalengagement - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_63" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_63" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume" title="Volume" class="md-nav__link">
+    Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volume-of-total-posts-in-a-monitor-category-results" title="Volume of total posts in a monitor - Category: results" class="md-nav__link">
+    Volume of total posts in a monitor - Category: results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorvolume-get" title="/monitor/volume - GET" class="md-nav__link">
+    /monitor/volume - GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_64" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_64" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelistblacklist" title="WhitelistBlacklist" class="md-nav__link">
+    WhitelistBlacklist
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detailed-information-about-a-specific-whitelistblacklists-associated-to-the-monitor-category-visualizations" title="Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations" class="md-nav__link">
+    Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whitelistblacklistwhitelistblacklistiddetail-get-post" title="/whitelistblacklist/{whitelistblacklistid}/detail - GET || POST" class="md-nav__link">
+    /whitelistblacklist/{whitelistblacklistid}/detail - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_65" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_65" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#word-cloud" title="Word Cloud" class="md-nav__link">
+    Word Cloud
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-frequency-information-for-posts-in-a-monitor-category-visualizations" title="Word frequency information for posts in a monitor - Category: visualizations" class="md-nav__link">
+    Word frequency information for posts in a monitor - Category: visualizations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitorwordcloud-get-post" title="/monitor/wordcloud - GET || POST" class="md-nav__link">
+    /monitor/wordcloud - GET || POST
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_66" title="Parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_66" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
               
+                
+                  <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/crimson_api_docs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
                 <h1 id="crimson-hexagon-api-documentation">Crimson Hexagon API Documentation</h1>
 <p><strong>ROOT_URL = <code>https://api.crimsonhexagon.com/api/</code></strong></p>
 <h3 id="endpoints">Endpoints</h3>
@@ -2147,49 +7959,70 @@
 </li>
 </ul>
 <hr />
+                
+                  
+                
               
-            </div>
+              
+                
+
+
+              
+            </article>
           </div>
-          <footer>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-      
-        <a href="../CLI/" class="btn btn-neutral" title="Command Line Interface"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-      
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../CLI/" title="Command Line Interface" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Command Line Interface
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
     </div>
   
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
-    
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
   </div>
-
-  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" style="cursor: pointer">
-    <span class="rst-current-version" data-toggle="rst-current-version">
+    </div>
+    
+      <script src="../assets/javascripts/application.a59e2a89.js"></script>
       
+      <script>app.initialize({version:"0.17.4",url:{base:".."}})</script>
       
-        <span><a href="../CLI/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+    
+    
       
-      
-    </span>
-</div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme.js"></script>
-      <script src="../search/require.js"></script>
-      <script src="../search/search.js"></script>
-
-</body>
+    
+  </body>
 </html>
