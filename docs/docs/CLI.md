@@ -14,8 +14,8 @@ Hexpy Command Line Interface
 
 ### Basic
 
-```
-$ hexpy --help
+```bash
+$ hexpy
 Usage: hexpy [OPTIONS] COMMAND [ARGS]...
 
   Command Line interface for working with Crimson Hexagon API.
@@ -31,6 +31,7 @@ Commands:
   metadata           Get Metadata for account team, monitors, and...
   results            Get Monitor results for 1 or more metrics.
   stream_posts       Stream posts in real time, stop after a...
+  train              Upload spreadsheet file of training examples...
   upload             Upload spreadsheet file as custom content.
 ```
 
@@ -48,22 +49,27 @@ Enter password: ***********
 
 Get Up-to-date API documentation as an html file
 ```bash
-hexpy api_documentation -o html
+$ hexpy api_documentation -o html
 ```
 
 Get list of all teams a user's teams.
 ```bash
-hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
+$ hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
 ```
 
 Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/)
 ```bash
-hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
+$ hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
 ```
 
 Upload TSV file as `my_custom_type` with English as the language that has tab delimited columns.
 ```bash
 $ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
+```
+
+Train a Opinion Monitor with using a spreadsheet of posts with labels for the predefined categories.
+```bash
+$ hexpy train training_data.csv MONITOR_ID
 ```
 
 Get word cloud and volume information from the monitor in the specified date range.
@@ -99,15 +105,15 @@ $ hexpy export MONITOR_ID --output_type json > my_export.json
 
 Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids
 ```bash
-cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -f excel
+$ cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -o excel
 ```
 
 Stream 1K real-time posts to json in the terminal
 ```bash
-hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
+$ hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
 ```
 
 Stream up to 10K real-time posts to a csv file with tab delimiter 
 ```bash
-hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' > my_csv_file.csv
+$ hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' > my_csv_file.csv
 ```

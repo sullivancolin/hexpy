@@ -31,3 +31,13 @@ Retrieve the status of the analysis request and the results.
 
 #### Arguments
 * request_id: Integer, the identifier given for the analysis, generated via the Analysis Request endpoints
+
+
+### image_analysis
+```python
+image_analysis(url: str) -> Dict[str, Any]
+```
+Get object, scene, activity predictions for image from public url.
+
+#### Arguments
+* url: String, the url of the image to analyze

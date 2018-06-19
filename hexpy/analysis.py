@@ -45,7 +45,11 @@ class AnalysisAPI:
         return handle_response(self.session.get(self.TEMPLATE + f"/{request_id}"))
 
     def image_analysis(self, url: str) -> Dict[str, Any]:
+        """Get object, scene, activity predictions for image from public url.
 
+        # Arguments
+            url: String, the url of the image to analyze
+        """
         return handle_response(
             self.session.get(ROOT + "imageanalysis", params={"url": url})
         )

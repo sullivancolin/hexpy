@@ -7,6 +7,7 @@ import click
 import requests
 import re
 from halo import Halo
+from clint.textui.progress import bar
 from getpass import getpass
 from .base import ROOT
 from .session import HexpySession
@@ -296,29 +297,35 @@ def api_documentation(ctx, output_type: str = "json"):
     default=None,
     help="Custom content type, as specified in Forsight.",
 )
-@click.option("--delimiter", "-d", default=",", help="CSV column delimiter.")
+@click.option("--separator", "-s", default=",", help="CSV column separator.")
 @click.option("--language", "-l", default="en", help="language code of documents")
 @click.pass_context
 def upload(
     ctx,
     filename: str,
     content_type: str = None,
-    delimiter: str = ",",
+    separator: str = ",",
     language: str = "en",
 ) -> None:
     """Upload spreadsheet file as custom content."""
 
-    if delimiter == "\\t":
-        delimiter = "\t"
+    if separator == "\\t":
+        separator = "\t"
     session = ctx.invoke(login, expiration=True, force=False)
     client = ContentUploadAPI(session)
-    if filename.endswith(".csv"):
-        items = pd.read_csv(filename, sep=delimiter)
-    elif filename.endswith(".xlsx"):
-        items = pd.read_excel(filename)
-    else:
-        raise click.ClickException("File type must be either .csv or .xlsx")
-
+    try:
+        if filename.endswith(".csv"):
+            items = pd.read_csv(filename, sep=separator)
+        elif filename.endswith(".xlsx"):
+            items = pd.read_excel(filename)
+        else:
+            raise click.ClickException(
+                "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+            )
+    except Exception as e:
+        raise click.ClickException(
+            "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+        )
     # Handle Content Types
     if content_type is not None:
         items["type"] = content_type
@@ -327,21 +334,34 @@ def upload(
 
     # Handle titles
     if "title" not in items.columns:
+        click.echo("No post Titles provided. Creating dummy titles...")
         items["title"] = [f"Post {i}" for i in range(len(items))]
+
+    # Handle missing urls
+    if "url" not in items.columns:
+        click.echo("No URLs provided. Creating dummy URLS...")
+        items["url"] = [
+            f"https://www.dummyurl.com/docnum{i}" for i in range(len(items))
+        ]
 
     # Handle language code
     if "language" not in items.columns:
+        click.echo("No language code provided. defaulting to English...")
         items["language"] = language
 
     # Correctly format dates
     try:
         dates = [pendulum.parse(x).to_iso8601_string() for x in items["date"]]
     except Exception as e:
-        raise click.ClickException(
-            """Could not parse date format.  Must be Year-Month-Day as in 2017-10-01.
-            Optionally include time as 2017-10-01T21:30:05
-            """
-        )
+        try:
+            dates = [
+                pendulum.from_format(x, "MM/DD/YY HH:mm").to_iso8601_string()
+                for x in items.date
+            ]
+        except Exception as e:
+            raise click.ClickException(
+                "Could not parse date format.  Must be YYYY-MM-DD as in 2017-10-01. Optionally include time formatted as 2017-10-01T21:30:05"
+            )
 
     items.loc[:, "date"] = dates
 
@@ -383,6 +403,144 @@ def upload(
 
 
 @cli.command()
+@click.argument("filename", type=str)
+@click.argument("monitor_id", type=int)
+@click.option("--separator", "-s", default=",", help="CSV column separator.")
+@click.option("--language", "-l", default="en", help="language code of documents")
+@click.pass_context
+def train(
+    ctx, filename: str, monitor_id: int, separator: str = ",", language: str = "en"
+) -> None:
+    """Upload spreadsheet file of training examples for monitor."""
+
+    if separator == "\\t":
+        separator = "\t"
+    session = ctx.invoke(login, expiration=True, force=False)
+    client = MonitorAPI(session)
+
+    details = client.details(monitor_id)
+    if details["type"] != "OPINION":
+        raise click.ClickException("Monitor must be an opinion monitor.")
+
+    category_dict = {x["name"]: x["id"] for x in details["categories"]}
+    reverse_category_dict = {val: key for key, val in category_dict.items()}
+    try:
+        if filename.endswith(".csv"):
+            items = pd.read_csv(filename, sep=separator)
+        elif filename.endswith(".xlsx"):
+            items = pd.read_excel(filename)
+        else:
+            raise click.ClickException(
+                "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+            )
+    except Exception as e:
+        raise click.ClickException(
+            "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+        )
+    items.columns = [x.lower() for x in items.columns]
+
+    if "category" not in items.columns:
+        raise click.ClickException("File must contain `category` column")
+
+    if not all(x in category_dict for x in set(items["category"])):
+        monitor_categories = ", ".join(set(category_dict.keys()))
+        for x in set(items["category"]):
+            if x not in category_dict:
+                raise click.ClickException(
+                    f"'{x}' category not in monitor categories: {monitor_categories}"
+                )
+
+    items["categoryid"] = [category_dict[i] for i in items["category"]]
+
+    counts = items["category"].value_counts()
+
+    count_string = "\n".join(
+        [f"* {count} `{name}` posts" for name, count in counts.to_dict().items()]
+    )
+
+    click.echo("Preparing to upload:\n" + count_string)
+
+    # Handle titles
+    if "title" not in items.columns:
+        click.echo("No post Titles provided. Creating dummy titles...")
+        items["title"] = [f"Post {i}" for i in range(len(items))]
+
+    # Handle missing urls
+    if "url" not in items.columns:
+        click.echo("No URLs provided. Creating dummy URLS...")
+        items["url"] = [
+            f"https://www.dummyurl.com/docnum{i}" for i in range(len(items))
+        ]
+
+    # Handle language code
+    if "language" not in items.columns:
+        click.echo("No language code provided. defaulting to English...")
+        items["language"] = language
+
+    # Correctly format dates
+    try:
+        dates = [pendulum.parse(x).to_iso8601_string() for x in items["date"]]
+    except Exception as e:
+        try:
+            dates = [
+                pendulum.from_format(x, "MM/DD/YY HH:mm").to_iso8601_string()
+                for x in items.date
+            ]
+        except Exception as e:
+            raise click.ClickException(
+                "Could not parse date format.  Must be YYYY-MM-DD as in 2017-10-01. Optionally include time formatted as 2017-10-01T21:30:05"
+            )
+
+    items.loc[:, "date"] = dates
+
+    # Check for required field
+    click.echo(
+        "Checking for required fields: [contents, date, author, language, title, url]..."
+    )
+    try:
+        assert {
+            "contents",
+            "date",
+            "author",
+            "language",
+            "categoryid",
+            "title",
+            "url",
+        }.issubset(set(items.columns))
+    except AssertionError:
+        raise click.ClickException(
+            "1 or more missing fields.  Required fields: contents, date, author, language, category, title, url"
+        )
+
+    # Assert Unique Urls
+    try:
+        assert len(items[items.url.duplicated()]) == 0
+    except AssertionError:
+        raise click.ClickException("Duplicate URLs detected.")
+
+    for val in sorted(np.unique(items.categoryid)):
+
+        # Covert data to list of dictionaries
+        data = items[items.categoryid == val][
+            ["title", "date", "contents", "language", "author", "url"]
+        ].to_dict(orient="records")
+        if len(data) > 1000:
+            for batch in bar([data[i : i + 1000] for i in range(0, len(data), 1000)]):
+                # response = client.train_monitor(
+                #     monitor_id=monitor_id, category_id=int(val), data=batch
+                # )
+                pass
+        # response = client.train_monitor(
+        #     monitor_id=monitor_id, category_id=int(val), data=data
+        # )
+        category = reverse_category_dict[val]
+        spinner = Halo(
+            text=f"Successfuly uploaded {len(data)} {category} docs!", spinner="dots"
+        )
+        spinner.succeed()
+
+
+@cli.command()
 @click.argument("monitor_id", type=int)
 @click.option(
     "--limit/--no-limit",
@@ -408,10 +566,10 @@ def upload(
     "--filename", "-f", default=None, help="filename. Default is monitor name."
 )
 @click.option(
-    "--delimiter",
-    "-d",
+    "--separator",
+    "-s",
     default=",",
-    help="CSV column delimiter in quotes.(default=',')",
+    help="CSV column separator in quotes.(default=',')",
 )
 @click.pass_context
 def export(
@@ -421,12 +579,12 @@ def export(
     dates: Sequence[str] = None,
     output_type: str = "csv",
     filename: str = None,
-    delimiter: str = ",",
+    separator: str = ",",
 ) -> None:
     """Export monitor posts as json or to a spreadsheet."""
 
-    if delimiter == "\\t":
-        delimiter = "\t"
+    if separator == "\\t":
+        separator = "\t"
     session = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(session)
     details = client.details(monitor_id)
@@ -451,7 +609,7 @@ def export(
         else:
             name = f"{monitor_id}_{info.replace(' ', '_')}_Posts"
         if output_type == "csv":
-            df.to_csv(name + ".csv", index=False, sep=delimiter)
+            df.to_csv(name + ".csv", index=False, sep=separator)
         elif output_type == "excel":
             df.to_excel(name + ".xlsx", index=False)
         else:
@@ -477,10 +635,10 @@ def export(
     help="type of data to output. (default=json)",
 )
 @click.option(
-    "--delimiter",
-    "-d",
+    "--separator",
+    "-s",
     default=",",
-    help="CSV column delimiter in quotes.(default=',')",
+    help="CSV column separator in quotes.(default=',')",
 )
 @click.pass_context
 def stream_posts(
@@ -488,12 +646,12 @@ def stream_posts(
     stream_id: int,
     stop_after: int = 100,
     output_type: str = "json",
-    delimiter: str = ",",
+    separator: str = ",",
 ):
     """Stream posts in real time, stop after a maximum of 10K."""
 
-    if delimiter == "\\t":
-        delimiter = "\t"
+    if separator == "\\t":
+        separator = "\t"
     session = ctx.invoke(login, expiration=True, force=False)
     client = StreamsAPI(session)
     so_far = 0
@@ -512,10 +670,10 @@ def stream_posts(
         elif output_type == "csv":
             df = posts_json_to_df(posts)
             if first_fetch:
-                click.echo(df.to_csv(sep=delimiter, index=False).strip())
+                click.echo(df.to_csv(sep=separator, index=False).strip())
                 first_fetch = False
             else:
-                click.echo(df.to_csv(header=None, sep=delimiter, index=False).strip())
+                click.echo(df.to_csv(header=None, sep=separator, index=False).strip())
         else:
             raise click.ClickException("Output type must be either csv or json")
         if response["totalPostsAvailable"] == 0:

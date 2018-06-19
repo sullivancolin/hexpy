@@ -16,7 +16,9 @@ pydocstyle = "*"
 tox = "*"
 coverage = "*"
 pytest = "*"
+ipython = "*"
 "e1839a8" = {path = ".", editable = true}
+mkdocs-material = "*"
 
 [requires]
 python_version = "3.6"
