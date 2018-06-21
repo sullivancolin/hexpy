@@ -2,7 +2,7 @@
 
 import inspect
 from typing import Dict, Any
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -20,13 +20,14 @@ class MetadataAPI:
     ```
     """
 
-    TEMPLATE = ROOT
-
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
+        self.TEMPLATE = session.ROOT
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
 
     def team_list(self) -> Dict[str, Any]:
         """Return a list of teams accessible to the requesting user."""

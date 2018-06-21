@@ -4,23 +4,16 @@ import functools
 from typing import Callable, Dict, Any, Union, Deque
 import time
 import threading
-import collections
+from collections import deque
 from requests.models import Response
 import logging
 
 logger = logging.getLogger(__name__)
 
-ROOT = "https://api.crimsonhexagon.com/api/"
 
-ONE_MINUTE = 60
-MAX_CALLS = 120
-
-
-def rate_limited(
-    func: Callable, max_calls: int = MAX_CALLS, period: int = ONE_MINUTE
-) -> Callable:
+def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
     """Limit the number of times a function can be called."""
-    calls: Deque = collections.deque()
+    calls: Deque = deque()
 
     # Add thread safety
     lock = threading.RLock()
@@ -52,7 +45,7 @@ def rate_limited(
 
 
 def handle_response(response: Union[Response, Dict[str, Any]]) -> Dict[str, Any]:
-    """Ensure responses do not contain errors, and Rate Limit is obeyed."""
+    """Ensure responses do not contain errors."""
 
     if not isinstance(response, dict):
         if response.status_code not in [200, 201, 202]:

@@ -1,7 +1,7 @@
 """Module for monitor results API"""
 
 import inspect
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from hexpy.session import HexpySession
 from typing import Dict, Any, Sequence, Union, List, Callable
 
@@ -23,10 +23,9 @@ class MonitorAPI:
     ```
     """
 
-    TEMPLATE = ROOT + "monitor/"
-
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
+        self.TEMPLATE = session.ROOT + "monitor/"
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in [
                 "__init__",
@@ -34,7 +33,9 @@ class MonitorAPI:
                 "_aggregate_dates",
                 "aggregate",
             ]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
         self.METRICS: Dict[str, Callable] = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,

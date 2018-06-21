@@ -2,7 +2,7 @@
 
 import inspect
 from clint.textui import progress
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from .session import HexpySession
 from typing import Dict, Any, Sequence
 
@@ -42,13 +42,14 @@ class ContentUploadAPI:
     ```
     """
 
-    TEMPLATE = ROOT + "content/upload"
-
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
+        self.TEMPLATE = session.ROOT + "content/upload"
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["batch_upload", "__init__"]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
 
     def upload(self, data: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         """Upload list of document dictionaries to Crimson Hexagon platform.

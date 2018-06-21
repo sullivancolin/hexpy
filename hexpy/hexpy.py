@@ -9,7 +9,6 @@ import re
 from halo import Halo
 from clint.textui.progress import bar
 from getpass import getpass
-from .base import ROOT
 from .session import HexpySession
 from .monitor import MonitorAPI
 from .content_upload import ContentUploadAPI
@@ -18,18 +17,18 @@ from .metadata import MetadataAPI
 from hexpy import __version__
 import pendulum
 import pathlib
-from typing import Sequence, Dict, Callable
+from typing import Sequence, Callable, Dict, Any
 from click_help_colors import HelpColorsGroup
 import os
 
 
-def posts_json_to_df(docs):
+def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
     """Convert post json to flattened pandas dataframe."""
 
     items = []
 
     for doc in docs:
-        record = {}
+        record: Dict[str, Any] = {}
         for key, val in doc.items():
             if isinstance(val, str):
                 if key == "contents" or key == "title":
@@ -38,9 +37,12 @@ def posts_json_to_df(docs):
                     record[key] = val
             elif key.endswith("Scores") and len(val) > 0:
                 category_name = key.split("Scores")[0]
-                category_max_index = np.argmax([x["score"] for x in val])
-                category = val[category_max_index][category_name + "Name"]
-                record[category_name + "Name"] = category
+                if doc[f"assigned{category_name.title()}Id"] == 0:
+                    record[category_name] = "Uncategorized"
+                else:
+                    category_max_index = np.argmax([x["score"] for x in val])
+                    category = val[category_max_index][category_name + "Name"]
+                    record[category_name] = category
             elif isinstance(val, dict):
                 for subkey, subval in val.items():
                     record[key + "_" + subkey] = subval
@@ -62,7 +64,8 @@ ENDPOINT_TEMPLATE = """
 {results}\n\n-------------------------"""
 
 
-def format_parameter(param):
+def format_parameter(param: dict) -> str:
+    """Format API request parameter to Markdown list entry."""
     if "name" in param:
         name = param["name"]
     else:
@@ -74,7 +77,8 @@ def format_parameter(param):
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Required = {required}\n"
 
 
-def format_response(response):
+def format_response(response: dict) -> str:
+    """Format API response field to Markdown list entry."""
     if "name" in response:
         name = response["name"]
     else:
@@ -86,7 +90,8 @@ def format_response(response):
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
 
 
-def format_endpoint(endpoint, index_num):
+def format_endpoint(endpoint: dict) -> str:
+    """format API endpoint to Markdown entry."""
     title = endpoint["endpoint"]
     url = endpoint["url"]
     method = endpoint["method"]
@@ -106,9 +111,10 @@ def format_endpoint(endpoint, index_num):
     )
 
 
-def docs_to_text(json_docs, mode="markdown"):
+def docs_to_text(json_docs: dict, mode: str = "markdown") -> str:
+    """Convert API documentation JSON to markdown or github flavored markdown."""
     endpoints = json_docs["endpoints"]
-    doc = f"# Crimson Hexagon API Documentation\n**ROOT_URL = `{ROOT}`**\n\n### Endpoints\n"
+    doc = f"# Crimson Hexagon API Documentation\n**ROOT_URL = `{HexpySession.ROOT}`**\n\n### Endpoints\n"
 
     for i, e in enumerate(endpoints):
 
@@ -118,10 +124,12 @@ def docs_to_text(json_docs, mode="markdown"):
         elif mode == "gfm":
             anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
         else:
-            raise click.ClickException("Invalid markdown mode")
+            raise click.ClickException(
+                f"Invalid markdown mode: {mode}. must be either `md` or `gfm`."
+            )
         doc += f"* [{e['endpoint']}](#{anchor})\n"
 
-    return doc + "\n".join([format_endpoint(e, i) for i, e in enumerate(endpoints)])
+    return doc + "\n".join([format_endpoint(e) for e in endpoints])
 
 
 @click.group(
@@ -528,12 +536,10 @@ def train(
         ].to_dict(orient="records")
         if len(data) > 1000:
             for batch in bar([data[i : i + 1000] for i in range(0, len(data), 1000)]):
-                response = client.train_monitor(
+                client.train_monitor(
                     monitor_id=monitor_id, category_id=int(val), data=batch
                 )
-        response = client.train_monitor(
-            monitor_id=monitor_id, category_id=int(val), data=data
-        )
+        client.train_monitor(monitor_id=monitor_id, category_id=int(val), data=data)
         category = reverse_category_dict[val]
         spinner = Halo(
             text=f"Successfuly uploaded {len(data)} {category} docs!", spinner="dots"
@@ -634,11 +640,11 @@ def export(
 @cli.command()
 @click.argument("stream_id", type=int)
 @click.option(
-    "--stop_after",
-    "-s",
+    "--max_docs",
+    "-m",
     type=int,
     default=100,
-    help="Stop streaming after number of posts reached. (default=100)",
+    help="Stop streaming after max number of posts reached. (default=100)",
 )
 @click.option(
     "--output_type",
@@ -657,7 +663,7 @@ def export(
 def stream_posts(
     ctx,
     stream_id: int,
-    stop_after: int = 100,
+    max_docs: int = 100,
     output_type: str = "json",
     separator: str = ",",
 ):
@@ -670,17 +676,17 @@ def stream_posts(
     so_far = 0
     request_count = 0
     first_fetch = True
-    if stop_after > 10000:
-        stop_after = 10000
-    while so_far < stop_after and request_count < 10000:
+    if max_docs > 10000:
+        max_docs = 10000
+    while so_far < max_docs and request_count < 10000:
         request_count += 1
         response = client.posts(stream_id)
         posts = response["posts"]
-        so_far += len(posts)
         if output_type == "json":
             for p in posts:
                 click.echo(json.dumps(p, ensure_ascii=False))
         elif output_type == "csv":
+            # import ipdb; ipdb.set_trace()
             df = posts_json_to_df(posts)
             if first_fetch:
                 click.echo(df.to_csv(sep=separator, index=False).strip())
@@ -689,6 +695,7 @@ def stream_posts(
                 click.echo(df.to_csv(header=None, sep=separator, index=False).strip())
         else:
             raise click.ClickException("Output type must be either csv or json")
+        so_far += len(posts)
         if response["totalPostsAvailable"] == 0:
             time.sleep(.6)
 

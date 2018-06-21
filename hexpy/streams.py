@@ -2,7 +2,7 @@
 
 import inspect
 from typing import Dict, Any
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -20,13 +20,14 @@ class StreamsAPI:
     ```
     """
 
-    TEMPLATE = ROOT + "stream"
-
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
+        self.TEMPLATE = session.ROOT + "stream"
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
 
     def posts(self, stream_id: int, count: int = 100) -> Dict[str, Any]:
         """Return posts from a stream.

@@ -1,7 +1,7 @@
 """Custom API request"""
 
 import inspect
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from .session import HexpySession
 from typing import Any, Dict
 
@@ -22,10 +22,12 @@ class CustomAPI:
 
     def __init__(self, session: HexpySession, endpoint: str) -> None:
         self.session = session.session
-        self.TEMPLATE = ROOT + endpoint
+        self.TEMPLATE = session.ROOT + endpoint
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
 
     def get(
         self, url_params: str = "", params: Dict[str, Any] = None

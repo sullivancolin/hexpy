@@ -1,7 +1,7 @@
 """Module for Activity Reports Api."""
 
 import inspect
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from .session import HexpySession
 from typing import Dict, Any
 
@@ -20,13 +20,14 @@ class ActivityAPI:
     ```
     """
 
-    TEMPLATE = ROOT + "report/"
-
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
+        self.TEMPLATE = session.ROOT + "report/"
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["__init__"]:
-                setattr(self, name, rate_limited(fn))
+                setattr(
+                    self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
+                )
 
     def monitor_creation(self, organization_id: int) -> Dict[str, Any]:
         """Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.

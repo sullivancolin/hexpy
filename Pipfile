@@ -19,6 +19,8 @@ pytest = "*"
 ipython = "*"
 "e1839a8" = {path = ".", editable = true}
 mkdocs-material = "*"
+ipdb = "*"
+better-exceptions = "*"
 
 [requires]
 python_version = "3.6"

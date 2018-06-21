@@ -55,8 +55,6 @@ docs: docs-clean
 
 ## serve docs
 serve-docs: docs
-	hexpy api_documentation -o markdown
-	mv crimson_api_docs.md docs/docs/
 	cd docs/; mkdocs serve
 
 ## remove previously build docs

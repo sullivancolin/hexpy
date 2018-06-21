@@ -5,7 +5,7 @@ import requests
 from pathlib import Path
 import json
 from getpass import getpass
-from .base import ROOT, handle_response, rate_limited
+from .base import handle_response, rate_limited
 from typing import Dict, Any
 
 
@@ -48,10 +48,15 @@ class HexpySession:
 
     CRED_FILE = Path.home() / ".hexpy" / "credentials.json"
 
+    ROOT = "https://api.crimsonhexagon.com/api/"
+
+    ONE_MINUTE = 60
+    MAX_CALLS = 120
+
     def __init__(self, token: str) -> None:
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name == "get_token":
-                setattr(self, name, rate_limited(fn))
+                setattr(self, name, rate_limited(fn, self.MAX_CALLS, self.ONE_MINUTE))
 
         self.auth = {"auth": token}
         self.session = requests.Session()
@@ -70,7 +75,7 @@ class HexpySession:
         """
         return handle_response(
             requests.Session().get(
-                ROOT + "authenticate",
+                cls.ROOT + "authenticate",
                 params={
                     "username": username,
                     "password": password,
