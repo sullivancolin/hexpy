@@ -1,6 +1,6 @@
 """Top-level package for hexpy."""
 
-__version__ = "0.5.0"
+__version__ = "0.5.1"
 
 from .session import HexpySession
 from .monitor import MonitorAPI
