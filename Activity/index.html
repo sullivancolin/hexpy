@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -660,17 +668,19 @@
                 <h1 id="activity-api">Activity API</h1>
 <h2 id="class-for-working-with-crimson-hexagon-activity-report-api">Class for working with Crimson Hexagon Activity Report API.</h2>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, ActivityAPI
-&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; activity_client = ActivityAPI(session)
-&gt;&gt;&gt; activity_client.monitor_creation(organization_id)
-&gt;&gt;&gt; session.close()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">ActivityAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">activity_client</span> <span class="o">=</span> <span class="n">ActivityAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">activity_client</span><span class="o">.</span><span class="n">monitor_creation</span><span class="p">(</span><span class="n">organization_id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="monitor_creation">monitor_creation</h3>
-<pre><code class="python">monitor_creation(organization_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">monitor_creation</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.</p>
 <h4 id="arguments">Arguments</h4>
@@ -678,8 +688,9 @@
 <li>organiztion_id: Integer, the id of the organization being requested.</li>
 </ul>
 <h3 id="social_sites">social_sites</h3>
-<pre><code class="python">social_sites(organization_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">social_sites</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Get Social Site Report and associated usernames for Teams within an Organization.</p>
 <h4 id="arguments_1">Arguments</h4>
@@ -687,8 +698,9 @@
 <li>organiztion_id: Integer, the id of the organization being requested.</li>
 </ul>
 <h3 id="user_activity">user_activity</h3>
-<pre><code class="python">user_activity(organization_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">user_activity</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Get a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.</p>
 <h4 id="arguments_2">Arguments</h4>
@@ -696,8 +708,9 @@
 <li>organiztion_id: Integer, the id of the organization being requested.</li>
 </ul>
 <h3 id="user_invitations">user_invitations</h3>
-<pre><code class="python">user_invitations(organization_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">user_invitations</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Get a list of users within an Organization and which Team(s) they were invited to.</p>
 <h4 id="arguments_3">Arguments</h4>

@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -676,36 +684,41 @@
                 <h1 id="metadata-api">Metadata API</h1>
 <h2 id="class-for-working-with-crimson-hexagon-account-and-analysis-metadata">Class for working with Crimson Hexagon account and analysis metadata.</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, MetadataAPI
-&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; metadata_client = MetadataAPI(session)
-&gt;&gt;&gt; metadata_client.team_list()
-&gt;&gt;&gt; session.close()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">MetadataAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">metadata_client</span> <span class="o">=</span> <span class="n">MetadataAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">metadata_client</span><span class="o">.</span><span class="n">team_list</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="team_list">team_list</h3>
-<pre><code class="python">team_list() -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">team_list</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Return a list of teams accessible to the requesting user.</p>
 <h3 id="monitor_list">monitor_list</h3>
-<pre><code class="python">monitor_list(team_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">monitor_list</span><span class="p">(</span><span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
 
-<p>Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.</p>
+
+<p>Returns a list of monitors accessible to the user team along with metadata related to those monitors.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
 <li>team_id: integer id number for a team</li>
 </ul>
 <h3 id="geography">geography</h3>
-<pre><code class="python">geography() -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">geography</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Return all the geographical locations that you may use to filter monitor results and to upload documents with location information.</p>
 <h3 id="states">states</h3>
-<pre><code class="python">states(country: str) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">states</span><span class="p">(</span><span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Return all the states for a given country that you may use to filter monitor results and to upload documents with location information.</p>
 <h4 id="arguments_1">Arguments</h4>
@@ -713,8 +726,9 @@
 <li>country: country code to filter states</li>
 </ul>
 <h3 id="cities">cities</h3>
-<pre><code class="python">cities(country: str) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">cities</span><span class="p">(</span><span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Returns all the cities or urban areas defined in the given country that you may use to filter monitor results and to upload documents with location information. </p>
 <h4 id="arguments_2">Arguments</h4>
@@ -722,13 +736,15 @@
 <li>country: country: country code  to filter states</li>
 </ul>
 <h3 id="countries">countries</h3>
-<pre><code class="python">countries() -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">countries</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Returns all the countries that you may use to filter monitor results and to upload documents with location information.</p>
 <h3 id="api_documentation">api_documentation</h3>
-<pre><code class="python">api_documentation() -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">api_documentation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Return latest JSON version of Crimson Hexagon API endpoint documentation.</p>
                 

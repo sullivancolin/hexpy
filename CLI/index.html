@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -522,93 +530,106 @@
 </ul>
 <h2 id="usage">Usage</h2>
 <h3 id="basic">Basic</h3>
-<pre><code class="bash">$ hexpy
-Usage: hexpy [OPTIONS] COMMAND [ARGS]...
+<div class="codehilite"><pre><span></span>$ hexpy
+Usage: hexpy <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
 
-  Command Line interface for working with Crimson Hexagon API.
+  Command Line interface <span class="k">for</span> working with Crimson Hexagon API.
 
 Options:
   --version  Show the version and exit.
   --help     Show this message and exit.
 
 Commands:
-  api_documentation  Get API documentation for all endpoints.
-  export             Export monitor posts as json or to a...
+  api_documentation  Get API documentation <span class="k">for</span> all endpoints.
+  <span class="nb">export</span>             Export monitor posts as json or to a...
   login              Session login credentials.
-  metadata           Get Metadata for account team, monitors, and...
-  results            Get Monitor results for 1 or more metrics.
+  metadata           Get Metadata <span class="k">for</span> account team, monitors, and...
+  results            Get Monitor results <span class="k">for</span> <span class="m">1</span> or more metrics.
   stream_posts       Stream posts in real time, stop after a...
   train              Upload spreadsheet file of training examples...
   upload             Upload spreadsheet file as custom content.
-</code></pre>
+</pre></div>
+
 
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples</h2>
 <p>Login to Crimson API with you credentials and save your token</p>
-<pre><code class="bash">$ hexpy login --force
+<div class="codehilite"><pre><span></span>$ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
 ✔ Success!
-</code></pre>
+</pre></div>
+
 
 <p>Get Up-to-date API documentation as an html file</p>
-<pre><code class="bash">$ hexpy api_documentation -o html
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy api_documentation -o html
+</pre></div>
+
 
 <p>Get list of all teams a user's teams.</p>
-<pre><code class="bash">$ hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy metadata team_list <span class="p">|</span> jq -r <span class="s1">&#39;.teams[] | [.name, .id]| @tsv&#39;</span> <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
+</pre></div>
+
 
 <p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a></p>
-<pre><code class="bash">$ hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy metadata monitor_list --team_id TEAM_ID <span class="p">|</span> jq -r <span class="s1">&#39;.monitors[] | [.id, .name] | @tsv&#39;</span> <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
+</pre></div>
+
 
 <p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.</p>
-<pre><code class="bash">$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter <span class="s1">&#39;\t&#39;</span>
+</pre></div>
+
 
 <p>Train a Opinion Monitor with using a spreadsheet of posts with labels for the predefined categories.</p>
-<pre><code class="bash">$ hexpy train training_data.csv MONITOR_ID
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy train training_data.csv MONITOR_ID
+</pre></div>
+
 
 <p>Get word cloud and volume information from the monitor in the specified date range.</p>
-<pre><code class="bash">$ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy results MONITOR_ID volume word_cloud --date_range <span class="m">2017</span>-01-01 <span class="m">2017</span>-02-01
+</pre></div>
+
 
 <p>Get monitor volume information for each day  as a CSV using <a href="https://stedolan.github.io/jq/">jq</a></p>
-<pre><code class="bash">$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'
-&quot;2017-01-04T00:00:00&quot;,74
-&quot;2017-01-05T00:00:00&quot;,101
-&quot;2017-01-06T00:00:00&quot;,67
-&quot;2017-01-07T00:00:00&quot;,58
-&quot;2017-01-08T00:00:00&quot;,64
-&quot;2017-01-09T00:00:00&quot;,72
-&quot;2017-01-10T00:00:00&quot;,92
-&quot;2017-01-11T00:00:00&quot;,72
-&quot;2017-01-12T00:00:00&quot;,133
-&quot;2017-01-13T00:00:00&quot;,67
+<div class="codehilite"><pre><span></span>$ hexpy results MONITOR_ID volume <span class="p">|</span> jq -r <span class="s1">&#39;.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv&#39;</span>
+<span class="s2">&quot;2017-01-04T00:00:00&quot;</span>,74
+<span class="s2">&quot;2017-01-05T00:00:00&quot;</span>,101
+<span class="s2">&quot;2017-01-06T00:00:00&quot;</span>,67
+<span class="s2">&quot;2017-01-07T00:00:00&quot;</span>,58
+<span class="s2">&quot;2017-01-08T00:00:00&quot;</span>,64
+<span class="s2">&quot;2017-01-09T00:00:00&quot;</span>,72
+<span class="s2">&quot;2017-01-10T00:00:00&quot;</span>,92
+<span class="s2">&quot;2017-01-11T00:00:00&quot;</span>,72
+<span class="s2">&quot;2017-01-12T00:00:00&quot;</span>,133
+<span class="s2">&quot;2017-01-13T00:00:00&quot;</span>,67
 ...
-</code></pre>
+</pre></div>
+
 
 <p>Export Monitor posts to excel file called <code>my_export.xlsx</code></p>
-<pre><code class="bash">$ hexpy export MONITOR_ID --output_type excel --filename my_export
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy <span class="nb">export</span> MONITOR_ID --output_type excel --filename my_export
+</pre></div>
+
 
 <p>Export Monitor posts as json and redirect to <code>my_export.json</code></p>
-<pre><code class="bash">$ hexpy export MONITOR_ID --output_type json &gt; my_export.json
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy <span class="nb">export</span> MONITOR_ID --output_type json &gt; my_export.json
+</pre></div>
+
 
 <p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids</p>
-<pre><code class="bash">$ cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -o excel
-</code></pre>
+<div class="codehilite"><pre><span></span>$ cat monitor_ids.txt <span class="p">|</span> xargs -n <span class="m">1</span> -P <span class="m">4</span> hexpy <span class="nb">export</span> -o excel
+</pre></div>
+
 
 <p>Stream 1K real-time posts to json in the terminal</p>
-<pre><code class="bash">$ hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --stop_after <span class="m">1000</span> --output_type json 
+</pre></div>
+
 
 <p>Stream up to 10K real-time posts to a csv file with tab delimiter </p>
-<pre><code class="bash">$ hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' &gt; my_csv_file.csv
-</code></pre>
+<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --stop_after <span class="m">10000</span> --output_type csv --delimiter <span class="s1">&#39;\t&#39;</span> &gt; my_csv_file.csv
+</pre></div>
                 
                   
                 

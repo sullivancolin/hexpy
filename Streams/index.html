@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -780,17 +788,19 @@
                 <h1 id="streams-api">Streams API</h1>
 <h2 id="class-for-working-with-streams-api">Class for working with Streams API.</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession , StreamsAPI
-&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; streams_client = StreamsAPI(session)
-&gt;&gt;&gt; streams_client.stream_list(team_id)
-&gt;&gt;&gt; session.close()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span> <span class="p">,</span> <span class="n">StreamsAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">streams_client</span> <span class="o">=</span> <span class="n">StreamsAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">streams_client</span><span class="o">.</span><span class="n">stream_list</span><span class="p">(</span><span class="n">team_id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="posts">posts</h3>
-<pre><code class="python">posts(stream_id: int, count: int = 100) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">posts</span><span class="p">(</span><span class="n">stream_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Return posts from a stream.</p>
 <h4 id="arguments">Arguments:</h4>
@@ -799,8 +809,9 @@
 <li>count: Integer, the count of posts to retrieve from the stream, max = 100.</li>
 </ul>
 <h3 id="stream_list">stream_list</h3>
-<pre><code class="python">stream_list(team_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">stream_list</span><span class="p">(</span><span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>List all available Streams for a team.</p>
 <h4 id="arguments_1">Arguments</h4>
@@ -808,8 +819,9 @@
 <li>team_id: Integer the id of the team.</li>
 </ul>
 <h3 id="create_stream">create_stream</h3>
-<pre><code class="python">create_stream(team_id: int, name: str) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">create_stream</span><span class="p">(</span><span class="n">team_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Create new stream for a team. System Admin Only.</p>
 <h4 id="arguments_2">Arguments</h4>
@@ -818,8 +830,9 @@
 <li>name: String, the name to associate with the newly created stream.</li>
 </ul>
 <h3 id="delete_stream">delete_stream</h3>
-<pre><code class="python">delete_stream(stream_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">delete_stream</span><span class="p">(</span><span class="n">stream_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Delete a stream. System Admin Only.</p>
 <h4 id="arguments_3">Arguments</h4>
@@ -827,8 +840,9 @@
 <li>stream_id: Integer, the id of the stream to be deleted.</li>
 </ul>
 <h3 id="add_monitor_to_stream">add_monitor_to_stream</h3>
-<pre><code class="python">add_monitor_to_stream(stream_id: int, monitor_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">add_monitor_to_stream</span><span class="p">(</span><span class="n">stream_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Associate a monitor with a stream. System Admin Only.</p>
 <h4 id="arguments_4">Arguments</h4>
@@ -837,8 +851,9 @@
 <li>monitor_id: Integer, the id to be associated with the stream.</li>
 </ul>
 <h3 id="remove_monitor_from_stream">remove_monitor_from_stream</h3>
-<pre><code class="python">remove_monitor_from_stream(stream_id: int, monitor_id: int) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">remove_monitor_from_stream</span><span class="p">(</span><span class="n">stream_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Remove association between monitor and stream.  System Admin Only.</p>
 <h4 id="arguments_5">Arguments</h4>
@@ -847,8 +862,9 @@
 <li>monitor_id: Integer, the id to be removed from the stream.</li>
 </ul>
 <h3 id="update_stream">update_stream</h3>
-<pre><code class="python">update_stream(stream_id: int, name: str) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">update_stream</span><span class="p">(</span><span class="n">stream_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Update name of stream. System Admin Only.</p>
 <h4 id="arguments_6">Arguments</h4>

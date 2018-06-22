@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -620,17 +628,19 @@
                 <h1 id="custom-api">Custom API</h1>
 <h2 id="class-for-creating-a-custom-api">Class for creating a custom API</h2>
 <h2 id="example-usage">Example usage.</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession , CustomAPI
-&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; custom_client = CustomAPI(session, &quot;/some/endpoint/&quot;)
-&gt;&gt;&gt; custom_client.get(url_params=&quot;&lt;url_param1&gt;/path&quot;, params={&quot;query_string_param&quot;:some_value})
-&gt;&gt;&gt; session.close()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span> <span class="p">,</span> <span class="n">CustomAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">custom_client</span> <span class="o">=</span> <span class="n">CustomAPI</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="s2">&quot;/some/endpoint/&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">custom_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url_params</span><span class="o">=</span><span class="s2">&quot;&lt;url_param1&gt;/path&quot;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;query_string_param&quot;</span><span class="p">:</span><span class="n">some_value</span><span class="p">})</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="get">get</h3>
-<pre><code class="python">get(url_params: str = &quot;&quot;, params: Dict[str, Any] = None) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">get</span><span class="p">(</span><span class="n">url_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>end get request using URL parameters and query-string parameters.</p>
 <h4 id="arguments">Arguments:</h4>
@@ -639,8 +649,9 @@
 <li>params: Dict, querystring params.</li>
 </ul>
 <h3 id="post">post</h3>
-<pre><code class="python">post(url_params: str = &quot;&quot;, params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">post</span><span class="p">(</span><span class="n">url_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Send post request using URL parameters and query-string parameters, and json data.</p>
 <h4 id="arguments_1">Arguments</h4>
@@ -650,8 +661,9 @@
 <li>data: Dict, json data to post.</li>
 </ul>
 <h3 id="delete">delete</h3>
-<pre><code class="python">delete(url_params: str = &quot;&quot;, params: Dict[str, Any] = None) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">delete</span><span class="p">(</span><span class="n">url_params</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Send delete request using URL parameters and query-string parameters.</p>
 <h4 id="arguments_2">Arguments</h4>

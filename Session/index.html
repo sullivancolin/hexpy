@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -620,37 +628,43 @@
                 <h1 id="session">Session</h1>
 <h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</h2>
 <p>Login using token, or username. Optionally include password, or enter it at the prompt.</p>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession
-&gt;&gt;&gt; session = HexpySession.login(username=&quot;username@gmail.com&quot;, password=&quot;secretpassword&quot;)
-&gt;&gt;&gt; session.save_token()  # saving token to ~/.hexpy/credentials.json
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@gmail.com&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;secretpassword&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">save_token</span><span class="p">()</span>  <span class="c1"># saving token to ~/.hexpy/credentials.json</span>
+</pre></div>
+
 
 <p>or</p>
-<pre><code class="python">&gt;&gt;&gt; session = HexpySession.login(username=&quot;username@email.com&quot;)
-Enter password: *********
-&gt;&gt;&gt; session.save_token()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@email.com&quot;</span><span class="p">)</span>
+<span class="n">Enter</span> <span class="n">password</span><span class="p">:</span> <span class="o">*********</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">save_token</span><span class="p">()</span>
+</pre></div>
+
 
 <p>or instantiate a session using a token</p>
-<pre><code class="python">&gt;&gt;&gt; session = HexpySession(token=&quot;previously_saved_token&quot;)
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;previously_saved_token&quot;</span><span class="p">)</span>
+</pre></div>
+
 
 <p>Create instance by loading token from file.  Default is <code>~/.hexpy/credentials.json</code></p>
-<pre><code class="python">&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+</pre></div>
+
 
 <p>Create instance with context manager to close TCP session automatically when finished</p>
-<pre><code class="python">&gt;&gt;&gt; with HexpySession.load_auth_from_file() as session:
-...:     client = MonitorAPI(session)
-...:     # use client to call API multiple times with same session
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+<span class="o">...</span><span class="p">:</span>     <span class="n">client</span> <span class="o">=</span> <span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">...</span><span class="p">:</span>     <span class="c1"># use client to call API multiple times with same session</span>
 
-&gt;&gt;&gt; # session TCP connection is closed until next call to API
-</code></pre>
+<span class="o">&gt;&gt;&gt;</span> <span class="c1"># session TCP connection is closed until next call to API</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="login">login</h3>
-<pre><code class="python">login(username: str, password: str = None, no_expiration: bool = False) -&gt; HexpySession
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">no_expiration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HexpySession</span>
+</pre></div>
+
 
 <p>Instantiate class from username and password.</p>
 <h4 id="arguments">Arguments</h4>
@@ -660,8 +674,9 @@ Enter password: *********
 <li>no_expiration: True/False token with 24 expiration.</li>
 </ul>
 <h3 id="save_token">save_token</h3>
-<pre><code class="python">save_token(path: str = None) -&gt; None
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">save_token</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span>
+</pre></div>
+
 
 <p>Save authorization token.</p>
 <h4 id="arguments_1">Arguments</h4>
@@ -669,8 +684,9 @@ Enter password: *********
 <li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
 <h3 id="load_auth_from_file">load_auth_from_file</h3>
-<pre><code class="python">load_auth_from_file(path: str = None) -&gt; HexpySession
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">load_auth_from_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HexpySession</span>
+</pre></div>
+
 
 <p>Instantiate class from previously saved credentials file.</p>
 <h4 id="arguments_2">Arguments</h4>
@@ -678,8 +694,9 @@ Enter password: *********
 <li>path: String, path to store credentials. default is <code>~/.hexpy/credentials.json</code></li>
 </ul>
 <h3 id="close">close</h3>
-<pre><code class="python">close() -&gt; None
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">close</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="bp">None</span>
+</pre></div>
+
 
 <p>Close open connection to API server.</p>
                 

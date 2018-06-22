@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="../images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="../images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -584,31 +592,33 @@ In the past, users have uploaded survey responses, proprietary content,
 and other types of data not available in the Crimson Hexagon data library.
 To use this endpoint, please contact support and they will create a new custom content type for you. <a href="https://apidocs.crimsonhexagon.com/reference#content-upload-1">Reference</a></p>
 <h2 id="example-usage">Example Usage</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, ContentUploadAPI
-&gt;&gt;&gt; session = HexpySession.load_auth_from_file()
-&gt;&gt;&gt; upload_client = ContentUploadAPI(session)
-&gt;&gt;&gt; items = [
-    {
-      &quot;title&quot;: &quot;Example Title&quot;,
-      &quot;date&quot;: &quot;2010-01-26T16:14:00&quot;,
-      &quot;author&quot;: &quot;me&quot;,
-      &quot;url&quot;: &quot;http://www.crimsonhexagon.com/post1&quot;,
-      &quot;contents&quot;: &quot;Example content&quot;,
-      &quot;language&quot;: &quot;en&quot;,
-      &quot;type&quot;: &quot;Your_Assigned_Content_Type_Name&quot;,
-      &quot;geolocation&quot;: {
-        &quot;id&quot;: &quot;USA.NY&quot;
-      }
-    },
-  ]
-&gt;&gt;&gt; upload_client.upload(items)
-&gt;&gt;&gt; session.close()
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">ContentUploadAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">upload_client</span> <span class="o">=</span> <span class="n">ContentUploadAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Title&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2010-01-26T16:14:00&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.crimsonhexagon.com/post1&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;contents&quot;</span><span class="p">:</span> <span class="s2">&quot;Example content&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Your_Assigned_Content_Type_Name&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;geolocation&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;USA.NY&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+  <span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">upload_client</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 
 <h2 id="methods">Methods</h2>
 <h3 id="upload">upload</h3>
-<pre><code class="python">upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">upload</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Upload list of document dictionaries to Crimson Hexagon platform.</p>
 <p>If greater than 1000 items passed, reverts to batch upload.</p>
@@ -617,8 +627,9 @@ To use this endpoint, please contact support and they will create a new custom c
 <li>data: list of document dictionaries  to upload.</li>
 </ul>
 <h3 id="batch_upload">batch_upload</h3>
-<pre><code class="python">batch_upload(data: Sequence[Dict[str, Any]]) -&gt; Dict[str, Any]
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="n">batch_upload</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
 
 <p>Batch upload list of document dictionaries to Crimson Hexagon platform.</p>
 <h4 id="arguments_1">Arguments</h4>

@@ -33,7 +33,7 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="./assets/images/favicon.png">
+      <link rel="shortcut icon" href="./images/favicon.ico">
       <meta name="generator" content="mkdocs-0.17.4, mkdocs-material-2.9.1">
     
     
@@ -44,6 +44,12 @@
     
       <link rel="stylesheet" href="./assets/stylesheets/application.ba0fd1a6.css">
       
+        <link rel="stylesheet" href="./assets/stylesheets/application-palette.6079476c.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
       
     
     
@@ -61,7 +67,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
   
     <svg class="md-svg">
       <defs>
@@ -103,7 +111,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href="." title="hexpy" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <img src="./images/logo.png" width="24" height="24">
           
         </a>
       </div>
@@ -172,7 +180,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -199,7 +207,7 @@
   <label class="md-nav__title md-nav__title--site" for="__drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <img src="./images/logo.png" width="48" height="48">
       
     </span>
     hexpy
@@ -221,7 +229,7 @@
       </div>
     
     <div class="md-source__repository">
-      GitHub
+      hexpy
     </div>
   </a>
 
@@ -513,7 +521,8 @@
                   <a href="https://github.com/sullivancolin/hexpy/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="a-python-client-for-the-crimson-hexagon-api">A Python Client for the Crimson Hexagon API</h1>
+                <p><img alt="Banner" src="./images/banner.png" /></p>
+<h1 id="a-python-client-for-the-crimson-hexagon-api">A Python Client for the Crimson Hexagon API</h1>
 <p><strong>hexpy</strong> is a simple python package for working with the <a href="https://apidocs.crimsonhexagon.com/">Crimson Hexagon API</a></p>
 <h2 id="why-use-this-client">Why use this client?</h2>
 <ul>
@@ -530,37 +539,38 @@
 <!-- To install the most recent stable release run <code>pip install hexpy</code>. -->
 
 <p>To install the latest version:</p>
-<pre><code class="bash">$ git clone https://github.com/sullivancolin/hexpy.git
+<div class="codehilite"><pre><span></span>$ git clone https://github.com/sullivancolin/hexpy.git
 $ pip install hexpy/
-</code></pre>
+</pre></div>
+
 
 <h2 id="project-homepage">Project Homepage</h2>
 <p>Visit <a href="https://github.com/sullivancolin/hexpy">Github</a> project page for full source code.</p>
 <h2 id="quick-start">Quick Start</h2>
-<pre><code class="python">&gt;&gt;&gt; from hexpy import HexpySession, MonitorAPI
-&gt;&gt;&gt; session = HexpySession(username=&quot;user@email.com&quot;, password=&quot;crimson_login&quot;)
-&gt;&gt;&gt; monitor_results_client=MonitorAPI(session)
-&gt;&gt;&gt; monitor_results_client.details(monitor_id)
-{'categories': [{'hidden': False,
-   'id': 6054759055,
-   'name': 'Basic Positive',
-   'sortOrder': 100,
-   'status': 'red',
-   'trainingDocs': 0},
-  {'hidden': False,
-   'id': 6054759059,
-   'name': 'Basic Neutral',
-   'sortOrder': 101,
-   'status': 'red',
-   'trainingDocs': 0},
-  {'hidden': False,
-   'id': 6054759051,
-   'name': 'Basic Negative',
-   'sortOrder': 102,
-   ...
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">MonitorAPI</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;user@email.com&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;crimson_login&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">monitor_results_client</span><span class="o">=</span><span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">monitor_results_client</span><span class="o">.</span><span class="n">details</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;hidden&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+   <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">6054759055</span><span class="p">,</span>
+   <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Basic Positive&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sortOrder&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+   <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;trainingDocs&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;hidden&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+   <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">6054759059</span><span class="p">,</span>
+   <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Basic Neutral&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sortOrder&#39;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span>
+   <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;trainingDocs&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+  <span class="p">{</span><span class="s1">&#39;hidden&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+   <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">6054759051</span><span class="p">,</span>
+   <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Basic Negative&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;sortOrder&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
+   <span class="o">...</span>
 
-&gt;&gt;&gt; session.close()
-</code></pre>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
                 
                   
                 
