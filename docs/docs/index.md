@@ -34,8 +34,8 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
 
 ```python
 >>> from hexpy import HexpySession, MonitorAPI
->>> session = HexpySession(username="user@email.com", password="crimson_login")
->>> monitor_results_client=MonitorAPI(session)
+>>> session = HexpySession.login(username="user@email.com", password="crimson_login")
+>>> monitor_results_client = MonitorAPI(session)
 >>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
