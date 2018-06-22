@@ -1,3 +1,5 @@
+![Banner](images/banner.png)
+
 A Python Client for the Crimson Hexagon API
 ===========================================
 

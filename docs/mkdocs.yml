@@ -1,6 +1,7 @@
 site_name: hexpy
 site_description: A Python client for the Crimson Hexagon API.
 repo_url: https://github.com/sullivancolin/hexpy
+repo_name: hexpy
 pages:
     - Home: index.md
     - Session: Session.md
@@ -14,6 +15,14 @@ pages:
     - Activty Reports: Activity.md
     - Command Line Interface: CLI.md
     - Crimson Api Documentation: crimson_api_docs.md
-theme: 'material'
+theme:
+  name: 'material'
+  palette:
+    primary: 'teal'
+    accent: 'red'
+  logo: 'images/logo.png'
+  favicon: 'images/favicon.ico'
+markdown_extensions:
+  - codehilite
 extra:
     version: 0.5.1

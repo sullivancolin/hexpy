@@ -25,7 +25,7 @@ Return a list of teams accessible to the requesting user.
 ```python
 monitor_list(team_id: int) -> Dict[str, Any]
 ```
-Returns a list of monitors accessible to the requesting or selected user along with metadata related to those monitors.
+Returns a list of monitors accessible to the user team along with metadata related to those monitors.
 
 #### Arguments
 * team_id: integer id number for a team
