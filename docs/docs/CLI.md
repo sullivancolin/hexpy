@@ -64,7 +64,7 @@ $ hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .na
 
 Upload TSV file as `my_custom_type` with English as the language that has tab delimited columns.
 ```bash
-$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter '\t'
+$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --separator '\t'
 ```
 
 Train a Opinion Monitor with using a spreadsheet of posts with labels for the predefined categories.
@@ -110,10 +110,10 @@ $ cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -o excel
 
 Stream 1K real-time posts to json in the terminal
 ```bash
-$ hexpy stream_posts STREAM_ID --stop_after 1000 --output_type json 
+$ hexpy stream_posts STREAM_ID --max_docs 1000 --output_type json 
 ```
 
 Stream up to 10K real-time posts to a csv file with tab delimiter 
 ```bash
-$ hexpy stream_posts STREAM_ID --stop_after 10000 --output_type csv --delimiter '\t' > my_csv_file.csv
+$ hexpy stream_posts STREAM_ID --output_type csv --max_docs 10000 | pv -s 10000 -l > streamed_posts.csv
 ```

@@ -81,11 +81,11 @@ dist: clean
 
 ## install the package to the pipenv virtualenv
 install: clean
-	pipenv install --three
+	pipenv install
 
 ## install the package and all development dependencies to the pipenv virtualenv
 install-dev: clean
-	pipenv install --dev --three
+	pipenv install --dev
 
 ##############################################################################
 # Self Documenting Commands                                                  #

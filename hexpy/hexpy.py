@@ -615,6 +615,7 @@ def export(
             end = details["resultsEnd"]
             docs = client.posts(monitor_id, start, end, extend_limit=not limit)["posts"]
     elif post_type == "training_posts":
+        info += "_Training"
         docs = client.training_posts(monitor_id)["trainingPosts"]
 
     if output_type == "json":
