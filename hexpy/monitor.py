@@ -349,7 +349,7 @@ class MonitorAPI:
                     "id": monitor_id,
                     "start": start,
                     "end": end,
-                    "aggregatebyday": group_by,
+                    "groupBy": group_by,
                 },
             )
         )
