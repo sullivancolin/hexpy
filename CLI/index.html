@@ -577,7 +577,7 @@ Enter password: ***********
 
 
 <p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.</p>
-<div class="codehilite"><pre><span></span>$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --delimiter <span class="s1">&#39;\t&#39;</span>
+<div class="codehilite"><pre><span></span>$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --separator <span class="s1">&#39;\t&#39;</span>
 </pre></div>
 
 
@@ -623,12 +623,12 @@ Enter password: ***********
 
 
 <p>Stream 1K real-time posts to json in the terminal</p>
-<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --stop_after <span class="m">1000</span> --output_type json 
+<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --max_docs <span class="m">1000</span> --output_type json 
 </pre></div>
 
 
 <p>Stream up to 10K real-time posts to a csv file with tab delimiter </p>
-<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --stop_after <span class="m">10000</span> --output_type csv --delimiter <span class="s1">&#39;\t&#39;</span> &gt; my_csv_file.csv
+<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --output_type csv --max_docs <span class="m">10000</span> <span class="p">|</span> pv -s <span class="m">10000</span> -l &gt; streamed_posts.csv
 </pre></div>
                 
                   
