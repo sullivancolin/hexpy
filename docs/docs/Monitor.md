@@ -92,6 +92,32 @@ Return information about the authors in a monitor and their affinity with a rang
 * daily: Boolean, if true, results returned from this endpoint will be trended daily instead of aggregated across the selected date range
 * document_source: String, document source for affinities. valid params include `TWITTER` or `TUMBLR`
 
+### topics
+```python
+topics(monitor_id: int, start: str, end: str, filter_string: str = None ) -> Dict[str, Any]:
+```
+
+Return the XML data that can be used to generate clustering visualizations using third-party software.
+
+#### Arguments
+* monitor_id: Integer, id of the monitor or monitor filter being requested
+* start: String, inclusive start date in YYYY-MM-DD
+* end: String, exclusive end date in YYYY-MM-DD
+* filter_string: String, pipe-separated list of field:value pairs used to filter posts
+
+### topic_waves
+```python
+topic_waves(monitor_id: int, start: str, end: str) -> Dict[str, Any]
+```
+
+Return the Topic waves information for a monitor.
+
+#### Arguments
+* monitor_id: Integer, id of the monitor or monitor filter being requested
+* start: String, inclusive start date in YYYY-MM-DD
+* end: String, exclusive end date in YYYY-MM-DD
+* filter_string: String, pipe-separated list of field:value pairs used to filter posts
+
 ### top_sources
 ```python
 top_sources(monitor_id: int, start: str, end: str) -> Dict[str, Any]

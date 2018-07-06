@@ -65,3 +65,4 @@ target/
 
 *.sublime-project
 *.sublime-workspace
+*.env

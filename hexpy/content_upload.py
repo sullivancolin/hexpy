@@ -5,6 +5,9 @@ from clint.textui import progress
 from .base import handle_response, rate_limited
 from .session import HexpySession
 from typing import Dict, Any, Sequence
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ContentUploadAPI:
@@ -63,7 +66,7 @@ class ContentUploadAPI:
                 self.session.post(self.TEMPLATE, json={"items": data})
             )
         else:
-            print("More than 1000 items found.  Uploading in batches of 1000.")
+            logger.info("More than 1000 items found.  Uploading in batches of 1000.")
             return self.batch_upload(data)
 
     def batch_upload(self, data: Sequence[Dict[str, Any]]) -> Dict[str, Any]:

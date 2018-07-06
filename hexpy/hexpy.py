@@ -6,7 +6,6 @@ import numpy as np
 import click
 import requests
 import re
-from halo import Halo
 from clint.textui.progress import bar
 from getpass import getpass
 from .session import HexpySession
@@ -167,8 +166,7 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
         password = getpass(prompt="Enter password: ")
         session = HexpySession.login(username, password, no_expiration=not expiration)
         session.save_token()
-        spinner = Halo(text="Success!", spinner="dots")
-        spinner.succeed()
+        click.echo("Success!")
         return session
 
 
@@ -406,10 +404,8 @@ def upload(
     if "geography" in items.columns:
         pass
 
-    response = client.upload(data=data)
-    click.echo(json.dumps(response))
-    spinner = Halo(text="Success!", spinner="dots")
-    spinner.succeed()
+    client.upload(data=data)
+    click.echo("Success!")
 
 
 @cli.command()
@@ -541,10 +537,7 @@ def train(
                 )
         client.train_monitor(monitor_id=monitor_id, category_id=int(val), data=data)
         category = reverse_category_dict[val]
-        spinner = Halo(
-            text=f"Successfuly uploaded {len(data)} {category} docs!", spinner="dots"
-        )
-        spinner.succeed()
+        click.echo(f"Successfuly uploaded {len(data)} {category} docs!")
 
 
 @cli.command()
@@ -634,8 +627,7 @@ def export(
             df.to_excel(name + ".xlsx", index=False)
         else:
             raise click.ClickException("Output type must be either csv, excel or json")
-        spinner = Halo(text="Done!", spinner="dots")
-        spinner.succeed()
+        click.echo("Done!")
 
 
 @cli.command()

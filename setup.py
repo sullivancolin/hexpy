@@ -7,7 +7,6 @@ requirements = [
     "clint>=0.5.1",
     "xlrd>=1.1.0",
     "requests>=2.18.4",
-    "halo>=0.0.7",
     "click>=6.7",
     "click-help-colors>=0.4",
     "pandas>=0.20.3",
