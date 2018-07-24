@@ -6,7 +6,7 @@ import numpy as np
 import click
 import requests
 import re
-from clint.textui.progress import bar
+from clint.textui import progress
 from getpass import getpass
 from .session import HexpySession
 from .monitor import MonitorAPI
@@ -16,7 +16,7 @@ from .metadata import MetadataAPI
 from hexpy import __version__
 import pendulum
 import pathlib
-from typing import Sequence, Callable, Dict, Any
+from typing import Sequence, Callable, Dict, Any, List
 from click_help_colors import HelpColorsGroup
 import os
 
@@ -45,6 +45,17 @@ def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
             elif isinstance(val, dict):
                 for subkey, subval in val.items():
                     record[key + "_" + subkey] = subval
+            elif isinstance(val, List) and key == "imageInfo":
+                for i, item in enumerate(val):
+                    record[f"image_{i}_url"] = val[i]["url"]
+                    if "objects" in val[i]:
+                        record[f"image_{i}_objects"] = "|".join(
+                            x["className"] for x in val[i]["objects"]
+                        )
+                    if "brands" in val[i]:
+                        record[f"image_{i}_brands"] = "|".join(
+                            x["className"] for x in val[i]["objects"]
+                        )
             elif isinstance(val, int):
                 record[key] = val
         items.append(record)
@@ -124,7 +135,7 @@ def docs_to_text(json_docs: dict, mode: str = "markdown") -> str:
             anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
         else:
             raise click.ClickException(
-                f"Invalid markdown mode: {mode}. must be either `md` or `gfm`."
+                f"Invalid markdown mode: {mode}. must be either 'md' or 'gfm'."
             )
         doc += f"* [{e['endpoint']}](#{anchor})\n"
 
@@ -338,7 +349,7 @@ def upload(
     if content_type is not None:
         items["type"] = content_type
     elif "type" not in items.columns:
-        raise click.ClickException("Missing custom content type")
+        raise click.ClickException("Missing custom content column 'type'")
 
     # Handle titles
     if "title" not in items.columns:
@@ -347,17 +358,27 @@ def upload(
 
     # Handle missing urls
     if "url" not in items.columns:
-        click.echo("No URLs provided. Creating dummy URLS...")
-        items["url"] = [
-            f"https://www.dummyurl.com/docnum{i}" for i in range(len(items))
-        ]
+        raise click.ClickException(
+            "No 'url' column provided.  Please include unique valid urls."
+        )
+    # Handle author
+    if "author" not in items.columns:
+        raise click.ClickException(
+            "No 'author' column provided.  Please include author names."
+        )
 
     # Handle language code
     if "language" not in items.columns:
-        click.echo("No language code provided. defaulting to English...")
-        items["language"] = language
+        raise click.ClickException(
+            "No 'language' column provided.  Please include valid ISO language code."
+        )
 
     # Correctly format dates
+    if "date" not in items.columns:
+        raise click.ClickException(
+            "No 'date' column provided.  Please include YYYY-MM-DD dates"
+        )
+
     try:
         dates = [pendulum.parse(x).to_iso8601_string() for x in items["date"]]
     except Exception as e:
@@ -445,26 +466,26 @@ def train(
         )
     items.columns = [x.lower() for x in items.columns]
 
-    if "category" not in items.columns:
-        raise click.ClickException("File must contain `category` column")
+    if "categoryName" not in items.columns and "categoryId" not in items.columns:
+        raise click.ClickException(
+            "File must contain either 'categoryName' string column or 'categoryId' integer column"
+        )
+    if "categoryId" in items.columns:
+        if not all(x in reverse_category_dict for x in set(items["categoryId"])):
+            for x in set(items["categoryId"]):
+                if x not in reverse_category_dict:
+                    raise click.ClickException(
+                        f"'{x}' categoryId not in monitor categories: {category_dict}"
+                    )
+    else:
+        if not all(x in category_dict for x in set(items["categoryName"])):
+            for x in set(items["categoryName"]):
+                if x not in category_dict:
+                    raise click.ClickException(
+                        f"'{x}' categoryName not in monitor categories: {category_dict}"
+                    )
 
-    if not all(x in category_dict for x in set(items["category"])):
-        monitor_categories = ", ".join(set(category_dict.keys()))
-        for x in set(items["category"]):
-            if x not in category_dict:
-                raise click.ClickException(
-                    f"'{x}' category not in monitor categories: {monitor_categories}"
-                )
-
-    items["categoryid"] = [category_dict[i] for i in items["category"]]
-
-    counts = items["category"].value_counts()
-
-    count_string = "\n".join(
-        [f"* {count} `{name}` posts" for name, count in counts.to_dict().items()]
-    )
-
-    click.echo("Preparing to upload:\n" + count_string)
+        items["categoryid"] = [category_dict[i] for i in items["categoryName"]]
 
     # Handle titles
     if "title" not in items.columns:
@@ -473,17 +494,26 @@ def train(
 
     # Handle missing urls
     if "url" not in items.columns:
-        click.echo("No URLs provided. Creating dummy URLS...")
-        items["url"] = [
-            f"https://www.dummyurl.com/docnum{i}" for i in range(len(items))
-        ]
+        raise click.ClickException(
+            "No 'url' column provided.  Please include unique valid urls."
+        )
+    # Handle author
+    if "author" not in items.columns:
+        raise click.ClickException(
+            "No 'author' column provided.  Please include author names."
+        )
 
     # Handle language code
     if "language" not in items.columns:
-        click.echo("No language code provided. defaulting to English...")
-        items["language"] = language
+        raise click.ClickException(
+            "No 'language' column provided.  Please include valid ISO language code."
+        )
 
     # Correctly format dates
+    if "date" not in items.columns:
+        raise click.ClickException(
+            "No 'date' column provided.  Please include YYYY-MM-DD dates"
+        )
     try:
         dates = [pendulum.parse(x).to_iso8601_string() for x in items["date"]]
     except Exception as e:
@@ -494,15 +524,11 @@ def train(
             ]
         except Exception as e:
             raise click.ClickException(
-                "Could not parse date format.  Must be YYYY-MM-DD as in 2017-10-01. Optionally include time formatted as 2017-10-01T21:30:05"
+                "Could not parse date format.  Must be YYYY-MM-DD as in 2017-10-01 or ISO formatted as 2017-10-01T21:30:05"
             )
 
     items.loc[:, "date"] = dates
 
-    # Check for required field
-    click.echo(
-        "Checking for required fields: [contents, date, author, language, title, url]..."
-    )
     try:
         assert {
             "contents",
@@ -515,7 +541,7 @@ def train(
         }.issubset(set(items.columns))
     except AssertionError:
         raise click.ClickException(
-            "1 or more missing fields.  Required fields: contents, date, author, language, category, title, url"
+            "1 or more missing fields: contents, date, author, language, categoryid, title, url"
         )
 
     # Assert Unique Urls
@@ -523,6 +549,13 @@ def train(
         assert len(items[items.url.duplicated()]) == 0
     except AssertionError:
         raise click.ClickException("Duplicate URLs detected.")
+    counts = items["category"].value_counts()
+
+    count_string = "\n".join(
+        [f"* {count} '{name}' posts" for name, count in counts.to_dict().items()]
+    )
+
+    click.echo("Preparing to upload:\n" + count_string)
 
     for val in sorted(np.unique(items.categoryid)):
 
@@ -531,7 +564,9 @@ def train(
             ["title", "date", "contents", "language", "author", "url"]
         ].to_dict(orient="records")
         if len(data) > 1000:
-            for batch in bar([data[i : i + 1000] for i in range(0, len(data), 1000)]):
+            for batch in progress.bar(
+                [data[i : i + 1000] for i in range(0, len(data), 1000)]
+            ):
                 client.train_monitor(
                     monitor_id=monitor_id, category_id=int(val), data=batch
                 )

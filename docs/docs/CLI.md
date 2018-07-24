@@ -44,7 +44,7 @@ Login to Crimson API with you credentials and save your token
 $ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
-✔ Success!
+Success!
 ```
 
 Get Up-to-date API documentation as an html file
