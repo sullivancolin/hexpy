@@ -57,9 +57,8 @@ Batch upload list of document dictionaries to Crimson Hexagon platform.
 ```python
 custom_field_upload(document_type: int, batch: int, data: Sequence[Dict[str, Any]]) -> Dict[str, Any]
 ```
-Upload list of document dictionaries to Crimson Hexagon platform.
+Upload content via the API w/ custom fields support.
 
-If greater than 1000 items passed, reverts to batch upload.
 # Arguments
 * document_type: Integer, The id of the document type to which the uploading docs will belong
 * batch: Integer, The id of the batch to which the uploading docs will belong
