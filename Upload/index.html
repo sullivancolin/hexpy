@@ -391,6 +391,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#custom_field_upload" title="custom_field_upload" class="md-nav__link">
+    custom_field_upload
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -561,6 +568,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#custom_field_upload" title="custom_field_upload" class="md-nav__link">
+    custom_field_upload
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -635,6 +649,18 @@ To use this endpoint, please contact support and they will create a new custom c
 <h4 id="arguments_1">Arguments</h4>
 <ul>
 <li>data: list of document dictionaries to upload in batches of 1000.</li>
+</ul>
+<h3 id="custom_field_upload">custom_field_upload</h3>
+<div class="codehilite"><pre><span></span><span class="n">custom_field_upload</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</pre></div>
+
+
+<p>Upload content via the API w/ custom fields support.</p>
+<h1 id="arguments_2">Arguments</h1>
+<ul>
+<li>document_type: Integer, The id of the document type to which the uploading docs will belong</li>
+<li>batch: Integer, The id of the batch to which the uploading docs will belong</li>
+<li>data: list of document dictionaries  to upload.</li>
 </ul>
                 
                   
