@@ -82,3 +82,21 @@ class ContentUploadAPI:
             response = self.upload(batch)
             batch_responses[f"Batch number {batch_num}"] = response
         return handle_response(batch_responses)
+
+    def custom_field_upload(
+        self, document_type: int, batch: int, data: Sequence[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """Upload content via the API w/ custom fields support.
+
+        # Arguments
+            document_type: Integer, The id of the document type to which the uploading docs will belong.
+            batch: Integer, The id of the batch to which the uploading docs will belong.
+            data: list of document dictionaries  to upload.
+        """
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE,
+                params={"documentType": document_type, "batch": batch},
+                json={"items": data},
+            )
+        )

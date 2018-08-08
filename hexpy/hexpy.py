@@ -54,7 +54,7 @@ def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
                         )
                     if "brands" in val[i]:
                         record[f"image_{i}_brands"] = "|".join(
-                            x["className"] for x in val[i]["objects"]
+                            x["brand"] for x in val[i]["brands"]
                         )
             elif isinstance(val, int):
                 record[key] = val

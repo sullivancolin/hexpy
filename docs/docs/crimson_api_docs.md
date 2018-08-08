@@ -7,6 +7,7 @@
 * [Authentication](#authentication)
 * [Authors](#authors)
 * [Content Upload](#content-upload)
+* [Content Upload Custom Fields Support](#content-upload-custom-fields-support)
 * [Day and Time](#day-and-time)
 * [Demographics - Age](#demographics-age)
 * [Demographics - Gender](#demographics-gender)
@@ -205,6 +206,25 @@
 	- Restricted = False
 * `ContractedDocumentsWithinTwentyFourHours` - If requested, the number of documents this organization can upload in a rolling twenty four hour period.
 	- Type: Long
+	- Restricted = False
+
+
+-------------------------
+
+#### Content Upload Custom Fields Support
+##### Upload content via the API w/ custom fields support - Category: admin
+##### `/content/upload` - POST
+##### Parameters
+* `documentType` - The id of the document type to which the uploading docs will belong
+	- Type: Long
+	- Required = True
+* `batch` - The id of the batch to which the uploading docs will belong
+	- Type: String
+	- Required = False
+
+##### Response
+* `batchId` - The id of the batch to which these docs belong
+	- Type: String
 	- Restricted = False
 
 
