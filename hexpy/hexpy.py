@@ -464,7 +464,6 @@ def train(
         raise click.ClickException(
             "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
         )
-    items.columns = [x.lower() for x in items.columns]
 
     if "categoryName" not in items.columns and "categoryId" not in items.columns:
         raise click.ClickException(
@@ -487,6 +486,7 @@ def train(
 
         items["categoryid"] = [category_dict[i] for i in items["categoryName"]]
 
+    items.columns = [x.lower() for x in items.columns]
     # Handle titles
     if "title" not in items.columns:
         click.echo("No post Titles provided. Creating dummy titles...")
@@ -549,10 +549,13 @@ def train(
         assert len(items[items.url.duplicated()]) == 0
     except AssertionError:
         raise click.ClickException("Duplicate URLs detected.")
-    counts = items["category"].value_counts()
+    counts = items["categoryid"].value_counts()
 
     count_string = "\n".join(
-        [f"* {count} '{name}' posts" for name, count in counts.to_dict().items()]
+        [
+            f"* {count} '{reverse_category_dict[name]}' posts"
+            for name, count in counts.to_dict().items()
+        ]
     )
 
     click.echo("Preparing to upload:\n" + count_string)
