@@ -1,7 +1,7 @@
 A Python Client for the Crimson Hexagon API
 ===========================================
 
-**hexpy** is a simple python package for working with the Crimson Hexagon API
+**hexpy** is a simple python package for working with the [Crimson Hexagon API](https://apidocs.crimsonhexagon.com/)
 
 ## Why use this client?
 
@@ -13,7 +13,7 @@ A Python Client for the Crimson Hexagon API
 * Easily create shell scripts to work with API data.
 
 ## Requirements
-**hexpy** is compatible with Python 3.5 and higher
+**hexpy** is compatible with Python 3.6 and higher
 
 ## Installation
 To install the most recent stable release run `pip install hexpy`.
@@ -28,13 +28,13 @@ $ pip install hexpy/
 
 Visit [Github](https://github.com/sullivancolin/hexpy) project page for full source code.
 
-## Quickstart
+## Quick Start
 
 ```python
 >>> from hexpy import HexpySession, MonitorAPI
->>> auth = HexpySession.login(username="user@email.com", password="crimson_login")
->>> monitor_results_client = MonitorAPI(auth)
->>> monitor_results_client.details(MONITOR_ID)
+>>> session = HexpySession.login(username="user@email.com", password="crimson_login")
+>>> monitor_results_client = MonitorAPI(session)
+>>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
    'name': 'Basic Positive',
@@ -52,4 +52,6 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
    'name': 'Basic Negative',
    'sortOrder': 102,
    ...
+
+>>> session.close()
 ```
