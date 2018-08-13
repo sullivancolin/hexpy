@@ -566,12 +566,12 @@ Success!
 </pre></div>
 
 
-<p>Get list of all teams a user's teams.</p>
-<div class="codehilite"><pre><span></span>$ hexpy metadata team_list <span class="p">|</span> jq -r <span class="s1">&#39;.teams[] | [.name, .id]| @tsv&#39;</span> <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
+<p>Get list of all the user's teams using <a href="https://stedolan.github.io/jq/">jq</a>.</p>
+<div class="codehilite"><pre><span></span>$ hexpy metadata team_list <span class="p">|</span> jq -r <span class="s1">&#39;.teams[] | [.name, .id] | @tsv&#39;</span> <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
 </pre></div>
 
 
-<p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a></p>
+<p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a>.</p>
 <div class="codehilite"><pre><span></span>$ hexpy metadata monitor_list --team_id TEAM_ID <span class="p">|</span> jq -r <span class="s1">&#39;.monitors[] | [.id, .name] | @tsv&#39;</span> <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
 </pre></div>
 
@@ -628,7 +628,7 @@ Success!
 
 
 <p>Stream up to 10K real-time posts to a csv file with tab delimiter </p>
-<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --output_type csv --max_docs <span class="m">10000</span> <span class="p">|</span> pv -s <span class="m">10000</span> -l &gt; streamed_posts.csv
+<div class="codehilite"><pre><span></span>$ hexpy stream_posts STREAM_ID --output_type csv --max_docs <span class="m">10000</span> --separator <span class="s1">&#39;\t&#39;</span> <span class="p">|</span> pv -s <span class="m">10000</span> -l &gt; streamed_posts.csv
 </pre></div>
                 
                   
