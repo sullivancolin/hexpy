@@ -15,7 +15,7 @@ A Python Client for the Crimson Hexagon API
 * Easily create shell scripts to work with API data.
 
 ## Requirements
-**hexpy** is compatible with Python 3.5 and higher
+**hexpy** is compatible with Python 3.6 and higher
 
 ## Installation
 To install the most recent stable release run `pip install hexpy`.

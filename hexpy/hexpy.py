@@ -6,7 +6,6 @@ import numpy as np
 import click
 import requests
 import re
-from clint.textui import progress
 from getpass import getpass
 from .session import HexpySession
 from .monitor import MonitorAPI
@@ -121,7 +120,7 @@ def format_endpoint(endpoint: dict) -> str:
     )
 
 
-def docs_to_text(json_docs: dict, mode: str = "markdown") -> str:
+def docs_to_text(json_docs: dict, mode: str = "md") -> str:
     """Convert API documentation JSON to markdown or github flavored markdown."""
     endpoints = json_docs["endpoints"]
     doc = f"# Crimson Hexagon API Documentation\n**ROOT_URL = `{HexpySession.ROOT}`**\n\n### Endpoints\n"
@@ -317,15 +316,8 @@ def api_documentation(ctx, output_type: str = "json"):
     help="Custom content type, as specified in Forsight.",
 )
 @click.option("--separator", "-s", default=",", help="CSV column separator.")
-@click.option("--language", "-l", default="en", help="language code of documents")
 @click.pass_context
-def upload(
-    ctx,
-    filename: str,
-    content_type: str = None,
-    separator: str = ",",
-    language: str = "en",
-) -> None:
+def upload(ctx, filename: str, content_type: str = None, separator: str = ",") -> None:
     """Upload spreadsheet file as custom content."""
 
     if separator == "\\t":
@@ -433,11 +425,8 @@ def upload(
 @click.argument("filename", type=str)
 @click.argument("monitor_id", type=int)
 @click.option("--separator", "-s", default=",", help="CSV column separator.")
-@click.option("--language", "-l", default="en", help="language code of documents")
 @click.pass_context
-def train(
-    ctx, filename: str, monitor_id: int, separator: str = ",", language: str = "en"
-) -> None:
+def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
     """Upload spreadsheet file of training examples for monitor."""
 
     if separator == "\\t":
@@ -567,9 +556,7 @@ def train(
             ["title", "date", "contents", "language", "author", "url"]
         ].to_dict(orient="records")
         if len(data) > 1000:
-            for batch in progress.bar(
-                [data[i : i + 1000] for i in range(0, len(data), 1000)]
-            ):
+            for batch in [data[i : i + 1000] for i in range(0, len(data), 1000)]:
                 client.train_monitor(
                     monitor_id=monitor_id, category_id=int(val), data=batch
                 )

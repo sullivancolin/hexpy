@@ -4,7 +4,6 @@
 from setuptools import setup, find_packages
 
 requirements = [
-    "clint>=0.5.1",
     "xlrd>=1.1.0",
     "requests>=2.18.4",
     "click>=6.7",

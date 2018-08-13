@@ -1,7 +1,6 @@
 """Module for uploading custom content"""
 
 import inspect
-from clint.textui import progress
 from .base import handle_response, rate_limited
 from .session import HexpySession
 from typing import Dict, Any, Sequence
@@ -77,10 +76,11 @@ class ContentUploadAPI:
         """
         batch_responses = {}
         for batch_num, batch in enumerate(
-            progress.bar([data[i : i + 1000] for i in range(0, len(data), 1000)])
+            [data[i : i + 1000] for i in range(0, len(data), 1000)]
         ):
             response = self.upload(batch)
-            batch_responses[f"Batch number {batch_num}"] = response
+            logger.info(f"Uploaded batch number: {batch_num}")
+            batch_responses[f"Batch {batch_num}"] = response
         return handle_response(batch_responses)
 
     def custom_field_upload(

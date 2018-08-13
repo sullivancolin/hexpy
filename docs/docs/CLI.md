@@ -52,12 +52,12 @@ Get Up-to-date API documentation as an html file
 $ hexpy api_documentation -o html
 ```
 
-Get list of all teams a user's teams.
+Get list of all the user's teams using [jq](https://stedolan.github.io/jq/).
 ```bash
-$ hexpy metadata team_list | jq -r '.teams[] | [.name, .id]| @tsv' | column -t -s $'\t'
+$ hexpy metadata team_list | jq -r '.teams[] | [.name, .id] | @tsv' | column -t -s $'\t'
 ```
 
-Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/)
+Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/).
 ```bash
 $ hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
 ```
@@ -115,5 +115,5 @@ $ hexpy stream_posts STREAM_ID --max_docs 1000 --output_type json
 
 Stream up to 10K real-time posts to a csv file with tab delimiter 
 ```bash
-$ hexpy stream_posts STREAM_ID --output_type csv --max_docs 10000 | pv -s 10000 -l > streamed_posts.csv
+$ hexpy stream_posts STREAM_ID --output_type csv --max_docs 10000 --separator '\t' | pv -s 10000 -l > streamed_posts.csv
 ```
