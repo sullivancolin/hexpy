@@ -102,6 +102,7 @@ Get the Realtime social guids for the Monitor.
 * doct_type: String, Specifies the document type.
 * start: Integer, specifies inclusive start date in epoch seconds.
 * received_after: Integer, Specifies inclusive received after date in epoch seconds.
+* maxresults: Integer, Specifies maximum results to fetch.
 
 ### tweets
 ```python
@@ -129,6 +130,17 @@ Get the Realtime volume for the Monitor.
 volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]
 ```
 Get the Realtime volume by sentiment for the Monitor.
+
+#### Arguments
+* monitor_id: Integer, the id of the monitor being requested.
+* start: Integer, specifies inclusive start date in epoch seconds.
+* doc_type: String, specifies the document type to filter.
+
+### volume_by_emotion
+```python
+volume_by_emotion(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]
+```
+Get the Realtime volume by emotion for the Monitor.
 
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.

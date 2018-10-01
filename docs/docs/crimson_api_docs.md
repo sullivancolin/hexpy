@@ -6,6 +6,11 @@
 * [Analysis Results](#analysis-results)
 * [Authentication](#authentication)
 * [Authors](#authors)
+* [Content Delete](#content-delete)
+* [Content Delete](#content-delete)
+* [Content Source Create](#content-source-create)
+* [Content Source Delete](#content-source-delete)
+* [Content Source List](#content-source-list)
 * [Content Upload](#content-upload)
 * [Content Upload Custom Fields Support](#content-upload-custom-fields-support)
 * [Day and Time](#day-and-time)
@@ -22,6 +27,8 @@
 * [Get Social Site Report](#get-social-site-report)
 * [Get User Activity Report](#get-user-activity-report)
 * [Get User Invitation Report](#get-user-invitation-report)
+* [Image Analysis Request](#image-analysis-request)
+* [Image Analysis Request](#image-analysis-request)
 * [Image analysis](#image-analysis)
 * [Instagram Followers](#instagram-followers)
 * [Instagram Hashtags](#instagram-hashtags)
@@ -50,6 +57,7 @@
 * [Realtime SocialGuids](#realtime-socialguids)
 * [Realtime Tweets](#realtime-tweets)
 * [Realtime Volume](#realtime-volume)
+* [Realtime Volume by Emotion](#realtime-volume-by-emotion)
 * [Realtime Volume by Sentiment](#realtime-volume-by-sentiment)
 * [Stream Add Monitor](#stream-add-monitor)
 * [Stream Create](#stream-create)
@@ -186,6 +194,80 @@
 
 ##### Response
 * `authors` - JSON array of zero or more authors objects that contain author-specific attributes
+	- Type: List
+	- Restricted = False
+
+
+-------------------------
+
+#### Content Delete
+##### Delete content via the API - Category: admin
+##### `/content/delete` - POST
+##### Parameters
+* `documentType` - The id of the document type to delete documents from
+	- Type: long
+	- Required = True
+
+##### Response
+
+
+-------------------------
+
+#### Content Delete
+##### Delete batch content via the API - Category: admin
+##### `/content/delete` - POST
+##### Parameters
+* `documentType` - The id of the document type to delete documents from
+	- Type: long
+	- Required = True
+* `batch` - The id of the document batch to delete
+	- Type: String
+	- Required = True
+
+##### Response
+
+
+-------------------------
+
+#### Content Source Create
+##### Content Source creation - Category: admin
+##### `/content/sources` - POST
+##### Parameters
+
+##### Response
+* `contentSource` - Content Source
+	- Type: ContentSourceModel
+	- Restricted = False
+
+
+-------------------------
+
+#### Content Source Delete
+##### Content Source deletion - Category: admin
+##### `/content/sources` - DELETE
+##### Parameters
+* `documentType` - The id of the document type to delete
+	- Type: long
+	- Required = True
+* `removeResults` - If true, removes the results associated with the documentType
+	- Type: boolean
+	- Required = True
+
+##### Response
+
+
+-------------------------
+
+#### Content Source List
+##### Content Source list - Category: admin
+##### `/content/sources/list` - GET
+##### Parameters
+* `team` - The id of the team to which the listed content sources belong
+	- Type: Long
+	- Required = True
+
+##### Response
+* `contentSources` - Content Sources
 	- Type: List
 	- Restricted = False
 
@@ -486,6 +568,26 @@
 * `data` - List of 0..n user invitation report rows
 	- Type: List
 	- Restricted = False
+
+
+-------------------------
+
+#### Image Analysis Request
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
+##### Parameters
+
+##### Response
+
+
+-------------------------
+
+#### Image Analysis Request
+##### To return list of all class IDs and names. - Category: results
+##### `/imageanalysis/resources/classes` - GET
+##### Parameters
+
+##### Response
 
 
 -------------------------
@@ -927,7 +1029,7 @@
 
 #### Realtime Configure
 ##### Configure the Realtime evaluators for the Monitor - Category: monitors
-##### `/realtime/monitor/configure` - GET
+##### `/realtime/monitor/configure` - POST
 ##### Parameters
 * `id` - The id of the monitor being requested
 	- Type: long
@@ -1053,6 +1155,9 @@
 * `receivedafter` - Specifies inclusive receivedafter date in epoch seconds
 	- Type: Long
 	- Required = False
+* `maxresults` - Specifies maximum results to fetch
+	- Type: Integer
+	- Required = False
 
 ##### Response
 * `realtimeData` - JSON object of monitor realtime data
@@ -1084,6 +1189,28 @@
 #### Realtime Volume
 ##### Get the Realtime volume for the Monitor - Category: monitors
 ##### `/realtime/monitor/volume` - GET
+##### Parameters
+* `id` - The id of the monitor being requested
+	- Type: long
+	- Required = True
+* `start` - Specifies inclusive start date in epoch seconds
+	- Type: Long
+	- Required = False
+* `type` - Specifies the document type to filter
+	- Type: List
+	- Required = False
+
+##### Response
+* `realtimeData` - JSON object of monitor realtime data
+	- Type: Map
+	- Restricted = False
+
+
+-------------------------
+
+#### Realtime Volume by Emotion
+##### Get the Realtime volume by emotion for the Monitor - Category: monitors
+##### `/realtime/monitor/volumebyemotion` - GET
 ##### Parameters
 * `id` - The id of the monitor being requested
 	- Type: long

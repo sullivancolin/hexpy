@@ -46,7 +46,7 @@ class ContentUploadAPI:
 
     def __init__(self, session: HexpySession) -> None:
         self.session = session.session
-        self.TEMPLATE = session.ROOT + "content/upload"
+        self.TEMPLATE = session.ROOT + "content/"
         for name, fn in inspect.getmembers(self, inspect.ismethod):
             if name not in ["batch_upload", "__init__"]:
                 setattr(
@@ -62,7 +62,7 @@ class ContentUploadAPI:
         """
         if len(data) <= 1000:
             return handle_response(
-                self.session.post(self.TEMPLATE, json={"items": data})
+                self.session.post(self.TEMPLATE + "upload", json={"items": data})
             )
         else:
             logger.info("More than 1000 items found.  Uploading in batches of 1000.")
@@ -95,8 +95,72 @@ class ContentUploadAPI:
         """
         return handle_response(
             self.session.post(
-                self.TEMPLATE,
+                self.TEMPLATE + "upload",
                 params={"documentType": document_type, "batch": batch},
                 json={"items": data},
             )
+        )
+
+    def delete_content_batch(
+        self, document_type: int, batch: int, data=Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Delete batch content via the API.
+
+        # Arguments
+            * documentType: Integer, The id of the document type to delete documents from.
+            * batch: String, The id of the document batch to delete.
+        """
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE + "delete",
+                params={"documentType": document_type, "batch": batch},
+                json=data,
+            )
+        )
+
+    def delete_content(
+        self, document_type: int, data: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """Delete content via the API.
+
+        # Arguments
+            * documentType: Integer, The id of the document type to delete documents from.
+        """
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE + "delete",
+                params={"documentType": document_type},
+                json=data,
+            )
+        )
+
+    def delete_content_source(
+        self, document_type: int, remove_results: bool
+    ) -> Dict[str, Any]:
+        """Content Source deletion.
+
+        # Arguments
+            * documentType: Integer, The id of the document type to delete/
+            * removeResults: Boolean, If true, removes the results associated with the documentType.
+        """
+        return handle_response(
+            self.session.delete(
+                self.TEMPLATE + "sources",
+                params={"documentType": document_type, "removeResults": remove_results},
+            )
+        )
+
+    def create_content_source(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Content Source creation."""
+        return handle_response(self.session.post(self.TEMPLATE + "sources", json=data))
+
+    def list_content_sources(self, team_id: int) -> Dict[str, Any]:
+        """
+        Content Source list.
+
+        # Arguments
+            * team: Integer, The id of the team to which the listed content sources belong.
+        """
+        return handle_response(
+            self.session.get(self.TEMPLATE + "sources/list", params={"team": team_id})
         )

@@ -73,14 +73,16 @@ class RealtimeAPI:
             self.session.get(self.TEMPLATE + "list", params={"team_id": team_id})
         )
 
-    def configure(self, monitor_id: int) -> Dict[str, Any]:
+    def configure(self, monitor_id: int, data: Dict[str, Any]) -> Dict[str, Any]:
         """Configure the Realtime evaluators for the Monitor.
 
         # Arguments
             monitor_id: Integer, the id of the monitor being requested.
         """
         return handle_response(
-            self.session.get(self.TEMPLATE + "configure", params={"id": monitor_id})
+            self.session.post(
+                self.TEMPLATE + "configure", params={"id": monitor_id}, json=data
+            )
         )
 
     def enable(self, monitor_id: int) -> Dict[str, Any]:
@@ -129,6 +131,7 @@ class RealtimeAPI:
         doc_type: str,
         start: int = None,
         received_after: int = None,
+        maxresults: int = None,
     ) -> Dict[str, Any]:
         """Get the Realtime social guids for the Monitor.
 
@@ -137,6 +140,7 @@ class RealtimeAPI:
             doc_type: String, Specifies the document type.
             start: Integer, specifies inclusive start date in epoch seconds.
             received_after: Integer, Specifies inclusive received after date in epoch seconds.
+            maxresults: Integer, Specifies maximum results to fetch.
         """
         return handle_response(
             self.session.get(
@@ -146,6 +150,7 @@ class RealtimeAPI:
                     "start": start,
                     "receivedafter": received_after,
                     "type": doc_type,
+                    "maxresults": maxresults,
                 },
             )
         )
@@ -193,6 +198,23 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "volumebysentiment",
+                params={"id": monitor_id, "start": start, "type": doc_type},
+            )
+        )
+
+    def volume_by_emotion(
+        self, monitor_id: int, start: int, doc_type: str
+    ) -> Dict[str, Any]:
+        """Get the Realtime volume by emotion for the Monitor.
+
+        # Arguments
+            monitor_id: Integer, the id of the monitor being requested.
+            start: Integer, specifies inclusive start date in epoch seconds.
+            doc_type: String, specifies the document type to filter.
+        """
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "volumebyemotion",
                 params={"id": monitor_id, "start": start, "type": doc_type},
             )
         )
