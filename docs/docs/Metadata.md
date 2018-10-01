@@ -10,7 +10,6 @@ Metadata API
 >>> session = HexpySession.load_auth_from_file()
 >>> metadata_client = MetadataAPI(session)
 >>> metadata_client.team_list()
->>> session.close()
 ```
 
 ## Methods
@@ -59,6 +58,12 @@ Returns all the cities or urban areas defined in the given country that you may 
 countries() -> Dict[str, Any]
 ```
 Returns all the countries that you may use to filter monitor results and to upload documents with location information.
+
+### image_classes
+```python
+image_classes() -> Dict[str, Any]
+```
+Return list of all class IDs and names.
 
 ### api_documentation
 ```python

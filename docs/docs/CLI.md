@@ -25,13 +25,13 @@ Options:
   --help     Show this message and exit.
 
 Commands:
-  api_documentation  Get API documentation for all endpoints.
-  export             Export monitor posts as json or to a...
+  api-documentation  Get API documentation for all endpoints.
+  export             Export monitor posts as json or to a spreadsheet.
   login              Session login credentials.
-  metadata           Get Metadata for account team, monitors, and...
+  metadata           Get Metadata for account team, monitors, and geography.
   results            Get Monitor results for 1 or more metrics.
-  stream_posts       Stream posts in real time, stop after a...
-  train              Upload spreadsheet file of training examples...
+  stream-posts       Stream posts in real time, stop after a maximum of 10K.
+  train              Upload spreadsheet file of training examples for...
   upload             Upload spreadsheet file as custom content.
 ```
 
@@ -49,7 +49,7 @@ Success!
 
 Get Up-to-date API documentation as an html file
 ```bash
-$ hexpy api_documentation -o html
+$ hexpy api-documentation -o html
 ```
 
 Get list of all the user's teams using [jq](https://stedolan.github.io/jq/).
@@ -110,10 +110,10 @@ $ cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -o excel
 
 Stream 1K real-time posts to json in the terminal
 ```bash
-$ hexpy stream_posts STREAM_ID --max_docs 1000 --output_type json 
+$ hexpy stream-posts STREAM_ID --max_docs 1000 --output_type json 
 ```
 
 Stream up to 10K real-time posts to a csv file with tab delimiter 
 ```bash
-$ hexpy stream_posts STREAM_ID --output_type csv --max_docs 10000 --separator '\t' | pv -s 10000 -l > streamed_posts.csv
+$ hexpy stream-posts STREAM_ID --output_type csv --max_docs 10000 --separator '\t' | pv -s 10000 -l > streamed_posts.csv
 ```

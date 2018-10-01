@@ -84,6 +84,12 @@ class MetadataAPI:
             self.session.get(self.TEMPLATE + "geography/info/countries")
         )
 
+    def image_classes(self) -> Dict[str, Any]:
+        """Return list of all class IDs and names."""
+        return handle_response(
+            self.session.get(self.TEMPLATE + "imageanalysis/resources/classes")
+        )
+
     def api_documentation(self) -> Dict[str, Any]:
         """Return latest JSON version of Crimson Hexagon API endpoint documentation."""
         return handle_response(self.session.get(self.TEMPLATE + "documentation"))

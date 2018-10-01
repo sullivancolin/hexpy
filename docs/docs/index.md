@@ -28,6 +28,8 @@ $ pip install hexpy/
 
 ## Project Homepage
 
+Visit [hexpy](https://sullivancolin.github.io/hexpy/) for full Documenation
+
 Visit [Github](https://github.com/sullivancolin/hexpy) project page for full source code.
 
 ## Quick Start
@@ -54,6 +56,5 @@ Visit [Github](https://github.com/sullivancolin/hexpy) project page for full sou
    'name': 'Basic Negative',
    'sortOrder': 102,
    ...
-
->>> session.close()
+}
 ```

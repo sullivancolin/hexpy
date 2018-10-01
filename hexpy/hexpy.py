@@ -217,13 +217,26 @@ def results(
     click.echo(json.dumps(results[0]["results"][0], ensure_ascii=False))
 
 
+metadata_choices = [
+    "team_list",
+    "monitor_list",
+    "geography",
+    "states",
+    "cities",
+    "countries",
+    "image_classes",
+    "monitor_details",
+    "stream_list",
+]
+
+
 @cli.command()
 @click.option("--team_id", "-t", default=None, help="team id for monitor list")
 @click.option(
     "--country", "-c", default=None, help="country code for city or state geo"
 )
 @click.option("--monitor_id", "-m", default=None, help="monitor id for details")
-@click.argument("info", type=str)
+@click.argument("info", type=click.Choice(metadata_choices))
 @click.pass_context
 def metadata(
     ctx, info: str, team_id: int = None, country: str = None, monitor_id: int = None
@@ -238,6 +251,7 @@ def metadata(
         * states
         * cities
         * countries
+        * image_classes
         * monitor_details
         * stream_list
     """
@@ -253,6 +267,7 @@ def metadata(
         "states": client.states,
         "cities": client.cities,
         "countries": client.countries,
+        "image_classes": client.image_classes,
         "monitor_details": monitor_client.details,
         "stream_list": stream_client.stream_list,
     }
@@ -715,7 +730,7 @@ def stream_posts(
             raise click.ClickException("Output type must be either csv or json")
         so_far += len(posts)
         if response["totalPostsAvailable"] == 0:
-            time.sleep(.6)
+            time.sleep(0.6)
 
 
 if __name__ == "__main__":

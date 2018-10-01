@@ -6,8 +6,8 @@ from setuptools import setup, find_packages
 requirements = [
     "xlrd>=1.1.0",
     "requests>=2.18.4",
-    "click>=6.7",
-    "click-help-colors>=0.4",
+    "click>=7.0",
+    "click-help-colors>=0.5",
     "pandas>=0.20.3",
     "openpyxl>=2.4.8",
     "pendulum>=1.3.2",

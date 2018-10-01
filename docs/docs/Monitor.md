@@ -13,7 +13,6 @@ Monitor API
 >>> start = details["resultsStart"]
 >>> end = details["resultsEnd"]
 >>> monitor_client.posts(monitor_id, start, end)
->>> session.close()
 ```
 
 ## Methods
@@ -23,7 +22,6 @@ Monitor API
 ```python
 details(monitor_id: int) -> Dict[str, Any]
 ```
-
 Return detailed metadata about the selected monitor, including category metadata.
 
 #### Arguments
@@ -33,7 +31,6 @@ Return detailed metadata about the selected monitor, including category metadata
 ```python
 audit(monitor_id: int) -> Dict[str, Any]
 ```
-
 Return audit information about the selected monitor, sorted from most to least recent.
 
 #### Arguments
@@ -43,7 +40,6 @@ Return audit information about the selected monitor, sorted from most to least r
 ```python
 word_cloud(monitor_id: int, start: str, end: str, filter_string: str = None) -> Dict[str, Any]
 ```
-
 Return an alphabetized list of the top 300 words in a monitor. This data is generated using documents randomly selected from the pool defined by the submitted parameters.
 
 #### Arguments
@@ -57,7 +53,6 @@ Return an alphabetized list of the top 300 words in a monitor. This data is gene
 ```python
 training_posts(monitor_id: int, category: int = None) -> Dict[str, Any]
 ```
-
 Return a list of the training posts for a given opinion monitor. The selected monitor must be an opinion monitor; requests for other monitor types will return an error. By default, all training posts for all categories in a monitor will be returned, however you may pass a category ID in your request to get training posts from a specific category.
 
 #### Arguments
@@ -68,7 +63,6 @@ Return a list of the training posts for a given opinion monitor. The selected mo
 ```python
 train_monitor(monitor_id: int, category_id: int, data: List[Dict[str, Any]]) -> Dict[str, Any]
 ```
-
 Upload individual training document monitors programmatically.
 
 Upload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. [Reference](https://apidocs.crimsonhexagon.com/reference#training-document-upload)
@@ -82,7 +76,6 @@ Upload a list documents of one category per request. Due to the restrictions inv
 ```python
 interest_affinities(monitor_id: int, start: str, end: str, daily: bool = False, document_source: str = None) -> Dict[str, Any]
 ```
-
 Return information about the authors in a monitor and their affinity with a range of pre-defined topics.
 
 #### Arguments
@@ -96,7 +89,6 @@ Return information about the authors in a monitor and their affinity with a rang
 ```python
 topics(monitor_id: int, start: str, end: str, filter_string: str = None ) -> Dict[str, Any]:
 ```
-
 Return the XML data that can be used to generate clustering visualizations using third-party software.
 
 #### Arguments
@@ -109,7 +101,6 @@ Return the XML data that can be used to generate clustering visualizations using
 ```python
 topic_waves(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
-
 Return the Topic waves information for a monitor.
 
 #### Arguments
@@ -122,7 +113,6 @@ Return the Topic waves information for a monitor.
 ```python
 top_sources(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
-
 Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
 #### Arguments
@@ -134,7 +124,6 @@ Return volume information related to the sites and content sources (e.g. Twitter
 ```python
 image_results(monitor_id: int, start: str, end: str, object_type: str = "", top: int = 100) -> Dict[str, Any]
 ```
-
 Return a breakdown of the top image classes within a provided monitor.
 
 #### Arguments
@@ -148,7 +137,6 @@ Return a breakdown of the top image classes within a provided monitor.
 ```python
 volume(monitor_id: int, start: str, end: str, group_by: str = "DAILY") -> Dict[str, Any]
 ```
-
 Return volume of total posts in a monitor.
 
 #### Arguments
@@ -161,7 +149,6 @@ Return volume of total posts in a monitor.
 ```python
 dayandtime(monitor_id: int, start: str, end: str, aggregate_by_day: bool = False, use_local_time: bool = False) -> Dict[str, Any]
 ```
-
 Return volume metrics for a given monitor split by date.
 
 #### Arguments
@@ -175,7 +162,6 @@ Return volume metrics for a given monitor split by date.
 ```python
 sentiment_and_categories(monitor_id: int, start: str, end: str, hide_excluded: bool = False) -> Dict[str, Any]
 ```
-
 Return aggregate volume, sentiment, emotion and opinion category analysis for a given monitor.
 
 #### Arguments
@@ -208,7 +194,6 @@ Return aggregated results for one or monitor ids, for one or more date pairs, fo
 ```python
 posts(monitor_id: int, start: str, end: str, filter_string: str = None, extend_limit: bool = False, full_contents: bool = False, geotagged: bool = False) -> Dict[str, Any]
 ```
-
 Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
 
 #### Arguments
@@ -289,7 +274,6 @@ Return volume metrics for a given monitor split by state.
 ```python
 countries(monitor_id: int, start: str, end: str) -> Dict[str, Any]
 ```
-
 Return volume metrics for a given monitor split by country.
 
 #### Arguments

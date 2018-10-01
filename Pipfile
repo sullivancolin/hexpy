@@ -21,7 +21,7 @@ ipython = "*"
 mkdocs-material = "*"
 ipdb = "*"
 better-exceptions = "*"
-tornado = "<5.0"
+pylint = "*"
 
 [requires]
 python_version = "3.7"
