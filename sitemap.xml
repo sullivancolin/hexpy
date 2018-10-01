@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Session/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Metadata/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Monitor/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Analysis/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Upload/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Streams/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Realtime/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Custom/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/Activity/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/CLI/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>/crimson_api_docs/</loc>
-     <lastmod>2018-08-13</lastmod>
+     <loc>None</loc>
+     <lastmod>2018-10-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
