@@ -123,7 +123,7 @@ def format_endpoint(endpoint: dict) -> str:
 def docs_to_text(json_docs: dict, mode: str = "md") -> str:
     """Convert API documentation JSON to markdown or github flavored markdown."""
     endpoints = json_docs["endpoints"]
-    doc = f"# Crimson Hexagon API Documentation\n**ROOT_URL = `{HexpySession.ROOT}`**\n\n### Endpoints\n"
+    doc = f"# Crimson Hexagon API Documentation\n**API URL: `{HexpySession.ROOT[:-1]}`**\n\n### Endpoints\n"
 
     for i, e in enumerate(endpoints):
 
@@ -708,6 +708,7 @@ def stream_posts(
     client = StreamsAPI(session)
     so_far = 0
     request_count = 0
+    attempts = 0
     first_fetch = True
     if max_docs > 10000:
         max_docs = 10000
@@ -715,6 +716,12 @@ def stream_posts(
         request_count += 1
         response = client.posts(stream_id)
         posts = response["posts"]
+        if response["totalPostsAvailable"] == 0:
+            if attempts > 15:
+                raise click.ClickException("Stream volume is zero.")
+            time.sleep(0.6)
+            attempts += 1
+            continue
         if output_type == "json":
             for p in posts:
                 click.echo(json.dumps(p, ensure_ascii=False))
@@ -729,8 +736,6 @@ def stream_posts(
         else:
             raise click.ClickException("Output type must be either csv or json")
         so_far += len(posts)
-        if response["totalPostsAvailable"] == 0:
-            time.sleep(0.6)
 
 
 if __name__ == "__main__":

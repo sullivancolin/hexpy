@@ -1,6 +1,6 @@
 .PHONY: clean clean-test clean-pyc clean-build docs
 
- ## remove all build, test, coverage and Python artifacts
+## remove all build, test, coverage and Python artifacts
 clean: clean-build clean-pyc clean-test docs-clean
 
 ## remove build artifacts

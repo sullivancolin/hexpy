@@ -14,7 +14,7 @@ class HexpySession:
 
     # Example Usage
 
-    Instantiate with token, or username. Optionally include password, or enter it at the prompt.
+    Login using username. Optionally include password, or enter it at the prompt.
 
     ```python
     >>> from hexpy import HexpySession
@@ -27,7 +27,7 @@ class HexpySession:
     Enter password: *********
     >>> session.save_token()
     ```
-    or
+    or instantiate a session using a saved token.
     ```python
     >>> session = HexpySession(token="previously_saved_token")
     ```

@@ -2,7 +2,7 @@ site_name: hexpy
 site_description: A Python client for the Crimson Hexagon API.
 repo_url: https://github.com/sullivancolin/hexpy
 repo_name: hexpy
-pages:
+nav:
     - Home: index.md
     - Session: Session.md
     - Metadata: Metadata.md
@@ -17,6 +17,8 @@ pages:
     - Crimson Api Documentation: crimson_api_docs.md
 theme:
   name: 'material'
+  font:
+    code: 'Fira Code'
   palette:
     primary: 'teal'
     accent: 'red'

@@ -1,5 +1,5 @@
 # Crimson Hexagon API Documentation
-**ROOT_URL = `https://api.crimsonhexagon.com/api/`**
+**API URL: `https://api.crimsonhexagon.com/api`**
 
 ### Endpoints
 * [Analysis Request](#analysis-request)
@@ -201,19 +201,6 @@
 -------------------------
 
 #### Content Delete
-##### Delete content via the API - Category: admin
-##### `/content/delete` - POST
-##### Parameters
-* `documentType` - The id of the document type to delete documents from
-	- Type: long
-	- Required = True
-
-##### Response
-
-
--------------------------
-
-#### Content Delete
 ##### Delete batch content via the API - Category: admin
 ##### `/content/delete` - POST
 ##### Parameters
@@ -222,6 +209,19 @@
 	- Required = True
 * `batch` - The id of the document batch to delete
 	- Type: String
+	- Required = True
+
+##### Response
+
+
+-------------------------
+
+#### Content Delete
+##### Delete content via the API - Category: admin
+##### `/content/delete` - POST
+##### Parameters
+* `documentType` - The id of the document type to delete documents from
+	- Type: long
 	- Required = True
 
 ##### Response
@@ -573,8 +573,8 @@
 -------------------------
 
 #### Image Analysis Request
-##### To return list of class IDs and names with specified class type. - Category: results
-##### `/imageanalysis/resources/classes/type` - GET
+##### To return list of all class IDs and names. - Category: results
+##### `/imageanalysis/resources/classes` - GET
 ##### Parameters
 
 ##### Response
@@ -583,8 +583,8 @@
 -------------------------
 
 #### Image Analysis Request
-##### To return list of all class IDs and names. - Category: results
-##### `/imageanalysis/resources/classes` - GET
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
 ##### Parameters
 
 ##### Response

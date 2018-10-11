@@ -3,7 +3,7 @@ Session
 
 ## Creating a session and generating a token for API requests.
 
-Login using token, or username. Optionally include password, or enter it at the prompt.
+Login using username. Optionally include password, or enter it at the prompt.
 ```python
 >>> from hexpy import HexpySession
 >>> session = HexpySession.login(username="username@gmail.com", password="secretpassword")
@@ -15,7 +15,7 @@ or
 Enter password: *********
 >>> session.save_token()
 ```
-or instantiate a session using a token
+or instantiate a session using a saved token
 ```python
 >>> session = HexpySession(token="previously_saved_token")
 ```
@@ -26,8 +26,8 @@ Create instance by loading token from file.  Default is `~/.hexpy/credentials.js
 Create instance with context manager to close TCP session automatically when finished
 ```python
 >>> with HexpySession.load_auth_from_file() as session:
-...:     client = MonitorAPI(session)
-...:     # use client to call API multiple times with same session
+     client = MonitorAPI(session)
+     ... # use client to call API multiple times with same session
 
 >>> # session TCP connection is closed until next call to API
 ```
