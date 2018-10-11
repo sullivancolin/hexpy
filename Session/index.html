@@ -58,8 +58,8 @@
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
-        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=:300,400,400i,700|Fira+Code">
+        <style>body,input{font-family:"","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Code","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
@@ -627,7 +627,7 @@
                 
                 <h1 id="session">Session</h1>
 <h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.</h2>
-<p>Login using token, or username. Optionally include password, or enter it at the prompt.</p>
+<p>Login using username. Optionally include password, or enter it at the prompt.</p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@gmail.com&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;secretpassword&quot;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">save_token</span><span class="p">()</span>  <span class="c1"># saving token to ~/.hexpy/credentials.json</span>
@@ -641,7 +641,7 @@
 </pre></div>
 
 
-<p>or instantiate a session using a token</p>
+<p>or instantiate a session using a saved token</p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;previously_saved_token&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -653,8 +653,8 @@
 
 <p>Create instance with context manager to close TCP session automatically when finished</p>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-<span class="o">...</span><span class="p">:</span>     <span class="n">client</span> <span class="o">=</span> <span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-<span class="o">...</span><span class="p">:</span>     <span class="c1"># use client to call API multiple times with same session</span>
+     <span class="n">client</span> <span class="o">=</span> <span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
+     <span class="o">...</span> <span class="c1"># use client to call API multiple times with same session</span>
 
 <span class="o">&gt;&gt;&gt;</span> <span class="c1"># session TCP connection is closed until next call to API</span>
 </pre></div>
