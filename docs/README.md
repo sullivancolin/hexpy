@@ -1,20 +1,32 @@
 Generating the docs
 ----------
 
-Install requirements:
+### Install requirements:
 
-    pip install -r requirements_dev.txt
+```bash
+$ pipenv install --dev
+$ pipenv shell
+```
 
-Change directories into the docs folder:
+### Build the docs
 
-    cd docs
+```bash
+$ make docs
+```
 
-Use [mkdocs](http://www.mkdocs.org/) structure to update the documentation. Test locally with:
+### Serve docs locally
+```bash
+$ make serve-docs
+```
 
-    mkdocs serve
 
-Once the docs look good, publish to `gh-pages` branch with:
+### deploy docs using `gh-pages`
 
-    mkdocs gh-deploy --clean
+```bash
+$ make releasedocs
+```
 
-** Note **: Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.
+**Note**:
+
+1. Never edit the the gh-pages git branch by hand. Only use via the `mkdocs gh-deploy` command. 
+2. Never edit the generated site by hand because using `gh-deploy` blows away the `gh-pages` branch and you'll lose your edits.

@@ -72,8 +72,12 @@ upload: dist
 	twine upload -r pypi dist/hexpy*
 
 ## increment the version, and tag in git
-bumpversion: clean
-	bumpversion --verbose patch
+bumpversion-patch: clean
+	bumpversion --verbose --dry-run patch
+
+## increment the version, and tag in git
+bumpversion-minor: clean
+	bumpversion --verbose --dry-run minor
 
 ## builds source and wheel package
 dist: clean

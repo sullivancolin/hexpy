@@ -37,7 +37,6 @@
 * [Interest Affinities](#interest-affinities)
 * [Monitor Audit](#monitor-audit)
 * [Monitor Detail](#monitor-detail)
-* [Monitor Dump](#monitor-dump)
 * [Monitor Image Results](#monitor-image-results)
 * [Monitor List](#monitor-list)
 * [Monitor Results](#monitor-results)
@@ -76,7 +75,6 @@
 * [Twitter Sent Posts](#twitter-sent-posts)
 * [Twitter Total Engagement](#twitter-total-engagement)
 * [Volume](#volume)
-* [WhitelistBlacklist](#whitelistblacklist)
 * [Word Cloud](#word-cloud)
 
 #### Analysis Request
@@ -201,14 +199,11 @@
 -------------------------
 
 #### Content Delete
-##### Delete batch content via the API - Category: admin
+##### Delete content via the API - Category: admin
 ##### `/content/delete` - POST
 ##### Parameters
 * `documentType` - The id of the document type to delete documents from
 	- Type: long
-	- Required = True
-* `batch` - The id of the document batch to delete
-	- Type: String
 	- Required = True
 
 ##### Response
@@ -217,11 +212,14 @@
 -------------------------
 
 #### Content Delete
-##### Delete content via the API - Category: admin
+##### Delete batch content via the API - Category: admin
 ##### `/content/delete` - POST
 ##### Parameters
 * `documentType` - The id of the document type to delete documents from
 	- Type: long
+	- Required = True
+* `batch` - The id of the document batch to delete
+	- Type: String
 	- Required = True
 
 ##### Response
@@ -573,8 +571,8 @@
 -------------------------
 
 #### Image Analysis Request
-##### To return list of all class IDs and names. - Category: results
-##### `/imageanalysis/resources/classes` - GET
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
 ##### Parameters
 
 ##### Response
@@ -583,8 +581,8 @@
 -------------------------
 
 #### Image Analysis Request
-##### To return list of class IDs and names with specified class type. - Category: results
-##### `/imageanalysis/resources/classes/type` - GET
+##### To return list of all class IDs and names. - Category: results
+##### `/imageanalysis/resources/classes` - GET
 ##### Parameters
 
 ##### Response
@@ -757,22 +755,6 @@
 ##### Response
 * `monitorDetail` - JSON array of monitor details
 	- Type: MonitorDetailModel
-	- Restricted = False
-
-
--------------------------
-
-#### Monitor Dump
-##### Get detailed information of the monitor - Category: admin
-##### `/monitor/dump` - GET
-##### Parameters
-* `id` - The id of the monitor being requested
-	- Type: long
-	- Required = True
-
-##### Response
-* `monitorDump` - Monitor dump
-	- Type: MonitorDumpModel
 	- Restricted = False
 
 
@@ -1606,22 +1588,6 @@
 	- Restricted = False
 * `volume` - JSON array of 1..n volume information for grouped periods
 	- Type: List
-	- Restricted = False
-
-
--------------------------
-
-#### WhitelistBlacklist
-##### Detailed Information about a specific whitelistblacklists associated to the monitor - Category: visualizations
-##### `/whitelistblacklist/{whitelistblacklistid}/detail` - GET || POST
-##### Parameters
-* `whitelistBlacklistId` - The id of the whitelistblacklist being requested
-	- Type: Long
-	- Required = True
-
-##### Response
-* `whitelistblacklistdetail` - JSON object of whitelistblacklist detail
-	- Type: WhitelistBlacklistDetailModel
 	- Restricted = False
 
 

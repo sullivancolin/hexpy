@@ -90,7 +90,7 @@ Content Source creation.
 
 ### delete_content_source
 ```python
-delete_content_type(document_type: int, remove_results: bool ) -> Dict[str, Any]
+delete_content_type(document_type: int, remove_results: bool) -> Dict[str, Any]
 ```
 Content Source deletion.
 
