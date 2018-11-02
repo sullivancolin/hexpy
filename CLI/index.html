@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.6">
     
     
       
@@ -100,7 +100,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#hexpy-command-line-interface" tabindex="1" class="md-skip">
+      <a href="#hexpy-command-line-interface" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -520,7 +520,7 @@
                 
                 
                 <h1 id="hexpy-command-line-interface">Hexpy Command Line Interface</h1>
-<p><strong>hexpy</strong> comes with a console script for conveniently automating several common tasks</p>
+<p>This project comes with a command line script, <strong>hexpy</strong>, for conveniently automating several common tasks</p>
 <h2 id="helpful-commands">Helpful Commands</h2>
 <ul>
 <li>Export sample of monitor posts to a spreadsheet.</li>
@@ -542,7 +542,7 @@ Options:
 Commands:
   api-documentation  Get API documentation <span class="k">for</span> all endpoints.
   <span class="nb">export</span>             Export monitor posts as json or to a spreadsheet.
-  login              Session login credentials.
+  login              Get API token with username and password and save to...
   metadata           Get Metadata <span class="k">for</span> account team, monitors, and geography.
   results            Get Monitor results <span class="k">for</span> <span class="m">1</span> or more metrics.
   stream-posts       Stream posts in real time, stop after a maximum of 10K.
@@ -553,11 +553,11 @@ Commands:
 
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples</h2>
-<p>Login to Crimson API with you credentials and save your token</p>
+<p>Login to Crimson API with you credentials and save your token to <code>~/.hexpy/token.json</code>.</p>
 <div class="codehilite"><pre><span></span>$ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
-Success!
+Success! Saved token to ~/.hexpy/token.json
 </pre></div>
 
 
@@ -701,7 +701,7 @@ Success!
       
     </div>
     
-      <script src="../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../assets/javascripts/application.5e60981f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
