@@ -1,7 +1,7 @@
 Hexpy Command Line Interface
 =============================
 
-**hexpy** comes with a console script for conveniently automating several common tasks
+This project comes with a command line script, **hexpy**, for conveniently automating several common tasks
 
 ## Helpful Commands
 
@@ -27,7 +27,7 @@ Options:
 Commands:
   api-documentation  Get API documentation for all endpoints.
   export             Export monitor posts as json or to a spreadsheet.
-  login              Session login credentials.
+  login              Get API token with username and password and save to...
   metadata           Get Metadata for account team, monitors, and geography.
   results            Get Monitor results for 1 or more metrics.
   stream-posts       Stream posts in real time, stop after a maximum of 10K.
@@ -39,12 +39,12 @@ See how each `hexpy` command works by running `hexpy COMMAND --help`
 
 ## Examples
 
-Login to Crimson API with you credentials and save your token
+Login to Crimson API with you credentials and save your token to `~/.hexpy/token.json`.
 ```bash
 $ hexpy login --force
 Enter username: username@email.com
 Enter password: ***********
-Success!
+Success! Saved token to ~/.hexpy/token.json
 ```
 
 Get Up-to-date API documentation as an html file

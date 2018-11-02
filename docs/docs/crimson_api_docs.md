@@ -102,7 +102,6 @@
 	- Type: ApiAnalysisContractInfo
 	- Restricted = False
 
-
 -------------------------
 
 #### Analysis Results
@@ -145,7 +144,6 @@
 	- Type: ApiAnalysisTaskRequest
 	- Restricted = False
 
-
 -------------------------
 
 #### Authentication
@@ -173,7 +171,6 @@
 	- Type: Date
 	- Restricted = False
 
-
 -------------------------
 
 #### Authors
@@ -195,20 +192,6 @@
 	- Type: List
 	- Restricted = False
 
-
--------------------------
-
-#### Content Delete
-##### Delete content via the API - Category: admin
-##### `/content/delete` - POST
-##### Parameters
-* `documentType` - The id of the document type to delete documents from
-	- Type: long
-	- Required = True
-
-##### Response
-
-
 -------------------------
 
 #### Content Delete
@@ -224,6 +207,17 @@
 
 ##### Response
 
+-------------------------
+
+#### Content Delete
+##### Delete content via the API - Category: admin
+##### `/content/delete` - POST
+##### Parameters
+* `documentType` - The id of the document type to delete documents from
+	- Type: long
+	- Required = True
+
+##### Response
 
 -------------------------
 
@@ -236,7 +230,6 @@
 * `contentSource` - Content Source
 	- Type: ContentSourceModel
 	- Restricted = False
-
 
 -------------------------
 
@@ -253,7 +246,6 @@
 
 ##### Response
 
-
 -------------------------
 
 #### Content Source List
@@ -268,7 +260,6 @@
 * `contentSources` - Content Sources
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -288,7 +279,6 @@
 	- Type: Long
 	- Restricted = False
 
-
 -------------------------
 
 #### Content Upload Custom Fields Support
@@ -306,7 +296,6 @@
 * `batchId` - The id of the batch to which these docs belong
 	- Type: String
 	- Restricted = False
-
 
 -------------------------
 
@@ -335,7 +324,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Demographics - Age
@@ -356,7 +344,6 @@
 * `ageCounts` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -379,7 +366,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Facebook Admin Posts
@@ -400,7 +386,6 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -423,7 +408,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Facebook Total Activity
@@ -445,7 +429,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Geography - All Resources
@@ -457,7 +440,6 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -474,7 +456,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Geography - Countries
@@ -486,7 +467,6 @@
 * `resources` - JSON array with the geography resources
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -503,7 +483,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Get Monitor Creation Report
@@ -518,7 +497,6 @@
 * `data` - List of 0..n monitor creation report rows
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -535,7 +513,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Get User Activity Report
@@ -550,7 +527,6 @@
 * `data` - List of 0..n user activity report rows
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -567,17 +543,6 @@
 	- Type: List
 	- Restricted = False
 
-
--------------------------
-
-#### Image Analysis Request
-##### To return list of class IDs and names with specified class type. - Category: results
-##### `/imageanalysis/resources/classes/type` - GET
-##### Parameters
-
-##### Response
-
-
 -------------------------
 
 #### Image Analysis Request
@@ -587,6 +552,14 @@
 
 ##### Response
 
+-------------------------
+
+#### Image Analysis Request
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
+##### Parameters
+
+##### Response
 
 -------------------------
 
@@ -602,7 +575,6 @@
 * `imgData` - Message object contains request parameters and image classification result
 	- Type: ImageAnalysisData
 	- Restricted = False
-
 
 -------------------------
 
@@ -625,7 +597,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Instagram Hashtags
@@ -646,7 +617,6 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -669,7 +639,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Instagram Total Activity
@@ -690,7 +659,6 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -725,7 +693,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Monitor Audit
@@ -741,7 +708,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Monitor Detail
@@ -756,7 +722,6 @@
 * `monitorDetail` - JSON array of monitor details
 	- Type: MonitorDetailModel
 	- Restricted = False
-
 
 -------------------------
 
@@ -785,7 +750,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Monitor List
@@ -800,7 +764,6 @@
 * `monitors` - JSON array of monitors viewable by the user
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -825,7 +788,6 @@
 * `results` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -860,7 +822,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Monitor Results by Country
@@ -890,7 +851,6 @@
 * `data` - JSON array of monitor geography result information
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -925,7 +885,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Monitor Training Posts
@@ -943,7 +902,6 @@
 * `trainingPosts` - JSON array of training posts for the selected monitor or category in a monitor
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -984,7 +942,6 @@
 	- Type: int
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Cashtags
@@ -1006,7 +963,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Configure
@@ -1021,7 +977,6 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
-
 
 -------------------------
 
@@ -1038,7 +993,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Disable
@@ -1051,7 +1005,6 @@
 
 ##### Response
 
-
 -------------------------
 
 #### Realtime Enable
@@ -1063,7 +1016,6 @@
 	- Required = True
 
 ##### Response
-
 
 -------------------------
 
@@ -1086,7 +1038,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Monitor List
@@ -1102,7 +1053,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Retweets
@@ -1117,7 +1067,6 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
-
 
 -------------------------
 
@@ -1146,7 +1095,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Tweets
@@ -1164,7 +1112,6 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
-
 
 -------------------------
 
@@ -1187,7 +1134,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Realtime Volume by Emotion
@@ -1208,7 +1154,6 @@
 * `realtimeData` - JSON object of monitor realtime data
 	- Type: Map
 	- Restricted = False
-
 
 -------------------------
 
@@ -1231,7 +1176,6 @@
 	- Type: Map
 	- Restricted = False
 
-
 -------------------------
 
 #### Stream Add Monitor
@@ -1246,7 +1190,6 @@
 	- Required = True
 
 ##### Response
-
 
 -------------------------
 
@@ -1263,7 +1206,6 @@
 	- Type: String
 	- Restricted = False
 
-
 -------------------------
 
 #### Stream Delete
@@ -1275,7 +1217,6 @@
 	- Required = True
 
 ##### Response
-
 
 -------------------------
 
@@ -1291,7 +1232,6 @@
 * `streams` - JSON array of streams viewable by the user
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -1314,7 +1254,6 @@
 	- Type: int
 	- Restricted = False
 
-
 -------------------------
 
 #### Stream Remove Monitor
@@ -1330,7 +1269,6 @@
 
 ##### Response
 
-
 -------------------------
 
 #### Stream Update Monitor
@@ -1343,7 +1281,6 @@
 
 ##### Response
 
-
 -------------------------
 
 #### Team List
@@ -1355,7 +1292,6 @@
 * `teams` - JSON array of teams accessible by the user
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -1377,7 +1313,6 @@
 * `contentSources` - JSON array of zero or more content sources objects that contain results for each date requested
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -1405,7 +1340,6 @@
 * `clustering` - XML string for generating visualizations
 	- Type: String
 	- Restricted = False
-
 
 -------------------------
 
@@ -1446,7 +1380,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Training Document Upload
@@ -1461,7 +1394,6 @@
 * `message` - Success response indicating a training post has been sucessfully uploaded
 	- Type: String
 	- Restricted = False
-
 
 -------------------------
 
@@ -1484,7 +1416,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Twitter Followers
@@ -1505,7 +1436,6 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -1528,7 +1458,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Twitter Total Engagement
@@ -1549,7 +1478,6 @@
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
 	- Restricted = False
-
 
 -------------------------
 
@@ -1590,7 +1518,6 @@
 	- Type: List
 	- Restricted = False
 
-
 -------------------------
 
 #### Word Cloud
@@ -1617,6 +1544,5 @@
 * `data` - Map of the top 300 terms appearing in a monitor to their frequency in that monitor
 	- Type: Map
 	- Restricted = False
-
 
 -------------------------

@@ -70,7 +70,8 @@ ENDPOINT_TEMPLATE = """
 ##### Parameters
 {params}
 ##### Response
-{results}\n\n-------------------------"""
+{results}
+-------------------------"""
 
 
 def format_parameter(param: dict) -> str:
@@ -155,7 +156,7 @@ def cli():
     "--force/--no-force",
     "-f",
     default=False,
-    help="force signing in again and storing token",
+    help="force signing in again and refreshing saved token",
 )
 @click.option(
     "--expiration/--no-expiration",
@@ -164,7 +165,7 @@ def cli():
     help="Get token valid for 24 hours, or with no expiration",
 )
 def login(force: bool = False, expiration: bool = True) -> HexpySession:
-    """Session login credentials."""
+    """Get API token with username and password and save to ~/.hexpy/token.json."""
     try:
         if not force:
             session = HexpySession.load_auth_from_file()
@@ -174,9 +175,11 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
     except IOError:
         username = input("Enter username: ")
         password = getpass(prompt="Enter password: ")
-        session = HexpySession.login(username, password, no_expiration=not expiration)
+        session = HexpySession.login(
+            username, password, no_expiration=not expiration, force=force
+        )
         session.save_token()
-        click.echo("Success!")
+        click.echo("Success! Saved token to ~/.hexpy/token.json")
         return session
 
 

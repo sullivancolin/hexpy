@@ -7,7 +7,7 @@ Login using username. Optionally include password, or enter it at the prompt.
 ```python
 >>> from hexpy import HexpySession
 >>> session = HexpySession.login(username="username@gmail.com", password="secretpassword")
->>> session.save_token()  # saving token to ~/.hexpy/credentials.json
+>>> session.save_token()  # saving token to ~/.hexpy/token.json
 ```
 or
 ```python
@@ -19,7 +19,7 @@ or instantiate a session using a saved token
 ```python
 >>> session = HexpySession(token="previously_saved_token")
 ```
-Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
+Create instance by loading token from file.  Default is `~/.hexpy/token.json`
 ```python
 >>> session = HexpySession.load_auth_from_file()
 ```
@@ -36,7 +36,7 @@ Create instance with context manager to close TCP session automatically when fin
 
 ### login
 ```python
-login(username: str, password: str = None, no_expiration: bool = False) -> HexpySession
+login(username: str, password: str = None, no_expiration: bool = False, force: bool = False) -> HexpySession
 ```
 Instantiate class from username and password.
 #### Arguments
@@ -50,20 +50,20 @@ save_token(path: str = None) -> None
 ```
 Save authorization token.
 #### Arguments
-* path: String, path to store credentials. default is `~/.hexpy/credentials.json`
+* path: String, path to store API token. default is `~/.hexpy/token.json`
 
 ### load_auth_from_file
 ```python
 load_auth_from_file(path: str = None) -> HexpySession
 ```
-Instantiate class from previously saved credentials file.
+Instantiate class from previously saved token file.
 #### Arguments
-* path: String, path to store credentials. default is `~/.hexpy/credentials.json`
+* path: String, path to store API token. default is default is `~/.hexpy/token.json`
 
 ### close
 
 ```python
 close() -> None
 ```
-Close open connection to API server.
+Close open TCP connection to API server.
 

@@ -31,7 +31,7 @@ class HexpySession:
     ```python
     >>> session = HexpySession(token="previously_saved_token")
     ```
-    Create instance by loading token from file.  Default is `~/.hexpy/credentials.json`
+    Create instance by loading token from file.  Default is `~/.hexpy/token.json`
     ```python
     >>> session = HexpySession.load_auth_from_file()
     ```
@@ -46,7 +46,7 @@ class HexpySession:
     ```
     """
 
-    CRED_FILE = Path.home() / ".hexpy" / "credentials.json"
+    TOKEN_FILE = Path.home() / ".hexpy" / "token.json"
 
     ROOT = "https://api.crimsonhexagon.com/api/"
 
@@ -63,8 +63,12 @@ class HexpySession:
         self.session.params = self.auth
 
     @classmethod
-    def get_token_(
-        cls, username: str, password: str, no_expiration: bool = False
+    def _get_token(
+        cls,
+        username: str,
+        password: str,
+        no_expiration: bool = False,
+        force: bool = False,
     ) -> Dict[str, Any]:
         """Request authorization token.
 
@@ -72,6 +76,7 @@ class HexpySession:
             username: String, account username.
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
+            force: Boolean, if true, forces authentication token update for the requesting user.
         """
         return handle_response(
             requests.Session().get(
@@ -80,6 +85,7 @@ class HexpySession:
                     "username": username,
                     "password": password,
                     "noExpiration": str(no_expiration).lower(),
+                    "force": str(force).lower(),
                 },
             )
         )
@@ -88,21 +94,27 @@ class HexpySession:
         """Save authorization token.
 
         # Arguments
-            path: String, path to store credentials. default is `~/.hexpy/credentials.json`
+            path: String, path to store token. default is `~/.hexpy/token.json`
         """
         if not path:
-            cred_path = self.CRED_FILE
+            token_path = self.TOKEN_FILE
         else:
-            cred_path = Path(path)
-        if not cred_path.exists():
-            parent = cred_path.parent
+            token_path = Path(path)
+        if not token_path.exists():
+            parent = token_path.parent
             if not parent.exists():
-                cred_path.parent.mkdir()
-        with open(cred_path, "w") as outfile:
+                token_path.parent.mkdir()
+        with open(token_path, "w") as outfile:
             json.dump(self.auth, outfile, indent=4)
 
     @classmethod
-    def login(cls, username: str, password: str = None, no_expiration: bool = False):
+    def login(
+        cls,
+        username: str,
+        password: str = None,
+        no_expiration: bool = False,
+        force: bool = False,
+    ):
         """
         Instantiate class from username and password.
 
@@ -110,23 +122,24 @@ class HexpySession:
             username: String, account username.
             password: String, account password.
             no_expiration: Boolean, if True, token does not expire in 24 hours.
+            force: Boolean, if true, forces authentication token update for the requesting user.
         """
         if password is None:
             password = getpass(prompt="Enter password: ")
 
-        auth = cls.get_token_(username, password, no_expiration)
+        auth = cls._get_token(username, password, no_expiration, force)
         return cls(auth["auth"])
 
     @classmethod
     def load_auth_from_file(cls, path: str = None):
-        """Instantiate class from previously saved credentials file.
+        """Instantiate class from previously saved token file.
 
         # Arguments
-            path: String, path to store credentials. default is default is `~/.hexpy/credentials.json`
+            path: String, path to store API token. default is default is `~/.hexpy/token.json`
         """
         try:
             if not path:
-                cred_path = cls.CRED_FILE
+                cred_path = cls.TOKEN_FILE
             else:
                 cred_path = Path(path)
             with open(cred_path) as infile:
