@@ -94,6 +94,8 @@
 	- Restricted = False
 * `request` - Defines the original request parameters made to invoke this analysis
 	- Type: ApiAnalysisTaskRequest
+	- Fields:
+`analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
 * `resultsUri` - Defines the URI that can be queried to retrieve the analysis status/results in the future
 	- Type: String
@@ -121,6 +123,8 @@
 	- Restricted = False
 * `request` - Defines the original request parameters made to invoke this analysis
 	- Type: ApiAnalysisTaskRequest
+	- Fields:
+`analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
 * `resultsUri` - Defines the URI that can be queried to retrieve the analysis status/results in the future
 	- Type: String
@@ -136,12 +140,16 @@
 	- Restricted = False
 * `analysisResults` - Analysis result
 	- Type: AnalysisResults
+	- Fields:
+`volumeResults`, `sentimentResults`, `genderResult`, `ageResult`, `locationResult`, `siteResult`, `affinityResults`, `reach`
 	- Restricted = False
 * `message` - Result message
 	- Type: String
 	- Restricted = False
 * `request` - Related task request
 	- Type: ApiAnalysisTaskRequest
+	- Fields:
+`analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
 
 -------------------------
@@ -190,6 +198,8 @@
 ##### Response
 * `authors` - JSON array of zero or more authors objects that contain author-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `countsByAuthor`, `numberOfAuthors`, `docsPerAuthor`, `totalImpressions`
 	- Restricted = False
 
 -------------------------
@@ -229,6 +239,8 @@
 ##### Response
 * `contentSource` - Content Source
 	- Type: ContentSourceModel
+	- Fields:
+`id`, `teamName`, `name`, `description`, `documents`
 	- Restricted = False
 
 -------------------------
@@ -239,9 +251,6 @@
 ##### Parameters
 * `documentType` - The id of the document type to delete
 	- Type: long
-	- Required = True
-* `removeResults` - If true, removes the results associated with the documentType
-	- Type: boolean
 	- Required = True
 
 ##### Response
@@ -259,6 +268,8 @@
 ##### Response
 * `contentSources` - Content Sources
 	- Type: List
+	- Fields:
+`id`, `teamName`, `name`, `description`, `documents`
 	- Restricted = False
 
 -------------------------
@@ -322,6 +333,8 @@
 ##### Response
 * `volumes` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `numberOfDocuments`, `volume`
 	- Restricted = False
 
 -------------------------
@@ -343,6 +356,8 @@
 ##### Response
 * `ageCounts` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `numberOfDocuments`, `ageCount`
 	- Restricted = False
 
 -------------------------
@@ -364,6 +379,8 @@
 ##### Response
 * `genderCounts` - JSON array of zero or more objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `numberOfDocuments`, `genderCounts`
 	- Restricted = False
 
 -------------------------
@@ -385,6 +402,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `adminPostMetrics`
 	- Restricted = False
 
 -------------------------
@@ -406,6 +425,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`date`, `likes`
 	- Restricted = False
 
 -------------------------
@@ -427,6 +448,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `admin`, `user`
 	- Restricted = False
 
 -------------------------
@@ -439,6 +462,8 @@
 ##### Response
 * `resources` - JSON array with the geography resources
 	- Type: List
+	- Fields:
+`id`, `name`, `country`, `state`, `city`, `latitude`, `longitude`
 	- Restricted = False
 
 -------------------------
@@ -454,6 +479,8 @@
 ##### Response
 * `resources` - JSON array with the geography resources
 	- Type: List
+	- Fields:
+`id`, `name`, `country`, `state`, `city`, `latitude`, `longitude`
 	- Restricted = False
 
 -------------------------
@@ -466,6 +493,8 @@
 ##### Response
 * `resources` - JSON array with the geography resources
 	- Type: List
+	- Fields:
+`id`, `name`, `country`, `latitude`, `longitude`
 	- Restricted = False
 
 -------------------------
@@ -481,6 +510,8 @@
 ##### Response
 * `resources` - JSON array with the geography resources
 	- Type: List
+	- Fields:
+`id`, `name`, `country`, `state`, `latitude`, `longitude`
 	- Restricted = False
 
 -------------------------
@@ -496,6 +527,8 @@
 ##### Response
 * `data` - List of 0..n monitor creation report rows
 	- Type: List
+	- Fields:
+`team_name`, `monitors_used`, `monitor_limit`, `monitors_created_past_month`
 	- Restricted = False
 
 -------------------------
@@ -511,6 +544,8 @@
 ##### Response
 * `data` - List of 0..n social site report rows
 	- Type: List
+	- Fields:
+`username`, `socialsite`, `team_name`, `creation_date`, `last_rate_limit_date`, `failed`, `failure_date`
 	- Restricted = False
 
 -------------------------
@@ -526,6 +561,8 @@
 ##### Response
 * `data` - List of 0..n user activity report rows
 	- Type: List
+	- Fields:
+`user_id`, `team_id`, `email`, `first_name`, `last_name`, `last_platform_login`, `team_name`, `monitors_viewed_past_month`, `monitors_created_past_month`, `last_team_visit`
 	- Restricted = False
 
 -------------------------
@@ -541,13 +578,15 @@
 ##### Response
 * `data` - List of 0..n user invitation report rows
 	- Type: List
+	- Fields:
+`email`, `team_name`, `create_edit`, `invite_user`, `heliosight`, `api_access`, `admin`, `date_sent`, `date_accepted`
 	- Restricted = False
 
 -------------------------
 
 #### Image Analysis Request
-##### To return list of all class IDs and names. - Category: results
-##### `/imageanalysis/resources/classes` - GET
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
 ##### Parameters
 
 ##### Response
@@ -555,8 +594,8 @@
 -------------------------
 
 #### Image Analysis Request
-##### To return list of class IDs and names with specified class type. - Category: results
-##### `/imageanalysis/resources/classes/type` - GET
+##### To return list of all class IDs and names. - Category: results
+##### `/imageanalysis/resources/classes` - GET
 ##### Parameters
 
 ##### Response
@@ -595,6 +634,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`date`, `followerCount`
 	- Restricted = False
 
 -------------------------
@@ -616,6 +657,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`date`, `hashtags`
 	- Restricted = False
 
 -------------------------
@@ -637,6 +680,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `adminPostMetrics`
 	- Restricted = False
 
 -------------------------
@@ -658,6 +703,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `admin`
 	- Restricted = False
 
 -------------------------
@@ -691,6 +738,8 @@
 	- Restricted = False
 * `affinityInfo` - JSON array of affinity objects containing information about the top affinities for the date range selected
 	- Type: List
+	- Fields:
+`id`, `name`, `relevancyScore`, `percentInMonitor`, `percentOnTwitter`
 	- Restricted = False
 
 -------------------------
@@ -706,6 +755,8 @@
 ##### Response
 * `auditInfo` - JSON array of audit events pertaining to the selected monitor
 	- Type: List
+	- Fields:
+`event`, `user`, `eventDate`
 	- Restricted = False
 
 -------------------------
@@ -721,6 +772,8 @@
 ##### Response
 * `monitorDetail` - JSON array of monitor details
 	- Type: MonitorDetailModel
+	- Fields:
+`parentMonitorId`, `categories`, `emotions`, `id`, `name`, `description`, `type`, `enabled`, `resultsStart`, `resultsEnd`, `keywords`, `languages`, `geolocations`, `gender`, `sources`, `timezone`, `teamName`, `tags`, `subfilters`
 	- Restricted = False
 
 -------------------------
@@ -748,6 +801,8 @@
 ##### Response
 * `results` - JSON array of zero or more daily image results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `creationDate`, `numberOfDocuments`, `numberOfImageDocuments`, `imageClasses`
 	- Restricted = False
 
 -------------------------
@@ -763,6 +818,8 @@
 ##### Response
 * `monitors` - JSON array of monitors viewable by the user
 	- Type: List
+	- Fields:
+`id`, `name`, `description`, `type`, `enabled`, `resultsStart`, `resultsEnd`, `keywords`, `languages`, `geolocations`, `gender`, `sources`, `timezone`, `teamName`, `tags`, `subfilters`
 	- Restricted = False
 
 -------------------------
@@ -787,6 +844,8 @@
 ##### Response
 * `results` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `creationDate`, `numberOfDocuments`, `numberOfRelevantDocuments`, `categories`
 	- Restricted = False
 
 -------------------------
@@ -820,6 +879,8 @@
 	- Restricted = False
 * `data` - JSON array of monitor geography result information
 	- Type: List
+	- Fields:
+`info`, `volume`, `perMillion`
 	- Restricted = False
 
 -------------------------
@@ -850,6 +911,8 @@
 	- Restricted = False
 * `data` - JSON array of monitor geography result information
 	- Type: List
+	- Fields:
+`info`, `volume`, `perMillion`
 	- Restricted = False
 
 -------------------------
@@ -883,6 +946,8 @@
 	- Restricted = False
 * `data` - JSON array of monitor geography result information
 	- Type: List
+	- Fields:
+`info`, `volume`, `perMillion`
 	- Restricted = False
 
 -------------------------
@@ -901,6 +966,8 @@
 ##### Response
 * `trainingPosts` - JSON array of training posts for the selected monitor or category in a monitor
 	- Type: List
+	- Fields:
+`categoryId`, `categoryName`, `categoryGroup`, `url`, `date`, `author`, `contents`, `title`, `type`
 	- Restricted = False
 
 -------------------------
@@ -937,6 +1004,8 @@
 ##### Response
 * `posts` - JSON array of zero or more post objects that contain post-specific attributes
 	- Type: List
+	- Fields:
+`location`, `geolocation`, `language`, `authorPosts`, `authorsFollowing`, `authorsFollowers`, `authorGender`, `trainingPost`, `assignedCategoryId`, `assignedEmotionId`, `categoryScores`, `emotionScores`, `imageInfo`, `customFields`, `batchId`, `url`, `date`, `author`, `contents`, `title`, `type`
 	- Restricted = False
 * `totalPostsAvailable` - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.
 	- Type: int
@@ -1201,6 +1270,8 @@
 ##### Response
 * `stream` - Stream information
 	- Type: StreamModel
+	- Fields:
+`id`, `name`, `teamName`, `monitors`
 	- Restricted = False
 * `path` - Stream path
 	- Type: String
@@ -1231,6 +1302,8 @@
 ##### Response
 * `streams` - JSON array of streams viewable by the user
 	- Type: List
+	- Fields:
+`id`, `name`, `teamName`, `monitors`
 	- Restricted = False
 
 -------------------------
@@ -1249,6 +1322,8 @@
 ##### Response
 * `posts` - JSON array of zero or more post objects that contain post-specific attributes
 	- Type: List
+	- Fields:
+`location`, `geolocation`, `language`, `authorPosts`, `authorsFollowing`, `authorsFollowers`, `authorGender`, `trainingPost`, `assignedCategoryId`, `assignedEmotionId`, `categoryScores`, `emotionScores`, `imageInfo`, `customFields`, `batchId`, `url`, `date`, `author`, `contents`, `title`, `type`
 	- Restricted = False
 * `totalPostsAvailable` - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.
 	- Type: int
@@ -1291,6 +1366,8 @@
 ##### Response
 * `teams` - JSON array of teams accessible by the user
 	- Type: List
+	- Fields:
+`id`, `name`
 	- Restricted = False
 
 -------------------------
@@ -1312,6 +1389,8 @@
 ##### Response
 * `contentSources` - JSON array of zero or more content sources objects that contain results for each date requested
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `topSites`, `sources`
 	- Restricted = False
 
 -------------------------
@@ -1378,6 +1457,8 @@
 	- Restricted = False
 * `topics` - JSON array of 1..n topics volume information for grouped periods
 	- Type: List
+	- Fields:
+`name`, `totalVolume`, `volume`
 	- Restricted = False
 
 -------------------------
@@ -1414,6 +1495,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `topHashtags`, `topMentions`, `topRetweets`
 	- Restricted = False
 
 -------------------------
@@ -1435,6 +1518,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`date`, `followers`
 	- Restricted = False
 
 -------------------------
@@ -1456,6 +1541,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `sentPostMetrics`, `totalImpressions`
 	- Restricted = False
 
 -------------------------
@@ -1477,6 +1564,8 @@
 ##### Response
 * `dailyResults` - JSON array of zero or more daily results objects that contain endpoint-specific attributes
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `mentions`, `replies`, `retweets`
 	- Restricted = False
 
 -------------------------
@@ -1516,6 +1605,8 @@
 	- Restricted = False
 * `volume` - JSON array of 1..n volume information for grouped periods
 	- Type: List
+	- Fields:
+`startDate`, `endDate`, `numberOfDocuments`
 	- Restricted = False
 
 -------------------------

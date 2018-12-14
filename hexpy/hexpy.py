@@ -28,35 +28,38 @@ def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
     for doc in docs:
         record: Dict[str, Any] = {}
         for key, val in doc.items():
-            if isinstance(val, str):
-                if key == "contents" or key == "title":
-                    record[key] = val.replace("\n", " ").replace("\r", " ")
-                else:
+            try:
+                if isinstance(val, str):
+                    if key == "contents" or key == "title":
+                        record[key] = val.replace("\n", " ").replace("\r", " ")
+                    else:
+                        record[key] = val
+                elif key.endswith("Scores") and len(val) > 0:
+                    category_name = key.split("Scores")[0]
+                    if doc[f"assigned{category_name.title()}Id"] == 0:
+                        record[category_name] = "Uncategorized"
+                    else:
+                        category_max_index = np.argmax([x["score"] for x in val])
+                        category = val[category_max_index][category_name + "Name"]
+                        record[category_name] = category
+                elif isinstance(val, dict):
+                    for subkey, subval in val.items():
+                        record[key + "_" + subkey] = subval
+                elif isinstance(val, List) and key == "imageInfo":
+                    for i, item in enumerate(val):
+                        record[f"image_{i}_url"] = val[i]["url"]
+                        if "objects" in val[i]:
+                            record[f"image_{i}_objects"] = "|".join(
+                                x["className"] for x in val[i]["objects"]
+                            )
+                        if "brands" in val[i]:
+                            record[f"image_{i}_brands"] = "|".join(
+                                x["brand"] for x in val[i]["brands"]
+                            )
+                elif isinstance(val, int):
                     record[key] = val
-            elif key.endswith("Scores") and len(val) > 0:
-                category_name = key.split("Scores")[0]
-                if doc[f"assigned{category_name.title()}Id"] == 0:
-                    record[category_name] = "Uncategorized"
-                else:
-                    category_max_index = np.argmax([x["score"] for x in val])
-                    category = val[category_max_index][category_name + "Name"]
-                    record[category_name] = category
-            elif isinstance(val, dict):
-                for subkey, subval in val.items():
-                    record[key + "_" + subkey] = subval
-            elif isinstance(val, List) and key == "imageInfo":
-                for i, item in enumerate(val):
-                    record[f"image_{i}_url"] = val[i]["url"]
-                    if "objects" in val[i]:
-                        record[f"image_{i}_objects"] = "|".join(
-                            x["className"] for x in val[i]["objects"]
-                        )
-                    if "brands" in val[i]:
-                        record[f"image_{i}_brands"] = "|".join(
-                            x["brand"] for x in val[i]["brands"]
-                        )
-            elif isinstance(val, int):
-                record[key] = val
+            except Exception:
+                continue
         items.append(record)
 
     df = pd.DataFrame.from_records(items)
@@ -96,7 +99,9 @@ def format_response(response: dict) -> str:
     param_type = response["type"]
     restricted = response["restricted"]
     description = response["description"]
-
+    if "members" in response:
+        members = ", ".join([f'`{member["name"]}`' for member in response["members"]])
+        return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Fields:\n{members}\n\t- Restricted = {restricted}\n"
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
 
 
@@ -729,7 +734,7 @@ def stream_posts(
             for p in posts:
                 click.echo(json.dumps(p, ensure_ascii=False))
         elif output_type == "csv":
-            # import ipdb; ipdb.set_trace()
+
             df = posts_json_to_df(posts)
             if first_fetch:
                 click.echo(df.to_csv(sep=separator, index=False).strip())
