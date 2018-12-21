@@ -13,13 +13,12 @@ class MonitorAPI:
 
     ```python
     >>> from hexpy import HexpySession, MonitorAPI
-    >>> session = HexpySession.load_auth_from_file())
-    >>> monitor_client = MonitorAPI(session))
-    >>> details = monitor_client.details(monitor_id))
+    >>> session = HexpySession.load_auth_from_file()
+    >>> monitor_client = MonitorAPI(session)
+    >>> details = monitor_client.details(monitor_id)
     >>> start = details["resultsStart"]
     >>> end = details["resultsEnd"]
-    >>> monitor_client.posts(monitor_id, start, end))
-    >>> session.close())
+    >>> monitor_client.posts(monitor_id, start, end)
     ```
     """
 

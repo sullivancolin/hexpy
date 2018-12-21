@@ -16,7 +16,6 @@ class ActivityAPI:
     >>> session = HexpySession.load_auth_from_file()
     >>> activity_client = ActivityAPI(session)
     >>> activity_client.monitor_creation(team_id)
-    >>> session.close()
     ```
     """
 

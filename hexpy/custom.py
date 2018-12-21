@@ -16,7 +16,6 @@ class CustomAPI:
     >>> session = HexpySession.load_auth_from_file()
     >>> custom_client = CustomAPI(session, "/some/endpoint/")
     >>> custom_client.get(url_params="<url_param1>/path", params={"query_string_param":some_value})
-    >>> session.close()
     ```
     """
 

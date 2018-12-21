@@ -64,6 +64,7 @@ target/
 .python-version
 
 *.sublime-project
+sftp-config.json
 *.sublime-workspace
 *.vscode
 *.env

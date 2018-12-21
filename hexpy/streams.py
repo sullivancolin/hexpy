@@ -16,7 +16,6 @@ class StreamsAPI:
     >>> session = HexpySession.load_auth_from_file()
     >>> streams_client = StreamsAPI(session)
     >>> streams_client.stream_list(team_id)
-    >>> session.close()
     ```
     """
 

@@ -101,7 +101,7 @@ def format_response(response: dict) -> str:
     description = response["description"]
     if "members" in response:
         members = ", ".join([f'`{member["name"]}`' for member in response["members"]])
-        return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Fields:\n{members}\n\t- Restricted = {restricted}\n"
+        return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Fields: {members}\n\t- Restricted = {restricted}\n"
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
 
 
@@ -145,6 +145,13 @@ def docs_to_text(json_docs: dict, mode: str = "md") -> str:
         doc += f"* [{e['endpoint']}](#{anchor})\n"
 
     return doc + "\n".join([format_endpoint(e) for e in endpoints])
+
+
+##########################################################################
+# CLI command and subcommands                                            #
+#                                                                        #
+#                                                                        #
+##########################################################################
 
 
 @click.group(

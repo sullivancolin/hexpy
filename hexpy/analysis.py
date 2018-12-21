@@ -16,7 +16,6 @@ class AnalysisAPI:
     >>> session = HexpySession.load_auth_from_file()
     >>> analysis_client = AnalysisAPI(session)
     >>> analysis_client.results(request_id)
-    >>> session.close()
     ```
     """
 

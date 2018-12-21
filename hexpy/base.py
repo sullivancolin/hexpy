@@ -1,4 +1,4 @@
-"""global variables for the API URL and rate limiting."""
+"""rate limiting decorator and handling responses for exceptions and JSON conversion"""
 
 import functools
 from typing import Callable, Dict, Any, Union, Deque
@@ -19,7 +19,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
     lock = threading.RLock()
 
     @functools.wraps(func)
-    def wrapper(*args, **kargs):
+    def wrapper(*args, **kwargs):
         """Wrap function."""
         with lock:
             if len(calls) >= max_calls:
@@ -39,7 +39,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
             while (calls[-1] - calls[0]) >= period:
                 calls.popleft()
 
-        return func(*args, **kargs)
+        return func(*args, **kwargs)
 
     return wrapper
 
