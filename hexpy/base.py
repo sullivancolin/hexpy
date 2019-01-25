@@ -8,8 +8,6 @@ from collections import deque
 from requests.models import Response
 import logging
 
-logger = logging.getLogger(__name__)
-
 
 def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
     """Limit the number of times a function can be called."""
@@ -17,6 +15,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
 
     # Add thread safety
     lock = threading.RLock()
+    logger = logging.getLogger(func.__name__)
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -29,7 +28,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
                     logger.info(
                         f"Rate Limit Reached. (Sleeping for {round(sleeptime)} seconds)"
                     )
-                    time.sleep(sleeptime)
+                    time.sleep(sleeptime + 10)
                 while len(calls) > 0:
                     calls.popleft()
             calls.append(time.time())
@@ -47,10 +46,11 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
 def handle_response(response: Union[Response, Dict[str, Any]]) -> Dict[str, Any]:
     """Ensure responses do not contain errors."""
 
-    if not isinstance(response, dict):
-        if response.status_code not in [200, 201, 202]:
+    if isinstance(response, Response):
+        if not response.ok:
             raise ValueError("Something Went Wrong. " + response.text)
         elif ("status" in response.json()) and response.json()["status"] == "error":
             raise ValueError("Something Went Wrong. " + response.text)
         return response.json()
-    return response
+    else:
+        return response

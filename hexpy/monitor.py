@@ -2,7 +2,7 @@
 
 import inspect
 from .base import handle_response, rate_limited
-from hexpy.session import HexpySession
+from .session import HexpySession
 from typing import Dict, Any, Sequence, Union, List, Callable
 
 

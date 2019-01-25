@@ -20,7 +20,9 @@ from click_help_colors import HelpColorsGroup
 import os
 
 
-def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
+def posts_json_to_df(
+    docs: Sequence[Dict[str, Any]], images: bool = False
+) -> pd.DataFrame:
     """Convert post json to flattened pandas dataframe."""
 
     items = []
@@ -46,16 +48,26 @@ def posts_json_to_df(docs: Sequence[Dict[str, Any]]) -> pd.DataFrame:
                     for subkey, subval in val.items():
                         record[key + "_" + subkey] = subval
                 elif isinstance(val, List) and key == "imageInfo":
-                    for i, item in enumerate(val):
-                        record[f"image_{i}_url"] = val[i]["url"]
-                        if "objects" in val[i]:
-                            record[f"image_{i}_objects"] = "|".join(
-                                x["className"] for x in val[i]["objects"]
-                            )
-                        if "brands" in val[i]:
-                            record[f"image_{i}_brands"] = "|".join(
-                                x["brand"] for x in val[i]["brands"]
-                            )
+                    if images:
+                        if len(val) > 0:
+                            urls = [x["url"] for x in val]
+                            objects = []
+                            brands = []
+                        for item in val:
+
+                            if "objects" in item:
+                                objects.append(
+                                    "|".join(x["className"] for x in item["objects"])
+                                )
+                            if "brands" in item:
+                                brands.append(
+                                    "|".join(x["brand"] for x in item["brands"])
+                                )
+                        record["image_urls"] = urls
+                        if len(objects) > 0:
+                            record["image_objects"] = objects
+                        if len(brands) > 0:
+                            record["image_brands"] = brands
                 elif isinstance(val, int):
                     record[key] = val
             except Exception:
@@ -633,6 +645,9 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
     default=",",
     help="CSV column separator in quotes.(default=',')",
 )
+@click.option(
+    "--images/--no-images", "-i", default=False, help="include image recognition."
+)
 @click.pass_context
 def export(
     ctx,
@@ -643,6 +658,7 @@ def export(
     post_type: str = "post_list",
     filename: str = None,
     separator: str = ",",
+    images: bool = False,
 ) -> None:
     """Export monitor posts as json or to a spreadsheet."""
 
@@ -670,7 +686,7 @@ def export(
         for p in docs:
             click.echo(json.dumps(p, ensure_ascii=False))
     else:
-        df = posts_json_to_df(docs)
+        df = posts_json_to_df(docs, images)
 
         if filename:
             name = filename

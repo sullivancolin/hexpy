@@ -17,11 +17,11 @@ tox = "*"
 coverage = "*"
 pytest = "*"
 ipython = "*"
-"e1839a8" = {path = ".", editable = true}
 mkdocs-material = "*"
 ipdb = "*"
 better-exceptions = "*"
 pylint = "*"
+black = "==18.9b0"
 
 [requires]
 python_version = "3.7"

@@ -28,34 +28,34 @@ clean-test:
 
 ## check style with flake8, mypy, black
 lint: clean
-	black . --check
-	flake8 hexpy tests --exit-zero
-	mypy hexpy --ignore-missing-imports
+	pipenv run black . --check
+	pipenv run flake8 hexpy tests --exit-zero
+	pipenv run mypy hexpy --ignore-missing-imports
 
 ## run tests with the default Python
 test:
-	pytest
+	pipenv run pytest
 
 ## run tests on every Python version with tox
 test-all:
-	tox
+	pipenv run tox
 
 ## check code coverage quickly with the default Python
 coverage:
-	coverage run --source hexpy -m pytest
-	coverage report -m
-	coverage html
+	pipenv run coverage run --source hexpy -m pytest
+	pipenv run coverage report -m
+	pipenv run coverage html
 	open -a "Google Chrome" htmlcov/index.html
 
 ## generate Mkdocs HTML documentation
 docs: docs-clean
-	hexpy api-documentation -o markdown
+	pipenv run hexpy api-documentation -o markdown
 	mv crimson_api_docs.md docs/docs/
-	cd docs/; mkdocs build
+	cd docs/; pipenv run mkdocs build
 
 ## serve docs
 serve-docs: docs
-	cd docs/; mkdocs serve
+	cd docs/; pipenv run mkdocs serve
 
 ## remove previously build docs
 docs-clean:
@@ -63,25 +63,29 @@ docs-clean:
 
 ## generate Mkdocs HTML documentation, commit to gh-pages branch and push to github
 releasedocs: docs-clean
-	hexpy api-documentation -o markdown
+	pipenv run hexpy api-documentation -o markdown
 	mv crimson_api_docs.md docs/docs/
-	cd docs/; mkdocs gh-deploy --verbose
+	cd docs/; pipenv run mkdocs gh-deploy --verbose
 
 ## upload wheel
 upload: dist
-	twine upload -r pypi dist/hexpy*
+	pipenv run twine upload -r pypi dist/hexpy*
 
-## increment the version, and tag in git
+## increment the patch version, and tag in git
 bumpversion-patch: clean
-	bumpversion --verbose --dry-run patch
+	pipenv run bumpversion --verbose patch
 
-## increment the version, and tag in git
+## increment the minor version, and tag in git
 bumpversion-minor: clean
-	bumpversion --verbose --dry-run minor
+	pipenv run bumpversion --verbose minor
+
+## increment the major version, and tag in git
+bumpversion-major: clean
+	pipenv run bumpversion --verbose major
 
 ## builds source and wheel package
 dist: clean
-	python setup.py sdist bdist_wheel
+	pipenv run python setup.py sdist bdist_wheel
 
 ## install the package to the pipenv virtualenv
 install: clean
@@ -98,4 +102,4 @@ install-dev: clean
 # See <https://gist.github.com/klmr/575726c7e05d8780505a> for explanation.
 .PHONY: show-help
 show-help:
-	@echo "$$(tput bold)Available rules:$$(tput sgr0)";echo;sed -ne"/^## /{h;s/.*//;:d" -e"H;n;s/^## //;td" -e"s/:.*//;G;s/\\n## /---/;s/\\n/ /g;p;}" ${MAKEFILE_LIST}|LC_ALL='C' sort -f|awk -F --- -v n=$$(tput cols) -v i=19 -v a="$$(tput setaf 6)" -v z="$$(tput sgr0)" '{printf"%s%*s%s ",a,-i,$$1,z;m=split($$2,w," ");l=n-i;for(j=1;j<=m;j++){l-=length(w[j])+1;if(l<= 0){l=n-i-length(w[j])-1;printf"\n%*s ",-i," ";}printf"%s ",w[j];}printf"\n";}'|more $(shell test $(shell uname) == Darwin && echo '-Xr')
+	@echo "$$(tput bold)Available rules:$$(tput sgr0)";echo;sed -ne"/^## /{h;s/.*//;:d" -e"H;n;s/^## //;td" -e"s/:.*//;G;s/\\n## /---/;s/\\n/ /g;p;}" ${MAKEFILE_LIST}|LC_ALL='C' sort -f|awk -F --- -v n=$$(tput cols) -v i=19 -v a="$$(tput setaf 6)" -v z="$$(tput sgr0)" '{printf"%s%*s%s ",a,-i,$$1,z;m=split($$2,w," ");l=n-i;for(j=1;j<=m;j++){l-=length(w[j])+1;if(l<= 0){l=n-i-length(w[j])-1;printf"\n%*s ",-i," ";}printf"%s ",w[j];}printf"\n";}'
