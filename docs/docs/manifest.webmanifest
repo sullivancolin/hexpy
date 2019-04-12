@@ -3,19 +3,19 @@
   "name": "hexpy: Crimson Hexagon Python Client",
   "icons": [
     {
-      "src": "/docs/images/logo_192.png",
+      "src": "/images/logo_192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/docs/images/logo_512.png",
+      "src": "/images/logo_512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "/hexpy/",
   "background_color": "#009688",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/hexpy/",
   "theme_color": "#009688"
 }
