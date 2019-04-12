@@ -3,7 +3,7 @@ Hexpy Command Line Interface
 
 This project comes with a command line script, **hexpy**, for conveniently automating several common tasks
 
-## Helpful Commands
+## Helpful Workflows
 
 * Export sample of monitor posts to a spreadsheet.
 * Easily upload a spreadsheet as custom content for analysis in ForSight.
@@ -11,8 +11,6 @@ This project comes with a command line script, **hexpy**, for conveniently autom
 * Compose powerful shell scripts with pipe-able commands such as [jq](https://stedolan.github.io/jq/), and `xargs`.
 
 ## Usage
-
-### Basic
 
 ```bash
 $ hexpy

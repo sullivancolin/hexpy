@@ -1,9 +1,11 @@
 """Module for Realtime Results Api."""
 
 import inspect
+
+from typing import Any, Dict, List
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import List, Dict, Any
 
 
 class RealtimeAPI:
@@ -125,6 +127,20 @@ class RealtimeAPI:
             self.session.get(self.TEMPLATE + "retweets", params={"id": monitor_id})
         )
 
+    def full_retweets(self, monitor_id: int, start: int) -> Dict[str, Any]:
+        """Get the Realtime fullretweets for the Monitor.
+
+        # Arguments
+            monitor_id: Integer, the id of the monitor being requested.
+            start: Integer, Specifies inclusive start date in epoch seconds
+        """
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "fullretweets",
+                params={"id": monitor_id, "start": start},
+            )
+        )
+
     def social_guids(
         self,
         monitor_id: int,
@@ -165,6 +181,19 @@ class RealtimeAPI:
         return handle_response(
             self.session.get(
                 self.TEMPLATE + "tweets", params={"id": monitor_id, "start": start}
+            )
+        )
+
+    def full_tweets(self, monitor_id: int, start: int = None) -> Dict[str, Any]:
+        """Get the Realtime fulltweets for the Monitor.
+
+        # Arguments
+            monitor_id: Integer, the id of the monitor being requested.
+            start: Integer, specifies inclusive start date in epoch seconds.
+        """
+        return handle_response(
+            self.session.get(
+                self.TEMPLATE + "fulltweets", params={"id": monitor_id, "start": start}
             )
         )
 

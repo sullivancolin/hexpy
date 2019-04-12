@@ -1,9 +1,11 @@
 """Module for monitor results API"""
 
 import inspect
+
+from typing import Any, Callable, Dict, List, Sequence, Union
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import Dict, Any, Sequence, Union, List, Callable
 
 
 class MonitorAPI:

@@ -2,19 +2,22 @@ site_name: hexpy
 site_description: A Python client for the Crimson Hexagon API.
 repo_url: https://github.com/sullivancolin/hexpy
 repo_name: hexpy
+
+edit_uri: ''
 nav:
-    - Home: index.md
-    - Session: Session.md
-    - Metadata: Metadata.md
-    - Monitor: Monitor.md
-    - Analysis: Analysis.md
-    - Upload: Upload.md
-    - Streams: Streams.md
-    - Realtime: Realtime.md
-    - Custom: Custom.md
-    - Activty Reports: Activity.md
+    - Getting Started: index.md
+    - API Reference:
+      - Session: Session.md
+      - Metadata: Metadata.md
+      - Monitor: Monitor.md
+      - Analysis: Analysis.md
+      - Upload: Upload.md
+      - Streams: Streams.md
+      - Realtime: Realtime.md
+      - Custom: Custom.md
+      - Activty Reports: Activity.md
     - Command Line Interface: CLI.md
-    - Crimson Api Documentation: crimson_api_docs.md
+    - Crimson API Documentation: crimson_api_docs.md
 theme:
   name: 'material'
   font:
@@ -24,7 +27,17 @@ theme:
     accent: 'red'
   logo: 'images/logo.png'
   favicon: 'images/favicon.ico'
+
 markdown_extensions:
   - codehilite
+  - admonition
+  - markdown.extensions.toc:
+      permalink: true
+      toc_depth: 3
+
+extra_css:
+  - 'stylesheets/extra.css'
+
 extra:
     version: 0.5.5
+    manifest: 'manifest.webmanifest'

@@ -1,7 +1,9 @@
 """Module for Streams API."""
 
 import inspect
-from typing import Dict, Any
+
+from typing import Any, Dict
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
 

@@ -1,12 +1,13 @@
 """rate limiting decorator and handling responses for exceptions and JSON conversion"""
 
 import functools
-from typing import Callable, Dict, Any, Union, Deque
-import time
-import threading
-from collections import deque
-from requests.models import Response
 import logging
+import threading
+import time
+from collections import deque
+
+from requests.models import Response
+from typing import Any, Callable, Deque, Dict, Union
 
 
 def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
@@ -26,7 +27,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
                 sleeptime = until - time.time()
                 if sleeptime > 0:
                     logger.info(
-                        f"Rate Limit Reached. (Sleeping for {round(sleeptime)} seconds)"
+                        f"Rate Limit Reached. (Sleeping for {round(sleeptime + 10)} seconds)"
                     )
                     time.sleep(sleeptime + 10)
                 while len(calls) > 0:

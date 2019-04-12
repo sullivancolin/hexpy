@@ -2,16 +2,15 @@
 
 __version__ = "0.5.5"
 
-from .session import HexpySession
-from .monitor import MonitorAPI
-from .metadata import MetadataAPI
-from .streams import StreamsAPI
+from .activity import ActivityAPI
 from .analysis import AnalysisAPI
 from .content_upload import ContentUploadAPI
 from .custom import CustomAPI
+from .metadata import MetadataAPI
+from .monitor import MonitorAPI
 from .realtime import RealtimeAPI
-from .activity import ActivityAPI
-
+from .session import HexpySession
+from .streams import StreamsAPI
 
 __all__ = [
     "HexpySession",

@@ -1,9 +1,11 @@
 """Custom API request"""
 
 import inspect
+
+from typing import Any, Dict
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import Any, Dict
 
 
 class CustomAPI:

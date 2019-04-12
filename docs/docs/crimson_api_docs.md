@@ -1,83 +1,9 @@
 # Crimson Hexagon API Documentation
 **API URL: `https://api.crimsonhexagon.com/api`**
 
-### Endpoints
-* [Analysis Request](#analysis-request)
-* [Analysis Results](#analysis-results)
-* [Authentication](#authentication)
-* [Authors](#authors)
-* [Content Delete](#content-delete)
-* [Content Delete](#content-delete)
-* [Content Source Create](#content-source-create)
-* [Content Source Delete](#content-source-delete)
-* [Content Source List](#content-source-list)
-* [Content Upload](#content-upload)
-* [Content Upload Custom Fields Support](#content-upload-custom-fields-support)
-* [Day and Time](#day-and-time)
-* [Demographics - Age](#demographics-age)
-* [Demographics - Gender](#demographics-gender)
-* [Facebook Admin Posts](#facebook-admin-posts)
-* [Facebook Page Likes](#facebook-page-likes)
-* [Facebook Total Activity](#facebook-total-activity)
-* [Geography - All Resources](#geography-all-resources)
-* [Geography - Cities](#geography-cities)
-* [Geography - Countries](#geography-countries)
-* [Geography - States](#geography-states)
-* [Get Monitor Creation Report](#get-monitor-creation-report)
-* [Get Social Site Report](#get-social-site-report)
-* [Get User Activity Report](#get-user-activity-report)
-* [Get User Invitation Report](#get-user-invitation-report)
-* [Image Analysis Request](#image-analysis-request)
-* [Image Analysis Request](#image-analysis-request)
-* [Image analysis](#image-analysis)
-* [Instagram Followers](#instagram-followers)
-* [Instagram Hashtags](#instagram-hashtags)
-* [Instagram Sent Media](#instagram-sent-media)
-* [Instagram Total Activity](#instagram-total-activity)
-* [Interest Affinities](#interest-affinities)
-* [Monitor Audit](#monitor-audit)
-* [Monitor Detail](#monitor-detail)
-* [Monitor Image Results](#monitor-image-results)
-* [Monitor List](#monitor-list)
-* [Monitor Results](#monitor-results)
-* [Monitor Results by City](#monitor-results-by-city)
-* [Monitor Results by Country](#monitor-results-by-country)
-* [Monitor Results by State](#monitor-results-by-state)
-* [Monitor Training Posts](#monitor-training-posts)
-* [Posts](#posts)
-* [Realtime Cashtags](#realtime-cashtags)
-* [Realtime Configure](#realtime-configure)
-* [Realtime Details](#realtime-details)
-* [Realtime Disable](#realtime-disable)
-* [Realtime Enable](#realtime-enable)
-* [Realtime Hashtags](#realtime-hashtags)
-* [Realtime Monitor List](#realtime-monitor-list)
-* [Realtime Retweets](#realtime-retweets)
-* [Realtime SocialGuids](#realtime-socialguids)
-* [Realtime Tweets](#realtime-tweets)
-* [Realtime Volume](#realtime-volume)
-* [Realtime Volume by Emotion](#realtime-volume-by-emotion)
-* [Realtime Volume by Sentiment](#realtime-volume-by-sentiment)
-* [Stream Add Monitor](#stream-add-monitor)
-* [Stream Create](#stream-create)
-* [Stream Delete](#stream-delete)
-* [Stream List](#stream-list)
-* [Stream Posts](#stream-posts)
-* [Stream Remove Monitor](#stream-remove-monitor)
-* [Stream Update Monitor](#stream-update-monitor)
-* [Team List](#team-list)
-* [Top Sites and Content Sources](#top-sites-and-content-sources)
-* [Topic Clustering](#topic-clustering)
-* [Topic Waves](#topic-waves)
-* [Training Document Upload](#training-document-upload)
-* [Twitter Engagement Metrics](#twitter-engagement-metrics)
-* [Twitter Followers](#twitter-followers)
-* [Twitter Sent Posts](#twitter-sent-posts)
-* [Twitter Total Engagement](#twitter-total-engagement)
-* [Volume](#volume)
-* [Word Cloud](#word-cloud)
+## Endpoints
 
-#### Analysis Request
+### Analysis Request
 ##### To submit an analysis task for asynchronous processing  - Category: results
 ##### `/results` - POST
 ##### Parameters
@@ -105,7 +31,7 @@
 
 -------------------------
 
-#### Analysis Results
+### Analysis Results
 ##### To retrieve the status of the analysis task and the results - Category: results
 ##### `/results/{resultId}` - GET
 ##### Parameters
@@ -150,7 +76,7 @@
 
 -------------------------
 
-#### Authentication
+### Authentication
 ##### Generate authentication tokens for use in API requests - Category: admin
 ##### `/authenticate` - GET
 ##### Parameters
@@ -177,7 +103,7 @@
 
 -------------------------
 
-#### Authors
+### Authors
 ##### Information about Twitter authors in a monitor - Category: results
 ##### `/monitor/authors` - GET
 ##### Parameters
@@ -199,7 +125,19 @@
 
 -------------------------
 
-#### Content Delete
+### Content Delete
+##### Delete content via the API - Category: admin
+##### `/content/delete` - POST
+##### Parameters
+* `documentType` - The id of the document type to delete documents from
+	- Type: long
+	- Required = True
+
+##### Response
+
+-------------------------
+
+### Content Delete
 ##### Delete batch content via the API - Category: admin
 ##### `/content/delete` - POST
 ##### Parameters
@@ -214,19 +152,7 @@
 
 -------------------------
 
-#### Content Delete
-##### Delete content via the API - Category: admin
-##### `/content/delete` - POST
-##### Parameters
-* `documentType` - The id of the document type to delete documents from
-	- Type: long
-	- Required = True
-
-##### Response
-
--------------------------
-
-#### Content Source Create
+### Content Source Create
 ##### Content Source creation - Category: admin
 ##### `/content/sources` - POST
 ##### Parameters
@@ -239,7 +165,7 @@
 
 -------------------------
 
-#### Content Source Delete
+### Content Source Delete
 ##### Content Source deletion - Category: admin
 ##### `/content/sources` - DELETE
 ##### Parameters
@@ -251,7 +177,7 @@
 
 -------------------------
 
-#### Content Source List
+### Content Source List
 ##### Content Source list - Category: admin
 ##### `/content/sources/list` - GET
 ##### Parameters
@@ -267,7 +193,7 @@
 
 -------------------------
 
-#### Content Upload
+### Content Upload
 ##### Upload content via the API - Category: admin
 ##### `/content/upload` - POST
 ##### Parameters
@@ -285,7 +211,7 @@
 
 -------------------------
 
-#### Content Upload Custom Fields Support
+### Content Upload Custom Fields Support
 ##### Upload content via the API w/ custom fields support - Category: admin
 ##### `/content/upload` - POST
 ##### Parameters
@@ -303,7 +229,7 @@
 
 -------------------------
 
-#### Day and Time
+### Day and Time
 ##### Volume information for a monitor aggregated by time of day or day of week) - Category: results
 ##### `/monitor/dayandtime` - GET
 ##### Parameters
@@ -331,7 +257,7 @@
 
 -------------------------
 
-#### Demographics - Age
+### Demographics - Age
 ##### Daily volume information for age in a monitor - Category: results
 ##### `/monitor/demographics/age` - GET
 ##### Parameters
@@ -353,7 +279,7 @@
 
 -------------------------
 
-#### Demographics - Gender
+### Demographics - Gender
 ##### Daily volume information for gender in a monitor - Category: results
 ##### `/monitor/demographics/gender` - GET
 ##### Parameters
@@ -375,7 +301,7 @@
 
 -------------------------
 
-#### Facebook Admin Posts
+### Facebook Admin Posts
 ##### Daily likes, comments, and shares for individual admin posts made by a Facebook account in a Facebook social account monitor - Category: social
 ##### `/monitor/facebook/adminposts` - GET
 ##### Parameters
@@ -397,7 +323,7 @@
 
 -------------------------
 
-#### Facebook Page Likes
+### Facebook Page Likes
 ##### Total page likes as of the requested dates for a Facebook social monitor - Category: social
 ##### `/monitor/facebook/pagelikes` - GET
 ##### Parameters
@@ -419,7 +345,7 @@
 
 -------------------------
 
-#### Facebook Total Activity
+### Facebook Total Activity
 ##### Daily total likes, comments, and shares on admin and user posts for a Facebook account in a Facebook social monitor - Category: social
 ##### `/monitor/facebook/totalactivity` - GET
 ##### Parameters
@@ -441,7 +367,7 @@
 
 -------------------------
 
-#### Geography - All Resources
+### Geography - All Resources
 ##### Returns all the available geolocation resources - Category: util
 ##### `/geography/info/all` - GET
 ##### Parameters
@@ -454,7 +380,7 @@
 
 -------------------------
 
-#### Geography - Cities
+### Geography - Cities
 ##### Returns all the available cities / urban areas in the given country - Category: util
 ##### `/geography/info/cities` - GET
 ##### Parameters
@@ -470,7 +396,7 @@
 
 -------------------------
 
-#### Geography - Countries
+### Geography - Countries
 ##### Returns all the available countries - Category: util
 ##### `/geography/info/countries` - GET
 ##### Parameters
@@ -483,7 +409,7 @@
 
 -------------------------
 
-#### Geography - States
+### Geography - States
 ##### Returns all the available states / regions in the given country - Category: util
 ##### `/geography/info/states` - GET
 ##### Parameters
@@ -499,7 +425,7 @@
 
 -------------------------
 
-#### Get Monitor Creation Report
+### Get Monitor Creation Report
 ##### Returns a list of Teams within an Organization and how many monitors were created during a given time period - Category: reports
 ##### `/report/monitorCreation` - GET
 ##### Parameters
@@ -515,7 +441,7 @@
 
 -------------------------
 
-#### Get Social Site Report
+### Get Social Site Report
 ##### Returns a list of social sites and associated usernames for Teams within an Organization. Also indicates which of the social sites have failed and when - Category: reports
 ##### `/report/socialSites` - GET
 ##### Parameters
@@ -531,7 +457,7 @@
 
 -------------------------
 
-#### Get User Activity Report
+### Get User Activity Report
 ##### Returns a list of users within an Organization including information on when they last logged into the platform, the last monitor they created, and the last monitor they viewed - Category: reports
 ##### `/report/userActivity` - GET
 ##### Parameters
@@ -547,7 +473,7 @@
 
 -------------------------
 
-#### Get User Invitation Report
+### Get User Invitation Report
 ##### Returns a list of users within an Organization and which Team(s) they were invited to. Also indicates when the invitation was sent and when it was accepted - Category: reports
 ##### `/report/userInvitations` - GET
 ##### Parameters
@@ -563,7 +489,7 @@
 
 -------------------------
 
-#### Image Analysis Request
+### Image Analysis Request
 ##### To return list of class IDs and names with specified class type. - Category: results
 ##### `/imageanalysis/resources/classes/type` - GET
 ##### Parameters
@@ -572,7 +498,7 @@
 
 -------------------------
 
-#### Image Analysis Request
+### Image Analysis Request
 ##### To return list of all class IDs and names. - Category: results
 ##### `/imageanalysis/resources/classes` - GET
 ##### Parameters
@@ -581,7 +507,7 @@
 
 -------------------------
 
-#### Image analysis
+### Image analysis
 ##### To return image classification data - Category: util
 ##### `/imageanalysis` - GET
 ##### Parameters
@@ -596,7 +522,7 @@
 
 -------------------------
 
-#### Instagram Followers
+### Instagram Followers
 ##### Total daily follower counts for Instagram social account monitors - Category: social
 ##### `/monitor/instagram/followers` - GET
 ##### Parameters
@@ -618,7 +544,7 @@
 
 -------------------------
 
-#### Instagram Hashtags
+### Instagram Hashtags
 ##### Total daily volume by Instagram hashtags for specific monitor - Category: social
 ##### `/monitor/instagram/hashtags` - GET
 ##### Parameters
@@ -640,7 +566,7 @@
 
 -------------------------
 
-#### Instagram Sent Media
+### Instagram Sent Media
 ##### Daily likes, comments, and tags for individual media posted by an Instagram account in an Instagram social account monitor - Category: social
 ##### `/monitor/instagram/sentmedia` - GET
 ##### Parameters
@@ -662,7 +588,7 @@
 
 -------------------------
 
-#### Instagram Total Activity
+### Instagram Total Activity
 ##### Daily likes, comments, and shares for individual admin posts made by an Instagram account in an Instagram social account monitor - Category: social
 ##### `/monitor/instagram/totalactivity` - GET
 ##### Parameters
@@ -684,7 +610,7 @@
 
 -------------------------
 
-#### Interest Affinities
+### Interest Affinities
 ##### Aggregate affinities for the selected monitor over a given date range - Category: visualizations
 ##### `/monitor/interestaffinities` - GET
 ##### Parameters
@@ -718,7 +644,7 @@
 
 -------------------------
 
-#### Monitor Audit
+### Monitor Audit
 ##### Audit information about the selected monitor - Category: admin
 ##### `/monitor/audit` - GET
 ##### Parameters
@@ -734,7 +660,7 @@
 
 -------------------------
 
-#### Monitor Detail
+### Monitor Detail
 ##### Attributes of the specified monitor - Category: admin
 ##### `/monitor/detail` - GET
 ##### Parameters
@@ -750,7 +676,7 @@
 
 -------------------------
 
-#### Monitor Image Results
+### Monitor Image Results
 ##### Daily image results for a monitor - Category: results
 ##### `/monitor/imageresults` - GET
 ##### Parameters
@@ -778,7 +704,7 @@
 
 -------------------------
 
-#### Monitor List
+### Monitor List
 ##### List of monitors available to the passed in username - Category: admin
 ##### `/monitor/list` - GET
 ##### Parameters
@@ -794,7 +720,7 @@
 
 -------------------------
 
-#### Monitor Results
+### Monitor Results
 ##### Daily results for a monitor - Category: results
 ##### `/monitor/results` - GET
 ##### Parameters
@@ -819,7 +745,7 @@
 
 -------------------------
 
-#### Monitor Results by City
+### Monitor Results by City
 ##### Returns all the monitor results grouped by the cities / urban areas in a given country (if given) - Category: results
 ##### `/monitor/geography/cities` - GET
 ##### Parameters
@@ -853,7 +779,7 @@
 
 -------------------------
 
-#### Monitor Results by Country
+### Monitor Results by Country
 ##### Returns all the monitor results grouped by country - Category: results
 ##### `/monitor/geography/countries` - GET
 ##### Parameters
@@ -884,7 +810,7 @@
 
 -------------------------
 
-#### Monitor Results by State
+### Monitor Results by State
 ##### Returns all the monitor results grouped by the country states / regions - Category: results
 ##### `/monitor/geography/states` - GET
 ##### Parameters
@@ -918,7 +844,7 @@
 
 -------------------------
 
-#### Monitor Training Posts
+### Monitor Training Posts
 ##### Download training posts for a monitor - Category: admin
 ##### `/monitor/trainingposts` - GET
 ##### Parameters
@@ -937,7 +863,7 @@
 
 -------------------------
 
-#### Posts
+### Posts
 ##### Information about posts in a monitor - Category: visualizations
 ##### `/monitor/posts` - GET || POST
 ##### Parameters
@@ -977,7 +903,7 @@
 
 -------------------------
 
-#### Realtime Cashtags
+### Realtime Cashtags
 ##### Get Cashtags associated to a Monitor - Category: monitors
 ##### `/realtime/monitor/cashtags` - GET
 ##### Parameters
@@ -998,7 +924,7 @@
 
 -------------------------
 
-#### Realtime Configure
+### Realtime Configure
 ##### Configure the Realtime evaluators for the Monitor - Category: monitors
 ##### `/realtime/monitor/configure` - POST
 ##### Parameters
@@ -1013,7 +939,7 @@
 
 -------------------------
 
-#### Realtime Details
+### Realtime Details
 ##### Get the Realtime evaluators details for the Monitor - Category: monitors
 ##### `/realtime/monitor/detail` - GET
 ##### Parameters
@@ -1028,7 +954,7 @@
 
 -------------------------
 
-#### Realtime Disable
+### Realtime Disable
 ##### Disable Realtime Data - Category: monitors
 ##### `/realtime/monitor/disable` - GET
 ##### Parameters
@@ -1040,7 +966,7 @@
 
 -------------------------
 
-#### Realtime Enable
+### Realtime Enable
 ##### Enable Realtime Data - Category: monitors
 ##### `/realtime/monitor/enable` - GET
 ##### Parameters
@@ -1052,7 +978,43 @@
 
 -------------------------
 
-#### Realtime Hashtags
+### Realtime FullRetweets
+##### Get the Realtime fulretweets for the Monitor - Category: monitors
+##### `/realtime/monitor/fullretweets` - GET
+##### Parameters
+* `id` - The id of the monitor being requested
+	- Type: long
+	- Required = True
+* `start` - Specifies inclusive start date in epoch seconds
+	- Type: Long
+	- Required = False
+
+##### Response
+* `realtimeData` - JSON object of monitor realtime data
+	- Type: Map
+	- Restricted = False
+
+-------------------------
+
+### Realtime FullTweets
+##### Get the Realtime fulltweets for the Monitor - Category: monitors
+##### `/realtime/monitor/fulltweets` - GET
+##### Parameters
+* `id` - The id of the monitor being requested
+	- Type: long
+	- Required = True
+* `start` - Specifies inclusive start date in epoch seconds
+	- Type: Long
+	- Required = False
+
+##### Response
+* `realtimeData` - JSON object of monitor realtime data
+	- Type: Map
+	- Restricted = False
+
+-------------------------
+
+### Realtime Hashtags
 ##### Get Hashtags associated to a Monitor - Category: monitors
 ##### `/realtime/monitor/hashtags` - GET
 ##### Parameters
@@ -1073,7 +1035,7 @@
 
 -------------------------
 
-#### Realtime Monitor List
+### Realtime Monitor List
 ##### Get the Monitors which are in Proteus - Category: monitors
 ##### `/realtime/monitor/list` - GET
 ##### Parameters
@@ -1088,7 +1050,7 @@
 
 -------------------------
 
-#### Realtime Retweets
+### Realtime Retweets
 ##### Get the Realtime retweets for the Monitor - Category: monitors
 ##### `/realtime/monitor/retweets` - GET
 ##### Parameters
@@ -1103,7 +1065,7 @@
 
 -------------------------
 
-#### Realtime SocialGuids
+### Realtime SocialGuids
 ##### Get the Realtime social guids for the Monitor - Category: monitors
 ##### `/realtime/monitor/socialguids` - GET
 ##### Parameters
@@ -1130,7 +1092,7 @@
 
 -------------------------
 
-#### Realtime Tweets
+### Realtime Tweets
 ##### Get the Realtime tweets for the Monitor - Category: monitors
 ##### `/realtime/monitor/tweets` - GET
 ##### Parameters
@@ -1148,7 +1110,7 @@
 
 -------------------------
 
-#### Realtime Volume
+### Realtime Volume
 ##### Get the Realtime volume for the Monitor - Category: monitors
 ##### `/realtime/monitor/volume` - GET
 ##### Parameters
@@ -1169,7 +1131,7 @@
 
 -------------------------
 
-#### Realtime Volume by Emotion
+### Realtime Volume by Emotion
 ##### Get the Realtime volume by emotion for the Monitor - Category: monitors
 ##### `/realtime/monitor/volumebyemotion` - GET
 ##### Parameters
@@ -1190,7 +1152,7 @@
 
 -------------------------
 
-#### Realtime Volume by Sentiment
+### Realtime Volume by Sentiment
 ##### Get the Realtime volume by sentiment for the Monitor - Category: monitors
 ##### `/realtime/monitor/volumebysentiment` - GET
 ##### Parameters
@@ -1211,7 +1173,7 @@
 
 -------------------------
 
-#### Stream Add Monitor
+### Stream Add Monitor
 ##### Stream Add Monitor Association - Category: admin
 ##### `/stream/{streamid}/monitor/{monitorid}` - POST
 ##### Parameters
@@ -1226,7 +1188,7 @@
 
 -------------------------
 
-#### Stream Create
+### Stream Create
 ##### Stream creation - Category: admin
 ##### `/stream` - POST
 ##### Parameters
@@ -1242,7 +1204,7 @@
 
 -------------------------
 
-#### Stream Delete
+### Stream Delete
 ##### Stream deletion - Category: admin
 ##### `/stream/{streamid}` - DELETE
 ##### Parameters
@@ -1254,7 +1216,7 @@
 
 -------------------------
 
-#### Stream List
+### Stream List
 ##### List of streams available to the passed in username - Category: admin
 ##### `/stream/list` - GET
 ##### Parameters
@@ -1270,7 +1232,7 @@
 
 -------------------------
 
-#### Stream Posts
+### Stream Posts
 ##### Information about posts in a stream - Category: results
 ##### `/stream/{streamid}/posts` - GET
 ##### Parameters
@@ -1292,7 +1254,7 @@
 
 -------------------------
 
-#### Stream Remove Monitor
+### Stream Remove Monitor
 ##### Stream Remove Monitor Association - Category: admin
 ##### `/stream/{streamid}/monitor/{monitorid}` - DELETE
 ##### Parameters
@@ -1307,7 +1269,7 @@
 
 -------------------------
 
-#### Stream Update Monitor
+### Stream Update Monitor
 ##### Stream Update Monitor Data - Category: admin
 ##### `/stream/{streamid}` - POST
 ##### Parameters
@@ -1319,7 +1281,7 @@
 
 -------------------------
 
-#### Team List
+### Team List
 ##### List of teams accessible to the current user - Category: admin
 ##### `/team/list` - GET
 ##### Parameters
@@ -1332,7 +1294,7 @@
 
 -------------------------
 
-#### Top Sites and Content Sources
+### Top Sites and Content Sources
 ##### Content source breakdown and top sites - Category: results
 ##### `/monitor/sources` - GET
 ##### Parameters
@@ -1354,7 +1316,7 @@
 
 -------------------------
 
-#### Topic Clustering
+### Topic Clustering
 ##### XML data that can be used to generate clustering visualizations using third-party software - Category: visualizations
 ##### `/monitor/topics` - GET || POST
 ##### Parameters
@@ -1381,7 +1343,7 @@
 
 -------------------------
 
-#### Topic Waves
+### Topic Waves
 ##### Topic waves information for a monitor - Category: visualizations
 ##### `/monitor/topicwaves` - GET || POST
 ##### Parameters
@@ -1421,7 +1383,7 @@
 
 -------------------------
 
-#### Training Document Upload
+### Training Document Upload
 ##### Train monitors via the API - Category: util
 ##### `/monitor/train` - POST
 ##### Parameters
@@ -1436,7 +1398,7 @@
 
 -------------------------
 
-#### Twitter Engagement Metrics
+### Twitter Engagement Metrics
 ##### Engagement metrics for Twitter content in a monitor - Category: results
 ##### `/monitor/twittermetrics` - GET
 ##### Parameters
@@ -1458,7 +1420,7 @@
 
 -------------------------
 
-#### Twitter Followers
+### Twitter Followers
 ##### Total daily follower counts for Twitter Social Account monitors - Category: social
 ##### `/monitor/twittersocial/followers` - GET
 ##### Parameters
@@ -1480,7 +1442,7 @@
 
 -------------------------
 
-#### Twitter Sent Posts
+### Twitter Sent Posts
 ##### Daily retweets, replies, and impressions for individual posts made by a Twitter account in a Twitter social account monitor - Category: social
 ##### `/monitor/twittersocial/sentposts` - GET
 ##### Parameters
@@ -1502,7 +1464,7 @@
 
 -------------------------
 
-#### Twitter Total Engagement
+### Twitter Total Engagement
 ##### Daily retweets, replies, and mentions for a targeted Twitter account in a Twitter social account monitor - Category: social
 ##### `/monitor/twittersocial/totalengagement` - GET
 ##### Parameters
@@ -1524,7 +1486,7 @@
 
 -------------------------
 
-#### Volume
+### Volume
 ##### Volume of total posts in a monitor - Category: results
 ##### `/monitor/volume` - GET
 ##### Parameters
@@ -1564,7 +1526,7 @@
 
 -------------------------
 
-#### Word Cloud
+### Word Cloud
 ##### Word frequency information for posts in a monitor - Category: visualizations
 ##### `/monitor/wordcloud` - GET || POST
 ##### Parameters

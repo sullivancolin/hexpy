@@ -1,9 +1,11 @@
 """Module for Activity Reports Api."""
 
 import inspect
+
+from typing import Any, Dict
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import Dict, Any
 
 
 class ActivityAPI:

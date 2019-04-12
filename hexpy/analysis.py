@@ -1,9 +1,11 @@
 """Module for interacting with analysis API"""
 
 import inspect
+
+from typing import Any, Dict
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import Dict, Any
 
 
 class AnalysisAPI:

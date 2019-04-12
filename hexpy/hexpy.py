@@ -1,23 +1,25 @@
 """CLI interface for hexpy."""
-import time
 import json
-import pandas as pd
-import numpy as np
-import click
-import requests
-import re
-from getpass import getpass
-from .session import HexpySession
-from .monitor import MonitorAPI
-from .content_upload import ContentUploadAPI
-from .streams import StreamsAPI
-from .metadata import MetadataAPI
-from hexpy import __version__
-import pendulum
-import pathlib
-from typing import Sequence, Callable, Dict, Any, List
-from click_help_colors import HelpColorsGroup
 import os
+import re
+import time
+from getpass import getpass
+
+import click
+import numpy as np
+import pandas as pd
+import pathlib
+import pendulum
+import requests
+from click_help_colors import HelpColorsGroup
+from hexpy import __version__
+from typing import Any, Callable, Dict, List, Sequence
+
+from .content_upload import ContentUploadAPI
+from .metadata import MetadataAPI
+from .monitor import MonitorAPI
+from .session import HexpySession
+from .streams import StreamsAPI
 
 
 def posts_json_to_df(
@@ -79,7 +81,7 @@ def posts_json_to_df(
 
 
 ENDPOINT_TEMPLATE = """
-#### {title}
+### {title}
 ##### {description} - Category: {category}
 ##### `{url}` - {method}
 ##### Parameters
@@ -141,20 +143,21 @@ def format_endpoint(endpoint: dict) -> str:
 def docs_to_text(json_docs: dict, mode: str = "md") -> str:
     """Convert API documentation JSON to markdown or github flavored markdown."""
     endpoints = json_docs["endpoints"]
-    doc = f"# Crimson Hexagon API Documentation\n**API URL: `{HexpySession.ROOT[:-1]}`**\n\n### Endpoints\n"
+    doc = f"# Crimson Hexagon API Documentation\n**API URL: `{HexpySession.ROOT[:-1]}`**\n\n## Endpoints\n"
 
-    for i, e in enumerate(endpoints):
+    if mode == "gfm":
+        for i, e in enumerate(endpoints):
 
-        if mode == "md":
-            anchor = e["endpoint"].lower().replace("-", " ")
-            anchor = re.sub(r"\s+", "-", anchor)
-        elif mode == "gfm":
-            anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
-        else:
-            raise click.ClickException(
-                f"Invalid markdown mode: {mode}. must be either 'md' or 'gfm'."
-            )
-        doc += f"* [{e['endpoint']}](#{anchor})\n"
+            if mode == "md":
+                anchor = e["endpoint"].lower().replace("-", " ")
+                anchor = re.sub(r"\s+", "-", anchor)
+            elif mode == "gfm":
+                anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
+            else:
+                raise click.ClickException(
+                    f"Invalid markdown mode: {mode}. must be either 'md' or 'gfm'."
+                )
+            doc += f"* [{e['endpoint']}](#{anchor})\n"
 
     return doc + "\n".join([format_endpoint(e) for e in endpoints])
 

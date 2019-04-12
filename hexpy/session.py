@@ -1,12 +1,17 @@
 """Module for handling API authorization"""
 
 import inspect
+import json
+import logging
+from getpass import getpass
+
 import requests
 from pathlib import Path
-import json
-from getpass import getpass
+from typing import Any, Dict
+
 from .base import handle_response, rate_limited
-from typing import Dict, Any
+
+logger = logging.getLogger(__name__)
 
 
 class HexpySession:
@@ -144,6 +149,7 @@ class HexpySession:
                 cred_path = Path(path)
             with open(cred_path) as infile:
                 auth = json.load(infile)
+                logger.info(f"using token: {json.dumps(auth)}")
                 return cls(token=auth["auth"])
         except IOError:
             raise IOError(

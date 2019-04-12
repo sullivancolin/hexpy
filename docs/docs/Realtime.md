@@ -88,6 +88,16 @@ retweets(monitor_id: int) -> Dict[str, Any]
 ```
 Get the Realtime retweets for the Monitor.
 
+### full_retweets
+```python
+full_retweets(monitor_id: int, start: int = None) -> Dict[str, Any]
+```
+Get the Realtime fullretweets for the Monitor.
+
+#### Arguments
+* monitor_id: Integer, the id of the monitor being requested.
+* start: Integer, specifies inclusive start date in epoch seconds.
+
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.
 
@@ -109,6 +119,12 @@ Get the Realtime social guids for the Monitor.
 tweets(monitor_id: int, start: int = None) -> Dict[str, Any]
 ```
 Get the Realtime tweets for the Monitor.
+
+### full_tweets
+```python
+full_tweets(monitor_id: int, start: int = None) -> Dict[str, Any]
+```
+Get the Realtime fulltweets for the Monitor.
 
 #### Arguments
 * monitor_id: Integer, the id of the monitor being requested.

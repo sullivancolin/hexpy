@@ -1,10 +1,12 @@
 """Module for uploading custom content"""
 
 import inspect
+import logging
+
+from typing import Any, Dict, Sequence
+
 from .base import handle_response, rate_limited
 from .session import HexpySession
-from typing import Dict, Any, Sequence
-import logging
 
 logger = logging.getLogger(__name__)
 
