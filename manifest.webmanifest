@@ -13,9 +13,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "/hexpy/",
   "background_color": "#009688",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/hexpy/",
   "theme_color": "#009688"
 }
