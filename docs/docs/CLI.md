@@ -1,3 +1,7 @@
+path: blob/master/hexpy
+source: hexpy.py
+
+
 Hexpy Command Line Interface
 =============================
 

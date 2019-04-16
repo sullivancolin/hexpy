@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: metadata.py
+
 Metadata API
 ============
 

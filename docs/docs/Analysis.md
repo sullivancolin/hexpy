@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: analysis.py
+
 # Analysis API
 
 ## Class for working with Crimson Hexagon Analysis API.

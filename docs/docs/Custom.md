@@ -1,3 +1,7 @@
+path: blob/master/hexpy
+source: custom.py
+
+
 Custom API
 ===========
 

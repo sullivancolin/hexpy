@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: streams.py
+
 Streams API
 ===========
 

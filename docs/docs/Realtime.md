@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: realtime.py
+
 Realtime API
 ===========
 

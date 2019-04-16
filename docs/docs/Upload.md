@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: content_upload.py
+
 Upload API
 =========
 

@@ -1,3 +1,6 @@
+path: blob/master/hexpy
+source: activity.py
+
 # Activity API
 
 ## Class for working with Crimson Hexagon Activity Report API.
