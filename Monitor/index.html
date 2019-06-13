@@ -1,1141 +1,6 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-        <meta name="description" content="A Python client for the Crimson Hexagon API.">
-      
-      
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
-    
-    
-      
-        <title>Monitor - hexpy</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/application.3020aac5.css">
-      
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
-      
-      
-        
-        
-        <meta name="theme-color" content="#009688">
-      
-    
-    
-      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
-    
-    
-      
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=:300,400,400i,700|Fira+Code">
-        <style>body,input{font-family:"","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Code","Courier New",Courier,monospace}</style>
-      
-    
-    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
-      <link rel="manifest" href="../manifest.webmanifest">
-    
-    
-      <link rel="stylesheet" href="../stylesheets/extra.css">
-    
-    
-      
-    
-    
-  </head>
-  
-    
-    
-    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
-  
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-    
-      <a href="#monitor-api" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href=".." title="hexpy" class="md-header-nav__button md-logo">
-          
-            <img src="../images/logo.png" width="24" height="24">
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              hexpy
-            </span>
-            <span class="md-header-nav__topic">
-              Monitor
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-        
-      </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
-
-
-  
-
-<a href="https://github.com/sullivancolin/hexpy" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    hexpy
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-      <main class="md-main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href=".." title="hexpy" class="md-nav__button md-logo">
-      
-        <img src="../images/logo.png" width="48" height="48">
-      
-    </a>
-    hexpy
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/sullivancolin/hexpy" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    hexpy
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href=".." title="Getting Started" class="md-nav__link">
-      Getting Started
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
-    
-    <label class="md-nav__link" for="nav-2">
-      API Reference
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-2">
-        API Reference
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Session/" title="Session" class="md-nav__link">
-      Session
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Metadata/" title="Metadata" class="md-nav__link">
-      Metadata
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Monitor
-      </label>
-    
-    <a href="./" title="Monitor" class="md-nav__link md-nav__link--active">
-      Monitor
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#class-for-working-with-crimson-hexagon-monitor-api" title="Class for working with Crimson Hexagon Monitor API." class="md-nav__link">
-    Class for working with Crimson Hexagon Monitor API.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-usage" title="Example usage." class="md-nav__link">
-    Example usage.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" title="Methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#details" title="details" class="md-nav__link">
-    details
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audit" title="audit" class="md-nav__link">
-    audit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#word_cloud" title="word_cloud" class="md-nav__link">
-    word_cloud
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#training_posts" title="training_posts" class="md-nav__link">
-    training_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#train_monitor" title="train_monitor" class="md-nav__link">
-    train_monitor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interest_affinities" title="interest_affinities" class="md-nav__link">
-    interest_affinities
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#topics" title="topics" class="md-nav__link">
-    topics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#topic_waves" title="topic_waves" class="md-nav__link">
-    topic_waves
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#top_sources" title="top_sources" class="md-nav__link">
-    top_sources
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#image_results" title="image_results" class="md-nav__link">
-    image_results
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#volume" title="volume" class="md-nav__link">
-    volume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dayandtime" title="dayandtime" class="md-nav__link">
-    dayandtime
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sentiment_and_categories" title="sentiment_and_categories" class="md-nav__link">
-    sentiment_and_categories
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aggregate" title="aggregate" class="md-nav__link">
-    aggregate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#posts" title="posts" class="md-nav__link">
-    posts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#demographics" title="Demographics" class="md-nav__link">
-    Demographics
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#age" title="age" class="md-nav__link">
-    age
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ethnicity" title="ethnicity" class="md-nav__link">
-    ethnicity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gender" title="gender" class="md-nav__link">
-    gender
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#geography" title="Geography" class="md-nav__link">
-    Geography
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cities" title="cities" class="md-nav__link">
-    cities
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#states" title="states" class="md-nav__link">
-    states
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#countries" title="countries" class="md-nav__link">
-    countries
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#twitter" title="Twitter" class="md-nav__link">
-    Twitter
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#twitter_authors" title="twitter_authors" class="md-nav__link">
-    twitter_authors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_metrics" title="twitter_metrics" class="md-nav__link">
-    twitter_metrics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_followers" title="twitter_followers" class="md-nav__link">
-    twitter_followers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_sent_posts" title="twitter_sent_posts" class="md-nav__link">
-    twitter_sent_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_engagement" title="twitter_engagement" class="md-nav__link">
-    twitter_engagement
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#facebook" title="Facebook" class="md-nav__link">
-    Facebook
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#facebook_admin_posts" title="facebook_admin_posts" class="md-nav__link">
-    facebook_admin_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#facebook_likes" title="facebook_likes" class="md-nav__link">
-    facebook_likes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#facebook_activity" title="facebook_activity" class="md-nav__link">
-    facebook_activity
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instagram" title="Instagram" class="md-nav__link">
-    Instagram
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#instagram_top_hashtags" title="instagram_top_hashtags" class="md-nav__link">
-    instagram_top_hashtags
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_followers" title="instagram_followers" class="md-nav__link">
-    instagram_followers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_sent_media" title="instagram_sent_media" class="md-nav__link">
-    instagram_sent_media
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_activity" title="instagram_activity" class="md-nav__link">
-    instagram_activity
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-        <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
-            Source
-          </a>
-        </li>
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Analysis/" title="Analysis" class="md-nav__link">
-      Analysis
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Upload/" title="Upload" class="md-nav__link">
-      Upload
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Streams/" title="Streams" class="md-nav__link">
-      Streams
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Realtime/" title="Realtime" class="md-nav__link">
-      Realtime
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Custom/" title="Custom" class="md-nav__link">
-      Custom
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Activity/" title="Activty Reports" class="md-nav__link">
-      Activty Reports
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../CLI/" title="Command Line Interface" class="md-nav__link">
-      Command Line Interface
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../crimson_api_docs/" title="Crimson API Documentation" class="md-nav__link">
-      Crimson API Documentation
-    </a>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#class-for-working-with-crimson-hexagon-monitor-api" title="Class for working with Crimson Hexagon Monitor API." class="md-nav__link">
-    Class for working with Crimson Hexagon Monitor API.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-usage" title="Example usage." class="md-nav__link">
-    Example usage.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" title="Methods" class="md-nav__link">
-    Methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#details" title="details" class="md-nav__link">
-    details
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audit" title="audit" class="md-nav__link">
-    audit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#word_cloud" title="word_cloud" class="md-nav__link">
-    word_cloud
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#training_posts" title="training_posts" class="md-nav__link">
-    training_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#train_monitor" title="train_monitor" class="md-nav__link">
-    train_monitor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interest_affinities" title="interest_affinities" class="md-nav__link">
-    interest_affinities
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#topics" title="topics" class="md-nav__link">
-    topics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#topic_waves" title="topic_waves" class="md-nav__link">
-    topic_waves
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#top_sources" title="top_sources" class="md-nav__link">
-    top_sources
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#image_results" title="image_results" class="md-nav__link">
-    image_results
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#volume" title="volume" class="md-nav__link">
-    volume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dayandtime" title="dayandtime" class="md-nav__link">
-    dayandtime
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sentiment_and_categories" title="sentiment_and_categories" class="md-nav__link">
-    sentiment_and_categories
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#aggregate" title="aggregate" class="md-nav__link">
-    aggregate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#posts" title="posts" class="md-nav__link">
-    posts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#demographics" title="Demographics" class="md-nav__link">
-    Demographics
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#age" title="age" class="md-nav__link">
-    age
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ethnicity" title="ethnicity" class="md-nav__link">
-    ethnicity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gender" title="gender" class="md-nav__link">
-    gender
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#geography" title="Geography" class="md-nav__link">
-    Geography
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#cities" title="cities" class="md-nav__link">
-    cities
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#states" title="states" class="md-nav__link">
-    states
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#countries" title="countries" class="md-nav__link">
-    countries
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#twitter" title="Twitter" class="md-nav__link">
-    Twitter
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#twitter_authors" title="twitter_authors" class="md-nav__link">
-    twitter_authors
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_metrics" title="twitter_metrics" class="md-nav__link">
-    twitter_metrics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_followers" title="twitter_followers" class="md-nav__link">
-    twitter_followers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_sent_posts" title="twitter_sent_posts" class="md-nav__link">
-    twitter_sent_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#twitter_engagement" title="twitter_engagement" class="md-nav__link">
-    twitter_engagement
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#facebook" title="Facebook" class="md-nav__link">
-    Facebook
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#facebook_admin_posts" title="facebook_admin_posts" class="md-nav__link">
-    facebook_admin_posts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#facebook_likes" title="facebook_likes" class="md-nav__link">
-    facebook_likes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#facebook_activity" title="facebook_activity" class="md-nav__link">
-    facebook_activity
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instagram" title="Instagram" class="md-nav__link">
-    Instagram
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#instagram_top_hashtags" title="instagram_top_hashtags" class="md-nav__link">
-    instagram_top_hashtags
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_followers" title="instagram_followers" class="md-nav__link">
-    instagram_followers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_sent_media" title="instagram_sent_media" class="md-nav__link">
-    instagram_sent_media
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#instagram_activity" title="instagram_activity" class="md-nav__link">
-    instagram_activity
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-        <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
-            Source
-          </a>
-        </li>
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                
-                <h1 id="monitor-api">Monitor API<a class="headerlink" href="#monitor-api" title="Permanent link">&para;</a></h1>
-<h2 id="class-for-working-with-crimson-hexagon-monitor-api">Class for working with Crimson Hexagon Monitor API.<a class="headerlink" href="#class-for-working-with-crimson-hexagon-monitor-api" title="Permanent link">&para;</a></h2>
-<h2 id="example-usage">Example usage.<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<!doctype html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="description" content="A Python client for the Crimson Hexagon API."><meta name="lang:clipboard.copy" content="Copy to clipboard"><meta name="lang:clipboard.copied" content="Copied to clipboard"><meta name="lang:search.language" content="en"><meta name="lang:search.pipeline.stopwords" content="True"><meta name="lang:search.pipeline.trimmer" content="True"><meta name="lang:search.result.none" content="No matching documents"><meta name="lang:search.result.one" content="1 matching document"><meta name="lang:search.result.other" content="# matching documents"><meta name="lang:search.tokenizer" content="[\s\-]+"><link rel="shortcut icon" href="../images/favicon.ico"><meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.3.1"><title>Monitor - hexpy</title><link rel="stylesheet" href="../assets/stylesheets/application.4031d38b.css"><link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css"><meta name="theme-color" content="#009688"><script src="../assets/javascripts/modernizr.74668098.js"></script><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=:300,400,400i,700|Fira+Code&display=swap"><style>body,input{font-family:"","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Fira Code","Courier New",Courier,monospace}</style><link rel="stylesheet" href="../assets/fonts/material-icons.css"><link rel="manifest" href="../manifest.webmanifest"><link rel="stylesheet" href="../stylesheets/extra.css"></head><body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red"><svg class="md-svg"><defs><svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg></defs></svg> <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off"> <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off"> <label class="md-overlay" data-md-component="overlay" for="__drawer"></label><a href="#monitor-api" tabindex="1" class="md-skip">Skip to content </a><header class="md-header" data-md-component="header"><nav class="md-header-nav md-grid"><div class="md-flex"><div class="md-flex__cell md-flex__cell--shrink"><a href=".." title="hexpy" class="md-header-nav__button md-logo"><img src="../images/logo.png" width="24" height="24"></a></div><div class="md-flex__cell md-flex__cell--shrink"><label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label></div><div class="md-flex__cell md-flex__cell--stretch"><div class="md-flex__ellipsis md-header-nav__title" data-md-component="title"><span class="md-header-nav__topic">hexpy</span><span class="md-header-nav__topic">Monitor</span></div></div><div class="md-flex__cell md-flex__cell--shrink"><label class="md-icon md-icon--search md-header-nav__button" for="__search"></label><div class="md-search" data-md-component="search" role="dialog"><label class="md-search__overlay" for="__search"></label><div class="md-search__inner" role="search"><form class="md-search__form" name="search"><input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active"> <label class="md-icon md-search__icon" for="__search"></label> <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">&#xE5CD;</button></form><div class="md-search__output"><div class="md-search__scrollwrap" data-md-scrollfix><div class="md-search-result" data-md-component="result"><div class="md-search-result__meta">Type to start searching</div><ol class="md-search-result__list"></ol></div></div></div></div></div></div><div class="md-flex__cell md-flex__cell--shrink"><div class="md-header-nav__source"><a href="https://github.com/sullivancolin/hexpy" title="Go to repository" class="md-source" data-md-source="github"><div class="md-source__icon"><svg viewBox="0 0 24 24" width="24" height="24"><use xlink:href="#__github" width="24" height="24"></use></svg></div><div class="md-source__repository">hexpy</div></a></div></div></div></nav></header><div class="md-container"><main class="md-main"><div class="md-main__inner md-grid" data-md-component="container"><div class="md-sidebar md-sidebar--primary" data-md-component="navigation"><div class="md-sidebar__scrollwrap"><div class="md-sidebar__inner"><nav class="md-nav md-nav--primary" data-md-level="0"><label class="md-nav__title md-nav__title--site" for="__drawer"><a href=".." title="hexpy" class="md-nav__button md-logo"><img src="../images/logo.png" width="48" height="48"></a>hexpy</label><div class="md-nav__source"><a href="https://github.com/sullivancolin/hexpy" title="Go to repository" class="md-source" data-md-source="github"><div class="md-source__icon"><svg viewBox="0 0 24 24" width="24" height="24"><use xlink:href="#__github" width="24" height="24"></use></svg></div><div class="md-source__repository">hexpy</div></a></div><ul class="md-nav__list" data-md-scrollfix><li class="md-nav__item"><a href=".." title="Getting Started" class="md-nav__link">Getting Started</a></li><li class="md-nav__item md-nav__item--active md-nav__item--nested"><input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked><label class="md-nav__link" for="nav-2">API Reference</label><nav class="md-nav" data-md-component="collapsible" data-md-level="1"><label class="md-nav__title" for="nav-2">API Reference</label><ul class="md-nav__list" data-md-scrollfix><li class="md-nav__item"><a href="../Session/" title="Session" class="md-nav__link">Session</a></li><li class="md-nav__item"><a href="../Metadata/" title="Metadata" class="md-nav__link">Metadata</a></li><li class="md-nav__item md-nav__item--active"><input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc"><label class="md-nav__link md-nav__link--active" for="__toc">Monitor</label><a href="./" title="Monitor" class="md-nav__link md-nav__link--active">Monitor</a><nav class="md-nav md-nav--secondary"><label class="md-nav__title" for="__toc">Table of contents</label><ul class="md-nav__list" data-md-scrollfix><li class="md-nav__item"><a href="#example-usage" title="Example usage" class="md-nav__link">Example usage</a></li><li class="md-nav__item"><a href="#methods" title="Methods" class="md-nav__link">Methods</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#details" title="details" class="md-nav__link">details</a></li><li class="md-nav__item"><a href="#audit" title="audit" class="md-nav__link">audit</a></li><li class="md-nav__item"><a href="#word_cloud" title="word_cloud" class="md-nav__link">word_cloud</a></li><li class="md-nav__item"><a href="#training_posts" title="training_posts" class="md-nav__link">training_posts</a></li><li class="md-nav__item"><a href="#train_monitor" title="train_monitor" class="md-nav__link">train_monitor</a></li><li class="md-nav__item"><a href="#interest_affinities" title="interest_affinities" class="md-nav__link">interest_affinities</a></li><li class="md-nav__item"><a href="#topics" title="topics" class="md-nav__link">topics</a></li><li class="md-nav__item"><a href="#topic_waves" title="topic_waves" class="md-nav__link">topic_waves</a></li><li class="md-nav__item"><a href="#top_sources" title="top_sources" class="md-nav__link">top_sources</a></li><li class="md-nav__item"><a href="#image_results" title="image_results" class="md-nav__link">image_results</a></li><li class="md-nav__item"><a href="#volume" title="volume" class="md-nav__link">volume</a></li><li class="md-nav__item"><a href="#dayandtime" title="dayandtime" class="md-nav__link">dayandtime</a></li><li class="md-nav__item"><a href="#sentiment_and_categories" title="sentiment_and_categories" class="md-nav__link">sentiment_and_categories</a></li><li class="md-nav__item"><a href="#aggregate" title="aggregate" class="md-nav__link">aggregate</a></li><li class="md-nav__item"><a href="#posts" title="posts" class="md-nav__link">posts</a></li></ul></nav></li><li class="md-nav__item"><a href="#demographics" title="Demographics" class="md-nav__link">Demographics</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#age" title="age" class="md-nav__link">age</a></li><li class="md-nav__item"><a href="#ethnicity" title="ethnicity" class="md-nav__link">ethnicity</a></li><li class="md-nav__item"><a href="#gender" title="gender" class="md-nav__link">gender</a></li></ul></nav></li><li class="md-nav__item"><a href="#geography" title="Geography" class="md-nav__link">Geography</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#cities" title="cities" class="md-nav__link">cities</a></li><li class="md-nav__item"><a href="#states" title="states" class="md-nav__link">states</a></li><li class="md-nav__item"><a href="#countries" title="countries" class="md-nav__link">countries</a></li></ul></nav></li><li class="md-nav__item"><a href="#twitter" title="Twitter" class="md-nav__link">Twitter</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#twitter_authors" title="twitter_authors" class="md-nav__link">twitter_authors</a></li><li class="md-nav__item"><a href="#twitter_metrics" title="twitter_metrics" class="md-nav__link">twitter_metrics</a></li><li class="md-nav__item"><a href="#twitter_followers" title="twitter_followers" class="md-nav__link">twitter_followers</a></li><li class="md-nav__item"><a href="#twitter_sent_posts" title="twitter_sent_posts" class="md-nav__link">twitter_sent_posts</a></li><li class="md-nav__item"><a href="#twitter_engagement" title="twitter_engagement" class="md-nav__link">twitter_engagement</a></li></ul></nav></li><li class="md-nav__item"><a href="#facebook" title="Facebook" class="md-nav__link">Facebook</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#facebook_admin_posts" title="facebook_admin_posts" class="md-nav__link">facebook_admin_posts</a></li><li class="md-nav__item"><a href="#facebook_likes" title="facebook_likes" class="md-nav__link">facebook_likes</a></li><li class="md-nav__item"><a href="#facebook_activity" title="facebook_activity" class="md-nav__link">facebook_activity</a></li></ul></nav></li><li class="md-nav__item"><a href="#instagram" title="Instagram" class="md-nav__link">Instagram</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#instagram_top_hashtags" title="instagram_top_hashtags" class="md-nav__link">instagram_top_hashtags</a></li><li class="md-nav__item"><a href="#instagram_followers" title="instagram_followers" class="md-nav__link">instagram_followers</a></li><li class="md-nav__item"><a href="#instagram_sent_media" title="instagram_sent_media" class="md-nav__link">instagram_sent_media</a></li><li class="md-nav__item"><a href="#instagram_activity" title="instagram_activity" class="md-nav__link">instagram_activity</a></li></ul></nav></li><li class="md-nav__item"><a href="#__source" title="Source" class="md-nav__link md-nav__link--active">Source</a></li></ul></nav></li><li class="md-nav__item"><a href="../Analysis/" title="Analysis" class="md-nav__link">Analysis</a></li><li class="md-nav__item"><a href="../Upload/" title="Upload" class="md-nav__link">Upload</a></li><li class="md-nav__item"><a href="../Streams/" title="Streams" class="md-nav__link">Streams</a></li><li class="md-nav__item"><a href="../Realtime/" title="Realtime" class="md-nav__link">Realtime</a></li><li class="md-nav__item"><a href="../Custom/" title="Custom" class="md-nav__link">Custom</a></li><li class="md-nav__item"><a href="../Activity/" title="Activty Reports" class="md-nav__link">Activty Reports</a></li><li class="md-nav__item"><a href="../Data_Validation/" title="Data Validation" class="md-nav__link">Data Validation</a></li></ul></nav></li><li class="md-nav__item"><a href="../CLI/" title="Command Line Interface" class="md-nav__link">Command Line Interface</a></li><li class="md-nav__item"><a href="../crimson_api_docs/" title="Crimson API Documentation" class="md-nav__link">Crimson API Documentation</a></li></ul></nav></div></div></div><div class="md-sidebar md-sidebar--secondary" data-md-component="toc"><div class="md-sidebar__scrollwrap"><div class="md-sidebar__inner"><nav class="md-nav md-nav--secondary"><label class="md-nav__title" for="__toc">Table of contents</label><ul class="md-nav__list" data-md-scrollfix><li class="md-nav__item"><a href="#example-usage" title="Example usage" class="md-nav__link">Example usage</a></li><li class="md-nav__item"><a href="#methods" title="Methods" class="md-nav__link">Methods</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#details" title="details" class="md-nav__link">details</a></li><li class="md-nav__item"><a href="#audit" title="audit" class="md-nav__link">audit</a></li><li class="md-nav__item"><a href="#word_cloud" title="word_cloud" class="md-nav__link">word_cloud</a></li><li class="md-nav__item"><a href="#training_posts" title="training_posts" class="md-nav__link">training_posts</a></li><li class="md-nav__item"><a href="#train_monitor" title="train_monitor" class="md-nav__link">train_monitor</a></li><li class="md-nav__item"><a href="#interest_affinities" title="interest_affinities" class="md-nav__link">interest_affinities</a></li><li class="md-nav__item"><a href="#topics" title="topics" class="md-nav__link">topics</a></li><li class="md-nav__item"><a href="#topic_waves" title="topic_waves" class="md-nav__link">topic_waves</a></li><li class="md-nav__item"><a href="#top_sources" title="top_sources" class="md-nav__link">top_sources</a></li><li class="md-nav__item"><a href="#image_results" title="image_results" class="md-nav__link">image_results</a></li><li class="md-nav__item"><a href="#volume" title="volume" class="md-nav__link">volume</a></li><li class="md-nav__item"><a href="#dayandtime" title="dayandtime" class="md-nav__link">dayandtime</a></li><li class="md-nav__item"><a href="#sentiment_and_categories" title="sentiment_and_categories" class="md-nav__link">sentiment_and_categories</a></li><li class="md-nav__item"><a href="#aggregate" title="aggregate" class="md-nav__link">aggregate</a></li><li class="md-nav__item"><a href="#posts" title="posts" class="md-nav__link">posts</a></li></ul></nav></li><li class="md-nav__item"><a href="#demographics" title="Demographics" class="md-nav__link">Demographics</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#age" title="age" class="md-nav__link">age</a></li><li class="md-nav__item"><a href="#ethnicity" title="ethnicity" class="md-nav__link">ethnicity</a></li><li class="md-nav__item"><a href="#gender" title="gender" class="md-nav__link">gender</a></li></ul></nav></li><li class="md-nav__item"><a href="#geography" title="Geography" class="md-nav__link">Geography</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#cities" title="cities" class="md-nav__link">cities</a></li><li class="md-nav__item"><a href="#states" title="states" class="md-nav__link">states</a></li><li class="md-nav__item"><a href="#countries" title="countries" class="md-nav__link">countries</a></li></ul></nav></li><li class="md-nav__item"><a href="#twitter" title="Twitter" class="md-nav__link">Twitter</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#twitter_authors" title="twitter_authors" class="md-nav__link">twitter_authors</a></li><li class="md-nav__item"><a href="#twitter_metrics" title="twitter_metrics" class="md-nav__link">twitter_metrics</a></li><li class="md-nav__item"><a href="#twitter_followers" title="twitter_followers" class="md-nav__link">twitter_followers</a></li><li class="md-nav__item"><a href="#twitter_sent_posts" title="twitter_sent_posts" class="md-nav__link">twitter_sent_posts</a></li><li class="md-nav__item"><a href="#twitter_engagement" title="twitter_engagement" class="md-nav__link">twitter_engagement</a></li></ul></nav></li><li class="md-nav__item"><a href="#facebook" title="Facebook" class="md-nav__link">Facebook</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#facebook_admin_posts" title="facebook_admin_posts" class="md-nav__link">facebook_admin_posts</a></li><li class="md-nav__item"><a href="#facebook_likes" title="facebook_likes" class="md-nav__link">facebook_likes</a></li><li class="md-nav__item"><a href="#facebook_activity" title="facebook_activity" class="md-nav__link">facebook_activity</a></li></ul></nav></li><li class="md-nav__item"><a href="#instagram" title="Instagram" class="md-nav__link">Instagram</a><nav class="md-nav"><ul class="md-nav__list"><li class="md-nav__item"><a href="#instagram_top_hashtags" title="instagram_top_hashtags" class="md-nav__link">instagram_top_hashtags</a></li><li class="md-nav__item"><a href="#instagram_followers" title="instagram_followers" class="md-nav__link">instagram_followers</a></li><li class="md-nav__item"><a href="#instagram_sent_media" title="instagram_sent_media" class="md-nav__link">instagram_sent_media</a></li><li class="md-nav__item"><a href="#instagram_activity" title="instagram_activity" class="md-nav__link">instagram_activity</a></li></ul></nav></li><li class="md-nav__item"><a href="#__source" title="Source" class="md-nav__link md-nav__link--active">Source</a></li></ul></nav></div></div></div><div class="md-content"><article class="md-content__inner md-typeset"><h1 id="monitor-api">Monitor API<a class="headerlink" href="#monitor-api" title="Permanent link">&para;</a></h1>
+<p>Class for working with Crimson Hexagon Monitor API.</p>
+<h2 id="example-usage">Example usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">MonitorAPI</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">monitor_client</span> <span class="o">=</span> <span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
@@ -1148,7 +13,7 @@
 
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <h3 id="details">details<a class="headerlink" href="#details" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">details</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">details</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1158,7 +23,7 @@
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 </ul>
 <h3 id="audit">audit<a class="headerlink" href="#audit" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">audit</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">audit</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1168,7 +33,7 @@
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 </ul>
 <h3 id="word_cloud">word_cloud<a class="headerlink" href="#word_cloud" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">word_cloud</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">word_cloud</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1181,7 +46,7 @@
 <li>filter_string: String, pipe-separated list of field:value pairs used to filter posts</li>
 </ul>
 <h3 id="training_posts">training_posts<a class="headerlink" href="#training_posts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">training_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">training_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1192,20 +57,20 @@
 <li>category: Integer, category id to target training posts from a specific category</li>
 </ul>
 <h3 id="train_monitor">train_monitor<a class="headerlink" href="#train_monitor" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">train_monitor</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">train_monitor</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">category_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">TrainCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
-<p>Upload individual training document monitors programmatically.</p>
-<p>Upload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option. <a href="https://apidocs.crimsonhexagon.com/reference#training-document-upload">Reference</a></p>
+<p>Upload training documents to monitor programmatically.</p>
+<p>Upload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.</p>
 <h4>Arguments</h4>
 <ul>
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>category_id: Integer, the category this content should belong to</li>
-<li>data: List of document dictionaries with required fields</li>
+<li>items: validated instance of <a href="../Data_Validation/#traincollection">TrainCollection</a> model</li>
 </ul>
 <h3 id="interest_affinities">interest_affinities<a class="headerlink" href="#interest_affinities" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">interest_affinities</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">daily</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">document_source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">interest_affinities</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">daily</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">document_source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1219,7 +84,7 @@
 <li>document_source: String, document source for affinities. valid params include <code>TWITTER</code> or <code>TUMBLR</code></li>
 </ul>
 <h3 id="topics">topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">topics</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="codehilite"><pre><span></span><span class="n">topics</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span><span class="p">:</span>
 </pre></div>
 
 
@@ -1232,7 +97,7 @@
 <li>filter_string: String, pipe-separated list of field:value pairs used to filter posts</li>
 </ul>
 <h3 id="topic_waves">topic_waves<a class="headerlink" href="#topic_waves" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">topic_waves</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">topic_waves</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1245,7 +110,7 @@
 <li>filter_string: String, pipe-separated list of field:value pairs used to filter posts</li>
 </ul>
 <h3 id="top_sources">top_sources<a class="headerlink" href="#top_sources" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">top_sources</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">top_sources</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1257,7 +122,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="image_results">image_results<a class="headerlink" href="#image_results" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">image_results</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">object_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">top</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">image_results</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">object_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">top</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1271,7 +136,7 @@
 <li>top : Integer, if defined, only the selected number of classes will be returned</li>
 </ul>
 <h3 id="volume">volume<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">group_by</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;DAILY&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">volume</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">group_by</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;DAILY&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1284,7 +149,7 @@
 <li>group_by: String, specifies how the volume data over the date range will be grouped. [HOURLY, DAILY, WEEKLY, MONTHLY]</li>
 </ul>
 <h3 id="dayandtime">dayandtime<a class="headerlink" href="#dayandtime" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">dayandtime</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">aggregate_by_day</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">use_local_time</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">dayandtime</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">aggregate_by_day</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">use_local_time</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1298,7 +163,7 @@
 <li>use_local_time: if True, volume aggregation will use the time local to the publishing author of a post, instead of converting that time to the timezone of the selected monitor</li>
 </ul>
 <h3 id="sentiment_and_categories">sentiment_and_categories<a class="headerlink" href="#sentiment_and_categories" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">sentiment_and_categories</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hide_excluded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">sentiment_and_categories</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hide_excluded</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1311,7 +176,7 @@
 <li>hide_excluded: Boolean, if True, categories set as hidden will not be included in category proportion calculations.</li>
 </ul>
 <h3 id="aggregate">aggregate<a class="headerlink" href="#aggregate" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">aggregate</span><span class="p">(</span><span class="n">monitor_ids</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">],</span> <span class="n">dates</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+<div class="codehilite"><pre><span></span><span class="n">aggregate</span><span class="p">(</span><span class="n">monitor_ids</span><span class="p">:</span> <span class="n">MonitorOrMonitors</span><span class="p">,</span> <span class="n">dates</span><span class="p">:</span> <span class="n">DateOrDates</span><span class="p">,</span> <span class="n">metrics</span><span class="p">:</span> <span class="n">MetricOrMetrics</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">JSONDict</span><span class="p">]</span>
 </pre></div>
 
 
@@ -1331,7 +196,7 @@
 <li>metrics: String or list of Strings, metric(s) to aggregate upon</li>
 </ul>
 <h3 id="posts">posts<a class="headerlink" href="#posts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">extend_limit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">full_contents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">geotagged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filter_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">extend_limit</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">full_contents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">geotagged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1349,7 +214,7 @@
 <h2 id="demographics">Demographics<a class="headerlink" href="#demographics" title="Permanent link">&para;</a></h2>
 <p>This collection of endpoints provide demographic volume metrics for users within a given monitor.</p>
 <h3 id="age">age<a class="headerlink" href="#age" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">age</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">age</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1361,7 +226,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="ethnicity">ethnicity<a class="headerlink" href="#ethnicity" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">ethnicity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">ethnicity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1373,7 +238,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="gender">gender<a class="headerlink" href="#gender" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">gender</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">gender</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1386,7 +251,7 @@
 </ul>
 <h2 id="geography">Geography<a class="headerlink" href="#geography" title="Permanent link">&para;</a></h2>
 <h3 id="cities">cities<a class="headerlink" href="#cities" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">cities</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">cities</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1399,7 +264,7 @@
 <li>country: String, country code to filter cities</li>
 </ul>
 <h3 id="states">states<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">states</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">states</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">country</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1412,7 +277,7 @@
 <li>country: String, country code to filter states</li>
 </ul>
 <h3 id="countries">countries<a class="headerlink" href="#countries" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">countries</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">countries</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1424,9 +289,9 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h2 id="twitter">Twitter<a class="headerlink" href="#twitter" title="Permanent link">&para;</a></h2>
-<p>This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors. </p>
+<p>This collection of endpoints relate provide metrics specific to Twitter from either Social Account or Buzz monitors.</p>
 <h3 id="twitter_authors">twitter_authors<a class="headerlink" href="#twitter_authors" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">twitter_authors</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">twitter_authors</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1438,7 +303,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_metrics">twitter_metrics<a class="headerlink" href="#twitter_metrics" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">twitter_metrics</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">twitter_metrics</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1450,7 +315,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_followers">twitter_followers<a class="headerlink" href="#twitter_followers" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">twitter_followers</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">twitter_followers</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1462,7 +327,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_sent_posts">twitter_sent_posts<a class="headerlink" href="#twitter_sent_posts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">twitter_sent_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">twitter_sent_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1474,7 +339,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="twitter_engagement">twitter_engagement<a class="headerlink" href="#twitter_engagement" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">twitter_engagement</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">twitter_engagement</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1487,7 +352,7 @@
 </ul>
 <h2 id="facebook">Facebook<a class="headerlink" href="#facebook" title="Permanent link">&para;</a></h2>
 <h3 id="facebook_admin_posts">facebook_admin_posts<a class="headerlink" href="#facebook_admin_posts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">facebook_admin_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">facebook_admin_posts</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1499,7 +364,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="facebook_likes">facebook_likes<a class="headerlink" href="#facebook_likes" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">facebook_likes</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">facebook_likes</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1511,7 +376,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="facebook_activity">facebook_activity<a class="headerlink" href="#facebook_activity" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">facebook_activity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">facebook_activity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1524,7 +389,7 @@
 </ul>
 <h2 id="instagram">Instagram<a class="headerlink" href="#instagram" title="Permanent link">&para;</a></h2>
 <h3 id="instagram_top_hashtags">instagram_top_hashtags<a class="headerlink" href="#instagram_top_hashtags" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">instagram_top_hashtags</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">instagram_top_hashtags</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1536,7 +401,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_followers">instagram_followers<a class="headerlink" href="#instagram_followers" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">instagram_followers</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">instagram_followers</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1548,7 +413,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_sent_media">instagram_sent_media<a class="headerlink" href="#instagram_sent_media" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">instagram_sent_media</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">instagram_sent_media</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1560,7 +425,7 @@
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
 </ul>
 <h3 id="instagram_activity">instagram_activity<a class="headerlink" href="#instagram_activity" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">instagram_activity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+<div class="codehilite"><pre><span></span><span class="n">instagram_activity</span><span class="p">(</span><span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -1570,89 +435,4 @@
 <li>monitor_id: Integer, id of the monitor or monitor filter being requested</li>
 <li>start: String, inclusive start date in YYYY-MM-DD</li>
 <li>end: String, exclusive end date in YYYY-MM-DD</li>
-</ul>
-                
-                  
-                    <h2 id="__source">Source</h2>
-                    
-                    
-                    
-                    
-                    <a href="https://github.com/sullivancolin/hexpy/blob/master/hexpy/monitor.py" title="monitor.py" class="md-source-file">
-                      monitor.py
-                    </a>
-                  
-                
-              
-              
-                
-
-
-              
-            </article>
-          </div>
-        </div>
-      </main>
-      
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../Metadata/" title="Metadata" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Metadata
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../Analysis/" title="Analysis" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Analysis
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
-      
-    </div>
-  </div>
-</footer>
-      
-    </div>
-    
-      <script src="../assets/javascripts/application.dc02f8ce.js"></script>
-      
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
-      
-    
-  </body>
-</html>
+</ul><h2 id="__source">Source</h2><a href="https://github.com/sullivancolin/hexpy/blob/master/hexpy/src/monitor.py" title="monitor.py" class="md-source-file">monitor.py </a></article></div></div></main><footer class="md-footer"><div class="md-footer-nav"><nav class="md-footer-nav__inner md-grid"><a href="../Metadata/" title="Metadata" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev"><div class="md-flex__cell md-flex__cell--shrink"><i class="md-icon md-icon--arrow-back md-footer-nav__button"></i></div><div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span class="md-flex__ellipsis"><span class="md-footer-nav__direction">Previous</span>Metadata</span></div></a><a href="../Analysis/" title="Analysis" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next"><div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span class="md-flex__ellipsis"><span class="md-footer-nav__direction">Next</span>Analysis</span></div><div class="md-flex__cell md-flex__cell--shrink"><i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i></div></a></nav></div><div class="md-footer-meta md-typeset"><div class="md-footer-meta__inner md-grid"><div class="md-footer-copyright">powered by <a href="https://www.mkdocs.org">MkDocs</a> and <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a></div></div></div></footer></div><script src="../assets/javascripts/application.b260a35d.js"></script><script>app.initialize({version:"1.0.4",url:{base:".."}})</script></body></html>
