@@ -2,9 +2,7 @@
 
 import inspect
 
-from typing import Any, Dict
-
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -31,11 +29,11 @@ class MetadataAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def team_list(self) -> Dict[str, Any]:
+    def team_list(self) -> JSONDict:
         """Return a list of teams accessible to the requesting user."""
         return handle_response(self.session.get(self.TEMPLATE + "team/list"))
 
-    def monitor_list(self, team_id: int) -> Dict[str, Any]:
+    def monitor_list(self, team_id: int) -> JSONDict:
         """Return a list of monitors accessible to the requesting
         or selected user along with metadata related to those monitors.
 
@@ -46,13 +44,13 @@ class MetadataAPI:
             self.session.get(self.TEMPLATE + "monitor/list", params={"team": team_id})
         )
 
-    def geography(self) -> Dict[str, Any]:
+    def geography(self) -> JSONDict:
         """Return all the geographical locations that you may use to
         filter monitor results and to upload documents with location information.
         """
         return handle_response(self.session.get(self.TEMPLATE + "geography/info/all"))
 
-    def states(self, country: str) -> Dict[str, Any]:
+    def states(self, country: str) -> JSONDict:
         """Return all the states for a given country that you may use to
         filter monitor results and to upload documents with location information.
 
@@ -65,7 +63,7 @@ class MetadataAPI:
             )
         )
 
-    def cities(self, country: str) -> Dict[str, Any]:
+    def cities(self, country: str) -> JSONDict:
         """Return all the cities or urban areas defined in the given country that you may use to
         filter monitor results and to upload documents with location information.
 
@@ -78,7 +76,7 @@ class MetadataAPI:
             )
         )
 
-    def countries(self) -> Dict[str, Any]:
+    def countries(self) -> JSONDict:
         """Return all the countries that you may use to filter monitor results
         and to upload documents with location information.
         """
@@ -86,12 +84,12 @@ class MetadataAPI:
             self.session.get(self.TEMPLATE + "geography/info/countries")
         )
 
-    def image_classes(self) -> Dict[str, Any]:
+    def image_classes(self) -> JSONDict:
         """Return list of all class IDs and names."""
         return handle_response(
             self.session.get(self.TEMPLATE + "imageanalysis/resources/classes")
         )
 
-    def api_documentation(self) -> Dict[str, Any]:
+    def api_documentation(self) -> JSONDict:
         """Return latest JSON version of Crimson Hexagon API endpoint documentation."""
         return handle_response(self.session.get(self.TEMPLATE + "documentation"))

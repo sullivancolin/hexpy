@@ -1,10 +1,9 @@
 """Module for interacting with analysis API"""
 
 import inspect
-
 from typing import Any, Dict
 
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -30,7 +29,7 @@ class AnalysisAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def analysis_request(self, data: Dict[str, Any]) -> Dict[str, Any]:
+    def analysis_request(self, data: Dict[str, Any]) -> JSONDict:
         """Submit a query task against 24 hours of social data.
 
         # Arguments
@@ -38,7 +37,7 @@ class AnalysisAPI:
         """
         return handle_response(self.session.post(self.TEMPLATE, json=data))
 
-    def results(self, request_id: int) -> Dict[str, Any]:
+    def results(self, request_id: int) -> JSONDict:
         """Retrieve the status of the analysis request and the results.
 
         # Arguments
@@ -46,7 +45,7 @@ class AnalysisAPI:
         """
         return handle_response(self.session.get(self.TEMPLATE + f"/{request_id}"))
 
-    def image_analysis(self, url: str) -> Dict[str, Any]:
+    def image_analysis(self, url: str) -> JSONDict:
         """Get object, scene, activity predictions for image from public url.
 
         # Arguments

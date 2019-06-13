@@ -5,12 +5,16 @@ import logging
 import threading
 import time
 from collections import deque
-
-from requests.models import Response
 from typing import Any, Callable, Deque, Dict, Union
 
+from requests.models import Response
 
-def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
+JSONDict = Dict[str, Any]
+
+
+def rate_limited(
+    func: Callable[..., JSONDict], max_calls: int, period: int
+) -> Callable[..., JSONDict]:
     """Limit the number of times a function can be called."""
     calls: Deque = deque()
 
@@ -19,7 +23,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
     logger = logging.getLogger(func.__name__)
 
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args, **kwargs) -> JSONDict:
         """Wrap function."""
         with lock:
             if len(calls) >= max_calls:
@@ -44,7 +48,7 @@ def rate_limited(func: Callable, max_calls: int, period: int) -> Callable:
     return wrapper
 
 
-def handle_response(response: Union[Response, Dict[str, Any]]) -> Dict[str, Any]:
+def handle_response(response: Union[Response, JSONDict]) -> JSONDict:
     """Ensure responses do not contain errors."""
 
     if isinstance(response, Response):

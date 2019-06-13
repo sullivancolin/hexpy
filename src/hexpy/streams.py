@@ -2,9 +2,7 @@
 
 import inspect
 
-from typing import Any, Dict
-
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -30,7 +28,7 @@ class StreamsAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def posts(self, stream_id: int, count: int = 100) -> Dict[str, Any]:
+    def posts(self, stream_id: int, count: int = 100) -> JSONDict:
         """Return posts from a stream.
 
         # Arguments:
@@ -46,7 +44,7 @@ class StreamsAPI:
             )
         )
 
-    def stream_list(self, team_id: int) -> Dict[str, Any]:
+    def stream_list(self, team_id: int) -> JSONDict:
         """List all available streams for a team.
 
         # Arguments
@@ -56,7 +54,7 @@ class StreamsAPI:
             self.session.get(self.TEMPLATE + "/list/", params={"teamid": team_id})
         )
 
-    def create_stream(self, team_id: int, name: str) -> Dict[str, Any]:
+    def create_stream(self, team_id: int, name: str) -> JSONDict:
         """Create new stream for a team. System Admin Only.
 
         # Arguments
@@ -67,7 +65,7 @@ class StreamsAPI:
             self.session.post(self.TEMPLATE, json={"teamid": team_id, "name": name})
         )
 
-    def delete_stream(self, stream_id: int) -> Dict[str, Any]:
+    def delete_stream(self, stream_id: int) -> JSONDict:
         """Delete a stream. System Admin Only.
 
         # Arguments
@@ -75,7 +73,7 @@ class StreamsAPI:
         """
         return handle_response(self.session.delete(self.TEMPLATE + f"/{stream_id}"))
 
-    def add_monitor_to_stream(self, stream_id: int, monitor_id: int) -> Dict[str, Any]:
+    def add_monitor_to_stream(self, stream_id: int, monitor_id: int) -> JSONDict:
         """Associate a monitor with a stream. System Admin Only.
 
         # Arguments
@@ -86,9 +84,7 @@ class StreamsAPI:
             self.session.post(self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}")
         )
 
-    def remove_monitor_from_stream(
-        self, stream_id: int, monitor_id: int
-    ) -> Dict[str, Any]:
+    def remove_monitor_from_stream(self, stream_id: int, monitor_id: int) -> JSONDict:
         """Remove association between monitor and stream.  System Admin Only.
 
         # Arguments
@@ -99,7 +95,7 @@ class StreamsAPI:
             self.session.delete(self.TEMPLATE + f"/{stream_id}/monitor/{monitor_id}")
         )
 
-    def update_stream(self, stream_id: int, name: str) -> Dict[str, Any]:
+    def update_stream(self, stream_id: int, name: str) -> JSONDict:
         """Update name of stream. System Admin Only.
 
         # Arguments

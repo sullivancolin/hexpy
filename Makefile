@@ -29,8 +29,9 @@ clean-test:
 ## check style with flake8, mypy, black
 lint: clean
 	pipenv run black . --check
-	pipenv run flake8 hexpy tests --exit-zero
-	pipenv run mypy hexpy --ignore-missing-imports
+	pipenv run isort -y
+	pipenv run flake8 . --exit-zero
+	pipenv run mypy . --ignore-missing-imports
 
 ## run tests with the default Python
 test:
@@ -42,7 +43,7 @@ test-all:
 
 ## check code coverage quickly with the default Python
 coverage:
-	pipenv run coverage run --source hexpy -m pytest
+	pipenv run coverage run --source src -m pytest
 	pipenv run coverage report -m
 	pipenv run coverage html
 	open -a "Google Chrome" htmlcov/index.html

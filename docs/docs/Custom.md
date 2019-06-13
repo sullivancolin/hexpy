@@ -1,13 +1,13 @@
-path: blob/master/hexpy
+path: blob/master/hexpy/src
 source: custom.py
 
 
 Custom API
 ===========
 
-## Class for creating a custom API
+Class for creating a custom API
 
-## Example usage.
+## Example usage
 
 ```python
 >>> from hexpy import HexpySession , CustomAPI
@@ -20,7 +20,7 @@ Custom API
 
 ### get
 ```python
-get(url_params: str = "", params: Dict[str, Any] = None) -> Dict[str, Any]
+get(url_params: str = "", params: Dict[str, Any] = None) -> JSONDict
 ```
 Send get request using URL parameters and query-string parameters.
 
@@ -30,7 +30,7 @@ Send get request using URL parameters and query-string parameters.
 
 ### post
 ```python
-post(url_params: str = "", params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -> Dict[str, Any]
+post(url_params: str = "", params: Dict[str, Any] = None, data: Dict[str, Any] = None, ) -> JSONDict
 ```
 Send post request using URL parameters and query-string parameters, and json data.
 
@@ -41,7 +41,7 @@ Send post request using URL parameters and query-string parameters, and json dat
 
 ### delete
 ```python
-delete(url_params: str = "", params: Dict[str, Any] = None) -> Dict[str, Any]
+delete(url_params: str = "", params: Dict[str, Any] = None) -> JSONDict
 ```
 Send delete request using URL parameters and query-string parameters.
 

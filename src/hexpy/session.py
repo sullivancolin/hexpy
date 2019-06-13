@@ -4,12 +4,11 @@ import inspect
 import json
 import logging
 from getpass import getpass
+from pathlib import Path
 
 import requests
-from pathlib import Path
-from typing import Any, Dict
 
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +73,7 @@ class HexpySession:
         password: str,
         no_expiration: bool = False,
         force: bool = False,
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Request authorization token.
 
         # Arguments

@@ -1,4 +1,4 @@
-path: blob/master/hexpy
+path: blob/master/hexpy/src
 source: hexpy.py
 
 
@@ -11,7 +11,7 @@ This project comes with a command line script, **hexpy**, for conveniently autom
 
 * Export sample of monitor posts to a spreadsheet.
 * Easily upload a spreadsheet as custom content for analysis in ForSight.
-* Quickly get multiple metrics from monitor results as JSON. 
+* Quickly get multiple metrics from monitor results as JSON.
 * Compose powerful shell scripts with pipe-able commands such as [jq](https://stedolan.github.io/jq/), and `xargs`.
 
 ## Usage
@@ -56,12 +56,16 @@ $ hexpy api-documentation -o html
 
 Get list of all the user's teams using [jq](https://stedolan.github.io/jq/).
 ```bash
-$ hexpy metadata team_list | jq -r '.teams[] | [.name, .id] | @tsv' | column -t -s $'\t'
+$ hexpy metadata team_list \
+| jq -r '.teams[] | [.name, .id] | @tsv' \
+| column -t -s $'\t'
 ```
 
 Get list of monitors for a user's team using [jq](https://stedolan.github.io/jq/).
 ```bash
-$ hexpy metadata monitor_list --team_id TEAM_ID | jq -r '.monitors[] | [.id, .name] | @tsv' | column -t -s $'\t'
+$ hexpy metadata monitor_list --team_id TEAM_ID \
+| jq -r '.monitors[] | [.id, .name] | @tsv' \
+| column -t -s $'\t'
 ```
 
 Upload TSV file as `my_custom_type` with English as the language that has tab delimited columns.
@@ -81,7 +85,8 @@ $ hexpy results MONITOR_ID volume word_cloud --date_range 2017-01-01 2017-02-01
 
 Get monitor volume information for each day  as a CSV using [jq](https://stedolan.github.io/jq/)
 ```bash
-$ hexpy results MONITOR_ID volume | jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'
+$ hexpy results MONITOR_ID volume \
+| jq -r '.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv'
 "2017-01-04T00:00:00",74
 "2017-01-05T00:00:00",101
 "2017-01-06T00:00:00",67
@@ -112,10 +117,11 @@ $ cat monitor_ids.txt | xargs -n 1 -P 4 hexpy export -o excel
 
 Stream 1K real-time posts to json in the terminal
 ```bash
-$ hexpy stream-posts STREAM_ID --max_docs 1000 --output_type json 
+$ hexpy stream-posts STREAM_ID --max_docs 1000 --output_type json
 ```
 
-Stream up to 10K real-time posts to a csv file with tab delimiter 
+Stream up to 10K real-time posts to a csv file with tab delimiter
 ```bash
-$ hexpy stream-posts STREAM_ID --output_type csv --max_docs 10000 --separator '\t' | pv -s 10000 -l > streamed_posts.csv
+$ hexpy stream-posts STREAM_ID --output_type csv --max_docs 10000 --separator '\t' \
+| pv -s 10000 -l > streamed_posts.csv
 ```

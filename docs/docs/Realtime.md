@@ -1,12 +1,12 @@
-path: blob/master/hexpy
+path: blob/master/hexpy/src
 source: realtime.py
 
 Realtime API
 ===========
 
-## Class for working with Realtime Results API.
+Class for working with Realtime Results API.
 
-## Example usage.
+## Example usage
 
 ```python
 >>> from hexpy import HexpySession, RealtimeAPI
@@ -20,7 +20,7 @@ Realtime API
 
 ### list
 ```python
-list(team_id: int) -> Dict[str, Any]
+list(team_id: int) -> JSONDict
 ```
 Get the Monitors which are in Proteus
 
@@ -29,7 +29,7 @@ Get the Monitors which are in Proteus
 
 ### configure
 ```python
-configure(monitor_id: int) -> Dict[str, Any]
+configure(monitor_id: int) -> JSONDict
 ```
 Configure the Realtime evaluators for the Monitor.
 
@@ -38,7 +38,7 @@ Configure the Realtime evaluators for the Monitor.
 
 ### enable
 ```python
-enable(monitor_id: int) -> Dict[str, Any]
+enable(monitor_id: int) -> JSONDict
 ```
 Enable Realtime Data.
 
@@ -47,7 +47,7 @@ Enable Realtime Data.
 
 ### disbale
 ```python
-disbale(monitor_id: int) -> Dict[str, Any]
+disbale(monitor_id: int) -> JSONDict
 ```
 Disable Realtime Data.
 
@@ -56,7 +56,7 @@ Disable Realtime Data.
 
 ### detail
 ```python
-detail(monitor_id: int) -> Dict[str, Any]
+detail(monitor_id: int) -> JSONDict
 ```
 Get the Realtime evaluators details for the Monitor.
 
@@ -65,7 +65,7 @@ Get the Realtime evaluators details for the Monitor.
 
 ### cashtags
 ```python
-cashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]
+cashtags(monitor_id: int, start: int = None, top: int = None) -> JSONDict
 ```
 Get Cashtags associated to a Monitor.
 
@@ -76,7 +76,7 @@ Get Cashtags associated to a Monitor.
 
 ### hashtags
 ```python
-hashtags(monitor_id: int, start: int = None, top: int = None) -> Dict[str, Any]
+hashtags(monitor_id: int, start: int = None, top: int = None) -> JSONDict
 ```
 Get Hashtags associated to a Monitor.
 
@@ -87,13 +87,13 @@ Get Hashtags associated to a Monitor.
 
 ### retweets
 ```python
-retweets(monitor_id: int) -> Dict[str, Any]
+retweets(monitor_id: int) -> JSONDict
 ```
 Get the Realtime retweets for the Monitor.
 
 ### full_retweets
 ```python
-full_retweets(monitor_id: int, start: int = None) -> Dict[str, Any]
+full_retweets(monitor_id: int, start: int = None) -> JSONDict
 ```
 Get the Realtime fullretweets for the Monitor.
 
@@ -106,7 +106,7 @@ Get the Realtime fullretweets for the Monitor.
 
 ### social_guids
 ```python
-social_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -> Dict[str, Any]
+social_guids(monitor_id: int, doc_type: str, start: int = None, received_after: int = None) -> JSONDict
 ```
 Get the Realtime social guids for the Monitor.
 
@@ -119,13 +119,13 @@ Get the Realtime social guids for the Monitor.
 
 ### tweets
 ```python
-tweets(monitor_id: int, start: int = None) -> Dict[str, Any]
+tweets(monitor_id: int, start: int = None) -> JSONDict
 ```
 Get the Realtime tweets for the Monitor.
 
 ### full_tweets
 ```python
-full_tweets(monitor_id: int, start: int = None) -> Dict[str, Any]
+full_tweets(monitor_id: int, start: int = None) -> JSONDict
 ```
 Get the Realtime fulltweets for the Monitor.
 
@@ -135,7 +135,7 @@ Get the Realtime fulltweets for the Monitor.
 
 ### volume
 ```python
-volume(monitor_id: int, start: int = None, doc_type: List = None) -> Dict[str, Any]
+volume(monitor_id: int, start: int = None, doc_type: List = None) -> JSONDict
 ```
 Get the Realtime volume for the Monitor.
 
@@ -146,7 +146,7 @@ Get the Realtime volume for the Monitor.
 
 ### volume_by_sentiment
 ```python
-volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]
+volume_by_sentiment(monitor_id: int, start: int, doc_type: str) -> JSONDict
 ```
 Get the Realtime volume by sentiment for the Monitor.
 
@@ -157,7 +157,7 @@ Get the Realtime volume by sentiment for the Monitor.
 
 ### volume_by_emotion
 ```python
-volume_by_emotion(monitor_id: int, start: int, doc_type: str) -> Dict[str, Any]
+volume_by_emotion(monitor_id: int, start: int, doc_type: str) -> JSONDict
 ```
 Get the Realtime volume by emotion for the Monitor.
 

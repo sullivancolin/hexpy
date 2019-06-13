@@ -1,4 +1,5 @@
 # Crimson Hexagon API Documentation
+
 **API URL: `https://api.crimsonhexagon.com/api`**
 
 ## Endpoints

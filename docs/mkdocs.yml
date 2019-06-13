@@ -16,6 +16,7 @@ nav:
       - Realtime: Realtime.md
       - Custom: Custom.md
       - Activty Reports: Activity.md
+      - Data Validation: Data_Validation.md
     - Command Line Interface: CLI.md
     - Crimson API Documentation: crimson_api_docs.md
 theme:

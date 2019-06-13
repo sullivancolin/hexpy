@@ -1,9 +1,9 @@
-path: blob/master/hexpy
+path: blob/master/hexpy/src
 source: analysis.py
 
 # Analysis API
 
-## Class for working with Crimson Hexagon Analysis API.
+Class for working with Crimson Hexagon Analysis API.
 
 ## Example Usage
 
@@ -18,7 +18,7 @@ source: analysis.py
 
 ### analysis_request
 ```python
-analysis_request(data: Dict[str, Any]) -> Dict[str, Any]
+analysis_request(data: Dict[str, Any]) -> JSONDict
 ```
 Submit a query task against 24 hours of social data.
 
@@ -27,7 +27,7 @@ Submit a query task against 24 hours of social data.
 
 ### results
 ```python
-results(request_id: int) -> Dict[str, Any]
+results(request_id: int) -> JSONDict
 ```
 Retrieve the status of the analysis request and the results.
 
@@ -37,7 +37,7 @@ Retrieve the status of the analysis request and the results.
 
 ### image_analysis
 ```python
-image_analysis(url: str) -> Dict[str, Any]
+image_analysis(url: str) -> JSONDict
 ```
 Get object, scene, activity predictions for image from public url.
 

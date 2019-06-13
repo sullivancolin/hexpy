@@ -1,10 +1,10 @@
-path: blob/master/hexpy
+path: blob/master/hexpy/src
 source: session.py
 
 Session
 =============
 
-## Creating a session and generating a token for API requests.
+Creating a session and generating a token for API requests.
 
 Login using username. Optionally include password, or enter it at the prompt.
 ```python

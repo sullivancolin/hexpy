@@ -1,11 +1,15 @@
 """Module for monitor results API"""
 
 import inspect
+from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 
-from typing import Any, Callable, Dict, List, Sequence, Union
-
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
+from .models import TrainCollection
 from .session import HexpySession
+
+DateOrDates = Union[Tuple[str, str], Sequence[Tuple[str, str]]]
+MonitorOrMonitors = Union[Sequence[int], int]
+MetricOrMetrics = Union[Sequence[str], str]
 
 
 class MonitorAPI:
@@ -46,24 +50,22 @@ class MonitorAPI:
         }
 
     def _aggregate_metrics(
-        self, monitor_id: int, date: Sequence[str], metrics: Union[Sequence[str], str]
-    ) -> Dict[Union[Sequence[str], str], Any]:
+        self, monitor_id: int, date: Sequence[str], metrics: MetricOrMetrics
+    ) -> JSONDict:
         if isinstance(metrics, list):
             return {
                 metric: self.METRICS[metric](monitor_id, date[0], date[1])
                 for metric in metrics
             }
         elif metrics in self.METRICS:
-            return {metrics: self.METRICS[str(metrics)](monitor_id, date[0], date[1])}
+            metric: str = str(metrics)
+            return {metric: self.METRICS[metric](monitor_id, date[0], date[1])}
         else:
             raise ValueError(f"valid metrics are {self.METRICS.keys()}")
 
     def _aggregate_dates(
-        self,
-        monitor_id: int,
-        dates: Union[Sequence[str], Sequence[Sequence[str]]],
-        metrics: Union[Sequence[str], str],
-    ) -> Sequence[Dict[str, Any]]:
+        self, monitor_id: int, dates: DateOrDates, metrics: MetricOrMetrics
+    ) -> Sequence[JSONDict]:
         if not (isinstance(dates, list) or isinstance(dates, tuple)):
             raise ValueError(
                 "dates must be a start and end pair, or a list of start and end pairs"
@@ -88,10 +90,10 @@ class MonitorAPI:
 
     def aggregate(
         self,
-        monitor_ids: Union[Sequence[int], int],
-        dates: Union[Sequence[str], Sequence[Sequence[str]]],
-        metrics: Union[Sequence[str], str],
-    ) -> Sequence[Dict[str, Any]]:
+        monitor_ids: MonitorOrMonitors,
+        dates: DateOrDates,
+        metrics: MetricOrMetrics,
+    ) -> Sequence[JSONDict]:
         """Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
 
         Valid metrics
@@ -128,7 +130,7 @@ class MonitorAPI:
                 "monitor_ids must be integer or list of integers to aggregate"
             )
 
-    def details(self, monitor_id: int) -> Dict[str, Any]:
+    def details(self, monitor_id: int) -> JSONDict:
         """Return detailed metadata about the selected monitor, including category metadata.
 
         # Arguments
@@ -138,7 +140,7 @@ class MonitorAPI:
             self.session.get(self.TEMPLATE + "detail", params={"id": monitor_id})
         )
 
-    def audit(self, monitor_id: int) -> Dict[str, Any]:
+    def audit(self, monitor_id: int) -> JSONDict:
         """Return audit information about the selected monitor, sorted from most to least recent.
 
         # Arguments
@@ -149,8 +151,8 @@ class MonitorAPI:
         )
 
     def word_cloud(
-        self, monitor_id: int, start: str, end: str, filter_string: str = None
-    ) -> Dict[str, Any]:
+        self, monitor_id: int, start: str, end: str, filter_string: Optional[str] = None
+    ) -> JSONDict:
         """Return an alphabetized list of the top 300 words in a monitor.
 
         This data is generated using documents randomly selected from the pool defined by the submitted parameters.
@@ -173,7 +175,9 @@ class MonitorAPI:
             )
         )
 
-    def training_posts(self, monitor_id: int, category: int = None) -> Dict[str, Any]:
+    def training_posts(
+        self, monitor_id: int, category: Optional[int] = None
+    ) -> JSONDict:
         """Return a list of the training posts for a given opinion monitor.
 
         The selected monitor must be an opinion monitor; requests for other monitor types will return an error.
@@ -192,19 +196,18 @@ class MonitorAPI:
         )
 
     def train_monitor(
-        self, monitor_id: int, category_id: int, data: List[Dict[str, Any]]
-    ) -> Dict[str, Any]:
-        """Upload training document monitors programmatically.
+        self, monitor_id: int, category_id: int, items: TrainCollection
+    ) -> JSONDict:
+        """Upload training documents to monitor programmatically.
 
         Upload list documents of one category per request. Due to the restrictions involved in using this endpoint,
         unless you have a specific need to train monitors programmatically,
         training monitors via the user interface in ForSight will normally be the more efficient training option.
-        [Reference](https://apidocs.crimsonhexagon.com/reference#training-document-upload))
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
             category_id: Integer, the category this content should belong to
-            data: List of document dictionaries with required fields
+            items: validated instance of [TrainCollection](Data_Validation.md#traincollection) model
         """
         return handle_response(
             self.session.post(
@@ -213,7 +216,7 @@ class MonitorAPI:
                 json={
                     "monitorid": monitor_id,
                     "categoryid": category_id,
-                    "documents": data,
+                    "documents": items.dict(),
                 },
             )
         )
@@ -224,8 +227,8 @@ class MonitorAPI:
         start: str,
         end: str,
         daily: bool = False,
-        document_source: str = None,
-    ) -> Dict[str, Any]:
+        document_source: Optional[str] = None,
+    ) -> JSONDict:
         """Return information about the authors in a monitor and their affinity with a range of pre-defined topics.
 
         # Arguments
@@ -249,8 +252,8 @@ class MonitorAPI:
         )
 
     def topics(
-        self, monitor_id: int, start: str, end: str, filter_string: str = None
-    ) -> Dict[str, Any]:
+        self, monitor_id: int, start: str, end: str, filter_string: Optional[str] = None
+    ) -> JSONDict:
         """Return the XML data that can be used to generate clustering visualizations using third-party software.
 
         # Arguments
@@ -271,7 +274,7 @@ class MonitorAPI:
             )
         )
 
-    def topic_waves(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def topic_waves(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return the Topic waves information for a monitor.
 
         # Arguments
@@ -287,7 +290,7 @@ class MonitorAPI:
             )
         )
 
-    def top_sources(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def top_sources(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return volume information related to the sites and content sources (e.g. Twitter, Forums, Blogs, etc.) in a monitor.
 
         # Arguments
@@ -309,7 +312,7 @@ class MonitorAPI:
         end: str,
         object_type: str = "",
         top: int = 100,
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Return a breakdown of the top image classes within a provided monitor.
 
         # Arguments
@@ -334,7 +337,7 @@ class MonitorAPI:
 
     def volume(
         self, monitor_id: int, start: str, end: str, group_by: str = "DAILY"
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Return volume of total posts in a monitor.
 
         # Arguments
@@ -362,7 +365,7 @@ class MonitorAPI:
         end: str,
         aggregate_by_day: bool = False,
         use_local_time: bool = False,
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Return volume information for a monitor aggregated by time of day or day of week.
 
         # Arguments
@@ -387,7 +390,7 @@ class MonitorAPI:
 
     def sentiment_and_categories(
         self, monitor_id: int, start: str, end: str, hide_excluded: bool = False
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Return aggregate volume, sentiment, emotion and opinion category
         analysis for a given monitor.
 
@@ -414,11 +417,11 @@ class MonitorAPI:
         monitor_id: int,
         start: str,
         end: str,
-        filter_string: str = None,
+        filter_string: Optional[str] = None,
         extend_limit: bool = False,
         full_contents: bool = False,
         geotagged: bool = False,
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Return post-level information (where available) and associated analysis (sentiment, emotion) for a given monitor.
 
         # Arguments
@@ -451,7 +454,7 @@ class MonitorAPI:
     #  for users within a given monitor.                                     #
     ##########################################################################
 
-    def age(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def age(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return volume metrics for a given monitor split by age bracket.
 
         # Arguments
@@ -466,7 +469,7 @@ class MonitorAPI:
             )
         )
 
-    def ethnicity(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def ethnicity(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return volume metrics for a given monitor split by ethnicity.
 
         # Arguments
@@ -481,7 +484,7 @@ class MonitorAPI:
             )
         )
 
-    def gender(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def gender(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return volume metrics for a given monitor split by gender.
 
         # Arguments
@@ -501,9 +504,7 @@ class MonitorAPI:
     #                                                                        #
     ##########################################################################
 
-    def cities(
-        self, monitor_id: int, start: str, end: str, country: str
-    ) -> Dict[str, Any]:
+    def cities(self, monitor_id: int, start: str, end: str, country: str) -> JSONDict:
         """Return volume metrics for a given monitor split by city.
 
         # Arguments
@@ -525,9 +526,7 @@ class MonitorAPI:
             )
         )
 
-    def states(
-        self, monitor_id: int, start: str, end: str, country: str
-    ) -> Dict[str, Any]:
+    def states(self, monitor_id: int, start: str, end: str, country: str) -> JSONDict:
         """Return volume metrics for a given monitor split by state.
 
         # Arguments
@@ -548,7 +547,7 @@ class MonitorAPI:
             )
         )
 
-    def countries(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def countries(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return volume metrics for a given monitor split by country.
 
         # Arguments
@@ -569,7 +568,7 @@ class MonitorAPI:
     # Twitter from either Social Account or Buzz monitors.                   #
     ##########################################################################
 
-    def twitter_authors(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def twitter_authors(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information related to the Twitter authors who have posted in a given monitor.
 
         # Arguments
@@ -584,7 +583,7 @@ class MonitorAPI:
             )
         )
 
-    def twitter_metrics(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def twitter_metrics(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information about the top hashtags, mentions, and retweets in a monitor.
 
         # Arguments
@@ -599,9 +598,7 @@ class MonitorAPI:
             )
         )
 
-    def twitter_followers(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def twitter_followers(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return the cumulative daily follower count for a targeted Twitter account in a Twitter Social Account Monitor
         as of the selected dates.
 
@@ -617,9 +614,7 @@ class MonitorAPI:
             )
         )
 
-    def twitter_sent_posts(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def twitter_sent_posts(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information about posts sent by the owner of a target Twitter account in a Twitter Social Account Monitor.
 
         # Arguments
@@ -634,9 +629,7 @@ class MonitorAPI:
             )
         )
 
-    def twitter_engagement(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def twitter_engagement(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information about retweets, replies, and @mentions for a Twitter Social Account monitor.
 
         # Arguments
@@ -657,9 +650,7 @@ class MonitorAPI:
     # Facebook from either Social Account or Buzz monitors.                  #
     ##########################################################################
 
-    def facebook_admin_posts(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def facebook_admin_posts(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return those posts made by the administrators/owners of a targeted Facebook page in a
         Facebook Social Account Monitor.
 
@@ -675,7 +666,7 @@ class MonitorAPI:
             )
         )
 
-    def facebook_likes(self, monitor_id: int, start: str, end: str) -> Dict[str, Any]:
+    def facebook_likes(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return the cumulative daily like count for a targeted Facebook page in a
         Facebook Social Account Monitor as of the selected dates.
 
@@ -691,9 +682,7 @@ class MonitorAPI:
             )
         )
 
-    def facebook_activity(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def facebook_activity(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information about actions (likes, comments, shares) made by users and admins for a given page.
 
         # Arguments
@@ -714,9 +703,7 @@ class MonitorAPI:
     # to Instagram from either Social Account or Buzz monitors.              #
     ##########################################################################
 
-    def instagram_top_hashtags(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def instagram_top_hashtags(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return the Top 50 most occurring Hashtags contained within the posts analyzed in a monitor,
         plus all explicitly targeted hashtags in a monitor's query, for which Metrics are being collected
         (i.e. for which the hashtags are being tracked explicitly in ForSight).
@@ -733,9 +720,7 @@ class MonitorAPI:
             )
         )
 
-    def instagram_followers(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def instagram_followers(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return the cumulative daily follower count for a targeted Instagram account in an
         Instagram Social Account Monitor as of the selected dates.
 
@@ -751,9 +736,7 @@ class MonitorAPI:
             )
         )
 
-    def instagram_sent_media(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def instagram_sent_media(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return media sent by admins in a targeted Instagram account.
 
         # Arguments
@@ -768,9 +751,7 @@ class MonitorAPI:
             )
         )
 
-    def instagram_activity(
-        self, monitor_id: int, start: str, end: str
-    ) -> Dict[str, Any]:
+    def instagram_activity(self, monitor_id: int, start: str, end: str) -> JSONDict:
         """Return information about actions (likes, comments) made by users and admins for a given account.
 
         # Arguments

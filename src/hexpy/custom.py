@@ -1,10 +1,9 @@
 """Custom API request"""
 
 import inspect
-
 from typing import Any, Dict
 
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -30,9 +29,7 @@ class CustomAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def get(
-        self, url_params: str = "", params: Dict[str, Any] = None
-    ) -> Dict[str, Any]:
+    def get(self, url_params: str = "", params: Dict[str, Any] = None) -> JSONDict:
         """Send get request using URL parameters and query-string parameters.
 
         # Arguments
@@ -49,7 +46,7 @@ class CustomAPI:
         url_params: str = "",
         params: Dict[str, Any] = None,
         data: Dict[str, Any] = None,
-    ) -> Dict[str, Any]:
+    ) -> JSONDict:
         """Send post request using URL parameters and query-string parameters, and json data.
 
         # Arguments
@@ -61,9 +58,7 @@ class CustomAPI:
             self.session.post(self.TEMPLATE + url_params, params=params, json=data)
         )
 
-    def delete(
-        self, url_params: str = "", params: Dict[str, Any] = None
-    ) -> Dict[str, Any]:
+    def delete(self, url_params: str = "", params: Dict[str, Any] = None) -> JSONDict:
         """Send delete request using URL parameters and query-string parameters.
 
         # Arguments

@@ -4,24 +4,25 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"e1839a8" = {path = ".", editable = true}
+hexpy = {editable = true,path = "."}
 
 [dev-packages]
-mypy = "*"
 "flake8" = "*"
 bumpversion = "*"
 mkdocs = "*"
 twine = "*"
 pydocstyle = "*"
 tox = "*"
-coverage = "*"
 pytest = "*"
 ipython = "*"
 mkdocs-material = "*"
 ipdb = "*"
 better-exceptions = "*"
 pylint = "*"
-black = "==18.9b0"
+black = "==19.3b0"
+mypy = "*"
+pytest-cov = "*"
+pytest-sugar = "*"
 
 [requires]
 python_version = "3.7"

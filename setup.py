@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """The setup script."""
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 requirements = [
     "xlrd>=1.1.0",
@@ -11,6 +11,8 @@ requirements = [
     "pandas>=0.20.3",
     "openpyxl>=2.4.8",
     "pendulum>=1.3.2",
+    "pydantic>=0.27",
+    "ftfy>=5.5.1",
 ]
 
 setup_requirements = ["pytest-runner", "setuptools>=38.6.0", "wheel>=0.31.0"]
@@ -29,7 +31,9 @@ setup(
     author="Colin Sullivan",
     author_email="csullivan@crimsonhexagon.com",
     url="https://sullivancolin.github.io/hexpy/",
-    packages=find_packages(include=["hexpy"]),
+    packages=find_packages(where="src", include=["hexpy"]),
+    package_dir={"": "src"},
+    package_data={"hexpy": ["py.typed"]},
     include_package_data=True,
     install_requires=requirements,
     python_requires=">=3.6",

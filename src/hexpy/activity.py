@@ -2,9 +2,7 @@
 
 import inspect
 
-from typing import Any, Dict
-
-from .base import handle_response, rate_limited
+from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
 
 
@@ -30,7 +28,7 @@ class ActivityAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def monitor_creation(self, organization_id: int) -> Dict[str, Any]:
+    def monitor_creation(self, organization_id: int) -> JSONDict:
         """Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.
 
         # Arguments
@@ -42,7 +40,7 @@ class ActivityAPI:
             )
         )
 
-    def social_sites(self, organization_id: int) -> Dict[str, Any]:
+    def social_sites(self, organization_id: int) -> JSONDict:
         """Get Social Site Report and associated usernames for Teams within an Organization.
 
         # Arguments
@@ -54,7 +52,7 @@ class ActivityAPI:
             )
         )
 
-    def user_activity(self, organization_id: int) -> Dict[str, Any]:
+    def user_activity(self, organization_id: int) -> JSONDict:
         """Get a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.
 
         # Arguments
@@ -66,7 +64,7 @@ class ActivityAPI:
             )
         )
 
-    def user_invitations(self, organization_id: int) -> Dict[str, Any]:
+    def user_invitations(self, organization_id: int) -> JSONDict:
         """Get a list of users within an Organization and which Team(s) they were invited to.
 
         # Arguments

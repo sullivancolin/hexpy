@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """Tests for `hexpy` package."""
 
-import pytest
-from hexpy.base import handle_response, rate_limited
-from hexpy import HexpySession, MonitorAPI
-from requests.models import Response
 import json
+
+import pytest
+from requests.models import Response
+
+from hexpy import HexpySession, MonitorAPI
+from hexpy.base import handle_response, rate_limited
 
 
 def test_auth():
