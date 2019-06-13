@@ -1,4 +1,4 @@
-path: blob/master/hexpy/src
+path: blob/master/src/hexpy
 source: content_upload.py
 
 Upload API
