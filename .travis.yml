@@ -8,7 +8,7 @@ python:
 # command to install dependencies
 install:
   - pip install .
-  - pip install pytest-cov pytest-surgar responses flake8 mypy black isort
+  - pip install pytest-cov pytest-sugar responses flake8 mypy black isort
 # command to run tests
 
 script:
@@ -17,4 +17,3 @@ script:
   - mypy setup.py src tests --ignore-missing-imports
   - flake8 setup.py src tests --exit-zero
   - pytest -vv
-
