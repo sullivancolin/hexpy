@@ -1,0 +1,881 @@
+{
+    "resultsStart": "2018-03-07T00:00:00",
+    "resultsEnd": "2019-03-20T00:00:00",
+    "results": {
+        "volume": {
+            "startDate": "2018-03-07T00:00:00",
+            "endDate": "2019-03-20T00:00:00",
+            "timezone": "America/New_York",
+            "groupBy": "DAILY",
+            "numberOfDocuments": 3164460,
+            "volume": [
+                {
+                    "startDate": "2018-03-07T00:00:00",
+                    "endDate": "2018-03-08T00:00:00",
+                    "numberOfDocuments": 32955
+                },
+                {
+                    "startDate": "2018-03-08T00:00:00",
+                    "endDate": "2018-03-09T00:00:00",
+                    "numberOfDocuments": 29308
+                },
+                {
+                    "startDate": "2018-03-09T00:00:00",
+                    "endDate": "2018-03-10T00:00:00",
+                    "numberOfDocuments": 26650
+                },
+                {
+                    "startDate": "2018-03-10T00:00:00",
+                    "endDate": "2018-03-11T00:00:00",
+                    "numberOfDocuments": 36857
+                },
+                {
+                    "startDate": "2018-03-11T00:00:00",
+                    "endDate": "2018-03-12T00:00:00",
+                    "numberOfDocuments": 33860
+                },
+                {
+                    "startDate": "2018-03-12T00:00:00",
+                    "endDate": "2018-03-13T00:00:00",
+                    "numberOfDocuments": 29318
+                },
+                {
+                    "startDate": "2018-03-13T00:00:00",
+                    "endDate": "2018-03-14T00:00:00",
+                    "numberOfDocuments": 23663
+                },
+                {
+                    "startDate": "2018-03-14T00:00:00",
+                    "endDate": "2018-03-15T00:00:00",
+                    "numberOfDocuments": 18773
+                },
+                {
+                    "startDate": "2018-03-15T00:00:00",
+                    "endDate": "2018-03-16T00:00:00",
+                    "numberOfDocuments": 18439
+                },
+                {
+                    "startDate": "2018-03-16T00:00:00",
+                    "endDate": "2018-03-17T00:00:00",
+                    "numberOfDocuments": 32859
+                }
+            ],
+            "status": "success"
+        },
+        "sentiment_and_categories": {
+            "results": [
+                {
+                    "startDate": "2018-03-07T00:00:00",
+                    "endDate": "2018-03-08T00:00:00",
+                    "creationDate": "2018-06-25T14:46:58",
+                    "numberOfDocuments": 32955,
+                    "numberOfRelevantDocuments": 32955,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.15,
+                            "volume": 4871,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.57,
+                            "volume": 18761,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.28,
+                            "volume": 9323,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.49,
+                            "volume": 16151,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.19,
+                            "volume": 6172,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.05,
+                            "volume": 1555,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.03,
+                            "volume": 1124,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.21,
+                            "volume": 6874,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 283,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.02,
+                            "volume": 794,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-08T00:00:00",
+                    "endDate": "2018-03-09T00:00:00",
+                    "creationDate": "2018-06-25T14:46:56",
+                    "numberOfDocuments": 29308,
+                    "numberOfRelevantDocuments": 29308,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.14,
+                            "volume": 4226,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.6,
+                            "volume": 17479,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.26,
+                            "volume": 7602,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.52,
+                            "volume": 15384,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.17,
+                            "volume": 4959,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.05,
+                            "volume": 1401,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.04,
+                            "volume": 1216,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.19,
+                            "volume": 5507,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 205,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.02,
+                            "volume": 636,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-09T00:00:00",
+                    "endDate": "2018-03-10T00:00:00",
+                    "creationDate": "2018-06-25T14:46:56",
+                    "numberOfDocuments": 26650,
+                    "numberOfRelevantDocuments": 26650,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.14,
+                            "volume": 3704,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.58,
+                            "volume": 15393,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.28,
+                            "volume": 7553,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.49,
+                            "volume": 13152,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.18,
+                            "volume": 4778,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.05,
+                            "volume": 1231,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.03,
+                            "volume": 911,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.21,
+                            "volume": 5559,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 261,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.03,
+                            "volume": 757,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-10T00:00:00",
+                    "endDate": "2018-03-11T00:00:00",
+                    "creationDate": "2018-06-25T14:46:56",
+                    "numberOfDocuments": 36857,
+                    "numberOfRelevantDocuments": 36857,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.13,
+                            "volume": 4666,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.58,
+                            "volume": 21495,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.29,
+                            "volume": 10696,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.55,
+                            "volume": 20397,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.16,
+                            "volume": 5753,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.04,
+                            "volume": 1460,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.03,
+                            "volume": 1172,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.19,
+                            "volume": 6914,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 372,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.02,
+                            "volume": 789,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-11T00:00:00",
+                    "endDate": "2018-03-12T00:00:00",
+                    "creationDate": "2018-06-25T14:46:58",
+                    "numberOfDocuments": 33860,
+                    "numberOfRelevantDocuments": 33860,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.13,
+                            "volume": 4327,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.6,
+                            "volume": 20299,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.27,
+                            "volume": 9234,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.57,
+                            "volume": 19161,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.16,
+                            "volume": 5424,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.04,
+                            "volume": 1381,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.03,
+                            "volume": 847,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.18,
+                            "volume": 6054,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 308,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.02,
+                            "volume": 684,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-12T00:00:00",
+                    "endDate": "2018-03-13T00:00:00",
+                    "creationDate": "2018-06-25T14:46:57",
+                    "numberOfDocuments": 29318,
+                    "numberOfRelevantDocuments": 29318,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.15,
+                            "volume": 4477,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.59,
+                            "volume": 17427,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.25,
+                            "volume": 7415,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.53,
+                            "volume": 15407,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.17,
+                            "volume": 5051,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.04,
+                            "volume": 1284,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.04,
+                            "volume": 1117,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.19,
+                            "volume": 5512,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 249,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.02,
+                            "volume": 698,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-13T00:00:00",
+                    "endDate": "2018-03-14T00:00:00",
+                    "creationDate": "2018-06-25T14:46:56",
+                    "numberOfDocuments": 23663,
+                    "numberOfRelevantDocuments": 23663,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.14,
+                            "volume": 3393,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.57,
+                            "volume": 13559,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.28,
+                            "volume": 6711,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.5,
+                            "volume": 11891,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.17,
+                            "volume": 4124,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.04,
+                            "volume": 1062,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.04,
+                            "volume": 932,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.2,
+                            "volume": 4834,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 218,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.03,
+                            "volume": 601,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-14T00:00:00",
+                    "endDate": "2018-03-15T00:00:00",
+                    "creationDate": "2018-06-25T14:46:56",
+                    "numberOfDocuments": 18773,
+                    "numberOfRelevantDocuments": 18773,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.14,
+                            "volume": 2668,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.56,
+                            "volume": 10552,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.3,
+                            "volume": 5553,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.49,
+                            "volume": 9261,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.17,
+                            "volume": 3163,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.05,
+                            "volume": 852,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.03,
+                            "volume": 650,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.22,
+                            "volume": 4096,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 188,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.03,
+                            "volume": 563,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-15T00:00:00",
+                    "endDate": "2018-03-16T00:00:00",
+                    "creationDate": "2018-06-25T14:46:58",
+                    "numberOfDocuments": 18439,
+                    "numberOfRelevantDocuments": 18439,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.15,
+                            "volume": 2766,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.57,
+                            "volume": 10486,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.28,
+                            "volume": 5187,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.49,
+                            "volume": 9125,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.18,
+                            "volume": 3295,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.05,
+                            "volume": 891,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.04,
+                            "volume": 679,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.21,
+                            "volume": 3815,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 138,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.03,
+                            "volume": 496,
+                            "hidden": false
+                        }
+                    ]
+                },
+                {
+                    "startDate": "2018-03-16T00:00:00",
+                    "endDate": "2018-03-17T00:00:00",
+                    "creationDate": "2018-06-25T14:46:58",
+                    "numberOfDocuments": 32859,
+                    "numberOfRelevantDocuments": 32859,
+                    "categories": [
+                        {
+                            "categoryId": 9846117389,
+                            "category": "Basic Negative",
+                            "proportion": 0.19,
+                            "volume": 6158,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117385,
+                            "category": "Basic Neutral",
+                            "proportion": 0.52,
+                            "volume": 17218,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117379,
+                            "category": "Basic Positive",
+                            "proportion": 0.29,
+                            "volume": 9483,
+                            "hidden": false
+                        }
+                    ],
+                    "emotions": [
+                        {
+                            "categoryId": 9846117388,
+                            "category": "Neutral",
+                            "proportion": 0.51,
+                            "volume": 16807,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117390,
+                            "category": "Sadness",
+                            "proportion": 0.2,
+                            "volume": 6460,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117384,
+                            "category": "Anger",
+                            "proportion": 0.06,
+                            "volume": 1965,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117387,
+                            "category": "Disgust",
+                            "proportion": 0.04,
+                            "volume": 1235,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117381,
+                            "category": "Joy",
+                            "proportion": 0.15,
+                            "volume": 4985,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117380,
+                            "category": "Surprise",
+                            "proportion": 0.01,
+                            "volume": 197,
+                            "hidden": false
+                        },
+                        {
+                            "categoryId": 9846117383,
+                            "category": "Fear",
+                            "proportion": 0.04,
+                            "volume": 1209,
+                            "hidden": false
+                        }
+                    ]
+                }
+            ],
+            "status": "success"
+        }
+    }
+}

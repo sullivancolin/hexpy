@@ -28,25 +28,23 @@ clean-test:
 
 ## check style with flake8, mypy, black
 lint: clean
-	pipenv run black . --check
 	pipenv run isort -y
+	pipenv run black .
 	pipenv run flake8 . --exit-zero
 	pipenv run mypy . --ignore-missing-imports
 
 ## run tests with the default Python
-test:
-	pipenv run pytest
+test: clean
+	pipenv run pytest -vv --cov=src
 
 ## run tests on every Python version with tox
-test-all:
+test-all: clean
 	pipenv run tox
 
 ## check code coverage quickly with the default Python
-coverage:
-	pipenv run coverage run --source src -m pytest
-	pipenv run coverage report -m
-	pipenv run coverage html
-	open -a "Google Chrome" htmlcov/index.html
+coverage: clean
+	pipenv run pytest --cov=src --cov-report html
+	open -a "Firefox" htmlcov/index.html
 
 ## generate Mkdocs HTML documentation
 docs: docs-clean

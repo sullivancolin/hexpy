@@ -1,11 +1,46 @@
 from collections import Counter
+from enum import Enum
 from typing import Dict, List, Optional
 
 import ftfy
 import pandas as pd
 import pendulum
+from pandas.io.json import json_normalize
 from pendulum.exceptions import ParserError
 from pydantic import BaseModel, Schema, UrlStr, validator
+
+
+class GenderEnum(str, Enum):
+    """Valid values for Gender Types"""
+
+    M = "M"
+    F = "F"
+
+
+class EngagementEnum(str, Enum):
+    """Valid values for Engagement Types"""
+
+    REPLY = "REPLY"
+    RETWEET = "RETWEET"
+    COMMENT = "COMMENT"
+
+
+class Geolocation(BaseModel):
+    """Validation model for geolocation data to be uploaded.
+
+    ## Fields
+        * id: Optional[str] = None
+        * latitude: Optional[float] = None
+        * longitude: Optional[float] = None
+        * zipcode: Optional[str] = None
+    """
+
+    country: Optional[str] = None
+    state: Optional[str] = None
+    city: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    zipcode: Optional[str] = None
 
 
 class UploadItem(BaseModel):
@@ -14,14 +49,21 @@ class UploadItem(BaseModel):
     Checks for required fields, with valid types and formatting.
 
     ## Fields
-        * type: str
         * title: str
         * url: UrlStr
+        * guid: str
         * author: str
         * language: str(max_length=2, min_length=2)
         * date: str
         * contents: str
-        * geolocation: Optional[Dict[str, str]] = None
+        * geolocation: Optional[Geolocation] = None
+        * custom: Optional[Dict[str, str]] = None
+        * age: Optional[int] = None
+        * gender: Optional[GenderEnum] = None
+        * pageId: Optional[str] = None
+        * parentGuid: Optional[str] = None
+        * authorProfileId: Optional[str] = None
+        * engagementType: Optional[EngagementEnum] = None
 
     ## Example Usage
 
@@ -34,22 +76,26 @@ class UploadItem(BaseModel):
         "url": "http://www.crimsonhexagon.com/post1",
         "contents": "Example content",
         "language": "en",
-        "type": "Your_Assigned_Content_Type_Name",
-        "geolocation": {
-            "id": "USA.NY"
-        }
+        "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
     }
     >>> upload_item = UploadItem(**item_dict)
     """
 
-    type: str
     title: str
     url: UrlStr
+    guid: str
     author: str
     language: str = Schema(..., max_length=2, min_length=2)  # type: ignore
     date: str
     contents: str
-    geolocation: Optional[Dict[str, str]] = None
+    geolocation: Optional[Geolocation] = None
+    custom: Optional[Dict[str, str]] = None
+    age: Optional[int] = None
+    gender: Optional[GenderEnum] = None
+    pageId: Optional[str] = None
+    parentGuid: Optional[str] = None
+    authorProfileId: Optional[str] = None
+    engagementType: Optional[EngagementEnum] = None
 
     class Config:
         allow_mutation = False
@@ -84,13 +130,17 @@ class UploadItem(BaseModel):
         return ftfy.fix_text(value)
 
     def __hash__(self):
-        return hash(self.url)
+        return hash(self.guid)
 
     def __eq__(self, other):
-        return isinstance(self, type(other)) and self.url == other.url
+        return isinstance(self, type(other)) and self.guid == other.guid
+
+    def dict(self, *args, **kwargs):
+        kwargs["skip_defaults"] = True
+        return super().dict(*args, **kwargs)
 
     def __repr__(self):  # pragma: no cover
-        return f"<UploadItem url='{self.url}'>"
+        return f"<UploadItem guid='{self.guid}'>"
 
 
 class UploadCollection(BaseModel):
@@ -133,8 +183,8 @@ class UploadCollection(BaseModel):
         if len(items) != len(set(items)):
             counts = Counter(items)
             dups = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].url for tup in dups]
-            raise ValueError(f"Duplicate item urls detected: {dups}")
+            dups = [tup[0].guid for tup in dups]
+            raise ValueError(f"Duplicate item guids detected: {dups}")
 
         return items
 
@@ -145,15 +195,44 @@ class UploadCollection(BaseModel):
         ## Arguments:
             * df: pd.DataFrame
         """
-        records = df.to_dict(orient="records")
+        df = df.fillna("")
+        sub_df = df[
+            [
+                col
+                for col in df.columns
+                if "geolocation" not in col and "custom" not in col
+            ]
+        ]
+        remaining = df[
+            [col for col in df.columns if "geolocation" in col or "custom" in col]
+        ]
+        records = sub_df.to_dict(orient="records")
+        records = [{key: val for key, val in rec.items() if val} for rec in records]
+        if len(remaining) > 0:
+            remaining_records = remaining.to_dict(orient="records")
+            for i, rec in enumerate(remaining_records):
+                geo_obj = {}
+                custom_obj = {}
+                for key, val in rec.items():
+                    if val:
+                        obj, sub_val = key.split(".")
+                        if obj == "geolocation":
+                            geo_obj[sub_val] = val
+                        else:
+                            custom_obj[sub_val] = val
+
+                if geo_obj:
+                    records[i]["geolocation"] = geo_obj
+                if custom_obj:
+                    records[i]["custom"] = custom_obj
         return cls(items=records)
 
     def to_dataframe(self) -> pd.DataFrame:
         """Convert UploadCollection to pandas Dataframe with one colume for each field"""
-        return pd.DataFrame.from_records(self.dict())
+        return json_normalize(self.dict())
 
     def dict(self, *args, **kwargs):
-        return [rec.dict() for rec in self.items]
+        return [rec.dict(*args, **kwargs) for rec in self.items]
 
     def __len__(self):
         return len(self.items)
@@ -163,7 +242,14 @@ class UploadCollection(BaseModel):
             yield item
 
     def __getitem__(self, slice):
-        return self.items[slice]
+        items = self.items[slice]
+        if isinstance(items, list):
+            return UploadCollection(items=items)
+        else:
+            return items
+
+    def __repr__(self):  # pragma: no cover
+        return f"<UploadCollection items=['{self.items[0].__repr__()}...]'>"
 
 
 class TrainItem(BaseModel):
@@ -285,11 +371,22 @@ class TrainCollection(BaseModel):
 
     @validator("items", whole=True)
     def unique_item_urls(cls, items):
+        """Urls must be unique."""
         if len(items) != len(set(items)):
             counts = Counter(items)
             dups = [tup for tup in counts.most_common() if tup[1] > 1]
             dups = [tup[0].url for tup in dups]
             raise ValueError(f"Duplicate item urls detected: {dups}")
+
+        return items
+
+    @validator("items", whole=True)
+    def categoryid_match(cls, items):
+        """Category Id must match"""
+
+        category_ids = set(item.categoryid for item in items)
+        if len(category_ids) != 1:
+            raise ValueError(f"Mulitple `categoryid` values detected: {category_ids}")
 
         return items
 
@@ -308,7 +405,7 @@ class TrainCollection(BaseModel):
         return pd.DataFrame.from_records(self.dict())
 
     def dict(self, *args, **kwargs):
-        return [rec.dict() for rec in self.items]
+        return [rec.dict(skip_defaults=True) for rec in self.items]
 
     def __len__(self):
         return len(self.items)
@@ -318,4 +415,11 @@ class TrainCollection(BaseModel):
             yield item
 
     def __getitem__(self, slice):
-        return self.items[slice]
+        items = self.items[slice]
+        if isinstance(items, list):
+            return TrainCollection(items=items)
+        else:
+            return items
+
+    def __repr__(self):  # pragma: no cover
+        return f"<TrainCollection items=['{self.items[0].__repr__()}...]'>"

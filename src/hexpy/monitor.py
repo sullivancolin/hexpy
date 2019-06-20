@@ -1,6 +1,7 @@
 """Module for monitor results API"""
 
 import inspect
+import logging
 from typing import Callable, Dict, Optional, Sequence, Tuple, Union
 
 from .base import JSONDict, handle_response, rate_limited
@@ -10,6 +11,8 @@ from .session import HexpySession
 DateOrDates = Union[Tuple[str, str], Sequence[Tuple[str, str]]]
 MonitorOrMonitors = Union[Sequence[int], int]
 MetricOrMetrics = Union[Sequence[str], str]
+
+logger = logging.getLogger(__name__)
 
 
 class MonitorAPI:
@@ -195,9 +198,7 @@ class MonitorAPI:
             )
         )
 
-    def train_monitor(
-        self, monitor_id: int, category_id: int, items: TrainCollection
-    ) -> JSONDict:
+    def train_monitor(self, monitor_id: int, items: TrainCollection) -> JSONDict:
         """Upload training documents to monitor programmatically.
 
         Upload list documents of one category per request. Due to the restrictions involved in using this endpoint,
@@ -209,17 +210,34 @@ class MonitorAPI:
             category_id: Integer, the category this content should belong to
             items: validated instance of [TrainCollection](Data_Validation.md#traincollection) model
         """
+
+        if len(items) > 1000:
+            logger.info(
+                "More than 1000 training items found.  Uploading in batches of 1000."
+            )
+            return self.batch_train(monitor_id=monitor_id, items=items)
+
         return handle_response(
             self.session.post(
                 self.TEMPLATE + "train",
                 params={"id": monitor_id},
                 json={
                     "monitorid": monitor_id,
-                    "categoryid": category_id,
+                    "categoryid": items[0].categoryid,
                     "documents": items.dict(),
                 },
             )
         )
+
+    def batch_train(self, monitor_id: int, items=TrainCollection):
+        batch_responses = {}
+        for batch_num, batch in enumerate(
+            [items[i : i + 1000] for i in range(0, len(items), 1000)]
+        ):
+            response = self.train_monitor(monitor_id=monitor_id, items=batch)
+            logger.info(f"Uploaded batch number: {batch_num}")
+            batch_responses[f"Batch {batch_num}"] = response
+        return batch_responses
 
     def interest_affinities(
         self,

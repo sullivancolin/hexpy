@@ -2,7 +2,6 @@
 
 import inspect
 import logging
-from typing import Any, Dict, List
 
 from .base import JSONDict, handle_response, rate_limited
 from .models import UploadCollection
@@ -55,60 +54,53 @@ class ContentUploadAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def upload(self, items: UploadCollection) -> JSONDict:
+    def upload(
+        self, document_type: int, items: UploadCollection, request_usage=True
+    ) -> JSONDict:
         """Upload collection of Custom Content to Crimson Hexagon platform.
 
         If greater than 1000 items passed, reverts to batch upload.
         # Arguments
-            items: validated instance of UploadCollection model
+            document_type: Integer, The id of the document type to which the uploading docs will belong.
+            items: validated UploadCollection.
+            requestUsage: Bool, return usage information.
         """
-        if len(items) <= 1000:
-            return handle_response(
-                self.session.post(
-                    self.TEMPLATE + "upload", json={"items": items.dict()}
-                )
-            )
-        else:
+        if len(items) > 1000:
             logger.info("More than 1000 items found.  Uploading in batches of 1000.")
-            return self.batch_upload(items)
+            return self.batch_upload(
+                document_type=document_type, items=items, request_usage=request_usage
+            )
 
-    def batch_upload(self, items: UploadCollection) -> JSONDict:
+        return handle_response(
+            self.session.post(
+                self.TEMPLATE + "upload",
+                params={"documentType": document_type},
+                json={"items": items.dict(skip_defaults=True)},
+            )
+        )
+
+    def batch_upload(
+        self, document_type: int, items: UploadCollection, request_usage=True
+    ) -> JSONDict:
         """Batch upload collection of Custom Content to Crimson Hexagon platform in groups of 1000.
 
         # Arguments
+            document_type: Integer, The id of the document type to which the uploading docs will belong.
             items: validated UploadCollection.
+            requestUsage: Bool, return usage information.
+
         """
         batch_responses = {}
         for batch_num, batch in enumerate(
             [items[i : i + 1000] for i in range(0, len(items), 1000)]
         ):
-            response = self.upload(batch)
+            response = self.upload(document_type, batch, request_usage)
             logger.info(f"Uploaded batch number: {batch_num}")
             batch_responses[f"Batch {batch_num}"] = response
-        return handle_response(batch_responses)
+        return batch_responses
 
-    def custom_field_upload(
-        self, document_type: int, batch: int, items: List[Dict[str, Any]]
-    ) -> JSONDict:
-        """Upload content via the API w/ custom fields support.
-
-        # Arguments
-            document_type: Integer, The id of the document type to which the uploading docs will belong.
-            batch: Integer, The id of the batch to which the uploading docs will belong.
-            data: list of document dictionaries  to upload.
-        """
-        return handle_response(
-            self.session.post(
-                self.TEMPLATE + "upload",
-                params={"documentType": document_type, "batch": batch},
-                json={"items": items},
-            )
-        )
-
-    def delete_content_batch(
-        self, document_type: int, batch: int, data: Dict[str, Any]
-    ) -> JSONDict:
-        """Delete batch content via the API.
+    def delete_content_batch(self, document_type: int, batch: str) -> JSONDict:
+        """Delete single batch of custom content via the API.
 
         # Arguments
             * documentType: Integer, The id of the document type to delete documents from.
@@ -118,23 +110,37 @@ class ContentUploadAPI:
             self.session.post(
                 self.TEMPLATE + "delete",
                 params={"documentType": document_type, "batch": batch},
-                json=data,
             )
         )
 
-    def delete_content(
-        self, document_type: int, data: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    def delete_content_items(
+        self, document_type: int, items: JSONDict, batch: str = None, url: str = None
+    ) -> JSONDict:
         """Delete content via the API.
 
         # Arguments
             * documentType: Integer, The id of the document type to delete documents from.
+            * items: JSONDict, dictionary specifying which documents to delete.
+            * batch: String, Batch ID.
+            * url: String, document url.
+
+        Example Items:
+        ```python
+        {
+            "items": [
+                {
+                    "guid": "This is my guid",
+                    "url": "http://www.crimsonhexagon.com/post1"
+                }
+            ]
+        }
+        ```
         """
         return handle_response(
             self.session.post(
                 self.TEMPLATE + "delete",
-                params={"documentType": document_type},
-                json=data,
+                params={"documentType": document_type, "batch": batch, "url": url},
+                json=items,
             )
         )
 
@@ -154,9 +160,21 @@ class ContentUploadAPI:
             )
         )
 
-    def create_content_source(self, data: Dict[str, Any]) -> JSONDict:
-        """Content Source creation."""
-        return handle_response(self.session.post(self.TEMPLATE + "sources", json=data))
+    def create_content_source(self, content_type: JSONDict) -> JSONDict:
+        """Content Source creation.
+
+        Example content_type:
+        ```python
+        {
+            "teamid": 461777351,
+            "name": "Customer_Surveys",
+            "description": "Customer Survey, May 2019"
+        }
+        ```
+        """
+        return handle_response(
+            self.session.post(self.TEMPLATE + "sources", json=content_type)
+        )
 
     def list_content_sources(self, team_id: int) -> JSONDict:
         """

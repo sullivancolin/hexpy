@@ -18,12 +18,61 @@ Class for working with Crimson Hexagon Analysis API.
 
 ### analysis_request
 ```python
-analysis_request(data: Dict[str, Any]) -> JSONDict
+analysis_request(request: JSONDict) -> JSONDict
 ```
 Submit a query task against 24 hours of social data.
 
 #### Arguments
-* data: Dictionary, query and filter parameters
+* request: Dictionary, query and filter parameters
+
+Example Request
+```python
+{
+    "analysis": [
+        "volume",
+        "sentiment",
+        "emotion",
+        "affinity",
+        "gender",
+        "age",
+        "location",
+        "source",
+        "reach"
+    ],
+    "keywords": "iPhone",
+    "languages": {
+        "type": "include",
+        "values": [
+        "EN"
+        ]
+    },
+    "gender": {
+            "type": "include",
+            "values": ["M"]
+    },
+    "locations": {
+        "type": "exclude",
+        "values": [
+            "JPN"
+        ]
+    },
+    "sources": [
+        "TWITTER",
+        "TUMBLR",
+        "INSTAGRAM",
+        "BLOGS",
+        "REVIEWS",
+        "GOOGLE_PLUS",
+        "NEWS",
+        "YOUTUBE",
+        "FORUMS"
+    ],
+    "startDate": "2016-09-20T00:00:00",
+    "endDate": "2016-09-21T00:00:00",
+    "timezone": "America/New_York",
+    "requestUsage": true
+}
+```
 
 ### results
 ```python

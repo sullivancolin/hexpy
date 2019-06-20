@@ -1,0 +1,805 @@
+{
+    "endpoints": [
+        {
+            "endpoint": "Analysis Request",
+            "url": "/results",
+            "method": "POST",
+            "description": "To submit an analysis task for asynchronous processing ",
+            "category": "results",
+            "parameters": [],
+            "response": [
+                {
+                    "name": "status",
+                    "type": "Status",
+                    "description": "Defines the status of the analysis. Refer to Response Statuses table for additional information",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "resultId",
+                    "type": "long",
+                    "description": "Defines the unique identifier by which the analysis status/results can be retrieved",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "retrieveAt",
+                    "type": "Date",
+                    "description": "Nullable. ISO8601 formatted date indicating a suggested time to re-attempt result retrieval if the status is WAITING",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "request",
+                    "type": "ApiAnalysisTaskRequest",
+                    "description": "Defines the original request parameters made to invoke this analysis",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "analysis",
+                            "type": "AnalysisType[]",
+                            "description": "Defines the types of analysis to be performed",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "startDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the start date and time of analysis. Analysis is inclusive of this datetime",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the end date and time of analysis. Analysis is exclusive of this datetime.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "timezone",
+                            "type": "String",
+                            "description": "Valid IANA timezone identifier to specify the timezone under which startDate and endDate should be interpreted. If not specified, defaults to the timezone under which the customer's dashboard has been configured.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "sources",
+                            "type": "String[]",
+                            "description": "Defines the name of the sources to be included in analysis (e.g. 'TWITTER'). At least 1 source must be specified. Custom sources are of the form 'CUSTOM:[PubType]' (e.g. 'CUSTOM:OurInternalFacebookData').",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "keywords",
+                            "type": "String",
+                            "description": "Keywords for analysis",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "languages",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 639-1 formatted language code. Defines an analysis filter for languages. If not specified, all languages will be included in analysis. Values must be valid Languages",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "locations",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 3166-1 alpha-3 formatted country codes. Defines an analysis filter for locations. If not specified, all locations will be included in analysis.Values must be valid Locations",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "gender",
+                            "type": "AnalysisFilter",
+                            "description": "Gender filter",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "requestingContractInfo",
+                            "type": "boolean",
+                            "description": "If true, contract usage information will be sent back even if the call is a success",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                },
+                {
+                    "name": "resultsUri",
+                    "type": "String",
+                    "description": "Defines the URI that can be queried to retrieve the analysis status/results in the future",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "contractInfo",
+                    "type": "ApiAnalysisContractInfo",
+                    "description": "If requested, the contract info after this request has been processed.",
+                    "restricted": false,
+                    "deprecated": false
+                }
+            ]
+        },
+        {
+            "endpoint": "Analysis Results",
+            "url": "/results/{resultId}",
+            "method": "GET",
+            "description": "To retrieve the status of the analysis task and the results",
+            "category": "results",
+            "parameters": [],
+            "response": [
+                {
+                    "name": "status",
+                    "type": "Status",
+                    "description": "Defines the status of the analysis. Refer to Response Statuses table for additional information",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "resultId",
+                    "type": "long",
+                    "description": "Defines the unique identifier by which the analysis status/results can be retrieved",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "retrieveAt",
+                    "type": "Date",
+                    "description": "Nullable. ISO8601 formatted date indicating a suggested time to re-attempt result retrieval if the status is WAITING",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "request",
+                    "type": "ApiAnalysisTaskRequest",
+                    "description": "Defines the original request parameters made to invoke this analysis",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "analysis",
+                            "type": "AnalysisType[]",
+                            "description": "Defines the types of analysis to be performed",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "startDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the start date and time of analysis. Analysis is inclusive of this datetime",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the end date and time of analysis. Analysis is exclusive of this datetime.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "timezone",
+                            "type": "String",
+                            "description": "Valid IANA timezone identifier to specify the timezone under which startDate and endDate should be interpreted. If not specified, defaults to the timezone under which the customer's dashboard has been configured.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "sources",
+                            "type": "String[]",
+                            "description": "Defines the name of the sources to be included in analysis (e.g. 'TWITTER'). At least 1 source must be specified. Custom sources are of the form 'CUSTOM:[PubType]' (e.g. 'CUSTOM:OurInternalFacebookData').",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "keywords",
+                            "type": "String",
+                            "description": "Keywords for analysis",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "languages",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 639-1 formatted language code. Defines an analysis filter for languages. If not specified, all languages will be included in analysis. Values must be valid Languages",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "locations",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 3166-1 alpha-3 formatted country codes. Defines an analysis filter for locations. If not specified, all locations will be included in analysis.Values must be valid Locations",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "gender",
+                            "type": "AnalysisFilter",
+                            "description": "Gender filter",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "requestingContractInfo",
+                            "type": "boolean",
+                            "description": "If true, contract usage information will be sent back even if the call is a success",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                },
+                {
+                    "name": "resultsUri",
+                    "type": "String",
+                    "description": "Defines the URI that can be queried to retrieve the analysis status/results in the future",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "contractInfo",
+                    "type": "ApiAnalysisContractInfo",
+                    "description": "If requested, the contract info after this request has been processed.",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "resultId",
+                    "type": "long",
+                    "description": "Identificator of the task response",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "status",
+                    "type": "Status",
+                    "description": "Current status of analysis task",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "analysisResults",
+                    "type": "AnalysisResults",
+                    "description": "Analysis result",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "volumeResults",
+                            "type": "HashMap",
+                            "description": "Volume analysis result",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "sentimentResults",
+                            "type": "Map",
+                            "description": "Sentiment analysis result",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "genderResult",
+                            "type": "Map",
+                            "description": "Gender analysis result",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "ageResult",
+                            "type": "Map",
+                            "description": "Age analysis result",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "locationResult",
+                            "type": "GeoPlaces",
+                            "description": "Location analysis result",
+                            "restricted": false,
+                            "deprecated": false,
+                            "members": [
+                                {
+                                    "name": "geoPlaces",
+                                    "type": "Collection",
+                                    "description": "Location list",
+                                    "restricted": false,
+                                    "deprecated": false
+                                },
+                                {
+                                    "name": "totalVolume",
+                                    "type": "double",
+                                    "description": "Total amount of appearances",
+                                    "restricted": false,
+                                    "deprecated": false
+                                }
+                            ]
+                        },
+                        {
+                            "name": "siteResult",
+                            "type": "Map",
+                            "description": "Source analysis result",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "affinityResults",
+                            "type": "List",
+                            "description": "Affinity analysis result",
+                            "restricted": false,
+                            "deprecated": false,
+                            "members": [
+                                {
+                                    "name": "localCount",
+                                    "type": "long",
+                                    "description": "Local Count",
+                                    "restricted": false,
+                                    "deprecated": false
+                                },
+                                {
+                                    "name": "twitterPercentage",
+                                    "type": "float",
+                                    "description": "Twitter Percentage",
+                                    "restricted": false,
+                                    "deprecated": false
+                                },
+                                {
+                                    "name": "segmentId",
+                                    "type": "long",
+                                    "description": "Segment ID",
+                                    "restricted": false,
+                                    "deprecated": false
+                                },
+                                {
+                                    "name": "segmentName",
+                                    "type": "String",
+                                    "description": "Segment Name",
+                                    "restricted": false,
+                                    "deprecated": false
+                                }
+                            ]
+                        },
+                        {
+                            "name": "reach",
+                            "type": "Long",
+                            "description": "Twitter reach also known as potential impressions",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                },
+                {
+                    "name": "message",
+                    "type": "String",
+                    "description": "Result message",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "request",
+                    "type": "ApiAnalysisTaskRequest",
+                    "description": "Related task request",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "analysis",
+                            "type": "AnalysisType[]",
+                            "description": "Defines the types of analysis to be performed",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "startDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the start date and time of analysis. Analysis is inclusive of this datetime",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "description": "ISO8601 formatted date representing the end date and time of analysis. Analysis is exclusive of this datetime.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "timezone",
+                            "type": "String",
+                            "description": "Valid IANA timezone identifier to specify the timezone under which startDate and endDate should be interpreted. If not specified, defaults to the timezone under which the customer's dashboard has been configured.",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "sources",
+                            "type": "String[]",
+                            "description": "Defines the name of the sources to be included in analysis (e.g. 'TWITTER'). At least 1 source must be specified. Custom sources are of the form 'CUSTOM:[PubType]' (e.g. 'CUSTOM:OurInternalFacebookData').",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "keywords",
+                            "type": "String",
+                            "description": "Keywords for analysis",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "languages",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 639-1 formatted language code. Defines an analysis filter for languages. If not specified, all languages will be included in analysis. Values must be valid Languages",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "locations",
+                            "type": "AnalysisFilter",
+                            "description": "ISO 3166-1 alpha-3 formatted country codes. Defines an analysis filter for locations. If not specified, all locations will be included in analysis.Values must be valid Locations",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "gender",
+                            "type": "AnalysisFilter",
+                            "description": "Gender filter",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "requestingContractInfo",
+                            "type": "boolean",
+                            "description": "If true, contract usage information will be sent back even if the call is a success",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "Authentication",
+            "url": "/authenticate",
+            "method": "GET",
+            "description": "Generate authentication tokens for use in API requests",
+            "category": "admin",
+            "parameters": [
+                {
+                    "name": "username",
+                    "type": "String",
+                    "required": true,
+                    "description": "Username of the requesting user",
+                    "deprecated": false
+                },
+                {
+                    "name": "password",
+                    "type": "String",
+                    "required": true,
+                    "description": "Password of the requesting user",
+                    "deprecated": false
+                },
+                {
+                    "name": "force",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "If true, forces authentication token update for the requesting user",
+                    "deprecated": false
+                },
+                {
+                    "name": "noExpiration",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "If true, the authentication token returned will not expire",
+                    "deprecated": false
+                }
+            ],
+            "response": [
+                {
+                    "name": "auth",
+                    "type": "String",
+                    "description": "Authentication token",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "expires",
+                    "type": "Date",
+                    "description": "Token expiration date (24 hours from token creation). If noExpiration = true, this field will not be returned",
+                    "restricted": false,
+                    "deprecated": false
+                }
+            ]
+        },
+        {
+            "endpoint": "Authors",
+            "url": "/monitor/authors",
+            "method": "GET",
+            "description": "Information about Twitter authors in a monitor",
+            "category": "results",
+            "parameters": [
+                {
+                    "name": "id",
+                    "type": "long",
+                    "required": true,
+                    "description": "The id of the monitor being requested",
+                    "deprecated": false
+                },
+                {
+                    "name": "start",
+                    "type": "Date",
+                    "required": true,
+                    "description": "Specifies inclusive start date in YYYY-MM-DD",
+                    "deprecated": false
+                },
+                {
+                    "name": "end",
+                    "type": "Date",
+                    "required": true,
+                    "description": "Specifies exclusive end date in YYYY-MM-DD",
+                    "deprecated": false
+                }
+            ],
+            "response": [
+                {
+                    "name": "authors",
+                    "type": "List",
+                    "description": "JSON array of zero or more authors objects that contain author-specific attributes",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "startDate",
+                            "type": "Date",
+                            "description": "Inclusive start date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "endDate",
+                            "type": "Date",
+                            "description": "Exclusive end date in dashboard time for this result - ISO 8601 format yyyy-MM-dd'T'HH:mm:ss",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "countsByAuthor",
+                            "type": "Map",
+                            "description": "Maps each author to the number of posts made by that author for this date",
+                            "restricted": true,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "numberOfAuthors",
+                            "type": "Integer",
+                            "description": "Number of unique authors",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "docsPerAuthor",
+                            "type": "Float",
+                            "description": "Average number of tweets published for this date by authors in the monitor",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "totalImpressions",
+                            "type": "Long",
+                            "description": "Total possible impressions for this date",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "Content Delete",
+            "url": "/content/delete",
+            "method": "POST",
+            "description": "Delete content via the API",
+            "category": "admin",
+            "parameters": [
+                {
+                    "name": "documentType",
+                    "type": "long",
+                    "required": true,
+                    "description": "The id of the document type to delete documents from",
+                    "deprecated": false
+                }
+            ],
+            "response": []
+        },
+        {
+            "endpoint": "Content Delete",
+            "url": "/content/delete",
+            "method": "POST",
+            "description": "Delete batch content via the API",
+            "category": "admin",
+            "parameters": [
+                {
+                    "name": "documentType",
+                    "type": "long",
+                    "required": true,
+                    "description": "The id of the document type to delete documents from",
+                    "deprecated": false
+                },
+                {
+                    "name": "batch",
+                    "type": "String",
+                    "required": true,
+                    "description": "The id of the document batch to delete",
+                    "deprecated": false
+                }
+            ],
+            "response": []
+        },
+        {
+            "endpoint": "Content Source Create",
+            "url": "/content/sources",
+            "method": "POST",
+            "description": "Content Source creation",
+            "category": "admin",
+            "parameters": [],
+            "response": [
+                {
+                    "name": "contentSource",
+                    "type": "ContentSourceModel",
+                    "description": "Content Source",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "id",
+                            "type": "long",
+                            "description": "Content Source ID",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "teamName",
+                            "type": "String",
+                            "description": "Content Source Team Name",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "description": "Content Source Name",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "description",
+                            "type": "String",
+                            "description": "Content Source Description",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "documents",
+                            "type": "Long",
+                            "description": "Content Source Documents",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "Content Source Delete",
+            "url": "/content/sources",
+            "method": "DELETE",
+            "description": "Content Source deletion",
+            "category": "admin",
+            "parameters": [
+                {
+                    "name": "documentType",
+                    "type": "long",
+                    "required": true,
+                    "description": "The id of the document type to delete",
+                    "deprecated": false
+                }
+            ],
+            "response": []
+        },
+        {
+            "endpoint": "Content Source List",
+            "url": "/content/sources/list",
+            "method": "GET",
+            "description": "Content Source list",
+            "category": "admin",
+            "parameters": [
+                {
+                    "name": "team",
+                    "type": "Long",
+                    "required": true,
+                    "description": "The id of the team to which the listed content sources belong",
+                    "deprecated": false
+                }
+            ],
+            "response": [
+                {
+                    "name": "contentSources",
+                    "type": "List",
+                    "description": "Content Sources",
+                    "restricted": false,
+                    "deprecated": false,
+                    "members": [
+                        {
+                            "name": "id",
+                            "type": "long",
+                            "description": "Content Source ID",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "teamName",
+                            "type": "String",
+                            "description": "Content Source Team Name",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "name",
+                            "type": "String",
+                            "description": "Content Source Name",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "description",
+                            "type": "String",
+                            "description": "Content Source Description",
+                            "restricted": false,
+                            "deprecated": false
+                        },
+                        {
+                            "name": "documents",
+                            "type": "Long",
+                            "description": "Content Source Documents",
+                            "restricted": false,
+                            "deprecated": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "endpoint": "Content Upload",
+            "url": "/content/upload",
+            "method": "POST",
+            "description": "Upload content via the API",
+            "category": "admin",
+            "parameters": [],
+            "response": [
+                {
+                    "name": "uploadCount",
+                    "type": "Integer",
+                    "description": "The number of posts that were successfully uploaded",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "DocumentsUploadedInLastTwentyFourHours",
+                    "type": "Long",
+                    "description": "If requested, the number of documents this organization has uploaded in the last twenty four hours.",
+                    "restricted": false,
+                    "deprecated": false
+                },
+                {
+                    "name": "ContractedDocumentsWithinTwentyFourHours",
+                    "type": "Long",
+                    "description": "If requested, the number of documents this organization can upload in a rolling twenty four hour period.",
+                    "restricted": false,
+                    "deprecated": false
+                }
+            ]
+        }
+    ],
+    "undocumented": []
+}

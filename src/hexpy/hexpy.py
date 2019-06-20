@@ -2,7 +2,6 @@
 import json
 import os
 import pathlib
-import re
 import time
 from collections import Counter
 from getpass import getpass
@@ -26,11 +25,20 @@ from .streams import StreamsAPI
 
 
 def helpful_validation_error(errors: List[JSONDict]) -> str:
-    # print(json.dumps(errors, indent=4))
-    error_template = "\t* {field} - {msg}\n"
+
+    top_error_template = "\t* {field} - {msg}\n"
+    sub_error_template = "\t* {field} - {number} - {subfield} - {msg}\n"
     error_message = "The file contained the following problems:\n"
     for e in errors:
-        error_message += error_template.format(field=e["loc"][0], msg=e["msg"])
+        if len(e["loc"]) == 1:
+            error_message += top_error_template.format(field=e["loc"][0], msg=e["msg"])
+        else:
+            error_message += sub_error_template.format(
+                field=e["loc"][0],
+                number=e["loc"][1],
+                subfield=e["loc"][2],
+                msg=e["msg"],
+            )
     return error_message
 
 
@@ -58,7 +66,7 @@ def posts_json_to_df(docs: Sequence[JSONDict], images: bool = False) -> pd.DataF
                         record[category_name] = category
                 elif isinstance(val, dict):
                     for subkey, subval in val.items():
-                        record[key + "_" + subkey] = subval
+                        record[key + "." + subkey] = subval
                 elif isinstance(val, List) and key == "imageInfo":
                     if images:
                         if len(val) > 0:
@@ -69,21 +77,23 @@ def posts_json_to_df(docs: Sequence[JSONDict], images: bool = False) -> pd.DataF
 
                                 if "objects" in item:
                                     objects.append(
-                                        "|".join(x["className"] for x in item["objects"])
+                                        "|".join(
+                                            x["className"] for x in item["objects"]
+                                        )
                                     )
                                 if "brands" in item:
                                     brands.append(
                                         "|".join(x["brand"] for x in item["brands"])
                                     )
-                            record["image_urls"] = " :: ".join(urls)
+                            record["image.urls"] = " :: ".join(urls)
                             if len(objects) > 0:
                                 object_str = " :: ".join(objects)
                                 if object_str != "":
-                                    record["image_objects"] = object_str
+                                    record["image.objects"] = object_str
                             if len(brands) > 0:
                                 brand_str = " :: ".join(brands)
                                 if brand_str != "":
-                                    record["image_brands"] = brand_str
+                                    record["image.brands"] = brand_str
                 elif isinstance(val, int):
                     record[key] = val
             except Exception:
@@ -161,16 +171,7 @@ def docs_to_text(json_docs: dict, mode: str = "md") -> str:
 
     if mode == "gfm":
         for i, e in enumerate(endpoints):
-
-            if mode == "md":
-                anchor = e["endpoint"].lower().replace("-", " ")
-                anchor = re.sub(r"\s+", "-", anchor)
-            elif mode == "gfm":
-                anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
-            else:
-                raise click.ClickException(
-                    f"Invalid markdown mode: {mode}. must be either 'md' or 'gfm'."
-                )
+            anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
             doc += f"* [{e['endpoint']}](#{anchor})\n"
 
     return doc + "\n".join([format_endpoint(e) for e in endpoints])
@@ -371,14 +372,15 @@ def api_documentation(ctx, output_type: str = "json"):
 @cli.command()
 @click.argument("filename")
 @click.option(
-    "--content_type",
-    "-c",
+    "--document_type",
+    "-d",
     default=None,
-    help="Custom content type, as specified in Forsight.",
+    help="Custom document type ID number",
+    type=int,
 )
 @click.option("--separator", "-s", default=",", help="CSV column separator.")
 @click.pass_context
-def upload(ctx, filename: str, content_type: str = None, separator: str = ",") -> None:
+def upload(ctx, filename: str, document_type: int, separator: str = ",") -> None:
     """Upload spreadsheet file as custom content."""
 
     if separator == "\\t":
@@ -400,11 +402,13 @@ def upload(ctx, filename: str, content_type: str = None, separator: str = ",") -
         )
 
     try:
-        data = UploadCollection.from_dataframe(items)
+        collection = UploadCollection.from_dataframe(items)
     except ValidationError as e:
         raise click.ClickException(helpful_validation_error(e.errors())) from e
-    client.upload(items=data)
-    click.echo("Success!")
+    response = client.upload(
+        document_type=document_type, items=collection, request_usage=True
+    )
+    click.echo(json.dumps(response, indent=4))
 
 
 @cli.command()
@@ -463,12 +467,14 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
 
         items["categoryid"] = [category_dict[i] for i in items["categoryname"]]
 
-    try:
-        items = TrainCollection.from_dataframe(items)
-    except ValidationError as e:
-        raise click.ClickException(helpful_validation_error(e.errors())) from e
+    # Validate all groups of documents
+    for categoryid, sub_df in items.groupby("categoryid"):
+        try:
+            validated = TrainCollection.from_dataframe(sub_df)
+        except ValidationError as e:
+            raise click.ClickException(helpful_validation_error(e.errors())) from e
 
-    counts = Counter(x.categoryid for x in items)
+    counts = Counter(items.categoryid)
 
     count_string = "\n".join(
         [
@@ -479,17 +485,13 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
 
     click.echo("Preparing to upload:\n" + count_string)
 
-    for val in sorted(list(counts.keys())):
+    for cat_id, sub_df in items.groupby("categoryid"):
 
         # Covert data to list of dictionaries
-        data = TrainCollection(items=[x for x in items if x.categoryid == val])
-        if len(data) > 1000:
-            for batch in [data[i : i + 1000] for i in range(0, len(data), 1000)]:
-                client.train_monitor(
-                    monitor_id=monitor_id, category_id=int(val), items=batch
-                )
-        # client.train_monitor(monitor_id=monitor_id, category_id=int(val), items=data)
-        category = reverse_category_dict[val]
+        data = TrainCollection.from_dataframe(sub_df)
+
+        client.train_monitor(monitor_id=monitor_id, items=data)
+        category = reverse_category_dict[cat_id]
         click.echo(f"Successfuly uploaded {len(data)} {category} docs!")
 
 
@@ -547,14 +549,12 @@ def export(
     images: bool = False,
 ) -> None:
     """Export monitor posts as json or to a spreadsheet."""
-
     if separator == "\\t":
         separator = "\t"
     session = ctx.invoke(login, expiration=True, force=False)
     client = MonitorAPI(session)
     details = client.details(monitor_id)
     info = details["name"]
-
     if post_type == "post_list":
         if dates:
             docs = client.posts(monitor_id, dates[0], dates[1], extend_limit=not limit)[

@@ -1,7 +1,6 @@
 """Module for interacting with analysis API"""
 
 import inspect
-from typing import Any, Dict
 
 from .base import JSONDict, handle_response, rate_limited
 from .session import HexpySession
@@ -29,13 +28,63 @@ class AnalysisAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def analysis_request(self, data: Dict[str, Any]) -> JSONDict:
+    def analysis_request(self, request: JSONDict) -> JSONDict:
         """Submit a query task against 24 hours of social data.
 
         # Arguments
-            data: Dictionary, query and filter parameters
+            request: Dictionary, query and filter parameters
+
+        Example Request
+        ```python
+        {
+            "analysis": [
+                "volume",
+                "sentiment",
+                "emotion",
+                "affinity",
+                "gender",
+                "age",
+                "location",
+                "source",
+                "reach"
+            ],
+            "keywords": "iPhone",
+            "languages": {
+                "type": "include",
+                "values": [
+                "EN"
+                ]
+            },
+            "gender": {
+                    "type": "include",
+                    "values": ["M"]
+            },
+            "locations": {
+                "type": "exclude",
+                "values": [
+                    "JPN"
+                ]
+            },
+            "sources": [
+                "TWITTER",
+                "TUMBLR",
+                "INSTAGRAM",
+                "BLOGS",
+                "REVIEWS",
+                "GOOGLE_PLUS",
+                "NEWS",
+                "YOUTUBE",
+                "FORUMS"
+            ],
+            "startDate": "2016-09-20T00:00:00",
+            "endDate": "2016-09-21T00:00:00",
+            "timezone": "America/New_York",
+            "requestUsage": true
+        }
+        ```
+
         """
-        return handle_response(self.session.post(self.TEMPLATE, json=data))
+        return handle_response(self.session.post(self.TEMPLATE, json=request))
 
     def results(self, request_id: int) -> JSONDict:
         """Retrieve the status of the analysis request and the results.

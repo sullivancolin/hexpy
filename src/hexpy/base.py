@@ -5,7 +5,7 @@ import logging
 import threading
 import time
 from collections import deque
-from typing import Any, Callable, Deque, Dict, Union
+from typing import Any, Callable, Deque, Dict
 
 from requests.models import Response
 
@@ -31,7 +31,7 @@ def rate_limited(
                 sleeptime = until - time.time()
                 if sleeptime > 0:
                     logger.info(
-                        f"Rate Limit Reached. (Sleeping for {round(sleeptime + 10)} seconds)"
+                        f"Rate Limit Reached. (Sleeping for {round(sleeptime + 5)} seconds)"
                     )
                     time.sleep(sleeptime + 10)
                 while len(calls) > 0:
@@ -48,14 +48,11 @@ def rate_limited(
     return wrapper
 
 
-def handle_response(response: Union[Response, JSONDict]) -> JSONDict:
+def handle_response(response: Response) -> JSONDict:
     """Ensure responses do not contain errors."""
 
-    if isinstance(response, Response):
-        if not response.ok:
-            raise ValueError("Something Went Wrong. " + response.text)
-        elif ("status" in response.json()) and response.json()["status"] == "error":
-            raise ValueError("Something Went Wrong. " + response.text)
-        return response.json()
-    else:
-        return response
+    if not response.ok:
+        raise ValueError(f"Something Went Wrong. {response.text}")
+    elif ("status" in response.json()) and response.json()["status"] == "error":
+        raise ValueError(f"Something Went Wrong. {response.text}")
+    return response.json()

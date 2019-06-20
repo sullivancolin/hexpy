@@ -66,11 +66,23 @@ Upload content via the API w/ custom fields support.
 * batch: Integer, The id of the batch to which the uploading docs will belong.
 * data: list of document dictionaries  to upload.
 
-### delete_content
+### delete_content_items
 ```python
 delete_content(document_type: int) -> JSONDict
 ```
 Content deletion via the API.
+
+Example content_type:
+```python
+{
+    "items": [
+        {
+            "guid": "This is my guid",
+            "url": "http://www.crimsonhexagon.com/post1"
+        }
+    ]
+}
+```
 
 #### Arguments
 * documentType: Integer, The id of the document type to delete.
@@ -88,9 +100,18 @@ Delete batch content via the API.
 
 ### create_content_source
 ```python
-create_content_source(content_source) -> JSONDict
+create_content_source(content_type: JSONDict) -> JSONDict
 ```
 Content Source creation.
+
+Example content_type
+```python
+{
+    "teamid": 461777351,
+    "name": "Customer_Surveys",
+    "description": "Customer Survey, May 2019"
+}
+```
 
 ### delete_content_source
 ```python

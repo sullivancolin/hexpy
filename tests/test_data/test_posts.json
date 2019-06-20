@@ -1,0 +1,245 @@
+[
+    {
+        "url": "http://twitter.com/sample/url/1",
+        "date": "2018-06-19T07:01:22",
+        "author": "Author1 (John Doe)",
+        "contents": "Sample Post contents goes here",
+        "title": "Sample Post contents goes here",
+        "type": "Twitter",
+        "language": "en",
+        "authorPosts": 332541,
+        "authorsFollowing": 1359,
+        "authorsFollowers": 2184,
+        "authorGender": "M",
+        "assignedCategoryId": 9846117385,
+        "assignedEmotionId": 9846117388,
+        "categoryScores": [
+            {
+                "categoryId": 9846117389,
+                "categoryName": "Basic Negative",
+                "score": 0
+            },
+            {
+                "categoryId": 9846117385,
+                "categoryName": "Basic Neutral",
+                "score": 1
+            },
+            {
+                "categoryId": 9846117379,
+                "categoryName": "Basic Positive",
+                "score": 0
+            }
+        ],
+        "emotionScores": [
+            {
+                "emotionId": 9846117388,
+                "emotionName": "Neutral",
+                "score": 0.74
+            },
+            {
+                "emotionId": 9846117390,
+                "emotionName": "Sadness",
+                "score": 0.04
+            },
+            {
+                "emotionId": 9846117384,
+                "emotionName": "Anger",
+                "score": 0.04
+            },
+            {
+                "emotionId": 9846117387,
+                "emotionName": "Disgust",
+                "score": 0.01
+            },
+            {
+                "emotionId": 9846117381,
+                "emotionName": "Joy",
+                "score": 0.13
+            },
+            {
+                "emotionId": 9846117380,
+                "emotionName": "Surprise",
+                "score": 0.03
+            },
+            {
+                "emotionId": 9846117383,
+                "emotionName": "Fear",
+                "score": 0.01
+            }
+        ],
+        "imageInfo": []
+    },
+    {
+        "url": "http://twitter.com/sample/url/2",
+        "date": "2018-06-21T08:40:25",
+        "author": "Author2 (Jane Doe)",
+        "contents": "Sample Post contents goes here",
+        "title": "Sample Post contents goes here",
+        "type": "Twitter",
+        "location": "CAN",
+        "geolocation": {
+            "id": "CAN",
+            "name": "Canada",
+            "country": "CAN"
+        },
+        "language": "en",
+        "authorPosts": 53749,
+        "authorsFollowing": 2892,
+        "authorsFollowers": 14910,
+        "authorGender": "F",
+        "assignedCategoryId": 9846117385,
+        "assignedEmotionId": 9846117388,
+        "categoryScores": [
+            {
+                "categoryId": 9846117389,
+                "categoryName": "Basic Negative",
+                "score": 0
+            },
+            {
+                "categoryId": 9846117385,
+                "categoryName": "Basic Neutral",
+                "score": 1
+            },
+            {
+                "categoryId": 9846117379,
+                "categoryName": "Basic Positive",
+                "score": 0
+            }
+        ],
+        "emotionScores": [
+            {
+                "emotionId": 9846117388,
+                "emotionName": "Neutral",
+                "score": 0.43
+            },
+            {
+                "emotionId": 9846117390,
+                "emotionName": "Sadness",
+                "score": 0.15
+            },
+            {
+                "emotionId": 9846117384,
+                "emotionName": "Anger",
+                "score": 0.06
+            },
+            {
+                "emotionId": 9846117387,
+                "emotionName": "Disgust",
+                "score": 0.07
+            },
+            {
+                "emotionId": 9846117381,
+                "emotionName": "Joy",
+                "score": 0.06
+            },
+            {
+                "emotionId": 9846117380,
+                "emotionName": "Surprise",
+                "score": 0.08
+            },
+            {
+                "emotionId": 9846117383,
+                "emotionName": "Fear",
+                "score": 0.16
+            }
+        ],
+        "imageInfo": [
+            {
+                "url": "http://sampleimage.url.com/sampleimage.jpg",
+                "objects": [
+                    {
+                        "score": 0.85437,
+                        "classId": 3844,
+                        "className": "Headphones"
+                    },
+                    {
+                        "score": 0.8528,
+                        "classId": 3434,
+                        "className": "Windmill"
+                    },
+                    {
+                        "score": 0.85014,
+                        "classId": 4128,
+                        "className": "Earrings"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "url": "http://twitter.com/sample/url/3",
+        "date": "2018-06-19T13:50:55",
+        "author": "Author3 (Jack Doe)",
+        "contents": "Sample Post contents goes here",
+        "title": "Sample Post contents goes here",
+        "type": "Twitter",
+        "location": "USA",
+        "geolocation": {
+            "id": "USA",
+            "name": "United States of America",
+            "country": "USA"
+        },
+        "language": "en",
+        "authorPosts": 89830,
+        "authorsFollowing": 1476,
+        "authorsFollowers": 1362,
+        "authorGender": "M",
+        "assignedCategoryId": 9846117379,
+        "assignedEmotionId": 9846117383,
+        "categoryScores": [
+            {
+                "categoryId": 9846117389,
+                "categoryName": "Basic Negative",
+                "score": 0
+            },
+            {
+                "categoryId": 9846117385,
+                "categoryName": "Basic Neutral",
+                "score": 0
+            },
+            {
+                "categoryId": 9846117379,
+                "categoryName": "Basic Positive",
+                "score": 1
+            }
+        ],
+        "emotionScores": [
+            {
+                "emotionId": 9846117388,
+                "emotionName": "Neutral",
+                "score": 0.02
+            },
+            {
+                "emotionId": 9846117390,
+                "emotionName": "Sadness",
+                "score": 0.17
+            },
+            {
+                "emotionId": 9846117384,
+                "emotionName": "Anger",
+                "score": 0.03
+            },
+            {
+                "emotionId": 9846117387,
+                "emotionName": "Disgust",
+                "score": 0.1
+            },
+            {
+                "emotionId": 9846117381,
+                "emotionName": "Joy",
+                "score": 0.23
+            },
+            {
+                "emotionId": 9846117380,
+                "emotionName": "Surprise",
+                "score": 0.1
+            },
+            {
+                "emotionId": 9846117383,
+                "emotionName": "Fear",
+                "score": 0.35
+            }
+        ],
+        "imageInfo": []
+    }
+]

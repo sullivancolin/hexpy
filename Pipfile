@@ -23,6 +23,7 @@ black = "==19.3b0"
 mypy = "*"
 pytest-cov = "*"
 pytest-sugar = "*"
+responses = "*"
 
 [requires]
 python_version = "3.7"

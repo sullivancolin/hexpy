@@ -1,0 +1,83 @@
+{
+    "resources": [
+        {
+            "id": "ABW",
+            "name": "Aruba",
+            "country": "ABW",
+            "latitude": 12.516935,
+            "longitude": -69.9742
+        },
+        {
+            "id": "ABW.Aruba",
+            "name": "Aruba",
+            "country": "ABW",
+            "state": "Aruba",
+            "latitude": 12.516935,
+            "longitude": -69.9742
+        },
+        {
+            "id": "AFG",
+            "name": "Afghanistan",
+            "country": "AFG",
+            "latitude": 33.836266,
+            "longitude": 66.008446
+        },
+        {
+            "id": "AFG.Badakhshan",
+            "name": "Badakhshan",
+            "country": "AFG",
+            "state": "Badakhshan",
+            "latitude": 37.035683,
+            "longitude": 71.44117
+        },
+        {
+            "id": "AFG.Badghis",
+            "name": "Badghis",
+            "country": "AFG",
+            "state": "Badghis",
+            "latitude": 35.14582,
+            "longitude": 63.7382
+        },
+        {
+            "id": "AFG.Baghlan",
+            "name": "Baghlan",
+            "country": "AFG",
+            "state": "Baghlan",
+            "latitude": 35.79878,
+            "longitude": 68.91088
+        },
+        {
+            "id": "AFG.Balkh",
+            "name": "Balkh",
+            "country": "AFG",
+            "state": "Balkh",
+            "latitude": 36.681255,
+            "longitude": 67.09223
+        },
+        {
+            "id": "AFG.Bamyan",
+            "name": "Bamyan",
+            "country": "AFG",
+            "state": "Bamyan",
+            "latitude": 34.803257,
+            "longitude": 67.23753
+        },
+        {
+            "id": "AFG.Farah",
+            "name": "Farah",
+            "country": "AFG",
+            "state": "Farah",
+            "latitude": 32.603043,
+            "longitude": 62.28357
+        },
+        {
+            "id": "AFG.Faryab",
+            "name": "Faryab",
+            "country": "AFG",
+            "state": "Faryab",
+            "latitude": 36.06375,
+            "longitude": 64.862816
+        }
+    ],
+    "status": "success"
+}
