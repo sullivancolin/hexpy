@@ -55,7 +55,7 @@ def test_rate_limiting(caplog):
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 
     with caplog.at_level(logging.INFO):
-        for i in range(12):
+        for _ in range(12):
             modified_func()
 
         assert caplog.records[0].msg == "Rate Limit Reached. (Sleeping for 6 seconds)"
@@ -70,7 +70,7 @@ def test_rate_limiting_window(caplog):
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 
     with caplog.at_level(logging.INFO):
-        for i in range(12):
+        for _ in range(12):
             modified_func()
             time.sleep(0.2)
         assert len(caplog.records) == 0

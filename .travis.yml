@@ -1,14 +1,20 @@
-# Config file for automatic testing at travis-ci.org
-# This file will be regenerated if you run travis_pypi_setup.py
-
+dist: xenial
 language: python
 python:
-  - 3.6
+  - "3.6"
+  - "3.7"
+  - "3.8-dev"
 
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis
+# command to install dependencies
+install:
+  - pip install .
+  - pip install pytest-cov flake8 mypy black isort
+# command to run tests
 
-# command to run tests, e.g. python setup.py test
-script: tox
-
+script:
+  - isort -c
+  - black setup.py src tests --check --verbose
+  - mypy setup.py src tests --ignore-missing-imports
+  - flake8 setup.py src tests --exit-zero
+  - pytest -vv
 

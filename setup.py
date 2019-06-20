@@ -17,7 +17,7 @@ requirements = [
 
 setup_requirements = ["pytest-runner", "setuptools>=38.6.0", "wheel>=0.31.0"]
 
-test_requirements = ["pytest"]
+test_requirements = ["pytest", "responses", "pytest-sugar"]
 
 with open("README.md") as infile:
     long_description = infile.read()

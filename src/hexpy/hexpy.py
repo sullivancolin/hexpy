@@ -170,7 +170,7 @@ def docs_to_text(json_docs: dict, mode: str = "md") -> str:
     doc = f"# Crimson Hexagon API Documentation\n\n**API URL: `{HexpySession.ROOT[:-1]}`**\n\n## Endpoints\n"
 
     if mode == "gfm":
-        for i, e in enumerate(endpoints):
+        for e in endpoints:
             anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
             doc += f"* [{e['endpoint']}](#{anchor})\n"
 
@@ -468,7 +468,7 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
         items["categoryid"] = [category_dict[i] for i in items["categoryname"]]
 
     # Validate all groups of documents
-    for categoryid, sub_df in items.groupby("categoryid"):
+    for _, sub_df in items.groupby("categoryid"):
         try:
             validated = TrainCollection.from_dataframe(sub_df)
         except ValidationError as e:
