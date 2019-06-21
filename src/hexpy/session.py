@@ -59,7 +59,7 @@ class HexpySession:
 
     def __init__(self, token: str) -> None:
         for name, fn in inspect.getmembers(self, inspect.ismethod):
-            if name == "get_token":
+            if name == "_get_token":
                 setattr(self, name, rate_limited(fn, self.MAX_CALLS, self.ONE_MINUTE))
 
         self.auth = {"auth": token}
