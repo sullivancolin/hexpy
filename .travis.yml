@@ -21,4 +21,8 @@ script:
 
 
 after_success:
+<<<<<<< HEAD
   - bash <(curl -s https://codecov.io/bash)
+=======
+- bash <(curl -s https://codecov.io/bash)
+>>>>>>> fix typo for coverage
