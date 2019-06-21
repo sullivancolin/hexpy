@@ -1,5 +1,8 @@
 dist: xenial
 language: python
+
+cache: pip
+
 python:
   - "3.6"
   - "3.7"
@@ -15,4 +18,8 @@ script:
   - black setup.py src tests --check --verbose
   - mypy setup.py src tests --ignore-missing-imports
   - flake8 setup.py src tests --exit-zero
-  - pytest -vv
+  - pytest -vv --cov=hexpy
+
+
+  after_success:
+- bash <(curl -s https://codecov.io/bash)
