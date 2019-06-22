@@ -1,9 +1,29 @@
-![Banner](images/banner.png)
+<p align="center">
+  <a href="https://sullivancolin.github.io/hexpy/"><img src="https://sullivancolin.github.io/hexpy/images/banner.png" alt="hexpy"></a>
+</p>
+<p align="center">
+<a href="https://travis-ci.com/sullivancolin/hexpy" target="_blank">
+    <img src="https://travis-ci.com/sullivancolin/hexpy.svg?branch=master" alt="Build Status">
+</a>
+
+<a href="https://pypi.org/project/hexpy/" target="_blank">
+    <img src="https://badge.fury.io/py/hexpy.svg" alt="PyPI version">
+</a>
+</p>
 
 A Python Client for the Crimson Hexagon API
 ===========================================
 
 **hexpy** is a simple python package for working with the [Crimson Hexagon API](https://apidocs.crimsonhexagon.com/)
+
+---
+## Project Homepage
+
+**Documentation**: [hexpy](https://sullivancolin.github.io/hexpy/)
+
+**Source Code**: [Github](https://github.com/sullivancolin/hexpy)
+
+---
 
 ## Why use this client?
 
@@ -25,12 +45,6 @@ To install the latest version:
 $ git clone https://github.com/sullivancolin/hexpy.git
 $ pip install hexpy/
 ```
-
-## Project Homepage
-
-Visit [hexpy](https://sullivancolin.github.io/hexpy/) for full Documenation
-
-Visit [Github](https://github.com/sullivancolin/hexpy) project page for full source code.
 
 ## Quick Start
 
