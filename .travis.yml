@@ -21,4 +21,7 @@ script:
 
 
 after_success:
+  - make clean
+  - pip install -e  U .
+  - pytest -v --cov=hexpy --cov-report=xml
   - bash <(curl -s https://codecov.io/bash)
