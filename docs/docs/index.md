@@ -5,7 +5,9 @@
 <a href="https://travis-ci.com/sullivancolin/hexpy" target="_blank">
     <img src="https://travis-ci.com/sullivancolin/hexpy.svg?branch=master" alt="Build Status">
 </a>
-
+<a href="https://codecov.io/gh/sullivancolin/hexpy" target="_blank">
+    <img src="https://codecov.io/gh/sullivancolin/hexpy/branch/master/graph/badge.svg" alt="Coverage">
+</a>
 <a href="https://pypi.org/project/hexpy/" target="_blank">
     <img src="https://badge.fury.io/py/hexpy.svg" alt="PyPI version">
 </a>
