@@ -25,6 +25,7 @@ clean-test:
 	rm -fr htmlcov/
 	rm -fr .cache/
 	rm -fr .pytest_cache
+	rm -f coverage.xml
 
 ## check style with flake8, mypy, black
 lint: clean

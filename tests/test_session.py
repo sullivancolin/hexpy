@@ -11,6 +11,7 @@ from hexpy import HexpySession
 
 @pytest.fixture
 def mocked_responses() -> responses.RequestsMock:
+    """return mocked HexpySession"""
     with responses.RequestsMock() as rsps:
 
         rsps.add(

@@ -29,7 +29,9 @@ class Geolocation(BaseModel):
     """Validation model for geolocation data to be uploaded.
 
     ## Fields
-        * id: Optional[str] = None
+        * country: Optional[str] = None
+        * state: Optional[str] = None
+        * city: Optional[str] = None
         * latitude: Optional[float] = None
         * longitude: Optional[float] = None
         * zipcode: Optional[str] = None
@@ -79,6 +81,7 @@ class UploadItem(BaseModel):
         "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
     }
     >>> upload_item = UploadItem(**item_dict)
+    ```
     """
 
     title: str
@@ -163,10 +166,7 @@ class UploadCollection(BaseModel):
             "url": "http://www.crimsonhexagon.com/post1",
             "contents": "Example content",
             "language": "en",
-            "type": "Your_Assigned_Content_Type_Name",
-            "geolocation": {
-                "id": "USA.NY"
-            }
+            "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
         }
     ]
     >>> upload_collection = UploadCollection(items=items)

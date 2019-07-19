@@ -25,17 +25,14 @@ Validation model for an item of custom content to be uploaded. Checks for requir
 ```python
 >>> from hexpy.models import UploadItem
 >>> item_dict = {
-        "title": "Example Title",
-        "date": "2010-01-26T16:14:00",
-        "author": "me",
-        "url": "http://www.crimsonhexagon.com/post1",
-        "contents": "Example content",
-        "language": "en",
-        "type": "Your_Assigned_Content_Type_Name",
-        "geolocation": {
-            "id": "USA.NY"
-        }
-    }
+    "title": "Example Title",
+    "date": "2010-01-26T16:14:00",
+    "author": "me",
+    "url": "http://www.crimsonhexagon.com/post1",
+    "contents": "Example content",
+    "language": "en",
+    "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
+}
 >>> upload_item = UploadItem(**item_dict)
 ```
 
@@ -50,19 +47,16 @@ Validation model for collection of items to be uploaded. Checks for duplicate up
 ```python
 >>> from hexpy.models import UploadItem, UploadCollection
 >>> items = [
-        {
-            "title": "Example Title",
-            "date": "2010-01-26T16:14:00",
-            "author": "me",
-            "url": "http://www.crimsonhexagon.com/post1",
-            "contents": "Example content",
-            "language": "en",
-            "type": "Your_Assigned_Content_Type_Name",
-            "geolocation": {
-                "id": "USA.NY"
-            }
-        }
-    ]
+    {
+        "title": "Example Title",
+        "date": "2010-01-26T16:14:00",
+        "author": "me",
+        "url": "http://www.crimsonhexagon.com/post1",
+        "contents": "Example content",
+        "language": "en",
+        "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
+    }
+]
 >>> upload_collection = UploadCollection(items=items)
 ```
 
