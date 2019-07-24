@@ -32,7 +32,7 @@ def test_cli_help():
 
 def test_posts_json_to_df(posts_json: List[JSONDict], posts_df: pd.DataFrame):
     df = posts_json_to_df(posts_json, images=True)
-    assert df.equals(posts_df)
+    assert df.equals(posts_df[df.columns])
 
 
 def test_format_documentation(

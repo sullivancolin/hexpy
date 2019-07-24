@@ -33,7 +33,7 @@ def upload_items() -> List[JSONDict]:
             "guid": "http://www.crimsonhexagon.com/post2",
             "contents": "Example content",
             "language": "en",
-            "geolocation": {"country": "USA", "state": "NY", "city": "NYC"},
+            "geolocation": {"id": "USA.NY"},
         },
         {
             "date": "2010-01-26T16:14:00+00:00",

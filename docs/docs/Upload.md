@@ -8,7 +8,6 @@ Class for working with the Custom Content Upload API.
 
 The Custom Content Upload endpoint enables the uploading of documents for analysis in the Forsight Platform.
 Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.
-To use this endpoint, please contact support and they will create a new custom content type for you. [Reference](https://apidocs.crimsonhexagon.com/reference#content-upload-1)
 
 ## Example Usage
 
@@ -19,15 +18,30 @@ To use this endpoint, please contact support and they will create a new custom c
 >>> upload_client = ContentUploadAPI(session)
 >>> items = [
     {
-        "title": "Example Title",
         "date": "2010-01-26T16:14:00",
-        "author": "me",
-        "url": "http://www.crimsonhexagon.com/post1",
         "contents": "Example content",
+        "guid": "This is my guid",
+        "title": "Example Title",
+        "author": "me",
         "language": "en",
-        "type": "Your_Assigned_Content_Type_Name",
+        "gender": "F",
         "geolocation": {
             "id": "USA.NY"
+        },
+        "pageId": "This is a pageId",
+        "parentGuid": "123123",
+        "authorProfileId": "1234567",
+        "custom": {
+            "field0": "value0",
+            "field1": "45.2",
+            "field2": "123",
+            "field3": "value3",
+            "field4": "value4",
+            "field5": "5_stars",
+            "field6": "1200",
+            "field7": "5",
+            "field8": "value5",
+            "field9": "value6"
         }
     }
 ]
@@ -38,39 +52,33 @@ To use this endpoint, please contact support and they will create a new custom c
 
 ### upload
 ```python
-upload(items: UploadCollection) -> JSONDict
+upload(document_type: int, items: UploadCollection, request_usage=True) -> JSONDict
 ```
 Upload collection of documents to Crimson Hexagon platform.
 
 If greater than 1000 items passed, reverts to batch upload.
+
 #### Arguments
-* items: validated instance of [UploadCollection](Data_Validation.md#uploadcollection) model
+* document_type: Integer, The id of the document type to which the uploading docs will * belong.
+* items: validated UploadCollection.
+* requestUsage: Bool, return usage information.
 
 ### batch_upload
 ```python
-batch_upload(items: UploadCollection) -> JSONDict
+batch_upload(document_type: int, items: UploadCollection, request_usage=True) -> JSONDict
 ```
 Batch upload collection of Custom Content to Crimson Hexagon platform in groups of 1000.
 
 #### Arguments
-* items: validated instance of [UploadCollection](Data_Validation.md#uploadcollection) model
-
-### custom_field_upload
-```python
-custom_field_upload(document_type: int, batch: int, data: Sequence[Dict[str, Any]]) -> JSONDict
-```
-Upload content via the API w/ custom fields support.
-
-#### Arguments
-* document_type: Integer, The id of the document type to which the uploading docs will belong
-* batch: Integer, The id of the batch to which the uploading docs will belong.
-* data: list of document dictionaries  to upload.
+    * document_type: Integer, The id of the document type to which the uploading docs will belong.
+    * items: validated UploadCollection.
+    * requestUsage: Bool, return usage information.
 
 ### delete_content_items
 ```python
-delete_content(document_type: int) -> JSONDict
+delete_content_items(document_type: int, items: JSONDict, batch: str = None) -> JSONDict:
 ```
-Content deletion via the API.
+Delete individual custom content documents via guid or url.
 
 Example content_type:
 ```python
@@ -92,7 +100,7 @@ Example content_type:
 ```python
 delete_content_batch(document_type: int, batch: int) -> JSONDict
 ```
-Delete batch content via the API.
+Delete single batch of custom content via the API.
 
 #### Arguments
 * documentType: Integer, The id of the document type to delete documents from.
