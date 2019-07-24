@@ -225,8 +225,8 @@ class UploadCollection(BaseModel):
     def unique_item_urls(cls, items: List[UploadItem]):
         if len(items) != len(set(items)):
             counts = Counter(items)
-            dups = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].guid for tup in dups]
+            dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
+            dups = [tup[0].guid for tup in dup_items]
             raise ValueError(f"Duplicate item guids detected: {dups}")
 
         return items
@@ -417,8 +417,8 @@ class TrainCollection(BaseModel):
         """Urls must be unique."""
         if len(items) != len(set(items)):
             counts = Counter(items)
-            dups = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].url for tup in dups]
+            dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
+            dups = [tup[0].url for tup in dup_items]
             raise ValueError(f"Duplicate item urls detected: {dups}")
 
         return items

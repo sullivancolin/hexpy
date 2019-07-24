@@ -128,9 +128,7 @@ class ContentUploadAPI:
             )
         )
 
-    def delete_content_items(
-        self, document_type: int, items: JSONDict, batch: str = None
-    ) -> JSONDict:
+    def delete_content_items(self, document_type: int, items: JSONDict) -> JSONDict:
         """Delete individual custom content documents via guid or url.
 
         # Arguments
@@ -153,7 +151,7 @@ class ContentUploadAPI:
         return handle_response(
             self.session.post(
                 self.TEMPLATE + "delete",
-                params={"documentType": document_type, "batch": batch, "url": url},
+                params={"documentType": document_type},
                 json=items,
             )
         )
