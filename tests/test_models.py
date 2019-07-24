@@ -30,7 +30,7 @@ def test_upload_from_df(upload_items: List[JSONDict]):
 def test_upload_to_df(upload_items: List[JSONDict]):
     df = json_normalize(upload_items)
     validated = UploadCollection.from_dataframe(df)
-    assert df.equals(validated.to_dataframe())
+    assert df.equals(validated.to_dataframe()[df.columns])
 
 
 def test_upload_iteration(upload_items: List[JSONDict]):
@@ -45,6 +45,7 @@ def test_wrong_upload_item(upload_items: List[JSONDict]):
     altered["language"] = "engl"
     altered["date"] = "02-2031-01"
     altered["url"] = "incorrect.com"
+    altered["custom"] = {"y": "z" * 10_000}
 
     with pytest.raises(ValidationError) as e:
         invalid = UploadItem(**altered)
@@ -65,6 +66,11 @@ def test_wrong_upload_item(upload_items: List[JSONDict]):
             "msg": "ensure this value has at most 2 characters",
             "type": "value_error.any_str.max_length",
             "ctx": {"limit_value": 2},
+        },
+        {
+            "loc": ("custom",),
+            "msg": "Could not validate custom field keys or values. keys must be less that 100 characters. values must be less that 10,000 characters",
+            "type": "value_error",
         },
     ]
 
@@ -172,8 +178,8 @@ def test_train_from_df(train_items: List[JSONDict]):
 
 def test_train_to_df(train_items: List[JSONDict]):
     df = pd.DataFrame.from_records(train_items)
-    validated = TrainCollection.from_dataframe(df)
-    assert df.equals(validated.to_dataframe())
+    validated = TrainCollection(items=train_items)
+    assert df.equals(validated.to_dataframe()[df.columns])
 
 
 def test_train_iteration(train_items: List[JSONDict]):

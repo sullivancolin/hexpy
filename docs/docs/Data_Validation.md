@@ -10,32 +10,53 @@ Data Validation
 Validation model for an item of custom content to be uploaded. Checks for required fields, with valid types and formatting.
 
 ### Fields
-* type: String, Custom Content Type Name
 * title: String, Document Title
-* url: Url, Unique Document Url
+* url: Url, Unique Document Url,
+* guid: String, Unique Document Identifier
 * author: String, Document Author
 * language: String, 2 letter langauge code
 * date: String, Date or Datetime
 * contents: String, Document Body
 * geolocation: Optional Mapping Identifier
-
+* custom: Optinal Mapping of key value string pairs
+* age: Optional Integer
+* gender: Optional gender M/F
+* pageId: Optional String
+* parentGuid: Optional String
+* authorProfileID: Optional String
+* engagementType: Optional String REPLY/RETWEET/COMMENT
 
 ### Example Usage
 
 ```python
 >>> from hexpy.models import UploadItem
 >>> item_dict = {
-        "title": "Example Title",
-        "date": "2010-01-26T16:14:00",
-        "author": "me",
-        "url": "http://www.crimsonhexagon.com/post1",
-        "contents": "Example content",
-        "language": "en",
-        "type": "Your_Assigned_Content_Type_Name",
-        "geolocation": {
-            "id": "USA.NY"
-        }
+    "date": "2010-01-26T16:14:00",
+    "contents": "Example content",
+    "guid": "This is my guid",
+    "title": "Example Title",
+    "author": "me",
+    "language": "en",
+    "gender": "F",
+    "geolocation": {
+        "id": "USA.NY"
+    },
+    "pageId": "This is a pageId",
+    "parentGuid": "123123",
+    "authorProfileId": "1234567",
+    "custom": {
+        "field0": "value0",
+        "field1": "45.2",
+        "field2": "123",
+        "field3": "value3",
+        "field4": "value4",
+        "field5": "5_stars",
+        "field6": "1200",
+        "field7": "5",
+        "field8": "value5",
+        "field9": "value6"
     }
+}
 >>> upload_item = UploadItem(**item_dict)
 ```
 
@@ -50,19 +71,34 @@ Validation model for collection of items to be uploaded. Checks for duplicate up
 ```python
 >>> from hexpy.models import UploadItem, UploadCollection
 >>> items = [
-        {
-            "title": "Example Title",
-            "date": "2010-01-26T16:14:00",
-            "author": "me",
-            "url": "http://www.crimsonhexagon.com/post1",
-            "contents": "Example content",
-            "language": "en",
-            "type": "Your_Assigned_Content_Type_Name",
-            "geolocation": {
-                "id": "USA.NY"
-            }
+    {
+        "date": "2010-01-26T16:14:00",
+        "contents": "Example content",
+        "guid": "This is my guid",
+        "title": "Example Title",
+        "author": "me",
+        "language": "en",
+        "gender": "F",
+        "geolocation": {
+            "id": "USA.NY"
+        },
+        "pageId": "This is a pageId",
+        "parentGuid": "123123",
+        "authorProfileId": "1234567",
+        "custom": {
+            "field0": "value0",
+            "field1": "45.2",
+            "field2": "123",
+            "field3": "value3",
+            "field4": "value4",
+            "field5": "5_stars",
+            "field6": "1200",
+            "field7": "5",
+            "field8": "value5",
+            "field9": "value6"
         }
-    ]
+    }
+]
 >>> upload_collection = UploadCollection(items=items)
 ```
 

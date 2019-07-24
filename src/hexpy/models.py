@@ -35,9 +35,7 @@ class Geolocation(BaseModel):
         * zipcode: Optional[str] = None
     """
 
-    country: Optional[str] = None
-    state: Optional[str] = None
-    city: Optional[str] = None
+    id: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     zipcode: Optional[str] = None
@@ -70,15 +68,34 @@ class UploadItem(BaseModel):
     ```python
     >>> from hexpy.models import UploadItem
     >>> item_dict = {
-        "title": "Example Title",
         "date": "2010-01-26T16:14:00",
-        "author": "me",
-        "url": "http://www.crimsonhexagon.com/post1",
         "contents": "Example content",
+        "guid": "This is my guid",
+        "title": "Example Title",
+        "author": "me",
         "language": "en",
-        "geolocation": {"counrtry": "USA", "state": "NY", "city": "NYC"},
+        "gender": "F",
+        "geolocation": {
+            "id": "USA.NY"
+        },
+        "pageId": "This is a pageId",
+        "parentGuid": "123123",
+        "authorProfileId": "1234567",
+        "custom": {
+            "field0": "value0",
+            "field1": "45.2",
+            "field2": "123",
+            "field3": "value3",
+            "field4": "value4",
+            "field5": "5_stars",
+            "field6": "1200",
+            "field7": "5",
+            "field8": "value5",
+            "field9": "value6"
+        }
     }
     >>> upload_item = UploadItem(**item_dict)
+    ```
     """
 
     title: str
@@ -101,7 +118,7 @@ class UploadItem(BaseModel):
         allow_mutation = False
 
     @validator("date")
-    def parse_datetime(cls, value) -> str:
+    def parse_datetime(cls, value: str) -> str:
         """Validate date string using pendulum parsing followed by ISO formatting."""
         try:
             date = pendulum.parse(value)
@@ -115,19 +132,30 @@ class UploadItem(BaseModel):
         return date.to_iso8601_string()
 
     @validator("contents")
-    def fix_contents(cls, value) -> str:
+    def fix_contents(cls, value: str) -> str:
         """Fix mojibake in contents"""
         return ftfy.fix_text(value)
 
     @validator("title")
-    def fix_title(cls, value) -> str:
+    def fix_title(cls, value: str) -> str:
         """Fix mojibake in title"""
         return ftfy.fix_text(value)
 
     @validator("author")
-    def fix_author(cls, value) -> str:
+    def fix_author(cls, value: str) -> str:
         """Fix mojibake in author"""
         return ftfy.fix_text(value)
+
+    @validator("custom", whole=True)
+    def validate_custom_fields(cls, value_dict: Dict[str, str]) -> Dict[str, str]:
+        """Validate Custom Field key value pairs"""
+        if not all(len(key) < 100 for key in value_dict.keys()) or not all(
+            len(value) < 10_000 for value in value_dict.values()
+        ):
+            raise ValueError(
+                "Could not validate custom field keys or values. keys must be less that 100 characters. values must be less that 10,000 characters"
+            )
+        return value_dict
 
     def __hash__(self):
         return hash(self.guid)
@@ -157,15 +185,30 @@ class UploadCollection(BaseModel):
     >>> from hexpy.models import UploadItem, UploadCollection
     >>> items = [
         {
-            "title": "Example Title",
             "date": "2010-01-26T16:14:00",
-            "author": "me",
-            "url": "http://www.crimsonhexagon.com/post1",
             "contents": "Example content",
+            "guid": "This is my guid",
+            "title": "Example Title",
+            "author": "me",
             "language": "en",
-            "type": "Your_Assigned_Content_Type_Name",
+            "gender": "F",
             "geolocation": {
                 "id": "USA.NY"
+            },
+            "pageId": "This is a pageId",
+            "parentGuid": "123123",
+            "authorProfileId": "1234567",
+            "custom": {
+                "field0": "value0",
+                "field1": "45.2",
+                "field2": "123",
+                "field3": "value3",
+                "field4": "value4",
+                "field5": "5_stars",
+                "field6": "1200",
+                "field7": "5",
+                "field8": "value5",
+                "field9": "value6"
             }
         }
     ]
@@ -179,11 +222,11 @@ class UploadCollection(BaseModel):
         allow_mutation = False
 
     @validator("items", whole=True)
-    def unique_item_urls(cls, items):
+    def unique_item_urls(cls, items: List[UploadItem]):
         if len(items) != len(set(items)):
             counts = Counter(items)
-            dups = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].guid for tup in dups]
+            dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
+            dups = [tup[0].guid for tup in dup_items]
             raise ValueError(f"Duplicate item guids detected: {dups}")
 
         return items
@@ -296,7 +339,7 @@ class TrainItem(BaseModel):
         allow_mutation = False
 
     @validator("date")
-    def parse_datetime(cls, value):
+    def parse_datetime(cls, value: str):
         """Validate date string using pendulum parsing followed by ISO formatting."""
         try:
             date = pendulum.parse(value)
@@ -310,17 +353,17 @@ class TrainItem(BaseModel):
         return date.to_iso8601_string()
 
     @validator("contents")
-    def fix_contents(cls, value) -> str:
+    def fix_contents(cls, value: str) -> str:
         """Fix mojibake in contents"""
         return ftfy.fix_text(value)
 
     @validator("title")
-    def fix_title(cls, value) -> str:
+    def fix_title(cls, value: str) -> str:
         """Fix mojibake in title"""
         return ftfy.fix_text(value)
 
     @validator("author")
-    def fix_author(cls, value) -> str:
+    def fix_author(cls, value: str) -> str:
         """Fix mojibake in author"""
         return ftfy.fix_text(value)
 
@@ -370,18 +413,18 @@ class TrainCollection(BaseModel):
         allow_mutation = False
 
     @validator("items", whole=True)
-    def unique_item_urls(cls, items):
+    def unique_item_urls(cls, items: List[TrainItem]):
         """Urls must be unique."""
         if len(items) != len(set(items)):
             counts = Counter(items)
-            dups = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].url for tup in dups]
+            dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
+            dups = [tup[0].url for tup in dup_items]
             raise ValueError(f"Duplicate item urls detected: {dups}")
 
         return items
 
     @validator("items", whole=True)
-    def categoryid_match(cls, items):
+    def categoryid_match(cls, items: List[TrainItem]):
         """Category Id must match"""
 
         category_ids = set(item.categoryid for item in items)

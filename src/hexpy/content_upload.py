@@ -17,7 +17,7 @@ class ContentUploadAPI:
     Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.
     To use this endpoint, please contact support and they will create a new custom content type for you.
 
-    [Reference](https://apidocs.crimsonhexagon.com/reference#content-upload-1)
+    [Reference](https://apidocs.crimsonhexagon.com/reference#content-upload)
 
     # Example Usage
 
@@ -27,19 +27,34 @@ class ContentUploadAPI:
     >>> session = HexpySession.load_auth_from_file()
     >>> upload_client = ContentUploadAPI(session)
     >>> items = [
-        {
-            "title": "Example Title",
-            "date": "2010-01-26T16:14:00",
-            "author": "me",
-            "url": "http://www.crimsonhexagon.com/post1",
-            "contents": "Example content",
-            "language": "en",
-            "type": "Your_Assigned_Content_Type_Name",
-            "geolocation": {
-                "id": "USA.NY"
-            }
+    {
+        "date": "2010-01-26T16:14:00",
+        "contents": "Example content",
+        "guid": "This is my guid",
+        "title": "Example Title",
+        "author": "me",
+        "language": "en",
+        "gender": "F",
+        "geolocation": {
+            "id": "USA.NY"
+        },
+        "pageId": "This is a pageId",
+        "parentGuid": "123123",
+        "authorProfileId": "1234567",
+        "custom": {
+            "field0": "value0",
+            "field1": "45.2",
+            "field2": "123",
+            "field3": "value3",
+            "field4": "value4",
+            "field5": "5_stars",
+            "field6": "1200",
+            "field7": "5",
+            "field8": "value5",
+            "field9": "value6"
         }
-    ]
+    }
+]
     >>> data = UploadCollection(items=items)
     >>> upload_client.upload(data)
     ```
@@ -113,16 +128,13 @@ class ContentUploadAPI:
             )
         )
 
-    def delete_content_items(
-        self, document_type: int, items: JSONDict, batch: str = None, url: str = None
-    ) -> JSONDict:
-        """Delete content via the API.
+    def delete_content_items(self, document_type: int, items: JSONDict) -> JSONDict:
+        """Delete individual custom content documents via guid or url.
 
         # Arguments
             * documentType: Integer, The id of the document type to delete documents from.
             * items: JSONDict, dictionary specifying which documents to delete.
             * batch: String, Batch ID.
-            * url: String, document url.
 
         Example Items:
         ```python
@@ -139,7 +151,7 @@ class ContentUploadAPI:
         return handle_response(
             self.session.post(
                 self.TEMPLATE + "delete",
-                params={"documentType": document_type, "batch": batch, "url": url},
+                params={"documentType": document_type},
                 json=items,
             )
         )
