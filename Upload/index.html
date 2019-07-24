@@ -365,13 +365,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom_field_upload" title="custom_field_upload" class="md-nav__link">
-    custom_field_upload
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#delete_content_items" title="delete_content_items" class="md-nav__link">
     delete_content_items
   </a>
@@ -567,13 +560,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom_field_upload" title="custom_field_upload" class="md-nav__link">
-    custom_field_upload
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#delete_content_items" title="delete_content_items" class="md-nav__link">
     delete_content_items
   </a>
@@ -639,8 +625,7 @@
                 <h1 id="upload-api">Upload API<a class="headerlink" href="#upload-api" title="Permanent link">&para;</a></h1>
 <p>Class for working with the Custom Content Upload API.</p>
 <p>The Custom Content Upload endpoint enables the uploading of documents for analysis in the Forsight Platform.
-Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.
-To use this endpoint, please contact support and they will create a new custom content type for you. <a href="https://apidocs.crimsonhexagon.com/reference#content-upload-1">Reference</a></p>
+Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.</p>
 <h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">ContentUploadAPI</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy.models</span> <span class="kn">import</span> <span class="n">UploadCollection</span><span class="p">,</span> <span class="n">UploadItem</span>
@@ -648,15 +633,30 @@ To use this endpoint, please contact support and they will create a new custom c
 <span class="o">&gt;&gt;&gt;</span> <span class="n">upload_client</span> <span class="o">=</span> <span class="n">ContentUploadAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Title&quot;</span><span class="p">,</span>
         <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2010-01-26T16:14:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.crimsonhexagon.com/post1&quot;</span><span class="p">,</span>
         <span class="s2">&quot;contents&quot;</span><span class="p">:</span> <span class="s2">&quot;Example content&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;guid&quot;</span><span class="p">:</span> <span class="s2">&quot;This is my guid&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Example Title&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">,</span>
         <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Your_Assigned_Content_Type_Name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gender&quot;</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span>
         <span class="s2">&quot;geolocation&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;USA.NY&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;pageId&quot;</span><span class="p">:</span> <span class="s2">&quot;This is a pageId&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;parentGuid&quot;</span><span class="p">:</span> <span class="s2">&quot;123123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;authorProfileId&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;custom&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;field0&quot;</span><span class="p">:</span> <span class="s2">&quot;value0&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field1&quot;</span><span class="p">:</span> <span class="s2">&quot;45.2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field2&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field3&quot;</span><span class="p">:</span> <span class="s2">&quot;value3&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field4&quot;</span><span class="p">:</span> <span class="s2">&quot;value4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field5&quot;</span><span class="p">:</span> <span class="s2">&quot;5_stars&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field6&quot;</span><span class="p">:</span> <span class="s2">&quot;1200&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field7&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field8&quot;</span><span class="p">:</span> <span class="s2">&quot;value5&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;field9&quot;</span><span class="p">:</span> <span class="s2">&quot;value6&quot;</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">]</span>
@@ -667,7 +667,7 @@ To use this endpoint, please contact support and they will create a new custom c
 
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <h3 id="upload">upload<a class="headerlink" href="#upload" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">upload</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">UploadCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
+<div class="codehilite"><pre><span></span><span class="n">upload</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">UploadCollection</span><span class="p">,</span> <span class="n">request_usage</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
@@ -675,36 +675,29 @@ To use this endpoint, please contact support and they will create a new custom c
 <p>If greater than 1000 items passed, reverts to batch upload.</p>
 <h4>Arguments</h4>
 <ul>
-<li>items: validated instance of <a href="../Data_Validation/#uploadcollection">UploadCollection</a> model</li>
+<li>document_type: Integer, The id of the document type to which the uploading docs will * belong.</li>
+<li>items: validated UploadCollection.</li>
+<li>requestUsage: Bool, return usage information.</li>
 </ul>
 <h3 id="batch_upload">batch_upload<a class="headerlink" href="#batch_upload" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">batch_upload</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">UploadCollection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
+<div class="codehilite"><pre><span></span><span class="n">batch_upload</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">UploadCollection</span><span class="p">,</span> <span class="n">request_usage</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
 </pre></div>
 
 
 <p>Batch upload collection of Custom Content to Crimson Hexagon platform in groups of 1000.</p>
 <h4>Arguments</h4>
-<ul>
-<li>items: validated instance of <a href="../Data_Validation/#uploadcollection">UploadCollection</a> model</li>
-</ul>
-<h3 id="custom_field_upload">custom_field_upload<a class="headerlink" href="#custom_field_upload" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">custom_field_upload</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
+<div class="codehilite"><pre><span></span><span class="o">*</span> <span class="nv">document_type</span>: <span class="nv">Integer</span>, <span class="nv">The</span> <span class="nv">id</span> <span class="nv">of</span> <span class="nv">the</span> <span class="nv">document</span> <span class="nv">type</span> <span class="nv">to</span> <span class="nv">which</span> <span class="nv">the</span> <span class="nv">uploading</span> <span class="nv">docs</span> <span class="nv">will</span> <span class="nv">belong</span>.
+<span class="o">*</span> <span class="nv">items</span>: <span class="nv">validated</span> <span class="nv">UploadCollection</span>.
+<span class="o">*</span> <span class="nv">requestUsage</span>: <span class="nv">Bool</span>, <span class="k">return</span> <span class="nv">usage</span> <span class="nv">information</span>.
 </pre></div>
 
 
-<p>Upload content via the API w/ custom fields support.</p>
-<h4>Arguments</h4>
-<ul>
-<li>document_type: Integer, The id of the document type to which the uploading docs will belong</li>
-<li>batch: Integer, The id of the batch to which the uploading docs will belong.</li>
-<li>data: list of document dictionaries  to upload.</li>
-</ul>
 <h3 id="delete_content_items">delete_content_items<a class="headerlink" href="#delete_content_items" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">delete_content</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
+<div class="codehilite"><pre><span></span><span class="n">delete_content_items</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">JSONDict</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span><span class="p">:</span>
 </pre></div>
 
 
-<p>Content deletion via the API.</p>
+<p>Delete individual custom content documents via guid or url.</p>
 <p>Example content_type:</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -727,7 +720,7 @@ To use this endpoint, please contact support and they will create a new custom c
 </pre></div>
 
 
-<p>Delete batch content via the API.</p>
+<p>Delete single batch of custom content via the API.</p>
 <h4>Arguments</h4>
 <ul>
 <li>documentType: Integer, The id of the document type to delete documents from.</li>
