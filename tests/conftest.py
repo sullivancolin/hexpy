@@ -126,3 +126,10 @@ def results_json() -> JSONDict:
     """Expected monitor results json"""
     with open("tests/test_data/results.json") as infile:
         return json.load(infile)
+
+
+@pytest.fixture
+def monitor_details_json() -> JSONDict:
+    """Expected monitor details json"""
+    with open("tests/test_data/monitor_details.json") as infile:
+        return json.load(infile)

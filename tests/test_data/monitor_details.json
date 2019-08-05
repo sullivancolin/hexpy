@@ -1,0 +1,119 @@
+{
+    "id": 123456789,
+    "name": "Sample Monitor NAME",
+    "description": "",
+    "type": "BUZZ",
+    "enabled": true,
+    "resultsStart": "2018-03-07T00:00:00",
+    "resultsEnd": "2019-03-20T00:00:00",
+    "keywords": "(iOS OR iPhone)",
+    "languages": {
+        "values": [
+            "en"
+        ],
+        "type": "include"
+    },
+    "geolocations": {
+        "values": [],
+        "type": "include"
+    },
+    "gender": "F",
+    "sources": [
+        "Twitter"
+    ],
+    "timezone": "America/New_York",
+    "teamName": "Test Team 123",
+    "tags": [],
+    "subfilters": [
+        {
+            "id": 123456789,
+            "name": "battery",
+            "parameters": "Keywords: \nbattery"
+        }
+    ],
+    "categories": [
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Basic Positive",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 100
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Basic Neutral",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 101
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Basic Negative",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 102
+        }
+    ],
+    "emotions": [
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Joy",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 103
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Sadness",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 104
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Neutral",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 105
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Disgust",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 106
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Anger",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 107
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Surprise",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 108
+        },
+        {
+            "status": "red",
+            "id": 123456789,
+            "name": "Fear",
+            "trainingDocs": 0,
+            "hidden": false,
+            "sortOrder": 109
+        }
+    ],
+    "status": "success"
+}
