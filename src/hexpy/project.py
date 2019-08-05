@@ -20,7 +20,22 @@ class MonitorTypeEnum(str, Enum):
     SOCIAL = "SOCIAL"
 
 
-class Monitor(BaseModel):
+class Project(BaseModel):
+    """Class for working with a Crimson Hexagon Monitor Project.
+
+    # Example usage.
+
+    ```python
+    >>> from hexpy import HexpySession, Project
+    >>> session = HexpySession.load_auth_from_file()
+    >>> project = Project.get_from_monitor_id(session, monitor_id=123456789)
+    >>> description = project.description
+    >>> start = project.resultsStart
+    >>> end = project.resultsEnd
+    >>> sample_posts = project.posts()
+    ```
+    """
+
     id: int
     name: str
     description: str
@@ -46,14 +61,16 @@ class Monitor(BaseModel):
         arbitrary_types_allowed = True
 
     @validator("gender", pre=True)
-    def validate_gender(cls, value: Optional[str]) -> Union[str, None]:
+    def validate_empty_gender(cls, value: Optional[str]) -> Union[str, None]:
+        """Validate empty string is None"""
         if value:
             return value
         else:
             return None
 
     @classmethod
-    def get_monitor_from_id(cls, session: HexpySession, monitor_id: int) -> "Monitor":
+    def get_from_monitor_id(cls, session: HexpySession, monitor_id: int) -> "Project":
+        """Instantiate from session and Monitor ID"""
         client = MonitorAPI(session)
         details = client.details(monitor_id)
         details["session"] = session
@@ -90,7 +107,7 @@ class Monitor(BaseModel):
         return len(self.days)
 
     def __repr__(self) -> str:  # pragma: no cover
-        return f"<Monitor ('{self.name}', {self.resultsStart} ,{self.resultsEnd})>"
+        return f"<Project ('{self.name}', {self.resultsStart} ,{self.resultsEnd})>"
 
     def __iter__(self):  # type: ignore
         for day in self.days:

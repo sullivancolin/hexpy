@@ -8,6 +8,7 @@ from .content_upload import ContentUploadAPI
 from .custom import CustomAPI
 from .metadata import MetadataAPI
 from .monitor import MonitorAPI
+from .project import Project
 from .realtime import RealtimeAPI
 from .session import HexpySession
 from .streams import StreamsAPI
@@ -22,4 +23,5 @@ __all__ = [
     "CustomAPI",
     "RealtimeAPI",
     "ActivityAPI",
+    "Project",
 ]

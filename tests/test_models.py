@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Tests for model validation."""
+import inspect
 import logging
 from typing import List
 
@@ -13,6 +14,7 @@ from pydantic import ValidationError
 from hexpy import ContentUploadAPI, HexpySession, MonitorAPI
 from hexpy.base import JSONDict
 from hexpy.models import TrainCollection, TrainItem, UploadCollection, UploadItem
+from hexpy.project import Project
 
 
 def test_correct_upload_item(upload_items: List[JSONDict]) -> None:
@@ -303,3 +305,19 @@ def test_batch_train(
         )
 
     assert response == {"Batch 0": {}, "Batch 1": {}, "Batch 2": {}}
+
+
+@responses.activate
+def test_project(mocked_session: HexpySession, monitor_details_json: JSONDict) -> None:
+    """Test monitor """
+    responses.add(
+        responses.GET,
+        HexpySession.ROOT + "monitor/detail",
+        json=monitor_details_json,
+        status=200,
+    )
+    project = Project.get_from_monitor_id(mocked_session, 123456789)
+
+    assert len(project) == 379
+    assert len([day for day in project]) == 379
+    assert len([day for day in project[:10]]) == 10
