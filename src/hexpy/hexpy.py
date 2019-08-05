@@ -188,7 +188,7 @@ def docs_to_text(json_docs: dict, mode: str = "md") -> str:
     cls=HelpColorsGroup, help_headers_color="blue", help_options_color="yellow"
 )
 @click.version_option(version=__version__)
-def cli():
+def cli() -> None:
     """Command Line interface for working with Crimson Hexagon API."""
     pass
 
@@ -237,7 +237,10 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
 @click.argument("metrics", nargs=-1)
 @click.pass_context
 def results(
-    ctx, monitor_id: int, metrics: Sequence[str], date_range: Sequence[str] = None
+    ctx: click.Context,
+    monitor_id: int,
+    metrics: Sequence[str],
+    date_range: Sequence[str] = None,
 ) -> None:
     """Get Monitor results for 1 or more metrics.
 
@@ -286,7 +289,11 @@ metadata_choices = [
 @click.argument("info", type=click.Choice(metadata_choices))
 @click.pass_context
 def metadata(
-    ctx, info: str, team_id: int = None, country: str = None, monitor_id: int = None
+    ctx: click.Context,
+    info: str,
+    team_id: int = None,
+    country: str = None,
+    monitor_id: int = None,
 ) -> None:
     """Get Metadata for account team, monitors, and geography.
 
@@ -337,7 +344,7 @@ def metadata(
     help="file type of export. (default=json)",
 )
 @click.pass_context
-def api_documentation(ctx, output_type: str = "json"):
+def api_documentation(ctx: click.Context, output_type: str = "json") -> None:
     """Get API documentation for all endpoints.
 
     \b
@@ -380,7 +387,9 @@ def api_documentation(ctx, output_type: str = "json"):
 )
 @click.option("--separator", "-s", default=",", help="CSV column separator.")
 @click.pass_context
-def upload(ctx, filename: str, document_type: int, separator: str = ",") -> None:
+def upload(
+    ctx: click.Context, filename: str, document_type: int, separator: str = ","
+) -> None:
     """Upload spreadsheet file as custom content."""
 
     if separator == "\\t":
@@ -416,7 +425,9 @@ def upload(ctx, filename: str, document_type: int, separator: str = ",") -> None
 @click.argument("monitor_id", type=int)
 @click.option("--separator", "-s", default=",", help="CSV column separator.")
 @click.pass_context
-def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
+def train(
+    ctx: click.Context, filename: str, monitor_id: int, separator: str = ","
+) -> None:
     """Upload spreadsheet file of training examples for monitor."""
 
     if separator == "\\t":
@@ -470,7 +481,7 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
     # Validate all groups of documents
     for _, sub_df in items.groupby("categoryid"):
         try:
-            validated = TrainCollection.from_dataframe(sub_df)
+            validated = TrainCollection.from_dataframe(sub_df)  # noqa: F841
         except ValidationError as e:
             raise click.ClickException(helpful_validation_error(e.errors())) from e
 
@@ -538,7 +549,7 @@ def train(ctx, filename: str, monitor_id: int, separator: str = ",") -> None:
 )
 @click.pass_context
 def export(
-    ctx,
+    ctx: click.Context,
     monitor_id: int,
     limit: bool = True,
     dates: Sequence[str] = None,
@@ -611,12 +622,12 @@ def export(
 )
 @click.pass_context
 def stream_posts(
-    ctx,
+    ctx: click.Context,
     stream_id: int,
     max_docs: int = 100,
     output_type: str = "json",
     separator: str = ",",
-):
+) -> None:
     """Stream posts in real time, stop after a maximum of 10K."""
 
     if separator == "\\t":

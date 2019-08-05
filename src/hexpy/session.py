@@ -118,7 +118,7 @@ class HexpySession:
         password: str = None,
         no_expiration: bool = False,
         force: bool = False,
-    ):
+    ) -> "HexpySession":
         """
         Instantiate class from username and password.
 
@@ -135,7 +135,7 @@ class HexpySession:
         return cls(auth["auth"])
 
     @classmethod
-    def load_auth_from_file(cls, path: str = None):
+    def load_auth_from_file(cls, path: str = None) -> "HexpySession":
         """Instantiate class from previously saved token file.
 
         # Arguments
@@ -155,14 +155,14 @@ class HexpySession:
                 f"Credentials File at '{cred_path}' not found. Please specify token or username and password."
             )
 
-    def close(self):
+    def close(self) -> None:
         """Close persisted connection to API server."""
         self.session.close()
 
-    def __enter__(self):
+    def __enter__(self) -> "HexpySession":
         """Use HexpySession with Context Manager."""
         return self
 
-    def __exit__(self, *args):
+    def __exit__(self) -> None:
         """Exit Context Manager and close session."""
         self.close()

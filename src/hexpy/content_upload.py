@@ -70,7 +70,7 @@ class ContentUploadAPI:
                 )
 
     def upload(
-        self, document_type: int, items: UploadCollection, request_usage=True
+        self, document_type: int, items: UploadCollection, request_usage: bool = True
     ) -> JSONDict:
         """Upload collection of Custom Content to Crimson Hexagon platform.
 
@@ -95,7 +95,7 @@ class ContentUploadAPI:
         )
 
     def batch_upload(
-        self, document_type: int, items: UploadCollection, request_usage=True
+        self, document_type: int, items: UploadCollection, request_usage: bool = True
     ) -> JSONDict:
         """Batch upload collection of Custom Content to Crimson Hexagon platform in groups of 1000.
 

@@ -23,7 +23,7 @@ def rate_limited(
     logger = logging.getLogger(func.__name__)
 
     @functools.wraps(func)
-    def wrapper(*args, **kwargs) -> JSONDict:
+    def wrapper(*args: Any, **kwargs: Any) -> JSONDict:
         """Wrap function."""
         with lock:
             if len(calls) >= max_calls:
