@@ -14,8 +14,8 @@ install:
 # command to run tests
 
 script:
-  - black setup.py src tests --check --verbose
-  - mypy setup.py src tests --ignore-missing-imports
+  - black setup.py src tests --check
+  - mypy src tests setup.py --ignore-missing-imports  --disallow-untyped-defs
   - flake8 setup.py src tests --exit-zero
   - pytest -vv --cov=hexpy
 
