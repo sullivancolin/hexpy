@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Tests for model validation."""
-import inspect
 import logging
 from typing import List
 
@@ -11,10 +10,9 @@ from _pytest.capture import CaptureFixture
 from pandas.io.json import json_normalize
 from pydantic import ValidationError
 
-from hexpy import ContentUploadAPI, HexpySession, MonitorAPI
+from hexpy import ContentUploadAPI, HexpySession, MonitorAPI, Project
 from hexpy.base import JSONDict
 from hexpy.models import TrainCollection, TrainItem, UploadCollection, UploadItem
-from hexpy.project import Project
 
 
 def test_correct_upload_item(upload_items: List[JSONDict]) -> None:
