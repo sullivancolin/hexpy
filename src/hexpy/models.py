@@ -1,6 +1,8 @@
+"""Module for Data Validation Models"""
+
 from collections import Counter
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import ftfy
 import pandas as pd
@@ -147,6 +149,15 @@ class UploadItem(BaseModel):
         return ftfy.fix_text(value)
 
     @validator("custom", whole=True)
+    def validate_len_custom_fields(cls, value_dict: Dict[str, str]) -> Dict[str, str]:
+        """Validate number of Custom Fields"""
+        if len(value_dict) > 10:
+            raise ValueError(
+                f"{len(value_dict)} custom fields found. Must not exceed 10."
+            )
+        return value_dict
+
+    @validator("custom", whole=True)
     def validate_custom_fields(cls, value_dict: Dict[str, str]) -> Dict[str, str]:
         """Validate Custom Field key value pairs"""
         if not all(len(key) < 100 for key in value_dict.keys()) or not all(
@@ -157,17 +168,17 @@ class UploadItem(BaseModel):
             )
         return value_dict
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.guid)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return isinstance(self, type(other)) and self.guid == other.guid
 
-    def dict(self, *args, **kwargs):
+    def dict(self, *args, **kwargs):  # type: ignore
         kwargs["skip_defaults"] = True
         return super().dict(*args, **kwargs)
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self) -> str:  # pragma: no cover
         return f"<UploadItem guid='{self.guid}'>"
 
 
@@ -222,7 +233,8 @@ class UploadCollection(BaseModel):
         allow_mutation = False
 
     @validator("items", whole=True)
-    def unique_item_urls(cls, items: List[UploadItem]):
+    def unique_item_urls(cls, items: List[UploadItem]) -> List[UploadItem]:
+        """Validate items are unique"""
         if len(items) != len(set(items)):
             counts = Counter(items)
             dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
@@ -232,7 +244,7 @@ class UploadCollection(BaseModel):
         return items
 
     @classmethod
-    def from_dataframe(cls, df: pd.DataFrame):
+    def from_dataframe(cls, df: pd.DataFrame) -> "UploadCollection":
         """Create UploadCollection from pandas DataFrame containing necessary fields
 
         ## Arguments:
@@ -274,24 +286,24 @@ class UploadCollection(BaseModel):
         """Convert UploadCollection to pandas Dataframe with one colume for each field"""
         return json_normalize(self.dict())
 
-    def dict(self, *args, **kwargs):
+    def dict(self, *args: Any, **kwargs: Any):  # type: ignore
         return [rec.dict(*args, **kwargs) for rec in self.items]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.items)
 
-    def __iter__(self):
+    def __iter__(self):  # type: ignore
         for item in self.items:
             yield item
 
-    def __getitem__(self, slice):
+    def __getitem__(self, slice: Union[int, slice]):  # type: ignore
         items = self.items[slice]
         if isinstance(items, list):
             return UploadCollection(items=items)
         else:
             return items
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self) -> str:  # pragma: no cover
         return f"<UploadCollection items=['{self.items[0].__repr__()}...]'>"
 
 
@@ -339,7 +351,7 @@ class TrainItem(BaseModel):
         allow_mutation = False
 
     @validator("date")
-    def parse_datetime(cls, value: str):
+    def parse_datetime(cls, value: str) -> str:
         """Validate date string using pendulum parsing followed by ISO formatting."""
         try:
             date = pendulum.parse(value)
@@ -367,14 +379,14 @@ class TrainItem(BaseModel):
         """Fix mojibake in author"""
         return ftfy.fix_text(value)
 
-    def __hash__(self):
+    def __hash__(self):  # type: ignore
         """Identify unique object by url"""
         return hash(self.url)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any) -> bool:
         return isinstance(self, type(other)) and self.url == other.url
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self) -> str:  # pragma: no cover
         return f"<TrainItem url='{self.url}'>"
 
 
@@ -413,7 +425,7 @@ class TrainCollection(BaseModel):
         allow_mutation = False
 
     @validator("items", whole=True)
-    def unique_item_urls(cls, items: List[TrainItem]):
+    def unique_item_urls(cls, items: List[TrainItem]) -> List[TrainItem]:
         """Urls must be unique."""
         if len(items) != len(set(items)):
             counts = Counter(items)
@@ -424,7 +436,7 @@ class TrainCollection(BaseModel):
         return items
 
     @validator("items", whole=True)
-    def categoryid_match(cls, items: List[TrainItem]):
+    def categoryid_match(cls, items: List[TrainItem]) -> List[TrainItem]:
         """Category Id must match"""
 
         category_ids = set(item.categoryid for item in items)
@@ -434,7 +446,7 @@ class TrainCollection(BaseModel):
         return items
 
     @classmethod
-    def from_dataframe(cls, df: pd.DataFrame):
+    def from_dataframe(cls, df: pd.DataFrame) -> "TrainCollection":
         """Create TrainCollection from pandas DataFrame containing necessary fields
 
         ## Arguments:
@@ -447,22 +459,22 @@ class TrainCollection(BaseModel):
         """Convert TrainCollection to pandas Dataframe with one colume for each Field"""
         return pd.DataFrame.from_records(self.dict())
 
-    def dict(self, *args, **kwargs):
+    def dict(self, *args, **kwargs):  # type: ignore
         return [rec.dict(skip_defaults=True) for rec in self.items]
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.items)
 
-    def __iter__(self):
+    def __iter__(self):  # type: ignore
         for item in self.items:
             yield item
 
-    def __getitem__(self, slice):
-        items = self.items[slice]
+    def __getitem__(self, index):  # type:ignore
+        items = self.items[index]
         if isinstance(items, list):
             return TrainCollection(items=items)
         else:
             return items
 
-    def __repr__(self):  # pragma: no cover
+    def __repr__(self) -> str:  # pragma: no cover
         return f"<TrainCollection items=['{self.items[0].__repr__()}...]'>"

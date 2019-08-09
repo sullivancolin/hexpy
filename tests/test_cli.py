@@ -2,11 +2,13 @@
 """Tests for cli `hexpy` module."""
 
 import json
+from pathlib import Path
 from typing import List
 
 import pandas as pd
 import pytest
 import responses
+from _pytest.monkeypatch import MonkeyPatch
 from click.testing import CliRunner
 from pydantic import ValidationError
 
@@ -17,10 +19,12 @@ from hexpy.models import TrainCollection, UploadCollection
 
 
 def fake_login(force: bool = False, expiration: bool = True) -> HexpySession:
+    """Function to replace real login function"""
     return HexpySession(token="test-token-00000")
 
 
-def test_cli_help():
+def test_cli_help() -> None:
+    """Test cli help text"""
 
     runner = CliRunner()
     result = runner.invoke(cli, ["--help"])
@@ -30,20 +34,23 @@ def test_cli_help():
     )
 
 
-def test_posts_json_to_df(posts_json: List[JSONDict], posts_df: pd.DataFrame):
+def test_posts_json_to_df(posts_json: List[JSONDict], posts_df: pd.DataFrame) -> None:
+    """Test covert posts json to dataframe"""
     df = posts_json_to_df(posts_json, images=True)
     assert df.equals(posts_df[df.columns])
 
 
 def test_format_documentation(
     json_documentation: JSONDict, markdown_documentation: str
-):
+) -> None:
+    """Test coverting json api documentation to markdown"""
     docs = docs_to_text(json_documentation, mode="md")
     assert markdown_documentation == docs
 
 
 @responses.activate
-def test_export(posts_json: JSONDict, monkeypatch):
+def test_export(posts_json: JSONDict, monkeypatch: MonkeyPatch) -> None:
+    """Test exporting posts from cli to json"""
 
     monkeypatch.setattr(hexpy, "login", fake_login)
 
@@ -65,7 +72,10 @@ def test_export(posts_json: JSONDict, monkeypatch):
 
 
 @responses.activate
-def test_api_documentation(json_documentation: JSONDict, monkeypatch):
+def test_api_documentation(
+    json_documentation: JSONDict, monkeypatch: MonkeyPatch
+) -> None:
+    """Test cli api-documentation """
 
     monkeypatch.setattr(hexpy, "login", fake_login)
 
@@ -81,7 +91,8 @@ def test_api_documentation(json_documentation: JSONDict, monkeypatch):
 
 
 @responses.activate
-def test_metadata_geography(geography_json: JSONDict, monkeypatch):
+def test_metadata_geography(geography_json: JSONDict, monkeypatch: MonkeyPatch) -> None:
+    """Test cli geography resources."""
     monkeypatch.setattr(hexpy, "login", fake_login)
 
     responses.add(
@@ -97,8 +108,8 @@ def test_metadata_geography(geography_json: JSONDict, monkeypatch):
 
 
 @responses.activate
-def test_stream(posts_json: JSONDict, monkeypatch):
-
+def test_stream(posts_json: JSONDict, monkeypatch: MonkeyPatch) -> None:
+    """Test cli post streaming"""
     monkeypatch.setattr(hexpy, "login", fake_login)
 
     responses.add(
@@ -114,7 +125,10 @@ def test_stream(posts_json: JSONDict, monkeypatch):
 
 
 @responses.activate
-def test_upload(upload_items: JSONDict, monkeypatch, tmp_path):
+def test_upload(
+    upload_items: JSONDict, monkeypatch: MonkeyPatch, tmp_path: Path
+) -> None:
+    """Test cli uploading csv custom content"""
 
     tmp_file = tmp_path / "myfile.csv"
 
@@ -137,8 +151,8 @@ def test_upload(upload_items: JSONDict, monkeypatch, tmp_path):
 
 
 @responses.activate
-def test_train(train_items: JSONDict, monkeypatch, tmp_path):
-
+def test_train(train_items: JSONDict, monkeypatch: MonkeyPatch, tmp_path: Path) -> None:
+    """Test cli cli upload csv training posts"""
     tmp_file = tmp_path / "myfile.csv"
 
     item_df = TrainCollection(items=train_items).to_dataframe()
@@ -172,7 +186,8 @@ def test_train(train_items: JSONDict, monkeypatch, tmp_path):
 
 
 @responses.activate
-def test_results(results_json: JSONDict, monkeypatch):
+def test_results(results_json: JSONDict, monkeypatch: MonkeyPatch) -> None:
+    """Test cli monitor results output"""
     monkeypatch.setattr(hexpy, "login", fake_login)
 
     responses.add(
@@ -204,12 +219,12 @@ def test_results(results_json: JSONDict, monkeypatch):
     assert result.output.strip() == json.dumps(results_json)
 
 
-def test_helpful_error_item(upload_items: List[JSONDict]):
-
+def test_helpful_error_item(upload_items: List[JSONDict]) -> None:
+    """Test invalid custom content item helpful error messages"""
     del upload_items[1]["author"]
 
     with pytest.raises(ValidationError) as e:
-        collection = UploadCollection(items=upload_items)
+        collection = UploadCollection(items=upload_items)  # noqa: F841
 
     result = helpful_validation_error(e.value.errors())
 
@@ -219,13 +234,13 @@ def test_helpful_error_item(upload_items: List[JSONDict]):
     )
 
 
-def test_helpful_error_collection(upload_items: List[JSONDict]):
-
+def test_helpful_error_collection(upload_items: List[JSONDict]) -> None:
+    """Test duplicate item helpful erorror message"""
     upload_items[1]["url"] = upload_items[2]["url"]
     upload_items[1]["guid"] = upload_items[2]["guid"]
 
     with pytest.raises(ValidationError) as e:
-        collection = UploadCollection(items=upload_items)
+        collection = UploadCollection(items=upload_items)  # noqa: F841
 
     result = helpful_validation_error(e.value.errors())
 

@@ -229,7 +229,7 @@ class MonitorAPI:
             )
         )
 
-    def batch_train(self, monitor_id: int, items=TrainCollection):
+    def batch_train(self, monitor_id: int, items: TrainCollection) -> JSONDict:
         batch_responses = {}
         for batch_num, batch in enumerate(
             [items[i : i + 1000] for i in range(0, len(items), 1000)]

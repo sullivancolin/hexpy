@@ -32,10 +32,10 @@ lint: clean
 	pipenv run isort -y
 	pipenv run black .
 	pipenv run flake8 . --exit-zero
-	pipenv run mypy . --ignore-missing-imports
+	pipenv run mypy src tests setup.py
 
 ## run tests with the default Python
-test: clean
+test: lint
 	pipenv run pytest -vv --cov=src
 
 ## run tests on every Python version with tox
@@ -44,7 +44,7 @@ test-all: clean
 
 ## check code coverage quickly with the default Python
 coverage: clean
-	pipenv run pytest --cov=src --cov-report html
+	pipenv run pytest  -vv --cov=src --cov-report html --cov-report term
 	open -a "Firefox" htmlcov/index.html
 
 ## generate Mkdocs HTML documentation

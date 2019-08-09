@@ -2,6 +2,7 @@
 """Tests for hexpy `session.py` module."""
 
 import json
+from pathlib import Path
 
 import pytest
 import responses
@@ -24,13 +25,15 @@ def mocked_responses() -> responses.RequestsMock:
         yield rsps
 
 
-def test_login(mocked_responses):
+def test_login(mocked_responses: responses.RequestsMock) -> None:
+    """Test requesting authentication token"""
     session = HexpySession.login(username="test", password="testpassword")
 
     assert session.auth == {"auth": "test-token-00000"}
 
 
-def test_load_auth(tmp_path):
+def test_load_auth(tmp_path: Path) -> None:
+    """Test loading token from file"""
     HexpySession.TOKEN_FILE = tmp_path / ".hexpy" / "token.json"
 
     directory = tmp_path / ".hexpy"
@@ -39,17 +42,18 @@ def test_load_auth(tmp_path):
 
     token_file = directory / "token.json"
 
-    print(token_file, HexpySession.TOKEN_FILE)
-
     with open(token_file, "w") as outfile:
         json.dump({"auth": "test-token-00000"}, outfile)
 
     session = HexpySession.load_auth_from_file()
+    session2 = HexpySession.load_auth_from_file(str(token_file))
 
     assert session.auth == {"auth": "test-token-00000"}
+    assert session2.auth == session.auth
 
 
-def test_save_token(mocked_responses, tmp_path):
+def test_save_token(mocked_responses: responses.RequestsMock, tmp_path: Path) -> None:
+    """Test saving token to file"""
     HexpySession.TOKEN_FILE = tmp_path / ".hexpy" / "token.json"
     session = HexpySession.login(username="test", password="testpassword")
 

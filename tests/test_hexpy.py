@@ -1,33 +1,45 @@
 # -*- coding: utf-8 -*-
 """Tests for hexpy `base.py` module functions."""
-
-import json
 import logging
 import time
 
 import pytest
-from requests.models import Response
+import requests
+import responses
+from _pytest.capture import CaptureFixture
 
-from hexpy.base import handle_response, rate_limited
+from hexpy.base import JSONDict, handle_response, rate_limited
 
 
-def test_response_error_code():
+@responses.activate
+def test_response_error_code() -> None:
     """Test status code handled."""
-    response = Response()
-    response.status_code = 403
-    response._content = bytes(json.dumps({"key": "value"}), "utf-8")
+
+    responses.add(
+        responses.GET,
+        "https://testsite.com/endpoint",
+        json={"key": "value"},
+        status=403,
+    )
+
+    response = requests.get("https://testsite.com/endpoint")
 
     with pytest.raises(ValueError) as e:
         handle_response(response)
     assert e.value.args[0] == 'Something Went Wrong. {"key": "value"}'
 
 
-def test_response_error_status():
+@responses.activate
+def test_response_error_status() -> None:
     """Test status json value handled."""
-    response = Response()
-    response.status_code = 200
-    response._content = bytes(json.dumps({"status": "error"}), "utf-8")
+    responses.add(
+        responses.GET,
+        "https://testsite.com/endpoint",
+        json={"status": "error"},
+        status=200,
+    )
 
+    response = requests.get("https://testsite.com/endpoint")
     assert response.ok
 
     with pytest.raises(ValueError) as e:
@@ -35,22 +47,27 @@ def test_response_error_status():
     assert e.value.args[0] == 'Something Went Wrong. {"status": "error"}'
 
 
-def test_response_status_ok():
+@responses.activate
+def test_response_status_ok() -> None:
     """Test successful reponse"""
-    response = Response()
-    response.status_code = 200
-    response._content = bytes(json.dumps({"key": "value"}), "utf-8")
+    responses.add(
+        responses.GET,
+        "https://testsite.com/endpoint",
+        json={"key": "value"},
+        status=200,
+    )
 
+    response = requests.get("https://testsite.com/endpoint")
     results = handle_response(response)
 
     assert results == {"key": "value"}
 
 
-def test_rate_limiting(caplog):
+def test_rate_limiting(caplog: CaptureFixture) -> None:
     """Test function rate limiting"""
 
-    def base_func(message: str = "some message"):
-        return message
+    def base_func(message: str = "some message") -> JSONDict:
+        return {"msg": message}
 
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 
@@ -61,11 +78,11 @@ def test_rate_limiting(caplog):
         assert caplog.records[0].msg == "Rate Limit Reached. (Sleeping for 6 seconds)"
 
 
-def test_rate_limiting_window(caplog):
+def test_rate_limiting_window(caplog: CaptureFixture) -> None:
     """Test sliding window when rate limit not exceeded."""
 
-    def base_func(message: str = "some message"):
-        return message
+    def base_func(message: str = "some message") -> JSONDict:
+        return {"msg": message}
 
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 
