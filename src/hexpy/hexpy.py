@@ -560,6 +560,10 @@ def export(
     images: bool = False,
 ) -> None:
     """Export monitor posts as json or to a spreadsheet."""
+    if post_type not in {"post_list", "training_post"}:
+        raise click.ClickException(
+            "Invalid post_type: Must be either 'post_list' or training_post"
+        )
     if separator == "\\t":
         separator = "\t"
     session = ctx.invoke(login, expiration=True, force=False)
@@ -575,7 +579,7 @@ def export(
             start = details["resultsStart"]
             end = details["resultsEnd"]
             docs = client.posts(monitor_id, start, end, extend_limit=not limit)["posts"]
-    elif post_type == "training_posts":
+    else:
         info += "_Training"
         docs = client.training_posts(monitor_id)["trainingPosts"]
 
