@@ -1,6 +1,8 @@
+"""Module for Data Validation Models"""
+
 from collections import Counter
 from enum import Enum
-from typing import Any, Dict, Generator, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 
 import ftfy
 import pandas as pd
@@ -463,7 +465,7 @@ class TrainCollection(BaseModel):
     def __len__(self) -> int:
         return len(self.items)
 
-    def __iter__(self) -> Generator[TrainItem, None, None]:
+    def __iter__(self):  # type: ignore
         for item in self.items:
             yield item
 

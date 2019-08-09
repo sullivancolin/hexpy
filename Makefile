@@ -32,7 +32,7 @@ lint: clean
 	pipenv run isort -y
 	pipenv run black .
 	pipenv run flake8 . --exit-zero
-	pipenv run mypy src tests setup.py --ignore-missing-imports  --disallow-untyped-defs
+	pipenv run mypy src tests setup.py
 
 ## run tests with the default Python
 test: lint
