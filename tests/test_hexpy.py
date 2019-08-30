@@ -2,6 +2,7 @@
 """Tests for hexpy `base.py` module functions."""
 import logging
 import time
+from typing import Callable
 
 import pytest
 import requests
@@ -63,11 +64,18 @@ def test_response_status_ok() -> None:
     assert results == {"key": "value"}
 
 
-def test_rate_limiting(caplog: CaptureFixture) -> None:
-    """Test function rate limiting"""
-
-    def base_func(message: str = "some message") -> JSONDict:
+@pytest.fixture
+def base_func() -> Callable[[str], JSONDict]:
+    def some_function(message: str = "some message") -> JSONDict:
         return {"msg": message}
+
+    return some_function
+
+
+def test_rate_limiting(
+    caplog: CaptureFixture, base_func: Callable[[str], JSONDict]
+) -> None:
+    """Test function rate limiting"""
 
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 
@@ -78,11 +86,10 @@ def test_rate_limiting(caplog: CaptureFixture) -> None:
         assert caplog.records[0].msg == "Rate Limit Reached. (Sleeping for 6 seconds)"
 
 
-def test_rate_limiting_window(caplog: CaptureFixture) -> None:
+def test_rate_limiting_window(
+    caplog: CaptureFixture, base_func: Callable[[str], JSONDict]
+) -> None:
     """Test sliding window when rate limit not exceeded."""
-
-    def base_func(message: str = "some message") -> JSONDict:
-        return {"msg": message}
 
     modified_func = rate_limited(base_func, max_calls=10, period=1)
 

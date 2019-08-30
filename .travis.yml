@@ -11,8 +11,8 @@ python:
 install:
   - pip install .
   - pip install pytest-cov pytest-sugar responses flake8 mypy black
-# command to run tests
 
+# command to run tests
 script:
   - black setup.py src tests --check
   - mypy src tests setup.py --ignore-missing-imports  --disallow-untyped-defs

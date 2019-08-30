@@ -2,7 +2,7 @@
 
 import inspect
 import logging
-from typing import Callable, Dict, Optional, Sequence, Tuple, Union
+from typing import Callable, Dict, List, Optional, Sequence, Tuple, Union
 
 from .base import JSONDict, handle_response, rate_limited
 from .models import TrainCollection
@@ -44,7 +44,7 @@ class MonitorAPI:
                 setattr(
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
-        self.METRICS: Dict[str, Callable] = {
+        self.METRICS: Dict[str, Callable[..., JSONDict]] = {
             "volume": self.volume,
             "word_cloud": self.word_cloud,
             "sentiment_and_categories": self.sentiment_and_categories,
@@ -68,7 +68,7 @@ class MonitorAPI:
 
     def _aggregate_dates(
         self, monitor_id: int, dates: DateOrDates, metrics: MetricOrMetrics
-    ) -> Sequence[JSONDict]:
+    ) -> List[JSONDict]:
         if not (isinstance(dates, list) or isinstance(dates, tuple)):
             raise ValueError(
                 "dates must be a start and end pair, or a list of start and end pairs"
@@ -96,7 +96,7 @@ class MonitorAPI:
         monitor_ids: MonitorOrMonitors,
         dates: DateOrDates,
         metrics: MetricOrMetrics,
-    ) -> Sequence[JSONDict]:
+    ) -> List[JSONDict]:
         """Return aggregated results for one or monitor ids, for one or more date pairs, for one or more metrics.
 
         Valid metrics
@@ -201,9 +201,7 @@ class MonitorAPI:
     def train_monitor(self, monitor_id: int, items: TrainCollection) -> JSONDict:
         """Upload training documents to monitor programmatically.
 
-        Upload list documents of one category per request. Due to the restrictions involved in using this endpoint,
-        unless you have a specific need to train monitors programmatically,
-        training monitors via the user interface in ForSight will normally be the more efficient training option.
+        Upload TrainCollection for a single category. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.
 
         # Arguments
             monitor_id: Integer, id of the monitor or monitor filter being requested
@@ -230,6 +228,16 @@ class MonitorAPI:
         )
 
     def batch_train(self, monitor_id: int, items: TrainCollection) -> JSONDict:
+        """Batch upload training documents to monitor programmatically for collection larger than 1000 posts.
+
+        Batch upload TrainCollection of single category. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.
+
+        # Arguments
+            monitor_id: Integer, id of the monitor or monitor filter being requested
+            category_id: Integer, the category this content should belong to
+            items: validated instance of [TrainCollection](Data_Validation.md#traincollection) model
+        """
+
         batch_responses = {}
         for batch_num, batch in enumerate(
             [items[i : i + 1000] for i in range(0, len(items), 1000)]
