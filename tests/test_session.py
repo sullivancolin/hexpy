@@ -11,7 +11,7 @@ from hexpy import HexpySession
 
 
 @pytest.fixture
-def mocked_responses() -> responses.RequestsMock:
+def mocked_authenticate() -> responses.RequestsMock:
     """return mocked HexpySession"""
     with responses.RequestsMock() as rsps:
 
@@ -25,7 +25,7 @@ def mocked_responses() -> responses.RequestsMock:
         yield rsps
 
 
-def test_login(mocked_responses: responses.RequestsMock) -> None:
+def test_login(mocked_authenticate: responses.RequestsMock) -> None:
     """Test requesting authentication token"""
     session = HexpySession.login(username="test", password="testpassword")
 
@@ -52,7 +52,9 @@ def test_load_auth(tmp_path: Path) -> None:
     assert session2.auth == session.auth
 
 
-def test_save_token(mocked_responses: responses.RequestsMock, tmp_path: Path) -> None:
+def test_save_token(
+    mocked_authenticate: responses.RequestsMock, tmp_path: Path
+) -> None:
     """Test saving token to file"""
     HexpySession.TOKEN_FILE = tmp_path / ".hexpy" / "token.json"
     session = HexpySession.login(username="test", password="testpassword")

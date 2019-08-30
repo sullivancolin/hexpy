@@ -7,7 +7,6 @@ import pandas as pd
 import pytest
 import responses
 from _pytest.capture import CaptureFixture
-from pandas.io.json import json_normalize
 from pydantic import ValidationError
 
 from hexpy import ContentUploadAPI, HexpySession, MonitorAPI, Project
@@ -21,18 +20,19 @@ def test_correct_upload_item(upload_items: List[JSONDict]) -> None:
     assert validated.dict() == upload_items[0]
 
 
-def test_upload_from_df(upload_items: List[JSONDict]) -> None:
+def test_upload_from_df(
+    upload_items: List[JSONDict], upload_dataframe: pd.DataFrame
+) -> None:
     """Test dataframe for upload can be validated"""
-    df = json_normalize(upload_items)
-    validated = UploadCollection.from_dataframe(df)
+
+    validated = UploadCollection.from_dataframe(upload_dataframe)
     assert validated == UploadCollection(items=upload_items)
 
 
-def test_upload_to_df(upload_items: List[JSONDict]) -> None:
+def test_upload_to_df(upload_dataframe: pd.DataFrame) -> None:
     """Test back and forth to dataframe is equal"""
-    df = json_normalize(upload_items)
-    validated = UploadCollection.from_dataframe(df)
-    assert df.equals(validated.to_dataframe()[df.columns])
+    validated = UploadCollection.from_dataframe(upload_dataframe)
+    assert upload_dataframe.equals(validated.to_dataframe()[upload_dataframe.columns])
 
 
 def test_upload_iteration(upload_items: List[JSONDict]) -> None:
@@ -42,21 +42,22 @@ def test_upload_iteration(upload_items: List[JSONDict]) -> None:
         assert validated[i] == item
 
 
-def test_wrong_upload_item(upload_items: List[JSONDict]) -> None:
-    """Test invalid data and error messages"""
+@pytest.fixture
+def invalid_item(upload_items: List[JSONDict]) -> JSONDict:
+    """Upload item with invalid values for language, date, url"""
     altered = upload_items[0]
     altered["language"] = "engl"
     altered["date"] = "02-2031-01"
     altered["url"] = "incorrect.com"
+    return altered
+
+
+def test_wrong_upload_item(invalid_item: JSONDict) -> None:
+    """Test invalid data and error messages"""
 
     with pytest.raises(ValidationError) as e:
-        invalid = UploadItem(**altered)  # noqa: F841
+        invalid = UploadItem(**invalid_item)  # noqa: F841
     assert e.value.errors() == [
-        {
-            "loc": ("url",),
-            "msg": "url string does not match regex",
-            "type": "value_error.url.regex",
-        },
         {
             "loc": ("date",),
             "msg": "Could not validate format '02-2031-01'. Must be YYYY-MM-DD or iso-formatted time stamp",
@@ -68,17 +69,71 @@ def test_wrong_upload_item(upload_items: List[JSONDict]) -> None:
             "type": "value_error.any_str.max_length",
             "ctx": {"limit_value": 2},
         },
+        {
+            "loc": ("url",),
+            "msg": "url string does not match regex",
+            "type": "value_error.url.regex",
+        },
     ]
 
 
-def test_too_many_custom_fields(upload_items: List[JSONDict]) -> None:
-    """Test upload has too many custom fields"""
+@pytest.fixture
+def only_url_item(upload_items: List[JSONDict]) -> JSONDict:
+    altered = upload_items[0]
+    del altered["guid"]
+    return altered
 
+
+def test_only_url(only_url_item: JSONDict) -> None:
+    validated = UploadItem(**only_url_item)
+    assert validated.dict() == only_url_item
+
+
+@pytest.fixture
+def only_guid_item(upload_items: List[JSONDict]) -> JSONDict:
+    altered = upload_items[0]
+    del altered["url"]
+    return altered
+
+
+def test_only_guid(only_guid_item: JSONDict) -> None:
+    validated = UploadItem(**only_guid_item)
+    assert validated.dict() == only_guid_item
+
+
+@pytest.fixture
+def no_url_or_guid_item(upload_items: List[JSONDict]) -> JSONDict:
+    altered = upload_items[0]
+    altered["url"] = None
+    altered["guid"] = None
+    return altered
+
+
+def test_missing_url_and_guid(no_url_or_guid_item: JSONDict) -> None:
+    with pytest.raises(ValidationError) as e:
+        invalid = UploadItem(**no_url_or_guid_item)  # noqa: F841
+    assert e.value.errors() == [
+        {
+            "loc": ("guid",),
+            "msg": "Must specify either valid `guid` or `url`",
+            "type": "value_error",
+        }
+    ]
+
+
+@pytest.fixture
+def too_many_custom_fields(upload_items: List[JSONDict]) -> JSONDict:
+    """Upload item with more than 10 custom fields"""
     altered = upload_items[0]
     altered["custom"] = {str(x): str(x) for x in range(15)}
+    return altered
+
+
+def test_too_many_custom_fields(too_many_custom_fields: JSONDict) -> None:
+    """Test upload has too many custom fields"""
 
     with pytest.raises(ValidationError) as e:
-        invalid = UploadItem(**altered)  # noqa: F841
+        invalid = UploadItem(**too_many_custom_fields)  # noqa: F841
 
     assert e.value.errors() == [
         {
@@ -89,13 +144,19 @@ def test_too_many_custom_fields(upload_items: List[JSONDict]) -> None:
     ]
 
 
-def test_long_custom_fields(upload_items: List[JSONDict]) -> None:
-    """Test custom field values are too long"""
+@pytest.fixture
+def long_custom_fields(upload_items: List[JSONDict]) -> JSONDict:
+    """Upload item with custom field value of length 10002 characters"""
     altered = upload_items[0]
     altered["custom"] = {"1": "a" * 10_002}
+    return altered
+
+
+def test_long_custom_fields(long_custom_fields: JSONDict) -> None:
+    """Test custom field values are too long"""
 
     with pytest.raises(ValidationError) as e:
-        invalid = UploadItem(**altered)  # noqa: F841
+        invalid = UploadItem(**long_custom_fields)  # noqa: F841
     assert e.value.errors() == [
         {
             "loc": ("custom",),
@@ -105,14 +166,11 @@ def test_long_custom_fields(upload_items: List[JSONDict]) -> None:
     ]
 
 
-def test_detect_duplicate_upload_items(upload_items: List[JSONDict]) -> None:
+def test_detect_duplicate_upload_items(duplicate_items: List[JSONDict]) -> None:
     """Test duplicate items detected"""
-    altered = upload_items[1]
-
-    altered["guid"] = "http://www.crimsonhexagon.com/post1"
 
     with pytest.raises(ValidationError) as e:
-        invalid_collection = UploadCollection(items=upload_items)  # noqa: F841
+        invalid_collection = UploadCollection(items=duplicate_items)  # noqa: F841
 
     assert e.value.errors() == [
         {
@@ -135,16 +193,22 @@ def test_correct_train_item(train_items: List[JSONDict]) -> None:
     assert validated.dict() == train_items[0]
 
 
-def test_wrong_train_item(train_items: List[JSONDict]) -> None:
-    """Test invalid train item and messages"""
+@pytest.fixture
+def invalid_train_item(train_items: List[JSONDict]) -> JSONDict:
+    """Training item with invalid values for language, date, url, categoryid fields """
     altered = train_items[0]
     altered["language"] = "engl"
     altered["date"] = "02-2031-01"
     altered["url"] = "incorrect.com"
     altered["categoryid"] = None
+    return altered
+
+
+def test_wrong_train_item(invalid_train_item: JSONDict) -> None:
+    """Test invalid train item and messages"""
 
     with pytest.raises(ValidationError) as e:
-        invalid = TrainItem(**altered)  # noqa: F841
+        invalid = TrainItem(**invalid_train_item)  # noqa: F841
 
     assert e.value.errors() == [
         {
@@ -171,13 +235,18 @@ def test_wrong_train_item(train_items: List[JSONDict]) -> None:
     ]
 
 
-def test_detect_duplicate_train_items(train_items: List[JSONDict]) -> None:
+@pytest.fixture
+def duplicate_train_items(train_items: List[JSONDict]) -> List[JSONDict]:
+    """Training items with duplicates"""
+    train_items[1]["url"] = train_items[0]["url"]
+    return train_items
+
+
+def test_detect_duplicate_train_items(duplicate_train_items: List[JSONDict]) -> None:
     """Test duplicate items detected"""
-    altered = train_items[1]
-    altered["url"] = "http://www.crimsonhexagon.com/post1"
 
     with pytest.raises(ValidationError) as e:
-        invalid_collection = TrainCollection(items=train_items)  # noqa: F841
+        invalid_collection = TrainCollection(items=duplicate_train_items)  # noqa: F841
 
     assert e.value.errors() == [
         {
@@ -188,13 +257,18 @@ def test_detect_duplicate_train_items(train_items: List[JSONDict]) -> None:
     ]
 
 
-def test_mulitple_category_id(train_items: List[JSONDict]) -> None:
+@pytest.fixture
+def mixed_train_items(train_items: List[JSONDict]) -> List[JSONDict]:
+    """Training items with more than one categoryid"""
+    train_items[1]["categoryid"] = 9107252648
+    return train_items
+
+
+def test_mulitple_category_id(mixed_train_items: List[JSONDict]) -> None:
     """Test collection has single category id"""
-    altered = train_items[1]
-    altered["categoryid"] = 9_107_252_648
 
     with pytest.raises(ValidationError) as e:
-        invalid_collection = TrainCollection(items=train_items)  # noqa: F841
+        invalid_collection = TrainCollection(items=mixed_train_items)  # noqa: F841
 
     assert e.value.errors() == [
         {
@@ -205,18 +279,22 @@ def test_mulitple_category_id(train_items: List[JSONDict]) -> None:
     ]
 
 
-def test_train_from_df(train_items: List[JSONDict]) -> None:
+def test_train_from_df(
+    train_dataframe: pd.DataFrame, train_items: List[JSONDict]
+) -> None:
     """Test from dataframe is same as from dictionary"""
-    df = pd.DataFrame.from_records(train_items)
-    validated = TrainCollection.from_dataframe(df)
+
+    validated = TrainCollection.from_dataframe(train_dataframe)
     assert validated == TrainCollection(items=train_items)
 
 
-def test_train_to_df(train_items: List[JSONDict]) -> None:
+def test_train_to_df(
+    train_dataframe: pd.DataFrame, train_items: List[JSONDict]
+) -> None:
     """Test back and forth to dataframe is equal"""
-    df = pd.DataFrame.from_records(train_items)
+
     validated = TrainCollection(items=train_items)
-    assert df.equals(validated.to_dataframe()[df.columns])
+    assert train_dataframe.equals(validated.to_dataframe()[train_dataframe.columns])
 
 
 def test_train_iteration(train_items: List[JSONDict]) -> None:
@@ -239,15 +317,9 @@ def test_unique_train_items(train_items: List[JSONDict]) -> None:
     assert validated.dict() == train_items
 
 
-@responses.activate
-def test_batch_upload(
-    upload_items: List[JSONDict], mocked_session: HexpySession, caplog: CaptureFixture
-) -> None:
-    """Test more than 1000 items are uploaded in batches"""
-    responses.add(
-        responses.POST, HexpySession.ROOT + "content/upload", json={}, status=200
-    )
-
+@pytest.fixture
+def large_upload_collection(upload_items: List[JSONDict]) -> UploadCollection:
+    """Collection of 3050 unique upload items"""
     items = []
 
     item = upload_items[0]
@@ -257,12 +329,25 @@ def test_batch_upload(
         items.append(copy)
 
     collection = UploadCollection(items=items)
+    return collection
 
-    client = ContentUploadAPI(mocked_session)
+
+@responses.activate
+def test_batch_upload(
+    large_upload_collection: UploadCollection,
+    fake_session: HexpySession,
+    caplog: CaptureFixture,
+) -> None:
+    """Test more than 1000 items are uploaded in batches"""
+    responses.add(
+        responses.POST, HexpySession.ROOT + "content/upload", json={}, status=200
+    )
+
+    client = ContentUploadAPI(fake_session)
 
     with caplog.at_level(logging.INFO):
         response = client.upload(
-            document_type=123456789, items=collection, request_usage=True
+            document_type=123456789, items=large_upload_collection, request_usage=True
         )
 
         assert (
@@ -273,15 +358,9 @@ def test_batch_upload(
     assert response == {"Batch 0": {}, "Batch 1": {}, "Batch 2": {}, "Batch 3": {}}
 
 
-@responses.activate
-def test_batch_train(
-    train_items: List[JSONDict], mocked_session: HexpySession, caplog: CaptureFixture
-) -> None:
-    """Test more than 1000 items are trained in batches"""
-    responses.add(
-        responses.POST, HexpySession.ROOT + "monitor/train", json={}, status=200
-    )
-
+@pytest.fixture
+def large_train_collection(train_items: List[JSONDict]) -> TrainCollection:
+    """Collection of 3000 unique training items"""
     items = []
 
     item = train_items[0]
@@ -291,11 +370,26 @@ def test_batch_train(
         items.append(copy)
 
     collection = TrainCollection(items=items)
+    return collection
 
-    client = MonitorAPI(mocked_session)
+
+@responses.activate
+def test_batch_train(
+    large_train_collection: TrainCollection,
+    fake_session: HexpySession,
+    caplog: CaptureFixture,
+) -> None:
+    """Test more than 1000 items are trained in batches"""
+    responses.add(
+        responses.POST, HexpySession.ROOT + "monitor/train", json={}, status=200
+    )
+
+    client = MonitorAPI(fake_session)
 
     with caplog.at_level(logging.INFO):
-        response = client.train_monitor(monitor_id=123456789, items=collection)
+        response = client.train_monitor(
+            monitor_id=123456789, items=large_train_collection
+        )
 
         assert (
             caplog.records[0].msg

@@ -1,11 +1,10 @@
 """CLI interface for hexpy."""
 import json
-import os
-import pathlib
 import time
 from collections import Counter
 from getpass import getpass
-from typing import Callable, Dict, List, Sequence
+from pathlib import Path
+from typing import Callable, Dict, List, Tuple
 
 import click
 import numpy as np
@@ -42,7 +41,7 @@ def helpful_validation_error(errors: List[JSONDict]) -> str:
     return error_message
 
 
-def posts_json_to_df(docs: Sequence[JSONDict], images: bool = False) -> pd.DataFrame:
+def posts_json_to_df(docs: List[JSONDict], images: bool = False) -> pd.DataFrame:
     """Convert post json to flattened pandas dataframe."""
 
     items = []
@@ -115,7 +114,7 @@ ENDPOINT_TEMPLATE = """
 -------------------------"""
 
 
-def format_parameter(param: dict) -> str:
+def format_parameter(param: JSONDict) -> str:
     """Format API request parameter to Markdown list entry."""
     if "name" in param:
         name = param["name"]
@@ -128,7 +127,7 @@ def format_parameter(param: dict) -> str:
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Required = {required}\n"
 
 
-def format_response(response: dict) -> str:
+def format_response(response: JSONDict) -> str:
     """Format API response field to Markdown list entry."""
     if "name" in response:
         name = response["name"]
@@ -143,7 +142,7 @@ def format_response(response: dict) -> str:
     return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
 
 
-def format_endpoint(endpoint: dict) -> str:
+def format_endpoint(endpoint: JSONDict) -> str:
     """format API endpoint to Markdown entry."""
     title = endpoint["endpoint"]
     url = endpoint["url"]
@@ -164,7 +163,7 @@ def format_endpoint(endpoint: dict) -> str:
     )
 
 
-def docs_to_text(json_docs: dict, mode: str = "md") -> str:
+def docs_to_text(json_docs: JSONDict, mode: str = "md") -> str:
     """Convert API documentation JSON to markdown or github flavored markdown."""
     endpoints = json_docs["endpoints"]
     doc = f"# Crimson Hexagon API Documentation\n\n**API URL: `{HexpySession.ROOT[:-1]}`**\n\n## Endpoints\n"
@@ -239,8 +238,8 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
 def results(
     ctx: click.Context,
     monitor_id: int,
-    metrics: Sequence[str],
-    date_range: Sequence[str] = None,
+    metrics: Tuple[str, str],
+    date_range: Tuple[str, str] = None,
 ) -> None:
     """Get Monitor results for 1 or more metrics.
 
@@ -369,7 +368,7 @@ def api_documentation(ctx: click.Context, output_type: str = "json") -> None:
             "https://api.github.com/markdown",
             data=json.dumps({"text": md, "mode": "markdown"}),
         ).text
-        path = pathlib.Path(os.path.dirname(os.path.realpath(__file__)))
+        path = Path(__file__).resolve().parent
         with open(path / "head.html") as infile:
             html = infile.read() + html + "</article></body></html>"
         with open("crimson_api_docs.html", "w") as outfile:
@@ -552,7 +551,7 @@ def export(
     ctx: click.Context,
     monitor_id: int,
     limit: bool = True,
-    dates: Sequence[str] = None,
+    dates: Tuple[str, str] = None,
     output_type: str = "csv",
     post_type: str = "post_list",
     filename: str = None,

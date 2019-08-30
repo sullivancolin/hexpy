@@ -15,7 +15,7 @@ from pydantic import ValidationError
 from hexpy import HexpySession, hexpy
 from hexpy.base import JSONDict
 from hexpy.hexpy import cli, docs_to_text, helpful_validation_error, posts_json_to_df
-from hexpy.models import TrainCollection, UploadCollection
+from hexpy.models import UploadCollection
 
 
 def fake_login(force: bool = False, expiration: bool = True) -> HexpySession:
@@ -126,15 +126,13 @@ def test_stream(posts_json: JSONDict, monkeypatch: MonkeyPatch) -> None:
 
 @responses.activate
 def test_upload(
-    upload_items: JSONDict, monkeypatch: MonkeyPatch, tmp_path: Path
+    upload_dataframe: pd.DataFrame, monkeypatch: MonkeyPatch, tmp_path: Path
 ) -> None:
     """Test cli uploading csv custom content"""
 
     tmp_file = tmp_path / "myfile.csv"
 
-    item_df = UploadCollection(items=upload_items).to_dataframe()
-
-    item_df.to_csv(tmp_file, index=False)
+    upload_dataframe.to_csv(tmp_file, index=False)
 
     monkeypatch.setattr(hexpy, "login", fake_login)
 
@@ -151,13 +149,13 @@ def test_upload(
 
 
 @responses.activate
-def test_train(train_items: JSONDict, monkeypatch: MonkeyPatch, tmp_path: Path) -> None:
+def test_train(
+    train_dataframe: pd.DataFrame, monkeypatch: MonkeyPatch, tmp_path: Path
+) -> None:
     """Test cli cli upload csv training posts"""
     tmp_file = tmp_path / "myfile.csv"
 
-    item_df = TrainCollection(items=train_items).to_dataframe()
-
-    item_df.to_csv(tmp_file, index=False)
+    train_dataframe.to_csv(tmp_file, index=False)
 
     monkeypatch.setattr(hexpy, "login", fake_login)
 
@@ -234,17 +232,14 @@ def test_helpful_error_item(upload_items: List[JSONDict]) -> None:
     )
 
 
-def test_helpful_error_collection(upload_items: List[JSONDict]) -> None:
+def test_helpful_error_collection(duplicate_items: List[JSONDict]) -> None:
     """Test duplicate item helpful erorror message"""
-    upload_items[1]["url"] = upload_items[2]["url"]
-    upload_items[1]["guid"] = upload_items[2]["guid"]
-
     with pytest.raises(ValidationError) as e:
-        collection = UploadCollection(items=upload_items)  # noqa: F841
+        collection = UploadCollection(items=duplicate_items)  # noqa: F841
 
     result = helpful_validation_error(e.value.errors())
 
     assert (
         result
-        == """The file contained the following problems:\n\t* items - Duplicate item guids detected: ['http://www.crimsonhexagon.com/post3']\n"""
+        == """The file contained the following problems:\n\t* items - Duplicate item guids detected: ['http://www.crimsonhexagon.com/post1']\n"""
     )

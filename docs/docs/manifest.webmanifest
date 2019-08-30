@@ -1,21 +1,21 @@
 {
-  "short_name": "hexpy",
-  "name": "hexpy: Crimson Hexagon Python Client",
-  "icons": [
-    {
-      "src": "/images/logo_192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/images/logo_512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": "/hexpy/",
-  "background_color": "#009688",
-  "display": "standalone",
-  "scope": "/hexpy/",
-  "theme_color": "#009688"
+    "short_name": "hexpy",
+    "name": "hexpy: Crimson Hexagon Python Client",
+    "icons": [
+        {
+            "src": "/images/logo_192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/images/logo_512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/hexpy/",
+    "background_color": "#009688",
+    "display": "fullscreen",
+    "scope": "/hexpy/",
+    "theme_color": "#009688"
 }

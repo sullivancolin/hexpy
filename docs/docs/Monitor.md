@@ -70,6 +70,15 @@ Upload training documents to monitor programmatically.
 
 Upload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.
 
+### batch_train
+```python
+batch_train(monitor_id: int, category_id: int, items: TrainCollection) -> JSONDict
+```
+Batch upload training documents to monitor programmatically for collection larger than 1000 posts.
+
+Batch upload TrainCollection of single category. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically,
+training monitors via the user interface in ForSight will normally be the more efficient training option.
+
 #### Arguments
 * monitor_id: Integer, id of the monitor or monitor filter being requested
 * category_id: Integer, the category this content should belong to
