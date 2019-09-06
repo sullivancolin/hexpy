@@ -38,7 +38,7 @@
     
     
       
-        <title>Activty Reports - hexpy</title>
+        <title>Project - hexpy</title>
       
     
     
@@ -91,7 +91,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#activity-api" tabindex="1" class="md-skip">
+      <a href="#project" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -117,7 +117,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Activty Reports
+                Project
               
             </span>
           
@@ -355,6 +355,30 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../Activity/" title="Activty Reports" class="md-nav__link">
+      Activty Reports
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../Data_Validation/" title="Data Validation" class="md-nav__link">
+      Data Validation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -366,11 +390,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Activty Reports
+        Project
       </label>
     
-    <a href="./" title="Activty Reports" class="md-nav__link md-nav__link--active">
-      Activty Reports
+    <a href="./" title="Project" class="md-nav__link md-nav__link--active">
+      Project
     </a>
     
       
@@ -384,44 +408,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#example-usage" class="md-nav__link">
-    Example Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
+  <a href="#project_1" class="md-nav__link">
+    Project
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#monitor_creation" class="md-nav__link">
-    monitor_creation
+  <a href="#attributes" class="md-nav__link">
+    Attributes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#social_sites" class="md-nav__link">
-    social_sites
+  <a href="#example-usage" class="md-nav__link">
+    Example usage.
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user_activity" class="md-nav__link">
-    user_activity
+  <a href="#methods" class="md-nav__link">
+    Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user_invitations" class="md-nav__link">
-    user_invitations
+  <a href="#get_from_monitor_id" class="md-nav__link">
+    get_from_monitor_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-methods-of-monitorapi-are-available-using-default-monitor_id-start-and-end" class="md-nav__link">
+    All other methods of MonitorAPI are available using default monitor_id, start, and end
   </a>
   
 </li>
@@ -445,30 +469,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Data_Validation/" title="Data Validation" class="md-nav__link">
-      Data Validation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../Project/" title="Project" class="md-nav__link">
-      Project
-    </a>
   </li>
 
         
@@ -522,44 +522,44 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#example-usage" class="md-nav__link">
-    Example Usage
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    Methods
+  <a href="#project_1" class="md-nav__link">
+    Project
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#monitor_creation" class="md-nav__link">
-    monitor_creation
+  <a href="#attributes" class="md-nav__link">
+    Attributes
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#social_sites" class="md-nav__link">
-    social_sites
+  <a href="#example-usage" class="md-nav__link">
+    Example usage.
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user_activity" class="md-nav__link">
-    user_activity
+  <a href="#methods" class="md-nav__link">
+    Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user_invitations" class="md-nav__link">
-    user_invitations
+  <a href="#get_from_monitor_id" class="md-nav__link">
+    get_from_monitor_id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all-other-methods-of-monitorapi-are-available-using-default-monitor_id-start-and-end" class="md-nav__link">
+    All other methods of MonitorAPI are available using default monitor_id, start, and end
   </a>
   
 </li>
@@ -592,57 +592,62 @@
               
                 
                 
-                <h1 id="activity-api">Activity API<a class="headerlink" href="#activity-api" title="Permanent link">&para;</a></h1>
-<p>Class for working with Crimson Hexagon Activity Report API.</p>
-<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">ActivityAPI</span>
+                <h1 id="project">Project<a class="headerlink" href="#project" title="Permanent link">&para;</a></h1>
+<p>Hybrid <a href="https://pydantic-docs.helpmanual.io/">Pydantic Style Class</a> and <a href="../Monitor/">MonitorAPI</a> to make working with a monitor results more convenient.</p>
+<h2 id="project_1"><code>Project</code><a class="headerlink" href="#project_1" title="Permanent link">&para;</a></h2>
+<p>Class for working with a Crimson Hexagon Monitor Project.</p>
+<p>Possesses all the same methods as <a href="../Monitor/">MonitorAPI</a> with default arguments of the project <code>monitor_id</code>, <code>start</code>, and <code>end</code>.</p>
+<h3 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h3>
+<ul>
+<li>id: Integer</li>
+<li>name: String</li>
+<li>description: String</li>
+<li>type: Choice of BUZZ/OPINION/SOCIAL</li>
+<li>enabled: Boolean</li>
+<li>resultsStart: DateTime</li>
+<li>resultsEnd: DateTime</li>
+<li>keywords: String</li>
+<li>languages: JSONDict</li>
+<li>geolocations: JSONDict</li>
+<li>gender: Optional M/F/None</li>
+<li>sources: List of Strings</li>
+<li>timezone: String</li>
+<li>teamName: String</li>
+<li>tags: List of Strings</li>
+<li>subfilters: List of dictionaries</li>
+<li>categories: List of dictionaries</li>
+<li>emotions: List of dictionaries</li>
+<li>session: HexpySession</li>
+<li>days: List of Date Strings in the monitor</li>
+</ul>
+<h3 id="example-usage">Example usage.<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">Project</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">activity_client</span> <span class="o">=</span> <span class="n">ActivityAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">activity_client</span><span class="o">.</span><span class="n">monitor_creation</span><span class="p">(</span><span class="n">organization_id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">project</span> <span class="o">=</span> <span class="n">Project</span><span class="o">.</span><span class="n">get_from_monitor_id</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">monitor_id</span><span class="o">=</span><span class="mi">123456789</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">description</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">description</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">start</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">resultsStart</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">end</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">resultsEnd</span>
+<span class="c1">### get sample of posts over default date range in the project</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">sample_posts</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">posts</span><span class="p">()</span>
+<span class="c1">### get monitor results for each day in the project overriding default date range</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">day1</span><span class="p">,</span> <span class="n">day2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">project</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+        <span class="n">word_cloud_results</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">word_cloud</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">day1</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">day2</span><span class="p">)</span>
 </pre></div>
 
 
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
-<h3 id="monitor_creation">monitor_creation<a class="headerlink" href="#monitor_creation" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">monitor_creation</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
+<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
+<h3 id="get_from_monitor_id">get_from_monitor_id<a class="headerlink" href="#get_from_monitor_id" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="n">get_from_monitor_id</span><span class="p">(</span><span class="n">session</span><span class="p">:</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">monitor_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Project</span>
 </pre></div>
 
 
-<p>Get Monitor Creation Report for all teams within an organization and how many monitors were created during a given time period.</p>
+<p>Instantiate from session and Monitor ID</p>
 <h4>Arguments</h4>
 <ul>
-<li>organiztion_id: Integer, the id of the organization being requested.</li>
+<li>session: HexpySession object</li>
+<li>monitor_id: Integer for Monitor to work with</li>
 </ul>
-<h3 id="social_sites">social_sites<a class="headerlink" href="#social_sites" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">social_sites</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
-</pre></div>
-
-
-<p>Get Social Site Report and associated usernames for Teams within an Organization.</p>
-<h4>Arguments</h4>
-<ul>
-<li>organiztion_id: Integer, the id of the organization being requested.</li>
-</ul>
-<h3 id="user_activity">user_activity<a class="headerlink" href="#user_activity" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">user_activity</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
-</pre></div>
-
-
-<p>Get a list of users indicating when they last logged into the platform, the last monitor they created, and the last monitor they viewed.</p>
-<h4>Arguments</h4>
-<ul>
-<li>organiztion_id: Integer, the id of the organization being requested.</li>
-</ul>
-<h3 id="user_invitations">user_invitations<a class="headerlink" href="#user_invitations" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="n">user_invitations</span><span class="p">(</span><span class="n">organization_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
-</pre></div>
-
-
-<p>Get a list of users within an Organization and which Team(s) they were invited to.</p>
-<h4>Arguments</h4>
-<ul>
-<li>organiztion_id: Integer, the id of the organization being requested.</li>
-</ul>
+<h3 id="all-other-methods-of-monitorapi-are-available-using-default-monitor_id-start-and-end"><strong>All other methods of <a href="../Monitor/#methods">MonitorAPI</a> are available using default <code>monitor_id</code>, <code>start</code>, and <code>end</code></strong><a class="headerlink" href="#all-other-methods-of-monitorapi-are-available-using-default-monitor_id-start-and-end" title="Permanent link">&para;</a></h3>
                 
                   
                     <h2 id="__source">Source</h2>
@@ -650,8 +655,8 @@
                     
                     
                     
-                    <a href="https://github.com/sullivancolin/hexpy/blob/master/src/hexpy/activity.py" title="activity.py" class="md-source-file">
-                      activity.py
+                    <a href="https://github.com/sullivancolin/hexpy/blob/master/src/hexpy/project.py" title="project.py" class="md-source-file">
+                      project.py
                     </a>
                   
                 
@@ -672,7 +677,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../Custom/" title="Custom" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Data_Validation/" title="Data Validation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -681,19 +686,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Custom
+                Data Validation
               </span>
             </div>
           </a>
         
         
-          <a href="../Data_Validation/" title="Data Validation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../CLI/" title="Command Line Interface" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Data Validation
+                Command Line Interface
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
