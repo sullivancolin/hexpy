@@ -9,7 +9,7 @@ import pandas as pd
 import pendulum
 from pandas.io.json import json_normalize
 from pendulum.exceptions import ParserError
-from pydantic import BaseModel, Schema, UrlStr, validator
+from pydantic import BaseModel, NoneStr, Schema, UrlStr, validator
 
 
 class GenderEnum(str, Enum):
@@ -101,12 +101,12 @@ class UploadItem(BaseModel):
     """
 
     title: str
-    url: UrlStr
-    guid: str
     author: str
     language: str = Schema(..., max_length=2, min_length=2)  # type: ignore
     date: str
     contents: str
+    url: UrlStr = None  # type: ignore
+    guid: NoneStr = None
     geolocation: Optional[Geolocation] = None
     custom: Optional[Dict[str, str]] = None
     age: Optional[int] = None
@@ -119,8 +119,17 @@ class UploadItem(BaseModel):
     class Config:
         allow_mutation = False
 
+    @validator("guid", pre=True, always=True, whole=True)
+    def validate_guid_url(cls, value: str, values: Dict[str, Any]) -> str:
+        if value is not None:
+            return value
+        elif "url" in values and values["url"]:
+            return values["url"]
+        else:
+            raise ValueError("Must specify either valid `guid` or `url`")
+
     @validator("date")
-    def parse_datetime(cls, value: str) -> str:
+    def parse_datetime(cls, value: str, values: Dict[str, Any]) -> str:
         """Validate date string using pendulum parsing followed by ISO formatting."""
         try:
             date = pendulum.parse(value)

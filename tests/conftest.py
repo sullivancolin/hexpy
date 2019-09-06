@@ -6,6 +6,7 @@ from typing import List
 
 import pandas as pd
 import pytest
+from pandas.io.json import json_normalize
 
 from hexpy import HexpySession
 from hexpy.base import JSONDict
@@ -54,6 +55,20 @@ def upload_items() -> List[JSONDict]:
 
 
 @pytest.fixture
+def upload_dataframe(upload_items: List[JSONDict]) -> pd.DataFrame:
+    """Pandas dataframe of upload content"""
+    return json_normalize(upload_items)
+
+
+@pytest.fixture
+def duplicate_items(upload_items: List[JSONDict]) -> List[JSONDict]:
+    """Upload items with duplicates"""
+    upload_items[1]["guid"] = upload_items[0]["guid"]
+
+    return upload_items
+
+
+@pytest.fixture
 def train_items() -> List[JSONDict]:
     """Raw list of training dictionaries"""
     return [
@@ -79,8 +94,14 @@ def train_items() -> List[JSONDict]:
 
 
 @pytest.fixture
-def mocked_session() -> HexpySession:
-    """return mocked HexpySession"""
+def train_dataframe(train_items: List[JSONDict]) -> pd.DataFrame:
+    """Pandas dataframe of train items"""
+    return pd.DataFrame.from_records(train_items)
+
+
+@pytest.fixture
+def fake_session() -> HexpySession:
+    """Return fake HexpySession"""
     return HexpySession(token="test-token-00000")
 
 
@@ -125,4 +146,11 @@ def geography_json() -> JSONDict:
 def results_json() -> JSONDict:
     """Expected monitor results json"""
     with open("tests/test_data/results.json") as infile:
+        return json.load(infile)
+
+
+@pytest.fixture
+def monitor_details_json() -> JSONDict:
+    """Expected monitor details json"""
+    with open("tests/test_data/monitor_details.json") as infile:
         return json.load(infile)

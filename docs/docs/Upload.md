@@ -76,20 +76,18 @@ Batch upload collection of Custom Content to Crimson Hexagon platform in groups 
 
 ### delete_content_items
 ```python
-delete_content_items(document_type: int, items: JSONDict, batch: str = None) -> JSONDict:
+delete_content_items(document_type: int, items: List[JSONDict], batch: str = None) -> JSONDict:
 ```
 Delete individual custom content documents via guid or url.
 
 Example content_type:
 ```python
-{
-    "items": [
-        {
-            "guid": "This is my guid",
-            "url": "http://www.crimsonhexagon.com/post1"
-        }
-    ]
-}
+[
+    {
+        "guid": "This is my guid",
+        "url": "http://www.crimsonhexagon.com/post1"
+    }
+]
 ```
 
 #### Arguments
