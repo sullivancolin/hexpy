@@ -2,6 +2,7 @@
 
 import inspect
 import logging
+from typing import List
 
 from .base import JSONDict, handle_response, rate_limited
 from .models import UploadCollection
@@ -128,7 +129,9 @@ class ContentUploadAPI:
             )
         )
 
-    def delete_content_items(self, document_type: int, items: JSONDict) -> JSONDict:
+    def delete_content_items(
+        self, document_type: int, items: List[JSONDict]
+    ) -> JSONDict:
         """Delete individual custom content documents via guid or url.
 
         # Arguments
@@ -138,14 +141,12 @@ class ContentUploadAPI:
 
         Example Items:
         ```python
-        {
-            "items": [
-                {
-                    "guid": "This is my guid",
-                    "url": "http://www.crimsonhexagon.com/post1"
-                }
-            ]
-        }
+        [
+            {
+                "guid": "This is my guid",
+                "url": "http://www.crimsonhexagon.com/post1"
+            }
+        ]
         ```
         """
         return handle_response(

@@ -5,7 +5,7 @@ from setuptools import find_packages, setup
 
 requirements = [
     "xlrd>=1.1.0",
-    "requests>=2.18.4",
+    "requests>=2.22.0",
     "click>=7.0",
     "click-help-colors>=0.5",
     "pandas>=0.20.3",

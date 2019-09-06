@@ -1,7 +1,7 @@
 import inspect
 from enum import Enum
-from functools import partial
-from typing import Any, List, Optional, Union
+from functools import partial, wraps
+from typing import Any, Callable, List, Optional, Union
 
 import pendulum
 from pydantic import BaseModel, Extra, validator
@@ -10,6 +10,19 @@ from .base import JSONDict
 from .models import GenderEnum
 from .monitor import MonitorAPI
 from .session import HexpySession
+
+
+def substitute_default(
+    func: Callable[..., JSONDict], monitor_id: int, start: str, end: str
+) -> Callable[..., JSONDict]:
+    """Substitute function with default arguments"""
+
+    @wraps(func)
+    def wrapper(*args: Any, **kwargs: Any) -> JSONDict:
+        """Wrap function."""
+        return func(monitor_id=monitor_id, start=start, end=end, *args, **kwargs)
+
+    return wrapper
 
 
 class MonitorTypeEnum(str, Enum):
@@ -90,13 +103,28 @@ class Project(BaseModel):
             args_spec = inspect.signature(fn)
             args = args_spec.parameters.keys()
             if "monitor_id" in args and "start" in args and "end" in args:
-                setattr(
-                    self,
-                    name,
-                    partial(
-                        fn, monitor_id=self.id, start=self.days[0], end=self.days[-1]
-                    ),
-                )
+                if name != "gender":
+                    setattr(
+                        self,
+                        name,
+                        substitute_default(
+                            fn,
+                            monitor_id=self.id,
+                            start=self.days[0],
+                            end=self.days[-1],
+                        ),
+                    )
+                else:
+                    setattr(
+                        self,
+                        "monitor_" + name,
+                        substitute_default(
+                            fn,
+                            monitor_id=self.id,
+                            start=self.days[0],
+                            end=self.days[-1],
+                        ),
+                    )
             elif "monitor_id" in args:
                 setattr(self, name, partial(fn, monitor_id=self.id))
 
