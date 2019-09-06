@@ -66,7 +66,10 @@ def test_response_status_ok() -> None:
 
 @pytest.fixture
 def base_func() -> Callable[[str], JSONDict]:
+    """Fixture for testing function to be decorated with rate limiting"""
+
     def some_function(message: str = "some message") -> JSONDict:
+        """Simple function to be ratelimited"""
         return {"msg": message}
 
     return some_function

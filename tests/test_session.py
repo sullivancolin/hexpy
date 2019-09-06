@@ -12,7 +12,7 @@ from hexpy import HexpySession
 
 @pytest.fixture
 def mocked_authenticate() -> responses.RequestsMock:
-    """return mocked HexpySession"""
+    """Return mocked HexpySession"""
     with responses.RequestsMock() as rsps:
 
         rsps.add(

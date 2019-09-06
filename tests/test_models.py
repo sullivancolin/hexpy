@@ -79,30 +79,35 @@ def test_wrong_upload_item(invalid_item: JSONDict) -> None:
 
 @pytest.fixture
 def only_url_item(upload_items: List[JSONDict]) -> JSONDict:
+    """Fixture for upload item with only url field"""
     altered = upload_items[0]
     del altered["guid"]
     return altered
 
 
 def test_only_url(only_url_item: JSONDict) -> None:
+    """Test validation of upload items without guid"""
     validated = UploadItem(**only_url_item)
     assert validated.dict() == only_url_item
 
 
 @pytest.fixture
 def only_guid_item(upload_items: List[JSONDict]) -> JSONDict:
+    """Fixture for upload item with only guid field"""
     altered = upload_items[0]
     del altered["url"]
     return altered
 
 
 def test_only_guid(only_guid_item: JSONDict) -> None:
+    """Test validation of upload item without url"""
     validated = UploadItem(**only_guid_item)
     assert validated.dict() == only_guid_item
 
 
 @pytest.fixture
 def no_url_or_guid_item(upload_items: List[JSONDict]) -> JSONDict:
+    """Fixture for upload item with neither url or guid field"""
     altered = upload_items[0]
     altered["url"] = None
     altered["guid"] = None
@@ -110,6 +115,7 @@ def no_url_or_guid_item(upload_items: List[JSONDict]) -> JSONDict:
 
 
 def test_missing_url_and_guid(no_url_or_guid_item: JSONDict) -> None:
+    """Test validation fails for upload item without url or guid"""
     with pytest.raises(ValidationError) as e:
         invalid = UploadItem(**no_url_or_guid_item)  # noqa: F841
     assert e.value.errors() == [
@@ -400,15 +406,15 @@ def test_batch_train(
 
 
 @responses.activate
-def test_project(mocked_session: HexpySession, monitor_details_json: JSONDict) -> None:
-    """Test monitor """
+def test_project(fake_session: HexpySession, monitor_details_json: JSONDict) -> None:
+    """Test monitor project validation, instantiation, iteration."""
     responses.add(
         responses.GET,
         HexpySession.ROOT + "monitor/detail",
         json=monitor_details_json,
         status=200,
     )
-    project = Project.get_from_monitor_id(mocked_session, 123456789)
+    project = Project.get_from_monitor_id(fake_session, 123456789)
 
     assert len(project) == 379
     assert len([day for day in project]) == 379

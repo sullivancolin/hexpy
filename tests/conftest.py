@@ -101,7 +101,7 @@ def train_dataframe(train_items: List[JSONDict]) -> pd.DataFrame:
 
 @pytest.fixture
 def fake_session() -> HexpySession:
-    """return mocked HexpySession"""
+    """Return fake HexpySession"""
     return HexpySession(token="test-token-00000")
 
 
