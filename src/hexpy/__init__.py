@@ -1,6 +1,6 @@
 """Top-level package for hexpy."""
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
 
 from .activity import ActivityAPI
 from .analysis import AnalysisAPI

@@ -42,5 +42,5 @@ extra_css:
   - 'stylesheets/extra.css'
 
 extra:
-    version: 0.7.0
+    version: 0.7.1
     manifest: 'manifest.webmanifest'
