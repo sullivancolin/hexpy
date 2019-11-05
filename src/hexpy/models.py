@@ -9,7 +9,7 @@ import pandas as pd
 import pendulum
 from pandas.io.json import json_normalize
 from pendulum.exceptions import ParserError
-from pydantic import BaseModel, NoneStr, Schema, UrlStr, validator
+from pydantic import BaseModel, Field, HttpUrl, NoneStr, validator
 
 
 class GenderEnum(str, Enum):
@@ -50,12 +50,12 @@ class UploadItem(BaseModel):
 
     ## Fields
         * title: str
-        * url: UrlStr
+        * url: HttpUrl
         * guid: str
         * author: str
         * language: str(max_length=2, min_length=2)
         * date: str
-        * contents: str
+        * contents: str(max_length=16384)
         * geolocation: Optional[Geolocation] = None
         * custom: Optional[Dict[str, str]] = None
         * age: Optional[int] = None
@@ -102,10 +102,10 @@ class UploadItem(BaseModel):
 
     title: str
     author: str
-    language: str = Schema(..., max_length=2, min_length=2)  # type: ignore
+    language: str = Field(..., max_length=2, min_length=2)
     date: str
-    contents: str
-    url: UrlStr = None  # type: ignore
+    contents: str = Field(..., max_length=16384)
+    url: HttpUrl = None  # type: ignore
     guid: NoneStr = None
     geolocation: Optional[Geolocation] = None
     custom: Optional[Dict[str, str]] = None
@@ -184,7 +184,7 @@ class UploadItem(BaseModel):
         return isinstance(self, type(other)) and self.guid == other.guid
 
     def dict(self, *args, **kwargs):  # type: ignore
-        kwargs["skip_defaults"] = True
+        kwargs["exclude_unset"] = True
         return super().dict(*args, **kwargs)
 
     def __repr__(self) -> str:  # pragma: no cover
@@ -247,7 +247,7 @@ class UploadCollection(BaseModel):
         if len(items) != len(set(items)):
             counts = Counter(items)
             dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].guid for tup in dup_items]
+            dups = [str(tup[0].guid) for tup in dup_items]
             raise ValueError(f"Duplicate item guids detected: {dups}")
 
         return items
@@ -296,7 +296,7 @@ class UploadCollection(BaseModel):
         return json_normalize(self.dict())
 
     def dict(self, *args: Any, **kwargs: Any):  # type: ignore
-        return [rec.dict(*args, **kwargs) for rec in self.items]
+        return [rec.dict(exclude_unset=True) for rec in self.items]
 
     def __len__(self) -> int:
         return len(self.items)
@@ -324,7 +324,7 @@ class TrainItem(BaseModel):
     ## Fields
         * categoryid: int
         * title: str
-        * url: UrlStr
+        * url: HttpUrl
         * author: str
         * language: str(max_length=2, min_length=2)
         * date: str
@@ -348,9 +348,9 @@ class TrainItem(BaseModel):
 
     categoryid: int
     title: str
-    url: UrlStr
+    url: HttpUrl
     author: str
-    language: str = Schema(..., max_length=2, min_length=2)  # type: ignore
+    language: str = Field(..., max_length=2, min_length=2)
     date: str
     contents: str
 
@@ -439,7 +439,7 @@ class TrainCollection(BaseModel):
         if len(items) != len(set(items)):
             counts = Counter(items)
             dup_items = [tup for tup in counts.most_common() if tup[1] > 1]
-            dups = [tup[0].url for tup in dup_items]
+            dups = [str(tup[0].url) for tup in dup_items]
             raise ValueError(f"Duplicate item urls detected: {dups}")
 
         return items
@@ -469,7 +469,7 @@ class TrainCollection(BaseModel):
         return pd.DataFrame.from_records(self.dict())
 
     def dict(self, *args, **kwargs):  # type: ignore
-        return [rec.dict(skip_defaults=True) for rec in self.items]
+        return [rec.dict(exclude_unset=True) for rec in self.items]
 
     def __len__(self) -> int:
         return len(self.items)

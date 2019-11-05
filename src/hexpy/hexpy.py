@@ -12,6 +12,7 @@ import pandas as pd
 import requests
 from click_help_colors import HelpColorsGroup
 from pydantic import ValidationError
+from termcolor import colored
 
 from . import __version__
 from .base import JSONDict
@@ -216,11 +217,18 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
     except IOError:
         username = input("Enter username: ")
         password = getpass(prompt="Enter password: ")
-        session = HexpySession.login(
-            username, password, no_expiration=not expiration, force=force
-        )
+        try:
+            session = HexpySession.login(
+                username, password, no_expiration=not expiration, force=force
+            )
+        except ValueError as exception:
+            raise click.ClickException(click.style(str(exception), fg="red", bold=True))
         session.save_token()
-        click.echo("Success! Saved token to ~/.hexpy/token.json")
+        click.echo(
+            click.style(
+                "Success! Saved token to ~/.hexpy/token.json", fg="green", bold=True
+            )
+        )
         return session
 
 
@@ -238,7 +246,7 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
 def results(
     ctx: click.Context,
     monitor_id: int,
-    metrics: Tuple[str, str],
+    metrics: List[str],
     date_range: Tuple[str, str] = None,
 ) -> None:
     """Get Monitor results for 1 or more metrics.
@@ -402,7 +410,10 @@ def upload(
             items = pd.read_excel(filename)
         else:
             raise click.ClickException(
-                "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+                click.style(
+                    "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx",
+                    fg="red",
+                )
             )
     except Exception as e:
         raise click.ClickException(
@@ -412,7 +423,9 @@ def upload(
     try:
         collection = UploadCollection.from_dataframe(items)
     except ValidationError as e:
-        raise click.ClickException(helpful_validation_error(e.errors())) from e
+        raise click.ClickException(
+            click.style(helpful_validation_error(e.errors()), fg="red")
+        ) from e
     response = client.upload(
         document_type=document_type, items=collection, request_usage=True
     )
@@ -436,7 +449,9 @@ def train(
 
     details = client.details(monitor_id)
     if details["type"] != "OPINION":
-        raise click.ClickException("Monitor must be an opinion monitor.")
+        raise click.ClickException(
+            click.style("Monitor must be an opinion monitor.", fg="red")
+        )
 
     category_dict = {x["name"]: x["id"] for x in details["categories"]}
     reverse_category_dict = {val: key for key, val in category_dict.items()}
@@ -447,32 +462,44 @@ def train(
             items = pd.read_excel(filename)
         else:
             raise click.ClickException(
-                "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+                click.style(
+                    "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx",
+                    fg="red",
+                )
             )
-    except Exception:
+    except Exception as e:
         raise click.ClickException(
-            "Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx"
+            f"Error reading spreadsheet file. File type must be either UTF-8 encoded .csv or .xlsx. erors: {e.args}"
         )
 
     items.columns = [x.lower() for x in items.columns]
 
     if "categoryname" not in items.columns and "categoryid" not in items.columns:
         raise click.ClickException(
-            "File must contain either 'categoryName' string column or 'categoryId' integer column"
+            click.style(
+                "File must contain either 'categoryName' string column or 'categoryId' integer column",
+                fg="red",
+            )
         )
     if "categoryid" in items.columns:
         if not all(x in reverse_category_dict for x in set(items["categoryid"])):
             for x in set(items["categoryid"]):
                 if x not in reverse_category_dict:
                     raise click.ClickException(
-                        f"'{x}' categoryId not in monitor categories: {category_dict}"
+                        click.style(
+                            f"'{x}' categoryId not in monitor categories: {category_dict}",
+                            fg="red",
+                        )
                     )
     else:
         if not all(x in category_dict for x in set(items["categoryname"])):
             for x in set(items["categoryname"]):
                 if x not in category_dict:
                     raise click.ClickException(
-                        f"'{x}' categoryName not in monitor categories: {category_dict}"
+                        click.style(
+                            f"'{x}' categoryName not in monitor categories: {category_dict}",
+                            fg="red",
+                        )
                     )
 
         items["categoryid"] = [category_dict[i] for i in items["categoryname"]]
@@ -482,7 +509,9 @@ def train(
         try:
             validated = TrainCollection.from_dataframe(sub_df)  # noqa: F841
         except ValidationError as e:
-            raise click.ClickException(helpful_validation_error(e.errors())) from e
+            raise click.ClickException(
+                click.style(helpful_validation_error(e.errors()), fg="red")
+            ) from e
 
     counts = Counter(items.categoryid)
 
@@ -495,14 +524,19 @@ def train(
 
     click.echo("Preparing to upload:\n" + count_string)
 
-    for cat_id, sub_df in items.groupby("categoryid"):
+    with click.progressbar(
+        length=len(counts.items()), fill_char=colored("▉", "green")
+    ) as bar:
 
-        # Covert data to list of dictionaries
-        data = TrainCollection.from_dataframe(sub_df)
+        for i, (cat_id, sub_df) in enumerate(items.groupby("categoryid")):
 
-        client.train_monitor(monitor_id=monitor_id, items=data)
-        category = reverse_category_dict[cat_id]
-        click.echo(f"Successfuly uploaded {len(data)} {category} docs!")
+            # Covert data to list of dictionaries
+            data = TrainCollection.from_dataframe(sub_df)
+
+            client.train_monitor(monitor_id=monitor_id, items=data)
+            category = reverse_category_dict[cat_id]
+            bar.update(i)
+            click.echo(f"Successfuly uploaded {len(data)} {category} docs!")
 
 
 @cli.command()
@@ -635,6 +669,10 @@ def stream_posts(
 
     if separator == "\\t":
         separator = "\t"
+    if output_type not in {"csv", "json"}:
+        raise click.ClickException(
+            click.style("Output type must be either csv or json", fg="red")
+        )
     session = ctx.invoke(login, expiration=True, force=False)
     client = StreamsAPI(session)
     so_far = 0
@@ -664,8 +702,6 @@ def stream_posts(
                 first_fetch = False
             else:
                 click.echo(df.to_csv(header=None, sep=separator, index=False).strip())
-        else:
-            raise click.ClickException("Output type must be either csv or json")
         so_far += len(posts)
 
 

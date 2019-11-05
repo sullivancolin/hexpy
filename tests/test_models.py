@@ -26,7 +26,7 @@ def test_upload_from_df(
     """Test dataframe for upload can be validated"""
 
     validated = UploadCollection.from_dataframe(upload_dataframe)
-    assert validated == UploadCollection(items=upload_items)
+    assert validated.dict() == upload_items
 
 
 def test_upload_to_df(upload_dataframe: pd.DataFrame) -> None:
@@ -59,20 +59,20 @@ def test_wrong_upload_item(invalid_item: JSONDict) -> None:
         invalid = UploadItem(**invalid_item)  # noqa: F841
     assert e.value.errors() == [
         {
+            "ctx": {"limit_value": 2},
+            "loc": ("language",),
+            "msg": "ensure this value has at most 2 characters",
+            "type": "value_error.any_str.max_length",
+        },
+        {
             "loc": ("date",),
             "msg": "Could not validate format '02-2031-01'. Must be YYYY-MM-DD or iso-formatted time stamp",
             "type": "value_error",
         },
         {
-            "loc": ("language",),
-            "msg": "ensure this value has at most 2 characters",
-            "type": "value_error.any_str.max_length",
-            "ctx": {"limit_value": 2},
-        },
-        {
             "loc": ("url",),
-            "msg": "url string does not match regex",
-            "type": "value_error.url.regex",
+            "msg": "invalid or missing URL scheme",
+            "type": "value_error.url.scheme",
         },
     ]
 
@@ -219,24 +219,24 @@ def test_wrong_train_item(invalid_train_item: JSONDict) -> None:
     assert e.value.errors() == [
         {
             "loc": ("categoryid",),
-            "msg": "value is not a valid integer",
-            "type": "type_error.integer",
+            "msg": "none is not an allowed value",
+            "type": "type_error.none.not_allowed",
         },
         {
             "loc": ("url",),
-            "msg": "url string does not match regex",
-            "type": "value_error.url.regex",
+            "msg": "invalid or missing URL scheme",
+            "type": "value_error.url.scheme",
+        },
+        {
+            "ctx": {"limit_value": 2},
+            "loc": ("language",),
+            "msg": "ensure this value has at most 2 characters",
+            "type": "value_error.any_str.max_length",
         },
         {
             "loc": ("date",),
             "msg": "Could not validate date format '02-2031-01'. Must be YYYY-MM-DD or iso-formatted time stamp",
             "type": "value_error",
-        },
-        {
-            "loc": ("language",),
-            "msg": "ensure this value has at most 2 characters",
-            "type": "value_error.any_str.max_length",
-            "ctx": {"limit_value": 2},
         },
     ]
 

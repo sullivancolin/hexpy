@@ -1,3 +1,5 @@
+"""Module for working with Monitor Project"""
+
 import inspect
 from enum import Enum
 from functools import partial, wraps
