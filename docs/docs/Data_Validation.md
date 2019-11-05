@@ -16,7 +16,7 @@ Validation model for an item of custom content to be uploaded. Checks for requir
 * author: String, Document Author
 * language: String, 2 letter langauge code
 * date: String, Date or Datetime
-* contents: String, Document Body
+* contents: String, Document text (max length 16384 characters)
 * geolocation: Optional Mapping Identifier
 * custom: Optinal Mapping of key value string pairs
 * age: Optional Integer
