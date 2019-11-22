@@ -236,7 +236,7 @@ class UploadCollection(BaseModel):
     ```
     """
 
-    items: List[UploadItem]
+    items: List[UploadItem] = Field(..., min_items=1)
 
     class Config:
         allow_mutation = False
@@ -426,7 +426,7 @@ class TrainCollection(BaseModel):
     ```
     """
 
-    items: List[TrainItem]
+    items: List[TrainItem] = Field(..., min_items=1)
 
     class Config:
         """Immutable Object"""

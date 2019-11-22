@@ -11,7 +11,7 @@ requirements = [
     "pandas>=0.20.3",
     "openpyxl>=2.4.8",
     "pendulum>=1.3.2",
-    "pydantic>= 1.0",
+    "pydantic>= 1.1",
     "ftfy>=5.5.1",
 ]
 

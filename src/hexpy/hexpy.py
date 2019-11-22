@@ -593,9 +593,9 @@ def export(
     images: bool = False,
 ) -> None:
     """Export monitor posts as json or to a spreadsheet."""
-    if post_type not in {"post_list", "training_post"}:
+    if post_type not in {"post_list", "training_posts"}:
         raise click.ClickException(
-            "Invalid post_type: Must be either 'post_list' or training_post"
+            "Invalid post_type: Must be either 'post_list' or training_posts"
         )
     if separator == "\\t":
         separator = "\t"
