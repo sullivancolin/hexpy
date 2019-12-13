@@ -187,7 +187,7 @@ class UploadItem(BaseModel):
         kwargs["exclude_unset"] = True
         return super().dict(*args, **kwargs)
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<UploadItem guid='{self.guid}'>"
 
 
@@ -312,7 +312,7 @@ class UploadCollection(BaseModel):
         else:
             return items
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<UploadCollection items=['{self.items[0].__repr__()}...]'>"
 
 
@@ -395,7 +395,7 @@ class TrainItem(BaseModel):
     def __eq__(self, other: Any) -> bool:
         return isinstance(self, type(other)) and self.url == other.url
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<TrainItem url='{self.url}'>"
 
 
@@ -485,5 +485,5 @@ class TrainCollection(BaseModel):
         else:
             return items
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<TrainCollection items=['{self.items[0].__repr__()}...]'>"
