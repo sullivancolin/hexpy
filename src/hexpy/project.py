@@ -136,7 +136,7 @@ class Project(BaseModel):
     def __len__(self) -> int:
         return len(self.days)
 
-    def __repr__(self) -> str:  # pragma: no cover
+    def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<Project ('{self.name}', {self.resultsStart} ,{self.resultsEnd})>"
 
     def __iter__(self):  # type: ignore

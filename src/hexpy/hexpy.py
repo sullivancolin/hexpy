@@ -12,7 +12,6 @@ import pandas as pd
 import requests
 from click_help_colors import HelpColorsGroup
 from pydantic import ValidationError
-from termcolor import colored
 
 from . import __version__
 from .base import JSONDict
@@ -524,19 +523,16 @@ def train(
 
     click.echo("Preparing to upload:\n" + count_string)
 
-    with click.progressbar(
-        length=len(counts.items()), fill_char=colored("▉", "green")
-    ) as bar:
-
-        for i, (cat_id, sub_df) in enumerate(items.groupby("categoryid")):
-
-            # Covert data to list of dictionaries
-            data = TrainCollection.from_dataframe(sub_df)
-
-            client.train_monitor(monitor_id=monitor_id, items=data)
-            category = reverse_category_dict[cat_id]
-            bar.update(i)
-            click.echo(f"Successfuly uploaded {len(data)} {category} docs!")
+    for cat_id, sub_df in items.groupby("categoryid"):
+        # Convert data to list of dictionaries
+        data = TrainCollection.from_dataframe(sub_df)
+        client.train_monitor(monitor_id=monitor_id, items=data)
+        category = reverse_category_dict[cat_id]
+        click.echo(
+            click.style(
+                f"Successfuly uploaded {len(data)} {category} docs!", fg="green"
+            )
+        )
 
 
 @cli.command()
