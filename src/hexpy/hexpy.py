@@ -4,14 +4,14 @@ import time
 from collections import Counter
 from getpass import getpass
 from pathlib import Path
-from typing import Callable, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import click
 import numpy as np
 import pandas as pd
 import requests
 from click_help_colors import HelpColorsGroup
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError, validator
 
 from . import __version__
 from .base import JSONDict
@@ -103,8 +103,41 @@ def posts_json_to_df(docs: List[JSONDict], images: bool = False) -> pd.DataFrame
     return df
 
 
-ENDPOINT_TEMPLATE = """
-### {title}
+class Param(BaseModel):
+    name: str = "MISSING"
+    type: str
+    required: str
+    description: str
+
+    def render(self) -> str:
+        return f"* `{self.name}` - {self.description}\n\t- Type: {self.type}\n\t- Required = {self.required}\n"
+
+
+class Response(BaseModel):
+    name: str = "MISSING"
+    type: str
+    restricted: bool
+    description: str
+    members: Optional[List[str]] = None
+
+    @validator("members", pre=True)
+    def validate_members(cls, members: List[Dict[str, Any]]) -> List[str]:
+        return [member["name"] for member in members]
+
+    def render(self) -> str:
+        response = f"* `{self.name}` - {self.description}\n\t- Type: {self.type}\n\t- Restricted = {self.restricted}\n"
+
+        if self.members:
+            members = ", ".join([f"`{member}`" for member in self.members])
+            response += f"\t- Fields: {members}\n"
+
+        return response
+
+
+class Endpoint(BaseModel):
+
+    template: str = """
+### {endpoint}
 ##### {description} - Category: {category}
 ##### `{url}` - {method}
 ##### Parameters
@@ -112,55 +145,27 @@ ENDPOINT_TEMPLATE = """
 ##### Response
 {results}
 -------------------------"""
+    endpoint: str
+    url: str
+    method: str
+    description: str
+    category: str
+    parameters: List[Param]
+    response: List[Response]
 
+    def render(self) -> str:
+        params = "".join([param.render() for param in self.parameters])
+        response = "".join([r.render() for r in self.response])
 
-def format_parameter(param: JSONDict) -> str:
-    """Format API request parameter to Markdown list entry."""
-    if "name" in param:
-        name = param["name"]
-    else:
-        name = "MISSING"
-    param_type = param["type"]
-    required = param["required"]
-    description = param["description"]
-
-    return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Required = {required}\n"
-
-
-def format_response(response: JSONDict) -> str:
-    """Format API response field to Markdown list entry."""
-    if "name" in response:
-        name = response["name"]
-    else:
-        name = "MISSING"
-    param_type = response["type"]
-    restricted = response["restricted"]
-    description = response["description"]
-    if "members" in response:
-        members = ", ".join([f'`{member["name"]}`' for member in response["members"]])
-        return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Fields: {members}\n\t- Restricted = {restricted}\n"
-    return f"* `{name}` - {description}\n\t- Type: {param_type}\n\t- Restricted = {restricted}\n"
-
-
-def format_endpoint(endpoint: JSONDict) -> str:
-    """format API endpoint to Markdown entry."""
-    title = endpoint["endpoint"]
-    url = endpoint["url"]
-    method = endpoint["method"]
-    description = endpoint["description"]
-    category = endpoint["category"]
-    params = "".join([format_parameter(param) for param in endpoint["parameters"]])
-    results = "".join([format_response(r) for r in endpoint["response"]])
-
-    return ENDPOINT_TEMPLATE.format(
-        title=title,
-        url=url,
-        method=method,
-        description=description,
-        category=category,
-        params=params,
-        results=results,
-    )
+        return self.template.format(
+            endpoint=self.endpoint,
+            url=self.url,
+            method=self.method,
+            description=self.description,
+            category=self.category,
+            params=params,
+            results=response,
+        )
 
 
 def docs_to_text(json_docs: JSONDict, mode: str = "md") -> str:
@@ -173,7 +178,7 @@ def docs_to_text(json_docs: JSONDict, mode: str = "md") -> str:
             anchor = "user-content-" + e["endpoint"].lower().replace(" ", "-")
             doc += f"* [{e['endpoint']}](#{anchor})\n"
 
-    return doc + "\n".join([format_endpoint(e) for e in endpoints])
+    return doc + "\n".join([Endpoint(**e).render() for e in endpoints])
 
 
 ##########################################################################
@@ -223,10 +228,8 @@ def login(force: bool = False, expiration: bool = True) -> HexpySession:
         except ValueError as exception:
             raise click.ClickException(click.style(str(exception), fg="red", bold=True))
         session.save_token()
-        click.echo(
-            click.style(
-                "Success! Saved token to ~/.hexpy/token.json", fg="green", bold=True
-            )
+        click.secho(
+            "✅ Success! Saved token to ~/.hexpy/token.json", fg="green", bold=True
         )
         return session
 
@@ -528,10 +531,8 @@ def train(
         data = TrainCollection.from_dataframe(sub_df)
         client.train_monitor(monitor_id=monitor_id, items=data)
         category = reverse_category_dict[cat_id]
-        click.echo(
-            click.style(
-                f"Successfuly uploaded {len(data)} {category} docs!", fg="green"
-            )
+        click.secho(
+            f"✅ Successfuly uploaded {len(data)} {category} docs!", fg="green",
         )
 
 
@@ -628,7 +629,7 @@ def export(
             df.to_excel(name + ".xlsx", index=False)
         else:
             raise click.ClickException("Output type must be either csv, excel or json")
-        click.echo("Done!")
+        click.secho("✅ Done!", fg="green", bold=True)
 
 
 @cli.command()

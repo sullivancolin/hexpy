@@ -44,7 +44,7 @@ test-all: clean
 
 ## check code coverage quickly with the default Python
 coverage: clean
-	pipenv run pytest  -vv --cov=src --cov-report html --cov-report term
+	pipenv run pytest  -vv --cov=src --cov-report html --cov-report term --cov-context=test
 	open -a "Firefox" htmlcov/index.html
 
 ## generate Mkdocs HTML documentation

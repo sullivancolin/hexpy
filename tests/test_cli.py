@@ -179,7 +179,7 @@ def test_train(
     result = runner.invoke(cli, ["train", str(tmp_file), "12345678"])
     assert (
         result.output.strip()
-        == "Preparing to upload:\n* 2 'fake_category' posts\nSuccessfuly uploaded 2 fake_category docs!"
+        == "Preparing to upload:\n* 2 'fake_category' posts\n✅ Successfuly uploaded 2 fake_category docs!"
     )
 
 
