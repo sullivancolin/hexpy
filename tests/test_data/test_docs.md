@@ -21,8 +21,8 @@
 	- Restricted = False
 * `request` - Defines the original request parameters made to invoke this analysis
 	- Type: ApiAnalysisTaskRequest
-	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
+	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 * `resultsUri` - Defines the URI that can be queried to retrieve the analysis status/results in the future
 	- Type: String
 	- Restricted = False
@@ -49,8 +49,8 @@
 	- Restricted = False
 * `request` - Defines the original request parameters made to invoke this analysis
 	- Type: ApiAnalysisTaskRequest
-	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
+	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 * `resultsUri` - Defines the URI that can be queried to retrieve the analysis status/results in the future
 	- Type: String
 	- Restricted = False
@@ -65,15 +65,15 @@
 	- Restricted = False
 * `analysisResults` - Analysis result
 	- Type: AnalysisResults
-	- Fields: `volumeResults`, `sentimentResults`, `genderResult`, `ageResult`, `locationResult`, `siteResult`, `affinityResults`, `reach`
 	- Restricted = False
+	- Fields: `volumeResults`, `sentimentResults`, `genderResult`, `ageResult`, `locationResult`, `siteResult`, `affinityResults`, `reach`
 * `message` - Result message
 	- Type: String
 	- Restricted = False
 * `request` - Related task request
 	- Type: ApiAnalysisTaskRequest
-	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 	- Restricted = False
+	- Fields: `analysis`, `startDate`, `endDate`, `timezone`, `sources`, `keywords`, `languages`, `locations`, `gender`, `requestingContractInfo`
 
 -------------------------
 
@@ -121,8 +121,8 @@
 ##### Response
 * `authors` - JSON array of zero or more authors objects that contain author-specific attributes
 	- Type: List
-	- Fields: `startDate`, `endDate`, `countsByAuthor`, `numberOfAuthors`, `docsPerAuthor`, `totalImpressions`
 	- Restricted = False
+	- Fields: `startDate`, `endDate`, `countsByAuthor`, `numberOfAuthors`, `docsPerAuthor`, `totalImpressions`
 
 -------------------------
 
@@ -161,8 +161,8 @@
 ##### Response
 * `contentSource` - Content Source
 	- Type: ContentSourceModel
-	- Fields: `id`, `teamName`, `name`, `description`, `documents`
 	- Restricted = False
+	- Fields: `id`, `teamName`, `name`, `description`, `documents`
 
 -------------------------
 
@@ -189,8 +189,8 @@
 ##### Response
 * `contentSources` - Content Sources
 	- Type: List
-	- Fields: `id`, `teamName`, `name`, `description`, `documents`
 	- Restricted = False
+	- Fields: `id`, `teamName`, `name`, `description`, `documents`
 
 -------------------------
 
