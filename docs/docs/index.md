@@ -50,10 +50,19 @@ $ pip install hexpy/
 
 ## Quick Start
 
+<div class="termy">
+
 ```python
+// Import session and API classes
 >>> from hexpy import HexpySession, MonitorAPI
+
+// Create session using account credentials
 >>> session = HexpySession.login(username="user@email.com", password="crimson_login")
+
+// Create api client using session
 >>> monitor_results_client = MonitorAPI(session)
+
+// Call api endpoint function with necessary parameters
 >>> monitor_results_client.details(monitor_id)
 {'categories': [{'hidden': False,
    'id': 6054759055,
@@ -74,3 +83,4 @@ $ pip install hexpy/
    ...
 }
 ```
+</div>

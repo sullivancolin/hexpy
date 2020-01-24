@@ -1,0 +1,35 @@
+.termynal-comment {
+    color: #4a968f;
+    font-style: italic;
+    display: block;
+}
+
+.termy [data-ty="python"]:before {
+    content: '>>> ';
+}
+
+.termy [data-ty="continue"]:before {
+    content: '| ';
+}
+
+.termy [data-termynal] {
+    white-space: pre-wrap;
+    font-size: 80%;
+    font-family:'Fira Code', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
+    padding: 30px 20px 10px 25px;
+    line-height: 1.0;
+}
+
+a.external-link::after {
+    /* \00A0 is a non-breaking space
+        to make the mark be on the same line as the link
+    */
+    content: "\00A0[↪]";
+}
+
+a.internal-link::after {
+    /* \00A0 is a non-breaking space
+        to make the mark be on the same line as the link
+    */
+    content: "\00A0↪";
+}
