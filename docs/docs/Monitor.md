@@ -7,6 +7,7 @@ Monitor API
 Class for working with Crimson Hexagon Monitor API.
 
 ## Example usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, MonitorAPI
@@ -17,6 +18,7 @@ Class for working with Crimson Hexagon Monitor API.
 >>> end = details["resultsEnd"]
 >>> monitor_client.posts(monitor_id, start, end)
 ```
+</div>
 
 ## Methods
 
@@ -69,6 +71,11 @@ train_monitor(monitor_id: int, category_id: int, items: TrainCollection) -> JSON
 Upload training documents to monitor programmatically.
 
 Upload a list documents of one category per request. Due to the restrictions involved in using this endpoint, unless you have a specific need to train monitors programmatically, training monitors via the user interface in ForSight will normally be the more efficient training option.
+
+#### Arguments
+* monitor_id: Integer, id of the monitor or monitor filter being requested
+* category_id: Integer, the category this content should belong to
+* items: validated instance of [TrainCollection](Data_Validation.md#traincollection) model
 
 ### batch_train
 ```python

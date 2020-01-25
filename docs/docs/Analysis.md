@@ -6,6 +6,7 @@ source: analysis.py
 Class for working with Crimson Hexagon Analysis API.
 
 ## Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, AnalysisAPI
@@ -13,66 +14,18 @@ Class for working with Crimson Hexagon Analysis API.
 >>> analysis_client = AnalysisAPI(session)
 >>> analysis_client.results(request_id)
 ```
+</div>
 
 ## Methods
 
 ### analysis_request
 ```python
-analysis_request(request: JSONDict) -> JSONDict
+analysis_request(request: AnaysisRequest) -> JSONDict
 ```
 Submit a query task against 24 hours of social data.
 
 #### Arguments
-* request: Dictionary, query and filter parameters
-
-Example Request
-```python
-{
-    "analysis": [
-        "volume",
-        "sentiment",
-        "emotion",
-        "affinity",
-        "gender",
-        "age",
-        "location",
-        "source",
-        "reach"
-    ],
-    "keywords": "iPhone",
-    "languages": {
-        "type": "include",
-        "values": [
-        "EN"
-        ]
-    },
-    "gender": {
-            "type": "include",
-            "values": ["M"]
-    },
-    "locations": {
-        "type": "exclude",
-        "values": [
-            "JPN"
-        ]
-    },
-    "sources": [
-        "TWITTER",
-        "TUMBLR",
-        "INSTAGRAM",
-        "BLOGS",
-        "REVIEWS",
-        "GOOGLE_PLUS",
-        "NEWS",
-        "YOUTUBE",
-        "FORUMS"
-    ],
-    "startDate": "2016-09-20T00:00:00",
-    "endDate": "2016-09-21T00:00:00",
-    "timezone": "America/New_York",
-    "requestUsage": true
-}
-```
+* request: validated [AnalysisRequest](Data_Validation.md#analysisrequest).
 
 ### results
 ```python

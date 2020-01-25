@@ -12,6 +12,20 @@ from pendulum.exceptions import ParserError
 from pydantic import BaseModel, Field, HttpUrl, NoneStr, validator
 
 
+def parse_datetime(date_string: str) -> str:
+    """Validate date string using pendulum parsing followed by ISO formatting."""
+    try:
+        date = pendulum.parse(date_string)
+    except ParserError:
+        try:
+            date = pendulum.from_format(date_string, "MM/DD/YY HH:mm")
+        except Exception:
+            raise ValueError(
+                f"Could not validate format '{date_string}'. Must be YYYY-MM-DD or iso-formatted time stamp"
+            )
+    return date.to_iso8601_string()
+
+
 class GenderEnum(str, Enum):
     """Valid values for Gender Types"""
 
@@ -128,19 +142,7 @@ class UploadItem(BaseModel):
         else:
             raise ValueError("Must specify either valid `guid` or `url`")
 
-    @validator("date")
-    def parse_datetime(cls, value: str, values: Dict[str, Any]) -> str:
-        """Validate date string using pendulum parsing followed by ISO formatting."""
-        try:
-            date = pendulum.parse(value)
-        except ParserError:
-            try:
-                date = pendulum.from_format(value, "MM/DD/YY HH:mm")
-            except Exception:
-                raise ValueError(
-                    f"Could not validate format '{value}'. Must be YYYY-MM-DD or iso-formatted time stamp"
-                )
-        return date.to_iso8601_string()
+    _validate_datetime = validator("date", allow_reuse=True)(parse_datetime)
 
     @validator("contents")
     def fix_contents(cls, value: str) -> str:
@@ -359,19 +361,7 @@ class TrainItem(BaseModel):
 
         allow_mutation = False
 
-    @validator("date")
-    def parse_datetime(cls, value: str) -> str:
-        """Validate date string using pendulum parsing followed by ISO formatting."""
-        try:
-            date = pendulum.parse(value)
-        except ParserError:
-            try:
-                date = pendulum.from_format(value, "MM/DD/YY HH:mm")
-            except Exception:
-                raise ValueError(
-                    f"Could not validate date format '{value}'. Must be YYYY-MM-DD or iso-formatted time stamp"
-                )
-        return date.to_iso8601_string()
+    _validate_datetime = validator("date", allow_reuse=True)(parse_datetime)
 
     @validator("contents")
     def fix_contents(cls, value: str) -> str:
@@ -487,3 +477,162 @@ class TrainCollection(BaseModel):
 
     def __repr__(self) -> str:  # type: ignore # pragma: no cover
         return f"<TrainCollection items=['{self.items[0].__repr__()}...]'>"
+
+
+class AnalysisEnum(str, Enum):
+    """Valid analyis type values"""
+
+    volume = "volume"
+    sentimetn = "sentiment"
+    emotion = "emotion"
+    affinity = "affinity"
+    gender = "gender"
+    age = "age"
+    location = "location"
+    source = "source"
+    reach = "reach"
+
+
+class SourceEnum(str, Enum):
+    """Valid analysis source values"""
+
+    TWITTER = "TWITTER"
+    TUMBLE = "TUMBLR"
+    INSTIGRAM = "INSTAGRAM"
+    BLOGS = "BLOGS"
+    REVIEWS = "REVIEWS"
+    GOOGLE_PLUS = "GOOGLE_PLUS"
+    NEWS = "NEWS"
+    YOUTUBE = "YOUTUBE"
+    FORUMS = "FORUMS"
+
+
+class IncludeExcludeEnum(str, Enum):
+    """Valid include/exclude logic values"""
+
+    include = "include"
+    exclude = "exclude"
+
+
+class GenderLogic(BaseModel):
+    """Valid Gender include/exclude format"""
+
+    type: IncludeExcludeEnum
+    values: List[GenderEnum] = Field(..., min_items=1, max_items=2)
+
+
+class LanguageLogic(BaseModel):
+    """Valid Languages include/exclude format"""
+
+    type: IncludeExcludeEnum
+    values: List[str] = Field(..., min_items=1)
+
+
+class LocationLogic(BaseModel):
+    """Valid Location include/exclude format"""
+
+    type: IncludeExcludeEnum
+    values: List[str] = Field(..., min_items=1)
+
+
+class AnalysisRequest(BaseModel):
+    """Validation model for analysis request on 24 hour of data.
+
+    # Fields:
+        * analysis: List[AnalysisEnum] = Field(..., min_items=1)
+        * keywords: str
+        * sources: List[SourceEnum] = Field(..., min_items=1)
+        * startDate: str
+        * endDate: str
+        * timezone: str
+        * requestUsage: bool = True
+        * gender: Optional[GenderLogic]
+        * languages: Optional[LanguageLogic]
+        * locations: Optional[LocationLogic]
+
+
+    # Example Usage
+    ```python
+    >>> from hexpy.models import AnalysisRequest
+    >>> request_dict = {
+        "analysis": [
+            "volume",
+            "sentiment",
+            "emotion",
+            "affinity",
+            "gender",
+            "age",
+            "location",
+            "source",
+            "reach"
+        ],
+        "keywords": "iPhone",
+        "languages": {
+            "type": "include",
+            "values": [
+                "EN"
+            ]
+        },
+        "gender": {
+            "type": "include",
+            "values": [
+                "M"
+            ]
+        },
+        "locations": {
+            "type": "exclude",
+            "values": [
+                "JPN"
+            ]
+        },
+        "sources": [
+            "TWITTER",
+            "TUMBLR",
+            "INSTAGRAM",
+            "BLOGS",
+            "REVIEWS",
+            "GOOGLE_PLUS",
+            "NEWS",
+            "YOUTUBE",
+            "FORUMS"
+        ],
+        "startDate": "2016-09-20T00:00:00+00:00",
+        "endDate": "2016-09-21T00:00:00+00:00",
+        "timezone": "America/New_York",
+        "requestUsage": True
+    }
+
+    >>> analysis_request = AnalysisRequest(**request_dict)
+    ```
+    """
+
+    analysis: List[AnalysisEnum] = Field(..., min_items=1)
+    keywords: str
+    sources: List[SourceEnum] = Field(..., min_items=1)
+    startDate: str
+    endDate: str
+    timezone: str
+    requestUsage: bool = True
+    gender: Optional[GenderLogic]
+    languages: Optional[LanguageLogic]
+    locations: Optional[LocationLogic]
+
+    class Config:
+        allow_mutation = False
+
+    _validate_datetime = validator("startDate", "endDate", allow_reuse=True)(
+        parse_datetime
+    )
+
+    @validator("endDate")
+    def validate_24_range(cls, end_date: str, values: Dict[str, Any]) -> str:
+        start = pendulum.parse(values["startDate"])
+        end = pendulum.parse(end_date)
+        delta = end - start
+        if delta.in_hours() > 24:
+            raise ValueError("Period must not exceed 24 hours")
+        return end_date
+
+    def dict(self, *args, **kwargs):  # type: ignore
+        kwargs["exclude_unset"] = True
+        return super().dict(*args, **kwargs)

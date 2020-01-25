@@ -154,3 +154,10 @@ def monitor_details_json() -> JSONDict:
     """Expected monitor details json"""
     with open("tests/test_data/monitor_details.json") as infile:
         return json.load(infile)
+
+
+@pytest.fixture
+def analysis_request_dict() -> JSONDict:
+    """Expected format for analysis request"""
+    with open("tests/test_data/analysis.json") as infile:
+        return json.load(infile)

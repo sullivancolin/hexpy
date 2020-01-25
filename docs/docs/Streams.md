@@ -7,6 +7,7 @@ Streams API
 Class for working with Streams API.
 
 ## Example usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession , StreamsAPI
@@ -14,6 +15,7 @@ Class for working with Streams API.
 >>> streams_client = StreamsAPI(session)
 >>> streams_client.stream_list(team_id)
 ```
+</div>
 
 ## Methods
 

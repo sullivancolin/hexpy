@@ -7,6 +7,7 @@ Metadata API
 Class for working with Crimson Hexagon account and analysis metadata.
 
 ## Example usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, MetadataAPI
@@ -14,6 +15,7 @@ Class for working with Crimson Hexagon account and analysis metadata.
 >>> metadata_client = MetadataAPI(session)
 >>> metadata_client.team_list()
 ```
+</div>
 
 ## Methods
 

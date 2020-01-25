@@ -10,10 +10,11 @@ The Custom Content Upload endpoint enables the uploading of documents for analys
 Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.
 
 ## Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, ContentUploadAPI
->>> from hexpy.models import UploadCollection, UploadItem
+>>> from hexpy.models import UploadCollection
 >>> session = HexpySession.load_auth_from_file()
 >>> upload_client = ContentUploadAPI(session)
 >>> items = [
@@ -48,6 +49,8 @@ Users have uploaded survey responses, proprietary content, and other types of da
 >>> data = UploadCollection(items=items)
 >>> upload_client.upload(data)
 ```
+</div>
+
 ## Methods
 
 ### upload
@@ -60,7 +63,7 @@ If greater than 1000 items passed, reverts to batch upload.
 
 #### Arguments
 * document_type: Integer, The id of the document type to which the uploading docs will * belong.
-* items: validated UploadCollection.
+* items: validated [UploadCollection](Data_Validation.#uploadcollection]).
 * requestUsage: Bool, return usage information.
 
 ### batch_upload

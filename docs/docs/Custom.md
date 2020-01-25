@@ -8,6 +8,7 @@ Custom API
 Class for creating a custom API
 
 ## Example usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession , CustomAPI
@@ -15,6 +16,7 @@ Class for creating a custom API
 >>> custom_client = CustomAPI(session, "/some/endpoint/")
 >>> custom_client.get(url_params="<url_param1>/path", params={"query_string_param":some_value})
 ```
+</div>
 
 ## Methods
 
