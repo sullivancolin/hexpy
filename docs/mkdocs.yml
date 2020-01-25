@@ -40,6 +40,12 @@ markdown_extensions:
 
 extra_css:
   - 'stylesheets/extra.css'
+  - 'stylesheets/termynal.css'
+  - 'stylesheets/custom.css'
+
+extra_javascript:
+  - 'js/termynal.js'
+  - 'js/custom.js'
 
 extra:
     version: 0.7.2

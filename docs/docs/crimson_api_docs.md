@@ -491,8 +491,8 @@
 -------------------------
 
 ### Image Analysis Request
-##### To return list of class IDs and names with specified class type. - Category: results
-##### `/imageanalysis/resources/classes/type` - GET
+##### To return list of all class IDs and names. - Category: results
+##### `/imageanalysis/resources/classes` - GET
 ##### Parameters
 
 ##### Response
@@ -500,8 +500,8 @@
 -------------------------
 
 ### Image Analysis Request
-##### To return list of all class IDs and names. - Category: results
-##### `/imageanalysis/resources/classes` - GET
+##### To return list of class IDs and names with specified class type. - Category: results
+##### `/imageanalysis/resources/classes/type` - GET
 ##### Parameters
 
 ##### Response
