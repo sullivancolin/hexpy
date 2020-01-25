@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -68,6 +68,10 @@
     
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/termynal.css">
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
     
     
       
@@ -406,7 +410,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -613,7 +617,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -639,8 +643,10 @@
 <p>The Custom Content Upload endpoint enables the uploading of documents for analysis in the Forsight Platform.
 Users have uploaded survey responses, proprietary content, and other types of data not available in the Crimson Hexagon data library.</p>
 <h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="termy">
+
 <div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span><span class="p">,</span> <span class="n">ContentUploadAPI</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy.models</span> <span class="kn">import</span> <span class="n">UploadCollection</span><span class="p">,</span> <span class="n">UploadItem</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy.models</span> <span class="kn">import</span> <span class="n">UploadCollection</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">upload_client</span> <span class="o">=</span> <span class="n">ContentUploadAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
@@ -677,6 +683,8 @@ Users have uploaded survey responses, proprietary content, and other types of da
 </pre></div>
 
 
+</div>
+
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <h3 id="upload">upload<a class="headerlink" href="#upload" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="n">upload</span><span class="p">(</span><span class="n">document_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">UploadCollection</span><span class="p">,</span> <span class="n">request_usage</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSONDict</span>
@@ -688,7 +696,7 @@ Users have uploaded survey responses, proprietary content, and other types of da
 <h4>Arguments</h4>
 <ul>
 <li>document_type: Integer, The id of the document type to which the uploading docs will * belong.</li>
-<li>items: validated UploadCollection.</li>
+<li>items: validated <a href="Data_Validation.#uploadcollection]">UploadCollection</a>.</li>
 <li>requestUsage: Bool, return usage information.</li>
 </ul>
 <h3 id="batch_upload">batch_upload<a class="headerlink" href="#batch_upload" title="Permanent link">&para;</a></h3>
@@ -845,9 +853,13 @@ Users have uploaded survey responses, proprietary content, and other types of da
       
     </div>
     
-      <script src="../assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../js/termynal.js"></script>
+      
+        <script src="../js/custom.js"></script>
       
     
   </body>

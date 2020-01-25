@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -68,6 +68,10 @@
     
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/termynal.css">
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
     
     
       
@@ -445,7 +449,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -515,7 +519,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -546,6 +550,8 @@
 <li>Compose powerful shell scripts with pipe-able commands such as <a href="https://stedolan.github.io/jq/">jq</a>, and <code>xargs</code>.</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<div class="termy">
+
 <div class="codehilite"><pre><span></span>$ hexpy
 Usage: hexpy <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
 
@@ -567,51 +573,119 @@ Commands:
 </pre></div>
 
 
+</div>
+
 <p>See how each <code>hexpy</code> command works by running <code>hexpy COMMAND --help</code></p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<p>Login to Crimson API with you credentials and save your token to <code>~/.hexpy/token.json</code>.</p>
+<p>Login to Crimson API with you credentials and save your token to <code>~/.hexpy/token.json</code>.
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy login --force
-Enter username: username@email.com
-Enter password: ***********
-Success! Saved token to ~/.hexpy/token.json
+<span class="c1"># Enter username: $ username@email.com</span>
+<span class="c1"># Enter password: $ ***********</span>
+✅ Success! Saved token to ~/.hexpy/token.json
 </pre></div>
 
 
-<p>Get Up-to-date API documentation as an html file</p>
+</div>
+
+<p>Get Up-to-date API documentation as an html file
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy api-documentation -o html
 </pre></div>
 
 
-<p>Get list of all the user's teams using <a href="https://stedolan.github.io/jq/">jq</a>.</p>
+</div>
+
+<p>Get list of all the user's teams using <a href="https://stedolan.github.io/jq/">jq</a>.
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy metadata team_list <span class="se">\</span>
-<span class="p">|</span> jq -r <span class="s1">&#39;.teams[] | [.name, .id] | @tsv&#39;</span> <span class="se">\</span>
-<span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
+<span class="p">|</span> jq -r <span class="s1">&#39;.teams[] | [.name, .id] | @tsv&#39;</span>
+<span class="m">123456789</span>   some_team_1
+<span class="m">234567891</span>   some_team_2
+<span class="m">345678912</span>   some_team_3
+<span class="m">456789123</span>   some_team_3
+...
 </pre></div>
 
 
-<p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a>.</p>
+</div>
+
+<p>Get list of monitors for a user's team using <a href="https://stedolan.github.io/jq/">jq</a>.
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy metadata monitor_list --team_id TEAM_ID <span class="se">\</span>
 <span class="p">|</span> jq -r <span class="s1">&#39;.monitors[] | [.id, .name] | @tsv&#39;</span> <span class="se">\</span>
 <span class="p">|</span> column -t -s <span class="s1">$&#39;\t&#39;</span>
+<span class="m">123456789</span>   sample_monitor_1
+<span class="m">234567891</span>   sample_monitor_2
+<span class="m">345678912</span>   sample_monitor_3
+<span class="m">456789123</span>   sample_monitor_3
+...
 </pre></div>
 
 
-<p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.</p>
+</div>
+
+<p>Upload TSV file as <code>my_custom_type</code> with English as the language that has tab delimited columns.
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy upload spredsheet.csv --content_type my_custom_type --language en --separator <span class="s1">&#39;\t&#39;</span>
+<span class="o">{</span><span class="s2">&quot;status&quot;</span>: <span class="s2">&quot;success&quot;</span><span class="o">}</span>
 </pre></div>
 
 
-<p>Train a Opinion Monitor with using a spreadsheet of posts with labels for the predefined categories.</p>
+</div>
+
+<p>Train a Opinion Monitor with using a spreadsheet of posts with labels for the predefined categories.
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy train training_data.csv MONITOR_ID
+<span class="c1"># Preparing to upload:</span>
+<span class="c1">#   * 2 &#39;some_category&#39; posts</span>
+<span class="c1">#   * 5 &#39;other_category&#39; posts</span>
+<span class="c1"># ✅ Successfuly uploaded 2 fake_category docs!</span>
+<span class="c1"># ✅ Successfuly uploaded 5 other_category docs!</span>
 </pre></div>
 
 
-<p>Get word cloud and volume information from the monitor in the specified date range.</p>
-<div class="codehilite"><pre><span></span>$ hexpy results MONITOR_ID volume word_cloud --date_range <span class="m">2017</span>-01-01 <span class="m">2017</span>-02-01
+</div>
+
+<p>Get word cloud data from the monitor in the specified date range using <a href="https://stedolan.github.io/jq/">jq</a>.
+<div class="termy"></p>
+<div class="codehilite"><pre><span></span>$ hexpy results MONITOR_ID word_cloud --date_range <span class="m">2017</span>-01-01 <span class="m">2017</span>-02-01 <span class="p">|</span> jq .
+<span class="o">{</span>
+  <span class="s2">&quot;resultsStart&quot;</span>: <span class="s2">&quot;2017-01-01T00:00:00&quot;</span>,
+  <span class="s2">&quot;resultsEnd&quot;</span>: <span class="s2">&quot;2017-02-01T00:00:00&quot;</span>,
+  <span class="s2">&quot;results&quot;</span>: <span class="o">{</span>
+    <span class="s2">&quot;word_cloud&quot;</span>: <span class="o">{</span>
+      <span class="s2">&quot;data&quot;</span>: <span class="o">{</span>
+        <span class="s2">&quot;▇&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;⚡️&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;❤&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;・&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;🌑&quot;</span>: <span class="m">6</span>,
+        <span class="s2">&quot;🌹&quot;</span>: <span class="m">8</span>,
+        <span class="s2">&quot;👀&quot;</span>: <span class="m">7</span>,
+        <span class="s2">&quot;👇&quot;</span>: <span class="m">9</span>,
+        <span class="s2">&quot;👌&quot;</span>: <span class="m">5</span>,
+        <span class="s2">&quot;👏&quot;</span>: <span class="m">5</span>,
+        <span class="s2">&quot;💀&quot;</span>: <span class="m">5</span>,
+        <span class="s2">&quot;💥&quot;</span>: <span class="m">18</span>,
+        <span class="s2">&quot;🔥&quot;</span>: <span class="m">15</span>,
+        <span class="s2">&quot;😂&quot;</span>: <span class="m">46</span>,
+        <span class="s2">&quot;😍&quot;</span>: <span class="m">15</span>,
+        <span class="s2">&quot;😭&quot;</span>: <span class="m">32</span>,
+        <span class="s2">&quot;😱&quot;</span>: <span class="m">7</span>,
+        <span class="s2">&quot;🤣&quot;</span>: <span class="m">19</span>
+      <span class="o">}</span>,
+      <span class="s2">&quot;status&quot;</span>: <span class="s2">&quot;success&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
 
-<p>Get monitor volume information for each day  as a CSV using <a href="https://stedolan.github.io/jq/">jq</a></p>
+</div>
+
+<p>Get monitor volume information for each day  as a CSV using <a href="https://stedolan.github.io/jq/">jq</a>
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy results MONITOR_ID volume <span class="se">\</span>
 <span class="p">|</span> jq -r <span class="s1">&#39;.results.volume.volume[] | [.startDate, .numberOfDocuments] | @csv&#39;</span>
 <span class="s2">&quot;2017-01-04T00:00:00&quot;</span>,74
@@ -628,30 +702,58 @@ Success! Saved token to ~/.hexpy/token.json
 </pre></div>
 
 
-<p>Export Monitor posts to excel file called <code>my_export.xlsx</code></p>
+</div>
+
+<p>Export Monitor posts to excel file called <code>my_export.xlsx</code>
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy <span class="nb">export</span> MONITOR_ID --output_type excel --filename my_export
+<span class="c1"># ✅ Done!</span>
 </pre></div>
 
 
-<p>Export Monitor posts as json and redirect to <code>my_export.json</code></p>
+</div>
+
+<p>Export Monitor posts as json and redirect to <code>my_export.json</code>
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy <span class="nb">export</span> MONITOR_ID --output_type json &gt; my_export.json
 </pre></div>
 
 
-<p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids</p>
+</div>
+
+<p>Export posts to excel for multiple monitors in parallel from a file containing a list of monitor ids
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ cat monitor_ids.txt <span class="p">|</span> xargs -n <span class="m">1</span> -P <span class="m">4</span> hexpy <span class="nb">export</span> -o excel
+<span class="c1"># ✅ Done!</span>
+<span class="c1"># ✅ Done!</span>
+<span class="c1"># ✅ Done!</span>
+<span class="c1"># ✅ Done!</span>
 </pre></div>
 
 
-<p>Stream 1K real-time posts to json in the terminal</p>
+</div>
+
+<p>Stream 1K real-time posts to json in the terminal
+<div class="termy"></p>
 <div class="codehilite"><pre><span></span>$ hexpy stream-posts STREAM_ID --max_docs <span class="m">1000</span> --output_type json
+<span class="c1"># {&#39;url&#39;:&#39;http://twitter.com/sample/url/1&#39;,&#39;date&#39;:&#39;2018-06-19T07:01:22&#39;, ...}</span>
+<span class="c1"># {&#39;url&#39;:&#39;http://twitter.com/sample/url/2&#39;,&#39;date&#39;:&#39;2018-06-21T08:40:25&#39;, ...}</span>
+<span class="c1"># {&#39;url&#39;:&#39;http://twitter.com/sample/url/3&#39;,&#39;date&#39;:&#39;2018-06-19T13:50:55&#39;, ...}</span>
+<span class="c1"># ...</span>
 </pre></div>
 
 
-<p>Stream up to 10K real-time posts to a csv file with tab delimiter</p>
-<div class="codehilite"><pre><span></span>$ hexpy stream-posts STREAM_ID --output_type csv --max_docs <span class="m">10000</span> --separator <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
+</div>
+
+<p>Stream up to 10K real-time posts to a csv file with progress bar via <a href="https://www.ivarch.com/programs/pv.shtml">pv</a>
+<div class="termy"></p>
+<div class="codehilite"><pre><span></span>$ hexpy stream-posts STREAM_ID --output_type csv --max_docs <span class="m">10000</span> <span class="se">\</span>
 <span class="p">|</span> pv -s <span class="m">10000</span> -l &gt; streamed_posts.csv
+---&gt; <span class="m">100</span>%
 </pre></div>
+
+
+</div>
                 
                   
                     <h2 id="__source">Source</h2>
@@ -730,9 +832,13 @@ Success! Saved token to ~/.hexpy/token.json
       
     </div>
     
-      <script src="../assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../js/termynal.js"></script>
+      
+        <script src="../js/custom.js"></script>
       
     
   </body>

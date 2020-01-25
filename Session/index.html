@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -68,6 +68,10 @@
     
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/termynal.css">
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
     
     
       
@@ -288,6 +292,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#creating-a-session-and-generating-a-token-for-api-requests" class="md-nav__link">
+    Creating a session and generating a token for API requests.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     Methods
   </a>
@@ -330,7 +341,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -515,6 +526,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#creating-a-session-and-generating-a-token-for-api-requests" class="md-nav__link">
+    Creating a session and generating a token for API requests.
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#methods" class="md-nav__link">
     Methods
   </a>
@@ -557,7 +575,7 @@
       
       
         <li class="md-nav__item">
-          <a href="#__source" title="Source" class="md-nav__link md-nav__link--active">
+          <a href="#__source" class="md-nav__link md-nav__link--active">
             Source
           </a>
         </li>
@@ -579,39 +597,28 @@
                 
                 
                 <h1 id="session">Session<a class="headerlink" href="#session" title="Permanent link">&para;</a></h1>
-<p>Creating a session and generating a token for API requests.</p>
-<p>Login using username. Optionally include password, or enter it at the prompt.</p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span>
+<h2 id="creating-a-session-and-generating-a-token-for-api-requests">Creating a session and generating a token for API requests.<a class="headerlink" href="#creating-a-session-and-generating-a-token-for-api-requests" title="Permanent link">&para;</a></h2>
+<div class="termy">
+
+<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="n">Login</span> <span class="n">using</span> <span class="n">username</span> <span class="ow">and</span> <span class="n">password</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">hexpy</span> <span class="kn">import</span> <span class="n">HexpySession</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@gmail.com&quot;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&quot;secretpassword&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">save_token</span><span class="p">()</span>  <span class="c1"># saving token to ~/.hexpy/token.json</span>
-</pre></div>
-
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@email.com&quot;</span><span class="p">)</span>
-<span class="n">Enter</span> <span class="n">password</span><span class="p">:</span> <span class="o">*********</span>
+<span class="o">//</span> <span class="n">save</span> <span class="n">token</span> <span class="n">to</span> <span class="o">~/.</span><span class="n">hexpy</span><span class="o">/</span><span class="n">token</span><span class="o">.</span><span class="n">json</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">session</span><span class="o">.</span><span class="n">save_token</span><span class="p">()</span>
+
+<span class="o">//</span> <span class="ow">or</span> <span class="n">enter</span> <span class="n">your</span> <span class="n">password</span> <span class="n">at</span> <span class="n">the</span> <span class="n">prompt</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;username@email.com&quot;</span><span class="p">)</span>
+<span class="c1"># Enter password: $ *********</span>
+
+<span class="o">//</span> <span class="ow">or</span> <span class="n">instantiate</span> <span class="n">a</span> <span class="n">session</span> <span class="n">using</span> <span class="n">a</span> <span class="n">saved</span> <span class="n">token</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;previously_saved_token&quot;</span><span class="p">)</span>
+
+<span class="o">//</span> <span class="n">Create</span> <span class="n">instance</span> <span class="n">by</span> <span class="n">loading</span> <span class="n">token</span> <span class="kn">from</span> <span class="nn">file.</span>  <span class="nn">Default</span> <span class="nn">is</span> <span class="sb">`~/.hexpy/token.json`</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
 </pre></div>
 
 
-<p>or instantiate a session using a saved token</p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="s2">&quot;previously_saved_token&quot;</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Create instance by loading token from file.  Default is <code>~/.hexpy/token.json</code></p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">session</span> <span class="o">=</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span>
-</pre></div>
-
-
-<p>Create instance with context manager to close TCP session automatically when finished</p>
-<div class="codehilite"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">with</span> <span class="n">HexpySession</span><span class="o">.</span><span class="n">load_auth_from_file</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
-     <span class="n">client</span> <span class="o">=</span> <span class="n">MonitorAPI</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
-     <span class="o">...</span> <span class="c1"># use client to call API multiple times with same session</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="c1"># session TCP connection is closed until next call to API</span>
-</pre></div>
-
+</div>
 
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <h3 id="login">login<a class="headerlink" href="#login" title="Permanent link">&para;</a></h3>
@@ -730,9 +737,13 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../js/termynal.js"></script>
+      
+        <script src="../js/custom.js"></script>
       
     
   </body>

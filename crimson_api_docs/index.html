@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -68,6 +68,10 @@
     
     
       <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/termynal.css">
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
     
     
       
@@ -1598,8 +1602,8 @@
 </li>
 <li><code>request</code> - Defines the original request parameters made to invoke this analysis<ul>
 <li>Type: ApiAnalysisTaskRequest</li>
-<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 </ul>
 </li>
 <li><code>resultsUri</code> - Defines the URI that can be queried to retrieve the analysis status/results in the future<ul>
@@ -1637,8 +1641,8 @@
 </li>
 <li><code>request</code> - Defines the original request parameters made to invoke this analysis<ul>
 <li>Type: ApiAnalysisTaskRequest</li>
-<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 </ul>
 </li>
 <li><code>resultsUri</code> - Defines the URI that can be queried to retrieve the analysis status/results in the future<ul>
@@ -1663,8 +1667,8 @@
 </li>
 <li><code>analysisResults</code> - Analysis result<ul>
 <li>Type: AnalysisResults</li>
-<li>Fields: <code>volumeResults</code>, <code>sentimentResults</code>, <code>genderResult</code>, <code>ageResult</code>, <code>locationResult</code>, <code>siteResult</code>, <code>affinityResults</code>, <code>reach</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>volumeResults</code>, <code>sentimentResults</code>, <code>genderResult</code>, <code>ageResult</code>, <code>locationResult</code>, <code>siteResult</code>, <code>affinityResults</code>, <code>reach</code></li>
 </ul>
 </li>
 <li><code>message</code> - Result message<ul>
@@ -1674,8 +1678,8 @@
 </li>
 <li><code>request</code> - Related task request<ul>
 <li>Type: ApiAnalysisTaskRequest</li>
-<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>analysis</code>, <code>startDate</code>, <code>endDate</code>, <code>timezone</code>, <code>sources</code>, <code>keywords</code>, <code>languages</code>, <code>locations</code>, <code>gender</code>, <code>requestingContractInfo</code></li>
 </ul>
 </li>
 </ul>
@@ -1745,8 +1749,8 @@
 <ul>
 <li><code>authors</code> - JSON array of zero or more authors objects that contain author-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>countsByAuthor</code>, <code>numberOfAuthors</code>, <code>docsPerAuthor</code>, <code>totalImpressions</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>countsByAuthor</code>, <code>numberOfAuthors</code>, <code>docsPerAuthor</code>, <code>totalImpressions</code></li>
 </ul>
 </li>
 </ul>
@@ -1790,8 +1794,8 @@
 <ul>
 <li><code>contentSource</code> - Content Source<ul>
 <li>Type: ContentSourceModel</li>
-<li>Fields: <code>id</code>, <code>teamName</code>, <code>name</code>, <code>description</code>, <code>documents</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>teamName</code>, <code>name</code>, <code>description</code>, <code>documents</code></li>
 </ul>
 </li>
 </ul>
@@ -1824,8 +1828,8 @@
 <ul>
 <li><code>contentSources</code> - Content Sources<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>teamName</code>, <code>name</code>, <code>description</code>, <code>documents</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>teamName</code>, <code>name</code>, <code>description</code>, <code>documents</code></li>
 </ul>
 </li>
 </ul>
@@ -1913,8 +1917,8 @@
 <ul>
 <li><code>volumes</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>volume</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>volume</code></li>
 </ul>
 </li>
 </ul>
@@ -1944,8 +1948,8 @@
 <ul>
 <li><code>ageCounts</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>ageCount</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>ageCount</code></li>
 </ul>
 </li>
 </ul>
@@ -1975,8 +1979,8 @@
 <ul>
 <li><code>genderCounts</code> - JSON array of zero or more objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>genderCounts</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code>, <code>genderCounts</code></li>
 </ul>
 </li>
 </ul>
@@ -2006,8 +2010,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>adminPostMetrics</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>adminPostMetrics</code></li>
 </ul>
 </li>
 </ul>
@@ -2037,8 +2041,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>date</code>, <code>likes</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>date</code>, <code>likes</code></li>
 </ul>
 </li>
 </ul>
@@ -2068,8 +2072,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>admin</code>, <code>user</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>admin</code>, <code>user</code></li>
 </ul>
 </li>
 </ul>
@@ -2082,8 +2086,8 @@
 <ul>
 <li><code>resources</code> - JSON array with the geography resources<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>city</code>, <code>latitude</code>, <code>longitude</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>city</code>, <code>latitude</code>, <code>longitude</code></li>
 </ul>
 </li>
 </ul>
@@ -2103,8 +2107,8 @@
 <ul>
 <li><code>resources</code> - JSON array with the geography resources<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>city</code>, <code>latitude</code>, <code>longitude</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>city</code>, <code>latitude</code>, <code>longitude</code></li>
 </ul>
 </li>
 </ul>
@@ -2117,8 +2121,8 @@
 <ul>
 <li><code>resources</code> - JSON array with the geography resources<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>latitude</code>, <code>longitude</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>latitude</code>, <code>longitude</code></li>
 </ul>
 </li>
 </ul>
@@ -2138,8 +2142,8 @@
 <ul>
 <li><code>resources</code> - JSON array with the geography resources<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>latitude</code>, <code>longitude</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>country</code>, <code>state</code>, <code>latitude</code>, <code>longitude</code></li>
 </ul>
 </li>
 </ul>
@@ -2159,8 +2163,8 @@
 <ul>
 <li><code>data</code> - List of 0..n monitor creation report rows<ul>
 <li>Type: List</li>
-<li>Fields: <code>team_name</code>, <code>monitors_used</code>, <code>monitor_limit</code>, <code>monitors_created_past_month</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>team_name</code>, <code>monitors_used</code>, <code>monitor_limit</code>, <code>monitors_created_past_month</code></li>
 </ul>
 </li>
 </ul>
@@ -2180,8 +2184,8 @@
 <ul>
 <li><code>data</code> - List of 0..n social site report rows<ul>
 <li>Type: List</li>
-<li>Fields: <code>username</code>, <code>socialsite</code>, <code>team_name</code>, <code>creation_date</code>, <code>last_rate_limit_date</code>, <code>failed</code>, <code>failure_date</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>username</code>, <code>socialsite</code>, <code>team_name</code>, <code>creation_date</code>, <code>last_rate_limit_date</code>, <code>failed</code>, <code>failure_date</code></li>
 </ul>
 </li>
 </ul>
@@ -2201,8 +2205,8 @@
 <ul>
 <li><code>data</code> - List of 0..n user activity report rows<ul>
 <li>Type: List</li>
-<li>Fields: <code>user_id</code>, <code>team_id</code>, <code>email</code>, <code>first_name</code>, <code>last_name</code>, <code>last_platform_login</code>, <code>team_name</code>, <code>monitors_viewed_past_month</code>, <code>monitors_created_past_month</code>, <code>last_team_visit</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>user_id</code>, <code>team_id</code>, <code>email</code>, <code>first_name</code>, <code>last_name</code>, <code>last_platform_login</code>, <code>team_name</code>, <code>monitors_viewed_past_month</code>, <code>monitors_created_past_month</code>, <code>last_team_visit</code></li>
 </ul>
 </li>
 </ul>
@@ -2222,8 +2226,8 @@
 <ul>
 <li><code>data</code> - List of 0..n user invitation report rows<ul>
 <li>Type: List</li>
-<li>Fields: <code>email</code>, <code>team_name</code>, <code>create_edit</code>, <code>invite_user</code>, <code>heliosight</code>, <code>api_access</code>, <code>admin</code>, <code>date_sent</code>, <code>date_accepted</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>email</code>, <code>team_name</code>, <code>create_edit</code>, <code>invite_user</code>, <code>heliosight</code>, <code>api_access</code>, <code>admin</code>, <code>date_sent</code>, <code>date_accepted</code></li>
 </ul>
 </li>
 </ul>
@@ -2285,8 +2289,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>date</code>, <code>followerCount</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>date</code>, <code>followerCount</code></li>
 </ul>
 </li>
 </ul>
@@ -2316,8 +2320,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>date</code>, <code>hashtags</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>date</code>, <code>hashtags</code></li>
 </ul>
 </li>
 </ul>
@@ -2347,8 +2351,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>adminPostMetrics</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>adminPostMetrics</code></li>
 </ul>
 </li>
 </ul>
@@ -2378,8 +2382,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>admin</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>admin</code></li>
 </ul>
 </li>
 </ul>
@@ -2429,8 +2433,8 @@
 </li>
 <li><code>affinityInfo</code> - JSON array of affinity objects containing information about the top affinities for the date range selected<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>relevancyScore</code>, <code>percentInMonitor</code>, <code>percentOnTwitter</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>relevancyScore</code>, <code>percentInMonitor</code>, <code>percentOnTwitter</code></li>
 </ul>
 </li>
 </ul>
@@ -2450,8 +2454,8 @@
 <ul>
 <li><code>auditInfo</code> - JSON array of audit events pertaining to the selected monitor<ul>
 <li>Type: List</li>
-<li>Fields: <code>event</code>, <code>user</code>, <code>eventDate</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>event</code>, <code>user</code>, <code>eventDate</code></li>
 </ul>
 </li>
 </ul>
@@ -2471,8 +2475,8 @@
 <ul>
 <li><code>monitorDetail</code> - JSON array of monitor details<ul>
 <li>Type: MonitorDetailModel</li>
-<li>Fields: <code>parentMonitorId</code>, <code>categories</code>, <code>emotions</code>, <code>id</code>, <code>name</code>, <code>description</code>, <code>type</code>, <code>enabled</code>, <code>resultsStart</code>, <code>resultsEnd</code>, <code>keywords</code>, <code>languages</code>, <code>geolocations</code>, <code>gender</code>, <code>sources</code>, <code>timezone</code>, <code>teamName</code>, <code>tags</code>, <code>subfilters</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>parentMonitorId</code>, <code>categories</code>, <code>emotions</code>, <code>id</code>, <code>name</code>, <code>description</code>, <code>type</code>, <code>enabled</code>, <code>resultsStart</code>, <code>resultsEnd</code>, <code>keywords</code>, <code>languages</code>, <code>geolocations</code>, <code>gender</code>, <code>sources</code>, <code>timezone</code>, <code>teamName</code>, <code>tags</code>, <code>subfilters</code></li>
 </ul>
 </li>
 </ul>
@@ -2512,8 +2516,8 @@
 <ul>
 <li><code>results</code> - JSON array of zero or more daily image results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>creationDate</code>, <code>numberOfDocuments</code>, <code>numberOfImageDocuments</code>, <code>imageClasses</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>creationDate</code>, <code>numberOfDocuments</code>, <code>numberOfImageDocuments</code>, <code>imageClasses</code></li>
 </ul>
 </li>
 </ul>
@@ -2533,8 +2537,8 @@
 <ul>
 <li><code>monitors</code> - JSON array of monitors viewable by the user<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>description</code>, <code>type</code>, <code>enabled</code>, <code>resultsStart</code>, <code>resultsEnd</code>, <code>keywords</code>, <code>languages</code>, <code>geolocations</code>, <code>gender</code>, <code>sources</code>, <code>timezone</code>, <code>teamName</code>, <code>tags</code>, <code>subfilters</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>description</code>, <code>type</code>, <code>enabled</code>, <code>resultsStart</code>, <code>resultsEnd</code>, <code>keywords</code>, <code>languages</code>, <code>geolocations</code>, <code>gender</code>, <code>sources</code>, <code>timezone</code>, <code>teamName</code>, <code>tags</code>, <code>subfilters</code></li>
 </ul>
 </li>
 </ul>
@@ -2569,8 +2573,8 @@
 <ul>
 <li><code>results</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>creationDate</code>, <code>numberOfDocuments</code>, <code>numberOfRelevantDocuments</code>, <code>categories</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>creationDate</code>, <code>numberOfDocuments</code>, <code>numberOfRelevantDocuments</code>, <code>categories</code></li>
 </ul>
 </li>
 </ul>
@@ -2620,8 +2624,8 @@
 </li>
 <li><code>data</code> - JSON array of monitor geography result information<ul>
 <li>Type: List</li>
-<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 </ul>
 </li>
 </ul>
@@ -2666,8 +2670,8 @@
 </li>
 <li><code>data</code> - JSON array of monitor geography result information<ul>
 <li>Type: List</li>
-<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 </ul>
 </li>
 </ul>
@@ -2717,8 +2721,8 @@
 </li>
 <li><code>data</code> - JSON array of monitor geography result information<ul>
 <li>Type: List</li>
-<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>info</code>, <code>volume</code>, <code>perMillion</code></li>
 </ul>
 </li>
 </ul>
@@ -2743,8 +2747,8 @@
 <ul>
 <li><code>trainingPosts</code> - JSON array of training posts for the selected monitor or category in a monitor<ul>
 <li>Type: List</li>
-<li>Fields: <code>categoryId</code>, <code>categoryName</code>, <code>categoryGroup</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>categoryId</code>, <code>categoryName</code>, <code>categoryGroup</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 </ul>
 </li>
 </ul>
@@ -2799,8 +2803,8 @@
 <ul>
 <li><code>posts</code> - JSON array of zero or more post objects that contain post-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>location</code>, <code>geolocation</code>, <code>language</code>, <code>authorPosts</code>, <code>authorsFollowing</code>, <code>authorsFollowers</code>, <code>authorGender</code>, <code>trainingPost</code>, <code>assignedCategoryId</code>, <code>assignedEmotionId</code>, <code>categoryScores</code>, <code>emotionScores</code>, <code>imageInfo</code>, <code>customFields</code>, <code>batchId</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>location</code>, <code>geolocation</code>, <code>language</code>, <code>authorPosts</code>, <code>authorsFollowing</code>, <code>authorsFollowers</code>, <code>authorGender</code>, <code>trainingPost</code>, <code>assignedCategoryId</code>, <code>assignedEmotionId</code>, <code>categoryScores</code>, <code>emotionScores</code>, <code>imageInfo</code>, <code>customFields</code>, <code>batchId</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 </ul>
 </li>
 <li><code>totalPostsAvailable</code> - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.<ul>
@@ -3207,8 +3211,8 @@
 <ul>
 <li><code>stream</code> - Stream information<ul>
 <li>Type: StreamModel</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>teamName</code>, <code>monitors</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>teamName</code>, <code>monitors</code></li>
 </ul>
 </li>
 <li><code>path</code> - Stream path<ul>
@@ -3246,8 +3250,8 @@
 <ul>
 <li><code>streams</code> - JSON array of streams viewable by the user<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code>, <code>teamName</code>, <code>monitors</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code>, <code>teamName</code>, <code>monitors</code></li>
 </ul>
 </li>
 </ul>
@@ -3272,8 +3276,8 @@
 <ul>
 <li><code>posts</code> - JSON array of zero or more post objects that contain post-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>location</code>, <code>geolocation</code>, <code>language</code>, <code>authorPosts</code>, <code>authorsFollowing</code>, <code>authorsFollowers</code>, <code>authorGender</code>, <code>trainingPost</code>, <code>assignedCategoryId</code>, <code>assignedEmotionId</code>, <code>categoryScores</code>, <code>emotionScores</code>, <code>imageInfo</code>, <code>customFields</code>, <code>batchId</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>location</code>, <code>geolocation</code>, <code>language</code>, <code>authorPosts</code>, <code>authorsFollowing</code>, <code>authorsFollowers</code>, <code>authorGender</code>, <code>trainingPost</code>, <code>assignedCategoryId</code>, <code>assignedEmotionId</code>, <code>categoryScores</code>, <code>emotionScores</code>, <code>imageInfo</code>, <code>customFields</code>, <code>batchId</code>, <code>url</code>, <code>date</code>, <code>author</code>, <code>contents</code>, <code>title</code>, <code>type</code></li>
 </ul>
 </li>
 <li><code>totalPostsAvailable</code> - The number of posts stored for this monitor that match the query. Dates in the date range selected that have more than 10 thousand posts will be sampled. You may perform extrapolation calculations to approximate the total number of unsampled posts using the results counts in the Monitor Results endpoint.<ul>
@@ -3322,8 +3326,8 @@
 <ul>
 <li><code>teams</code> - JSON array of teams accessible by the user<ul>
 <li>Type: List</li>
-<li>Fields: <code>id</code>, <code>name</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>id</code>, <code>name</code></li>
 </ul>
 </li>
 </ul>
@@ -3353,8 +3357,8 @@
 <ul>
 <li><code>contentSources</code> - JSON array of zero or more content sources objects that contain results for each date requested<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>topSites</code>, <code>sources</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>topSites</code>, <code>sources</code></li>
 </ul>
 </li>
 </ul>
@@ -3454,8 +3458,8 @@
 </li>
 <li><code>topics</code> - JSON array of 1..n topics volume information for grouped periods<ul>
 <li>Type: List</li>
-<li>Fields: <code>name</code>, <code>totalVolume</code>, <code>volume</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>name</code>, <code>totalVolume</code>, <code>volume</code></li>
 </ul>
 </li>
 </ul>
@@ -3505,8 +3509,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>topHashtags</code>, <code>topMentions</code>, <code>topRetweets</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>topHashtags</code>, <code>topMentions</code>, <code>topRetweets</code></li>
 </ul>
 </li>
 </ul>
@@ -3536,8 +3540,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>date</code>, <code>followers</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>date</code>, <code>followers</code></li>
 </ul>
 </li>
 </ul>
@@ -3567,8 +3571,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>sentPostMetrics</code>, <code>totalImpressions</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>sentPostMetrics</code>, <code>totalImpressions</code></li>
 </ul>
 </li>
 </ul>
@@ -3598,8 +3602,8 @@
 <ul>
 <li><code>dailyResults</code> - JSON array of zero or more daily results objects that contain endpoint-specific attributes<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>mentions</code>, <code>replies</code>, <code>retweets</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>mentions</code>, <code>replies</code>, <code>retweets</code></li>
 </ul>
 </li>
 </ul>
@@ -3659,8 +3663,8 @@
 </li>
 <li><code>volume</code> - JSON array of 1..n volume information for grouped periods<ul>
 <li>Type: List</li>
-<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code></li>
 <li>Restricted = False</li>
+<li>Fields: <code>startDate</code>, <code>endDate</code>, <code>numberOfDocuments</code></li>
 </ul>
 </li>
 </ul>
@@ -3760,9 +3764,13 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../js/termynal.js"></script>
+      
+        <script src="../js/custom.js"></script>
       
     
   </body>
