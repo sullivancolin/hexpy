@@ -6,6 +6,7 @@ source: activity.py
 Class for working with Crimson Hexagon Activity Report API.
 
 ## Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, ActivityAPI
@@ -13,6 +14,7 @@ Class for working with Crimson Hexagon Activity Report API.
 >>> activity_client = ActivityAPI(session)
 >>> activity_client.monitor_creation(organization_id)
 ```
+</div>
 
 ## Methods
 

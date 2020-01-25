@@ -27,6 +27,7 @@ Validation model for an item of custom content to be uploaded. Checks for requir
 * engagementType: Optional String REPLY/RETWEET/COMMENT
 
 ### Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy.models import UploadItem
@@ -59,6 +60,7 @@ Validation model for an item of custom content to be uploaded. Checks for requir
 }
 >>> upload_item = UploadItem(**item_dict)
 ```
+</div>
 
 ## `UploadCollection`
 Validation model for collection of items to be uploaded. Checks for duplicate upload items, easily convert to/from dataframe
@@ -67,6 +69,7 @@ Validation model for collection of items to be uploaded. Checks for duplicate up
 * items: List of UploadItems or valid dictionaries
 
 ### Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy.models import UploadItem, UploadCollection
@@ -101,6 +104,7 @@ Validation model for collection of items to be uploaded. Checks for duplicate up
 ]
 >>> upload_collection = UploadCollection(items=items)
 ```
+</div>
 
 ### Methods
 
@@ -133,6 +137,7 @@ Validation model for training post to be uploaded. Checks for required fields, w
 * categoryid: Integer of Category defined in Monitor
 
 ### Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy.models import TrainItem
@@ -147,6 +152,7 @@ Validation model for training post to be uploaded. Checks for required fields, w
 }
 >>> train_item = TrainItem(**item)
 ```
+</div>
 
 ## `TrainCollection`
 Validation model for collections of training posts to be uploaded. Checks for duplicate training posts, easily convert to/from dataframe
@@ -156,6 +162,7 @@ Validation model for collections of training posts to be uploaded. Checks for du
 * items: List of TrainItems or valid dictionaries
 
 ### Example Usage
+<div class="termy">
 
 ```python
 >>> from hexpy.models import TrainItem, TrainCollection
@@ -172,6 +179,8 @@ Validation model for collections of training posts to be uploaded. Checks for du
 ]
 >>> train_collection = TrainCollection(items=items])
 ```
+</div>
+
 ### Methods
 
 ### from_dataframe
@@ -188,3 +197,75 @@ Create TrainCollection from pandas DataFrame containing necessary fields.
  to_dataframe() -> pd.DataFrame
  ```
  Convert TrainCollection to pandas Dataframe with one colume for each field.
+
+## `AnalysisRequest`
+Model for submitting valid analysis request via [AnalysisAPI](Analysis.md#analysis_request)
+
+### Fields
+* analysis: List of analysis type strings
+* keywords: String of boolean logic
+* sources: List of source strings
+* startDate: Datetime String
+* endDate: Datetime String
+* timezone: String
+* requestUsage: Boolean
+* gender: Optional include/exclude and array of gender strings
+* languages: Optional include/exclude and array of language strings
+* locations: Optional include/exclude and array of location strings
+
+### Example Usage
+<div class="termy">
+
+```python
+>>> from hexpy.models import AnalysisRequest
+>>> request_dict = {
+    "analysis": [
+        "volume",
+        "sentiment",
+        "emotion",
+        "affinity",
+        "gender",
+        "age",
+        "location",
+        "source",
+        "reach"
+    ],
+    "keywords": "iPhone",
+    "languages": {
+        "type": "include",
+        "values": [
+            "EN"
+        ]
+    },
+    "gender": {
+        "type": "include",
+        "values": [
+            "M"
+        ]
+    },
+    "locations": {
+        "type": "exclude",
+        "values": [
+            "JPN"
+        ]
+    },
+    "sources": [
+        "TWITTER",
+        "TUMBLR",
+        "INSTAGRAM",
+        "BLOGS",
+        "REVIEWS",
+        "GOOGLE_PLUS",
+        "NEWS",
+        "YOUTUBE",
+        "FORUMS"
+    ],
+    "startDate": "2016-09-20T00:00:00+00:00",
+    "endDate": "2016-09-21T00:00:00+00:00",
+    "timezone": "America/New_York",
+    "requestUsage": True
+}
+
+>>> analysis_request = AnalysisRequest(**request_dict)
+```
+</div>

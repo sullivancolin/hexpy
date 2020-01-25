@@ -34,6 +34,7 @@ Possesses all the same methods as [MonitorAPI](Monitor.md) with default argument
 * days: List of Date Strings in the monitor
 
 ### Example usage.
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, Project
@@ -48,6 +49,7 @@ Possesses all the same methods as [MonitorAPI](Monitor.md) with default argument
 >>> for day1, day2 in zip(project, project[1:]):
         word_cloud_results = project.word_cloud(start=day1, end=day2)
 ```
+</div>
 
 ### Methods
 

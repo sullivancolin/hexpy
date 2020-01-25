@@ -7,6 +7,7 @@ Realtime API
 Class for working with Realtime Results API.
 
 ## Example usage
+<div class="termy">
 
 ```python
 >>> from hexpy import HexpySession, RealtimeAPI
@@ -15,6 +16,7 @@ Class for working with Realtime Results API.
 >>> realtime_client.list(team_id)
 >>> session.close()
 ```
+</div>
 
 ## Methods
 

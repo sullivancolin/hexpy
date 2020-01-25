@@ -4,36 +4,28 @@ source: session.py
 Session
 =============
 
-Creating a session and generating a token for API requests.
+## Creating a session and generating a token for API requests.
 
-Login using username. Optionally include password, or enter it at the prompt.
+<div class="termy">
+
 ```python
+// Login using username and password
 >>> from hexpy import HexpySession
 >>> session = HexpySession.login(username="username@gmail.com", password="secretpassword")
->>> session.save_token()  # saving token to ~/.hexpy/token.json
-```
-or
-```python
->>> session = HexpySession.login(username="username@email.com")
-Enter password: *********
+// save token to ~/.hexpy/token.json
 >>> session.save_token()
-```
-or instantiate a session using a saved token
-```python
+
+// or enter your password at the prompt
+>>> session = HexpySession.login(username="username@email.com")
+# Enter password: $ *********
+
+// or instantiate a session using a saved token
 >>> session = HexpySession(token="previously_saved_token")
-```
-Create instance by loading token from file.  Default is `~/.hexpy/token.json`
-```python
+
+// Create instance by loading token from file.  Default is `~/.hexpy/token.json`
 >>> session = HexpySession.load_auth_from_file()
 ```
-Create instance with context manager to close TCP session automatically when finished
-```python
->>> with HexpySession.load_auth_from_file() as session:
-     client = MonitorAPI(session)
-     ... # use client to call API multiple times with same session
-
->>> # session TCP connection is closed until next call to API
-```
+</div>
 
 ## Methods
 

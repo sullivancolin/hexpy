@@ -4,6 +4,7 @@ import logging
 from typing import List
 
 import pandas as pd
+import pendulum
 import pytest
 import responses
 from _pytest.capture import CaptureFixture
@@ -11,7 +12,13 @@ from pydantic import ValidationError
 
 from hexpy import ContentUploadAPI, HexpySession, MonitorAPI, Project
 from hexpy.base import JSONDict
-from hexpy.models import TrainCollection, TrainItem, UploadCollection, UploadItem
+from hexpy.models import (
+    AnalysisRequest,
+    TrainCollection,
+    TrainItem,
+    UploadCollection,
+    UploadItem,
+)
 
 
 def test_correct_upload_item(upload_items: List[JSONDict]) -> None:
@@ -235,7 +242,7 @@ def test_wrong_train_item(invalid_train_item: JSONDict) -> None:
         },
         {
             "loc": ("date",),
-            "msg": "Could not validate date format '02-2031-01'. Must be YYYY-MM-DD or iso-formatted time stamp",
+            "msg": "Could not validate format '02-2031-01'. Must be YYYY-MM-DD or iso-formatted time stamp",
             "type": "value_error",
         },
     ]
@@ -419,3 +426,34 @@ def test_project(fake_session: HexpySession, monitor_details_json: JSONDict) -> 
     assert len(project) == 379
     assert len([day for day in project]) == 379
     assert len([day for day in project[:10]]) == 10
+
+
+def test_valid_analysis_request(analysis_request_dict: JSONDict) -> None:
+    """Test validation of analysis request dictionary format"""
+
+    request = AnalysisRequest(**analysis_request_dict)
+
+    assert request.dict() == analysis_request_dict
+
+
+@pytest.fixture
+def invalid_request_range(analysis_request_dict: JSONDict) -> JSONDict:
+
+    end = pendulum.parse(analysis_request_dict["endDate"])
+    new_date = end.add(days=1)
+    analysis_request_dict["endDate"] = new_date.to_iso8601_string()
+    return analysis_request_dict
+
+
+def test_invalid_analysis_date_range(invalid_request_range: JSONDict) -> None:
+
+    with pytest.raises(ValidationError) as e:
+        invalid_request = AnalysisRequest(**invalid_request_range)  # noqa: F841
+
+    assert e.value.errors() == [
+        {
+            "loc": ("endDate",),
+            "msg": "Period must not exceed 24 hours",
+            "type": "value_error",
+        }
+    ]

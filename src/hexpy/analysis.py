@@ -3,6 +3,7 @@
 import inspect
 
 from .base import JSONDict, handle_response, rate_limited
+from .models import AnalysisRequest
 from .session import HexpySession
 
 
@@ -28,15 +29,15 @@ class AnalysisAPI:
                     self, name, rate_limited(fn, session.MAX_CALLS, session.ONE_MINUTE)
                 )
 
-    def analysis_request(self, request: JSONDict) -> JSONDict:
+    def analysis_request(self, request: AnalysisRequest) -> JSONDict:
         """Submit a query task against 24 hours of social data.
 
         # Arguments
-            request: Dictionary, query and filter parameters
+            request: validated AnalysisRequest.
 
         Example Request
         ```python
-        {
+        request_dict = {
             "analysis": [
                 "volume",
                 "sentiment",
@@ -79,8 +80,9 @@ class AnalysisAPI:
             "startDate": "2016-09-20T00:00:00",
             "endDate": "2016-09-21T00:00:00",
             "timezone": "America/New_York",
-            "requestUsage": true
+            "requestUsage": True
         }
+        request = AnalysisRequest(**request_dict)
         ```
 
         """
